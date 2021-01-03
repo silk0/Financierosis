@@ -21,3 +21,12 @@
 
 <!-- App js -->
 <script src="assets/js/app.min.js"></script>
+<!-- Input Mask JS
+    ============================================ -->
+<script src="assets/js/jasny-bootstrap.min.js"></script>
+
+<!-- Validation js (Parsleyjs) -->
+<script src="assets/libs/parsleyjs/parsley.min.js"></script>
+
+<!-- validation init -->
+<script src="assets/js/pages/form-validation.init.js"></script> 
