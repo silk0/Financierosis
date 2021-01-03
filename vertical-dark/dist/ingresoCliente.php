@@ -154,8 +154,8 @@ function enviar(id){
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
-                            <div class="page-title-box">                                
-                                <h4 class="page-title">Registro de cliente</h4>
+                            <div class="page-title-box" >                                
+                                <h4 class="page-title" align="center">Registro de cliente</h4>
                             </div>
                         </div>
                     </div>
@@ -164,52 +164,100 @@ function enviar(id){
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card-box">
-                                <h4 class="header-title">Ingreso de datos generales del cliente</h4>
-                                <p class="sub-header">
-                                    You may also swap <code class="highlighter-rouge">.row</code> for <code class="highlighter-rouge">.form-row</code>, a variation of our standard grid row that overrides the default column gutters for tighter and more compact layouts.
-                                </p>
-    
-                                <form>
+                                <h4 class="header-title">Ingreso de datos generales del cliente</h4>     
+                                <form name="form" method="post" action="ingresoCliente.php?bandera=1" required class="parsley-examples">
+                                <input type="hidden" id="idfiador" name="idfiador">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEmail4" class="col-form-label">Nombre</label>
+                                            <input type="text"  class="form-control" name="nombre" id="nombre" required  placeholder="Jose Alfredo">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPassword4" class="col-form-label">Apellido</label>
+                                            <input type="text" class="form-control" name="apellido" id="apellido" required  placeholder="Rodriguez Perez">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEmail4" class="col-form-label">Dui</label>
+                                            <input type="text"  class="form-control" name="dui" id="dui" required  data-mask="99999999-9" placeholder="99999999-9">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPassword4" class="col-form-label">Nit</label>
+                                            <input type="text" class="form-control" name="nit" id="nit" required  data-mask="9999-999999-999-9" placeholder="9999-999999-999-9">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEmail4" class="col-form-label">Telefono fijo</label>
+                                            <input type="text"  class="form-control" name="telefono" id="telefono" required  data-mask="9999-9999" placeholder="9999-9999">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPassword4" class="col-form-label">Telefono Movil</label>
+                                            <input type="text" class="form-control" name="celular" id="celular" required data-mask="9999-9999" placeholder="9999-9999">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputAddress" class="col-form-label">Direccion</label>
+                                        <input type="text" class="form-control"  name="direc" id="direc" required placeholder="Calle Juan Ulloa Canas y Avenida Crescencio Miranda Casa #23">
+                                    </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputEmail4" class="col-form-label">Email</label>
-                                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                                            <input type="email"  class="form-control" name="email" id="email"  required  placeholder="Correo@correo.com">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="inputPassword4" class="col-form-label">Password</label>
-                                            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                                            <label for="inputPassword4" class="col-form-label">Profesion u oficio</label>
+                                            <input type="text" class="form-control" name="profecion" id="profecion" required  placeholder="Rodriguez Perez">
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputAddress" class="col-form-label">Address</label>
-                                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputAddress2" class="col-form-label">Address 2</label>
-                                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                                    </div>
+                                    </div>  
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="inputCity" class="col-form-label">City</label>
-                                            <input type="text" class="form-control" id="inputCity">
+                                        <div class="form-group col-md-4">
+                                            <label for="inputCity" class="col-form-label">Ingresos Mensuales ($)</label>
+                                            <input type="number" class="form-control" name="salario" id="salario" required  placeholder="0.00">
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="inputState" class="col-form-label">State</label>
-                                            <select id="inputState" class="form-control">
-                                                <option>Choose</option>
-                                                <option>Option 1</option>
-                                                <option>Option 2</option>
-                                                <option>Option 3</option>
-
+                                            <label for="inputState" class="col-form-label">Tipo de ingreso</label>
+                                            <select id="inputState" class="form-control" name="tipo" id="tipo" required >
+                                                <option selected >Seleccione</option>
+                                                <option>Salario</option>
+											    <option>Remesa</option>
+											    <option>Salario Informal</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-2">
-                                            <label for="inputZip" class="col-form-label">Zip</label>
-                                            <input type="text" class="form-control" id="inputZip">
+                                        <div class="form-group col-md-4">
+                                            <label for="inputZip" class="col-form-label">Egreso Promedio Mensual ($)</label>
+                                            <input type="number" class="form-control" name="egreso" id="egreso" placeholder="0.00" >
                                         </div>
-                                    </div>                                    
-
-                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                    </div>   
+                                    <div class="form-row">                                        
+                                        <div class="form-group col-md-4">
+                                            <label for="inputState" class="col-form-label">Agregar a la cartera</label>
+                                            <select id="inputState" class="form-control" name="cartera" id="cartera" required >
+                                                <option selected >Seleccione</option>
+                                                <?php
+                                                include 'config/conexion.php';
+                                                $result = $conexion->query("select id_categoria as id,nombre FROM tcartera");
+                                                if ($result) {
+                                                    while ($fila = $result->fetch_object()) {
+                                                        if ($fila->id == $idcaertera ) {
+                                                            echo '<option value="' . $fila->id. '" selected>' . $fila->nombre . '</opcion>';
+                                                        }else {
+                                                            echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';
+                                                        }
+                                                    }
+                                                }
+                                                ?> 
+                                            </select>
+                                        </div>
+                                    </div> 
+                                    </br>
+                                    <div class="form-row"> 
+                                    <div class="form-group">
+                                        <button type="sumit" onclick="go();" class="btn btn-success btn-rounded waves-light width-md">Registrar</button>                                        
+                                        <button type="reset" onclick="" class="btn btn-danger btn-rounded waves-light width-md">Cancelar</button>  
+                                    </div>                                      
+                                    </div>
                                 </form>
                             </div> <!-- end card-box -->
                         </div> <!-- end col -->
