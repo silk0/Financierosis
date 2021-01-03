@@ -17,6 +17,19 @@
 
     </head>
 
+    <script language=JavaScript> 
+        function go(){
+            
+        
+            if(document.getElementById('usuario').value=="" || document.getElementById('pass').value==""){
+                alert("complete los campos");
+            }else{
+                document.location.href='checkLogin.php?usuario='+document.getElementById('usuario').value+'&pass='+document.getElementById('pass').value;
+            }
+        } 
+
+    </script> 
+
     <body class="authentication-bg authentication-bg-pattern d-flex align-items-center">
 
         <div class="home-btn d-none d-sm-block">
@@ -33,25 +46,25 @@
                                 
                                 <div class="text-center mb-4">
                                     <a href="index.html">
-                                        <span><img src="vertical-dark/assets/images/logo-light.png" alt="" height="28"></span>
+                                        <span><img src="vertical-dark/dist/assets/images/logo-light.png" alt="" height="28"></span>
                                     </a>
                                 </div>
-
-                                <form action="#" class="pt-2">
+                                <div class="nk-block toggled" id="l-login">
+                                <form class="pt-2" name="form" id="form" method="GET" action="chekLogin.php">
 
                                     <div class="form-group mb-3">
                                         <label for="emailaddress">Usuario</label>
-                                        <input class="form-control" type="email" id="emailaddress" required="" placeholder="Enter your email">
+                                        <input class="form-control" type="email" name="usuario" id="usuario" required="" placeholder="Ingrese su usuario">
                                     </div>
 
                                     <div class="form-group mb-3">                                        
                                         <label for="password">Contraseña</label>
-                                        <input class="form-control" type="password" required="" id="password" placeholder="Enter your password">
+                                        <input name="pass" id="pass" class="form-control" type="password" required="" id="password" placeholder="Ingrese s contraseña">
                                     </div>
                                     
 
                                     <div class="form-group mb-0 text-center">
-                                        <button class="btn btn-success btn-block" type="submit"> Iniciar </button>
+                                        <button onclick="go();" class="btn btn-success btn-block" type="submit"> Iniciar </button>
                                     </div>
 
                                 </form>
