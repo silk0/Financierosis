@@ -1,5 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+//Codigo que muestra solo los errores exceptuando los notice.
+    error_reporting(E_ALL & ~E_NOTICE);
+    session_start();
+    if($_SESSION["logueado"] == TRUE) {
+    $usuario=$_SESSION["usuario"];
+    $nombre = $_SESSION["nombre"];
+    $tipo  = $_REQUEST["tipo"];
+    $id  = $_REQUEST["id"];
+    }else {
+        header("Location:index.php");
+    }
+?>
 <?php include_once 'Cabecera.php';?>
 
 <body>

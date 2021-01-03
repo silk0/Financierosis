@@ -24,7 +24,7 @@
             if(document.getElementById('usuario').value=="" || document.getElementById('pass').value==""){
                 alert("complete los campos");
             }else{
-                document.location.href='checkLogin.php?usuario='+document.getElementById('usuario').value+'&pass='+document.getElementById('pass').value;
+                document.location.href='vertical-dark/dist/checkLogin.php?usuario='+document.getElementById('usuario').value+'&pass='+document.getElementById('pass').value;
             }
         } 
 
