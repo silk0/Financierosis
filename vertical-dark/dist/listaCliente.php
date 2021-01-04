@@ -25,11 +25,10 @@ $id  = $_REQUEST["id"];
 <SCRIPT  language=JavaScript> 
 function go(){
     //validacion respectiva me da hueva
-        document.form.submit();  
+    $("#editarForm").submit();;         
 } 
-function edit(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres)
+function edit(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,cart)
 {
-
     // document.getElementById("baccion2").value=id;
     document.getElementById("nombrem").value=nom;
     document.getElementById("apellidom").value=ape;
@@ -39,15 +38,30 @@ function edit(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres)
     document.getElementById("telm").value=tel;
     document.getElementById("celm").value=cel;
     document.getElementById("emailm").value=email;    
-    document.getElementById("profecion").value=prof;
+    document.getElementById("profeciom").value=prof;
     document.getElementById("tipom").value=tipo;
     document.getElementById("salm").value=sal;
-    //document.getElementById("observm").value=ob;    
+    document.getElementById("observm").value=ob;    
     document.getElementById("egres").value=egres;
-    $("#custom-modal").modal();
+    document.getElementById("carteram").value=cart; 
   }
-function modify(id){
-  document.location.href="editarCliente.php?id="+id;
+function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,cart){
+    document.getElementById("id_cliente").value=id;
+    document.getElementById("nombre").value=nom;
+    document.getElementById("apellido").value=ape;
+    document.getElementById("dui").value=dui;
+    document.getElementById("nit").value=nit;
+    document.getElementById("direc").value=direc;
+    document.getElementById("telefono").value=tel;
+    document.getElementById("celular").value=cel;
+    document.getElementById("email").value=email;    
+    document.getElementById("profecion").value=prof;  
+    document.getElementById("tipo").value=tipo;
+    document.getElementById("salario").value=Number(sal);
+    document.getElementById("observ").value=ob;    
+    document.getElementById("egreso").value=Number(egres);    
+    document.getElementById("cartera").value=cart;  
+    
 }
 </script>
 
@@ -146,14 +160,14 @@ function modify(id){
                                                 echo "<td>" . $fila->nombre . "</td>";
                                                 echo "<td>" . $fila->apellido . "</td>"; 
                                                 echo "<td>" . $fila->telefono . "</td>";
-                                                echo "<td>
-                                                <div class='container' align='center'>  
-                                                    <button href='#custom-modal'
-                                                    data-animation='contentscale' data-plugin='custommodal'
-                                                    data-overlaySpeed='100'
-                                                    data-overlayColor='#36404a'
+                                                echo "<td>                                                 
+                                                    <button 
+                                                    button type='button'
+                                                    data-toggle='modal'                                                    
+                                                    data-target='#mostrarCliente'                                                    
                                                     class='btn btn-primary waves-effect waves-light' onclick=\"
-                                                    edit('$fila->id_cliente',
+                                                    edit(
+                                                    '$fila->id_cliente',
                                                     '$fila->nombre',
                                                     '$fila->apellido',
                                                     '$fila->dui',
@@ -166,16 +180,38 @@ function modify(id){
                                                     '$fila->tipo_ingreso',                                                    
                                                     '$fila->salario',
                                                     '$fila->observaciones',
-                                                    '$fila->egreso')\";>
+                                                    '$fila->egreso',
+                                                    '$fila->id_cartera'
+                                                    )\";>
                                                         <i class='mdi mdi-eye'></i> 
                                                     </button>
-                                                    <button class='btn btn-warning waves-effect waves-light' onclick='modify(" . $fila->id_cliente. ")'>
-                                                        <i class='mdi mdi-pencil-outline'></i> 
-                                                    </i></button>
+                                                    <button 
+                                                    type='button'
+                                                    data-toggle='modal'                                                    
+                                                    data-target='#editarCliente'
+                                                    class='btn btn-warning waves-effect waves-light' onclick=\"
+                                                    modify(
+                                                    '$fila->id_cliente',
+                                                    '$fila->nombre',
+                                                    '$fila->apellido',
+                                                    '$fila->dui',
+                                                    '$fila->nit',
+                                                    '$fila->profecion',
+                                                    '$fila->direccion',
+                                                    '$fila->telefono',
+                                                    '$fila->celular',
+                                                    '$fila->correo',
+                                                    '$fila->tipo_ingreso',                                                    
+                                                    '$fila->salario',
+                                                    '$fila->observaciones',
+                                                    '$fila->egreso',
+                                                    '$fila->id_cartera'
+                                                    )\";>                                                    
+                                                        <i class='mdi mdi-pencil-outline'></i></i>
+                                                    </button>
                                                 </div>
                                                 </td>";
                                                 echo "</tr>";
-
                                             }
                                         }
                                         ?>
@@ -184,10 +220,248 @@ function modify(id){
                             </div>
                         </div>
                     </div>
-                    <!-- end row -->                         
+                    <!-- end row --> 
 
+                    <!-- Bootstrap Modals -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card-box">                                
+                                <!--  Modal mostrar cliente-->
+                                <div id="mostrarCliente" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myLargeModalLabel">Datos del cliente</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="card-box">
+                                                            <form name="form" required class="parsley-examples">
+                                                            
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputEmail4" class="col-form-label">Nombre</label>
+                                                                    <input type="text"  class="form-control" name="nombrem" id="nombrem" required  placeholder="Jose Alfredo" readonly>
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputPassword4" class="col-form-label">Apellido</label>
+                                                                    <input type="text" class="form-control" name="apellidom" id="apellidom" required  placeholder="Rodriguez Perez" readonly>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputEmail4" class="col-form-label">Dui</label>
+                                                                    <input type="text"  class="form-control" name="duim" id="duim" required  data-mask="99999999-9" placeholder="99999999-9" readonly>
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputPassword4" class="col-form-label">Nit</label>
+                                                                    <input type="text" class="form-control" name="nitm" id="nitm" required  data-mask="9999-999999-999-9" placeholder="9999-999999-999-9" readonly>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputEmail4" class="col-form-label">Telefono fijo</label>
+                                                                    <input type="text"  class="form-control" name="telm" id="telm" required  data-mask="9999-9999" placeholder="9999-9999" readonly>
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputPassword4" class="col-form-label">Telefono Movil</label>
+                                                                    <input type="text" class="form-control" name="celm" id="celm" required data-mask="9999-9999" placeholder="9999-9999" readonly>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-row">
+                                                                <label for="inputAddress" class="col-form-label">Direccion</label>
+                                                                <input type="text" class="form-control"  name="direcm" id="direcm" required placeholder="Calle Juan Ulloa Canas y Avenida Crescencio Miranda Casa #23" readonly>
+                                                            </div>
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputEmail4" class="col-form-label">Email</label>
+                                                                    <input type="email"  class="form-control" name="emailm" id="emailm"  required  placeholder="Correo@correo.com" readonly>
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputPassword4" class="col-form-label">Profesion u oficio</label>
+                                                                    <input type="text"  class="form-control" name="profeciom" id="profeciom" required  placeholder="Ing. Civil" readonly>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="inputCity" class="col-form-label">Ingresos Mensuales</label>
+                                                                    <input type="text" class="form-control" name="salm" id="salm" required  placeholder="0.00" readonly>
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="inputState" class="col-form-label">Tipo de ingreso</label>
+                                                                    <input type="text" class="form-control" name="tipom" id="tipom" placeholder="0.00" readonly>
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="inputZip" class="col-form-label">Egreso Promedio Mensual</label>
+                                                                    <input type="text" class="form-control" name="egres" id="egres" placeholder="0.00" readonly>
+                                                                </div>
+                                                            </div> 
+
+                                                            <div class="form-row">                                        
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="inputState" class="col-form-label">Agregar a la cartera</label>
+                                                                    <select class="form-control" name="carteram" id="carteram" disabled>                                                                        
+                                                                        <?php
+                                                                        include 'config/conexion.php';
+                                                                        $result = $conexion->query("select id_categoria as id,nombre FROM tcartera");
+                                                                        if ($result) {
+                                                                            while ($fila = $result->fetch_object()) {                                                                                
+                                                                                echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
+                                                                            }
+                                                                        }
+                                                                        ?> 
+                                                                    </select>
+                                                                </div>
+                                                            </div>    
+
+                                                            <div class="form-row">
+                                                                <label for="inputEmail4" class="col-form-label">Descripcion</label>
+                                                                <textarea class="form-control" id="observm" name="observm" rows="5" readonly></textarea>
+                                                            </div>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->   
+                                <!--  Modal editar cliente-->
+                                <div id="editarCliente" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myLargeModalLabel">Editar datos del cliente</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="card-box">
+                                                            <form name="editarForm" id="editarForm" method="post" action="scriptsphp/modificarCliente.php?bandera=1" required class="parsley-examples">
+                                                            
+                                                            <div class="form-row">
+                                                                <input type="hidden" id="idfiador" name="idfiador">
+                                                                <input type="hidden" id="id_cliente" name="id_cliente">
+                                                            </div>
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputEmail4" class="col-form-label">Nombre</label>
+                                                                    <input type="text"  class="form-control" name="nombre" id="nombre" required  placeholder="Jose Alfredo">
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputPassword4" class="col-form-label">Apellido</label>
+                                                                    <input type="text" class="form-control" name="apellido" id="apellido" required  placeholder="Rodriguez Perez">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputEmail4" class="col-form-label">Dui</label>
+                                                                    <input type="text"  class="form-control" name="dui" id="dui" required  data-mask="99999999-9" placeholder="99999999-9" readonly>
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputPassword4" class="col-form-label">Nit</label>
+                                                                    <input type="text" class="form-control" name="nit" id="nit" required  data-mask="9999-999999-999-9" placeholder="9999-999999-999-9" readonly>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputEmail4" class="col-form-label">Telefono fijo</label>
+                                                                    <input type="text"  class="form-control" name="telefono" id="telefono" required  data-mask="9999-9999" placeholder="9999-9999" >
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputPassword4" class="col-form-label">Telefono Movil</label>
+                                                                    <input type="text" class="form-control" name="celular" id="celular" required data-mask="9999-9999" placeholder="9999-9999">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-row">
+                                                                <label for="inputAddress" class="col-form-label">Direccion</label>
+                                                                <input type="text" class="form-control"  name="direc" id="direc" required placeholder="Calle Juan Ulloa Canas y Avenida Crescencio Miranda Casa #23">
+                                                            </div>
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputEmail4" class="col-form-label">Correo</label>
+                                                                    <input type="email"  class="form-control" name="email" id="email"  required  placeholder="Correo@correo.com">
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="inputPassword4" class="col-form-label">Profesion u oficio</label>
+                                                                    <input type="text"  class="form-control" name="profecion" id="profecion" required  placeholder="Ing. Civil">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="inputCity" class="col-form-label">Ingresos Mensuales</label>
+                                                                    <input type="number" class="form-control" name="salario" id="salario" required  placeholder="0.00">
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="inputState" class="col-form-label">Tipo de ingreso</label>
+                                                                    <select class="form-control" name="tipo" id="tipo" required >
+                                                                        <option>Salario</option>
+                                                                        <option>Remesa</option>
+                                                                        <option>Salario Informal</option>
+                                                                    </select>                                                                   
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="inputZip" class="col-form-label">Egreso Promedio Mensual</label>
+                                                                    <input type="number" class="form-control" name="egreso" id="egreso" placeholder="0.00">
+                                                                </div>
+                                                            </div> 
+
+                                                            <div class="form-row">                                        
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="inputState" class="col-form-label">Agregar a la cartera</label>
+                                                                    <select class="form-control" name="cartera" id="cartera" required >                                                                        
+                                                                        <?php
+                                                                        include 'config/conexion.php';
+                                                                        $result = $conexion->query("select id_categoria as id,nombre FROM tcartera");
+                                                                        if ($result) {
+                                                                            while ($fila = $result->fetch_object()) {                                                                                
+                                                                                echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
+                                                                            }
+                                                                        }
+                                                                        ?> 
+                                                                    </select>
+                                                                </div>
+                                                            </div>    
+
+                                                            <div class="form-row">
+                                                                <label for="inputEmail4" class="col-form-label">Descripcion</label>
+                                                                <textarea class="form-control" id="observ" name="observ" rows="5"></textarea>
+                                                            </div>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn  btn-primary waves-effect" id ="cambios" name = "cambios"  onclick="go();" >Guardar Cambios</button>
+                                                <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->                              
+                            </div>
+                        </div>
+                    </div>      
                 </div> <!-- container -->
-
             </div> <!-- content -->
 
             <!-- Footer Start -->
@@ -211,86 +485,6 @@ function modify(id){
 
     </div>
     <!-- END wrapper -->
-    
-    <!-- Custom Modal -->
-    <div id="custom-modal" class="modal-demo containeR" aria-labelledby="myLargeModalLabel" >
-        <div class="container-flui">
-        <button type="button" class="close" onclick="Custombox.modal.close();">
-        <span>&times;</span><span class="sr-only">Close</span>
-        </button>
-        <h4 class="custom-modal-title">Datos del cliente</h4>
-            <!-- Form row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card-box">   
-                        <form name="form" method="post" action="ingresoCliente.php?bandera=1" required class="parsley-examples">
-                        
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4" class="col-form-label">Nombre</label>
-                                    <input type="text"  class="form-control" name="nombrem" id="nombrem" required  placeholder="Jose Alfredo" readonly>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputPassword4" class="col-form-label">Apellido</label>
-                                    <input type="text" class="form-control" name="apellidom" id="apellidom" required  placeholder="Rodriguez Perez" readonly>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4" class="col-form-label">Dui</label>
-                                    <input type="text"  class="form-control" name="duim" id="duim" required  data-mask="99999999-9" placeholder="99999999-9" readonly>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputPassword4" class="col-form-label">Nit</label>
-                                    <input type="text" class="form-control" name="nitm" id="nitm" required  data-mask="9999-999999-999-9" placeholder="9999-999999-999-9" readonly>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4" class="col-form-label">Telefono fijo</label>
-                                    <input type="text"  class="form-control" name="telm" id="telm" required  data-mask="9999-9999" placeholder="9999-9999" readonly>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputPassword4" class="col-form-label">Telefono Movil</label>
-                                    <input type="text" class="form-control" name="celm" id="celm" required data-mask="9999-9999" placeholder="9999-9999" readonly>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <label for="inputAddress" class="col-form-label">Direccion</label>
-                                <input type="text" class="form-control"  name="direcm" id="direcm" required placeholder="Calle Juan Ulloa Canas y Avenida Crescencio Miranda Casa #23" readonly>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4" class="col-form-label">Email</label>
-                                    <input type="email"  class="form-control" name="emailm" id="emailm"  required  placeholder="Correo@correo.com" readonly>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputPassword4" class="col-form-label">Profesion u oficio</label>
-                                    <input type="text"  class="form-control" name="profecion" id="profecion" required  placeholder="Ing. Civil" readonly>
-                                </div>
-                            </div>  
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="inputCity" class="col-form-label">Ingresos Mensuales</label>
-                                    <input type="text" class="form-control" name="salm" id="salm" required  placeholder="0.00" readonly>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputState" class="col-form-label">Tipo de ingreso</label>
-                                    <input type="text" class="form-control" name="tipom" id="tipom" placeholder="0.00" readonly>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputZip" class="col-form-label">Egreso Promedio Mensual</label>
-                                    <input type="text" class="form-control" name="egres" id="egres" placeholder="0.00" readonly>
-                                </div>
-                            </div>   
-                            </br>                            
-                        </form>
-                    </div> <!-- end card-box -->
-                </div> <!-- end col -->
-            </div>
-            <!-- end row -->
-       </div>
-    </div>                             
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>

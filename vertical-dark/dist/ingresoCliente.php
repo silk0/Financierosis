@@ -234,7 +234,7 @@ function enviar(id){
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="inputState" class="col-form-label">Tipo de ingreso</label>
-                                            <select id="inputState" class="form-control" name="tipo" id="tipo" required >
+                                            <select class="form-control" name="tipo" id="tipo" required >
                                                 <option selected >Seleccione</option>
                                                 <option>Salario</option>
 											    <option>Remesa</option>
@@ -249,7 +249,7 @@ function enviar(id){
                                     <div class="form-row">                                        
                                         <div class="form-group col-md-4">
                                             <label for="inputState" class="col-form-label">Agregar a la cartera</label>
-                                            <select id="inputState" class="form-control" name="cartera" id="cartera" required >
+                                            <select  class="form-control" name="cartera" id="cartera" required >
                                                 <option selected >Seleccione</option>
                                                 <?php
                                                 include 'config/conexion.php';
@@ -271,7 +271,7 @@ function enviar(id){
                                     <div class="form-row"> 
                                     <div class="form-group">
                                         <button type="buttom" onclick="go();" class="btn btn-success btn-rounded waves-light width-md">Registrar</button>                                        
-                                        <button type="reset" onclick="" class="btn btn-danger btn-rounded waves-light width-md">Cancelar</button>  
+                                        <button type="reset"  class="btn btn-danger btn-rounded waves-light width-md">Cancelar</button>  
                                     </div>                                      
                                     </div>
                                 </form>
