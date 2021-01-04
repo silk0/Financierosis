@@ -28,7 +28,7 @@ if($accion==1){
   celular='" . $cel . "',
   correo='" . $email . "',
   observaciones='" . $observ . "',
-  egreso='" . $egreso . "' 
+  egreso='" . $egres . "' 
   where id_cliente='". $id ."'";
   $resultado = $conexion->query($consulta);
   if ($resultado) {   
