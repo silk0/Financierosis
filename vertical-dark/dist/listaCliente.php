@@ -2,12 +2,13 @@
 <html lang="en">
 <?php include_once 'Cabecera.php';?>
 <script>
-   function filtrar(){
-    id=document.getElementById("op").value;    
-           $("#ide").val(id);
-          document.form.submit();
-        }
+    function filtrar() {
+        id = document.getElementById("op").value;
+        $("#ide").val(id);
+        document.form.submit();
+    }
 </script>
+
 <body>
 
     <!-- Begin page -->
@@ -59,14 +60,14 @@
                             <div class="card-box">
                                 <h4 class="header-title"></h4>
                                 <p class="sub-header">
-                                    
+
                                 </p>
 
                                 <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Listado de Cliente por Cartera:</label>
-                                        <div class="col-sm-10">
-                                            <select class="form-control" name="op" id="op" onchange="filtrar()">
-                                                <?php
+                                    <label class="col-sm-2 col-form-label">Listado de Cliente por Cartera:</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="op" id="op" onchange="filtrar()">
+                                            <?php
                                                   include "config/conexion.php";
                                                   $result = $conexion->query("SELECT id_categoria as id ,nombre FROM  tcartera ");
                                                             if ($result) {
@@ -76,32 +77,44 @@
                                                                      }
                                                              }
                                                  ?>
-                                            </select>
-                                        </div>
+                                        </select>
                                     </div>
+                                </div>
 
                                 <table id="datatable-buttons"
                                     class="table table-striped table-bordered dt-responsive nowrap">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>DUI</th>
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                            <th>Telèfono</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
 
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
+                                    <tbody> 
+                                        <?php
+                                             include "config/conexion.php";
+                                        $result = $conexion->query("SELECT * from tclientes ORDER BY id_cliente");
+                                        if ($result) {
+                                            while ($fila = $result->fetch_object()) {
+                                                echo "<tr>";
+                                                echo "<td>" . $fila->dui . "</td>";
+                                                echo "<td>" . $fila->nombre . "</td>";
+                                                echo "<td>" . $fila->apellido . "</td>"; 
+                                                echo "<td>" . $fila->telefono . "</td>";
+                                                echo "<td>
+                                                <div class='button-icon-btn'>
+                                                <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"edit('$fila->id_cliente','$fila->nombre','$fila->apellido','$fila->dui','$fila->nit','$fila->direccion','$fila->telefono','$fila->celular','$fila->correo','$fila->tipo_ingreso','$fila->profecion','$fila->salario','$fila->observaciones')\";><i class='notika-icon notika-search'></i></button>
+                                                <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modify(" . $fila->id_cliente. ")'><i class='notika-icon notika-menus'></i></button>
+                                                </div>
+                                                </td>";
+                                                echo "</tr>";
+
+                                            }
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
