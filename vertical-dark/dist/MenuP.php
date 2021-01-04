@@ -6,7 +6,7 @@
 
         <li>
             <a href="javascript: void(0);">
-                <i class="dripicons-mail"></i>
+                <i class="mdi mdi-account-group"></i>
                 <span>Clientes </span>
                 <span class="menu-arrow"></span>
             </a>
@@ -15,14 +15,40 @@
                     <a href="ingresoCliente.php">Nuevo Cliente</a>
                 </li>
                 <li>
-                    <a href="listaCliente.php">Lista de clientes</a>
-                </li>
-                <li>
-                    <a href="email-compose.html">Compose Email</a>
+                    <a href="listaCliente.php">Lista de Clientes</a>
                 </li>
             </ul>
         </li>
-       
+        <li>
+            <a href="javascript: void(0);">
+                <i class="dripicons-mail"></i>
+                <span> Fiadores </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <ul class="nav-second-level" aria-expanded="false">
+                <li>
+                    <a href="">Nuevo Fiador</a>
+                </li>
+                <li>
+                    <a href="">Lista de Fiadores</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript: void(0);">
+                <i class="dripicons-mail"></i>
+                <span> Proveedores </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <ul class="nav-second-level" aria-expanded="false">
+                <li>
+                    <a href="">Nuevo Proveedor</a>
+                </li>
+                <li>
+                    <a href="">Lista de Proveedores</a>
+                </li>
+            </ul>
+        </li>
 
         <li>
             <a href="javascript: void(0);">
