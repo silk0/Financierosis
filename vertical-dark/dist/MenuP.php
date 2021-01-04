@@ -15,7 +15,7 @@
                     <a href="ingresoCliente.php">Nuevo Cliente</a>
                 </li>
                 <li>
-                    <a href="Contenido.php">Lista de clientes</a>
+                    <a href="listaCliente.php">Lista de clientes</a>
                 </li>
                 <li>
                     <a href="email-compose.html">Compose Email</a>
