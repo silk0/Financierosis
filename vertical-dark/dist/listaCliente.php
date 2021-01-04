@@ -1,5 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+<?php
+//Codigo que muestra solo los errores exceptuando los notice.
+error_reporting(E_ALL & ~E_NOTICE);
+session_start();
+if($_SESSION["logueado"] == TRUE) {
+$usuario=$_SESSION["usuario"];
+$nombre = $_SESSION["nombre"];
+$tipo  = $_REQUEST["tipo"];
+$id  = $_REQUEST["id"];
+}else {
+    header("Location:index.php");
+  }
+?>>
 <?php include_once 'Cabecera.php';?>
 <script>
     function filtrar() {
@@ -105,9 +118,13 @@
                                                 echo "<td>" . $fila->apellido . "</td>"; 
                                                 echo "<td>" . $fila->telefono . "</td>";
                                                 echo "<td>
-                                                <div class='button-icon-btn'>
-                                                <button class='btn btn-info info-icon-notika btn-reco-mg btn-button-mg' onclick=\"edit('$fila->id_cliente','$fila->nombre','$fila->apellido','$fila->dui','$fila->nit','$fila->direccion','$fila->telefono','$fila->celular','$fila->correo','$fila->tipo_ingreso','$fila->profecion','$fila->salario','$fila->observaciones')\";><i class='notika-icon notika-search'></i></button>
-                                                <button class='btn btn-lightgreen lightgreen-icon-notika btn-reco-mg btn-button-mg' onclick='modify(" . $fila->id_cliente. ")'><i class='notika-icon notika-menus'></i></button>
+                                                <div class='container' align='center'>  
+                                                    <button class='btn btn-primary waves-effect waves-light' onclick=\"edit('$fila->id_cliente','$fila->nombre','$fila->apellido','$fila->dui','$fila->nit','$fila->direccion','$fila->telefono','$fila->celular','$fila->correo','$fila->tipo_ingreso','$fila->profecion','$fila->salario','$fila->observaciones')\";>
+                                                        <i class='mdi mdi-eye'></i> 
+                                                    </button>
+                                                    <button class='btn btn-warning waves-effect waves-light' onclick='modify(" . $fila->id_cliente. ")'>
+                                                        <i class='mdi mdi-pencil-outline'></i> 
+                                                    </i></button>
                                                 </div>
                                                 </td>";
                                                 echo "</tr>";
