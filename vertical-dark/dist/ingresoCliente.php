@@ -278,7 +278,7 @@ function enviar(id){
                             </div> <!-- end card-box -->
                         </div> <!-- end col -->
                     </div>
-                        <!-- end row -->
+                    <!-- end row -->
 
                  </div> <!-- container -->
 

@@ -31,6 +31,9 @@
 <!-- Validation js (Parsleyjs) -->
 <script src="assets/libs/parsleyjs/parsley.min.js"></script>
 
+<!-- Modal-Effect -->
+<script src="assets/libs/custombox/custombox.min.js"></script>
+
 <script type="text/javascript">
     Parsley.addMessages('es', {
         defaultMessage: "Este valor parece ser inválido.",
