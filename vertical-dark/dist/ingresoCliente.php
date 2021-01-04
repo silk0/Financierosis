@@ -131,7 +131,7 @@ function enviar(id){
 } 
 </script> 
 
-<body>
+<body class="left-side-menu-dark">
 
     <!-- Begin page -->
     <div id="wrapper">

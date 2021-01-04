@@ -2,7 +2,7 @@
 <html lang="en">
 <?php include_once 'Cabecera.php';?>
 
-<body>
+<body class="left-side-menu-dark">
 
     <!-- Begin page -->
     <div id="wrapper">

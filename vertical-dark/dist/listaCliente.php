@@ -120,7 +120,7 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                 </p>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Listado de Cliente por Cartera:</label>
+                                    <label class="col-sm-2 col-form-label">Clientes por Cartera:</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" name="op" id="op" onchange="filtrar()">
                                             <?php
