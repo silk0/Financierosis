@@ -55,11 +55,27 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 								'<a href="#" data-growl="url"></a>' +
 							'</div>'
 		});
-	}
+    }
+    function alert(str, icono){
+        var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+        });
+
+        Toast.fire({icon: icono, title: str});  
+    }
 	
 function go(){
 
     //Validaciones
+    alert('Mensaje','success');
    if(document.getElementById('nombre').value==""){
      notify(' Advertencia:','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
        document.getElementById("nombre").focus();
@@ -254,7 +270,7 @@ function enviar(id){
                                     </br>
                                     <div class="form-row"> 
                                     <div class="form-group">
-                                        <button type="sumit" onclick="go();" class="btn btn-success btn-rounded waves-light width-md">Registrar</button>                                        
+                                        <button type="buttom" onclick="go();" class="btn btn-success btn-rounded waves-light width-md">Registrar</button>                                        
                                         <button type="reset" onclick="" class="btn btn-danger btn-rounded waves-light width-md">Cancelar</button>  
                                     </div>                                      
                                     </div>
