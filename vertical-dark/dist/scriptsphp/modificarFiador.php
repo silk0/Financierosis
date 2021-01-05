@@ -1,6 +1,36 @@
 <?php
 include "../config/conexion.php";
-$bandera = $_REQUEST['bandera'];
+$accion = $_REQUEST['bandera'];
+$baccion  = $_REQUEST["baccion2"];
+if($accion==1){
+  $id = $_POST["id_fiador"];
+  $nombre   = $_POST['nombre'];
+  $apellido   = $_POST['apellido'];
+  $tel   = $_POST['telefono'];
+  $cel  = $_POST['celular'];
+  $direccion   = $_POST['direc'];
+  $email   = $_POST['email'];
+  $prof = $_POST['profecion'];
+  $salario = $_POST['salario'];
+  $consulta  = "UPDATE tfiador set nombre='" . $nombre . "',
+  apellido='" . $apellido . "',
+  telefono='" . $tel . "',
+  celular='" . $cel . "',
+  direccion='" . $direccion . "',
+  correo='" . $email . "',
+  profecion='". $prof ."',
+  salario='" . $salario . "',
+  
+  where id_fiador='". $id ."'";
+  $resultado = $conexion->query($consulta);
+  if ($resultado) {   
+    header('Location:../listaFiador.php?bandera=1');
+  } else {
+    header('Location:../listaFiador.php?bandera=2');
+  }   
+}
+
+/* $bandera = $_REQUEST['bandera'];
 $baccion  = $_REQUEST["baccion"];
 
 if ($bandera==1) {
@@ -19,9 +49,9 @@ $salario    = $_REQUEST['salario'];
     $consulta  = "UPDATE tfiador set nombre='" . $nombre . "',apellido='" . $apellido . "',direccion='" . $direccion . "',dui='" . $dui . "',nit='" . $nit . "',correo='" . $email . "',profecion='" . $trabajo . "',salario='" . $salario . "',telefono='" . $telefono . "',celular='" . $celular . "' where id_fiador='" . $baccion . "'";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
-        header('Location:../mostrarFiadores.php?bandera=1');
+        header('Location:../listaFiador.php?bandera=1');
       } else {
-        header('Location:../mostrarFiadores.php?bandera=2');
+        header('Location:../listaFiador.php?bandera=2');
       }
     }else if($bandera==2){
       $nombre     = $_POST['nombre'];
@@ -60,5 +90,5 @@ $email      = $_REQUEST['email'];
               header('Location:../mostrarProveedores.php?bandera=2');
             }
       
-      }
+      } */
 ?>
