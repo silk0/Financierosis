@@ -2,31 +2,41 @@
 <html lang="en"
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
-error_reporting(E_ALL & ~E_NOTICE);
-session_start();
-if($_SESSION["logueado"] == TRUE) {
-$usuario=$_SESSION["usuario"];
-$nombre = $_SESSION["nombre"];
-$tipo  = $_REQUEST["tipo"];
-$id  = $_REQUEST["id"];
-}else {
-    header("Location:index.php");
-  }
+    error_reporting(E_ALL & ~E_NOTICE);
+    session_start();
+    if($_SESSION["logueado"] == TRUE) {
+        $usuario=$_SESSION["usuario"];
+        $nombre = $_SESSION["nombre"];
+        $tipo  = $_REQUEST["tipo"];
+        $id  = $_REQUEST["id"];
+    }else {
+        header("Location:index.php");
+    }
+
+    if( isset($_REQUEST["cartera"]) ){
+		$cartera=($_REQUEST['cartera']);
+	}else{
+		$cartera=-1;
+	}
+
+
 ?>>
 <?php include_once 'Cabecera.php';?>
 <script>
     function filtrar() {
         id = document.getElementById("op").value;
-        $("#ide").val(id);
-        document.form.submit();
+        $("#ide").val(id);        
+        $("#fCartera").submit();
     }
 </script>
 
 <SCRIPT  language=JavaScript> 
 function go(){
     //validacion respectiva me da hueva
+    enviarDatos(2);
     $("#editarForm").submit();;         
 } 
+
 function edit(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,cart)
 {
     // document.getElementById("baccion2").value=id;
@@ -44,7 +54,8 @@ function edit(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,cart
     document.getElementById("observm").value=ob;    
     document.getElementById("egres").value=egres;
     document.getElementById("carteram").value=cart; 
-  }
+}
+
 function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,cart){
     document.getElementById("id_cliente").value=id;
     document.getElementById("nombre").value=nom;
@@ -61,7 +72,6 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
     document.getElementById("observ").value=ob;    
     document.getElementById("egreso").value=Number(egres);    
     document.getElementById("cartera").value=cart;  
-    
 }
 </script>
 
@@ -118,25 +128,34 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                 <p class="sub-header">
 
                                 </p>
-
-                                <div class="form-group row">
+                                <form id="fCartera" name= "fCartera" action="" method="GET"  class="parsley-examples">
+                                <div  class="form-group row">
                                     <label class="col-sm-2 col-form-label">Clientes por Cartera:</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" name="op" id="op" onchange="filtrar()">
                                             <?php
                                                   include "config/conexion.php";
-                                                  $result = $conexion->query("SELECT id_categoria as id ,nombre FROM  tcartera ");
-                                                            if ($result) {
-                                                             echo "<option value='".$fila->id."'>Seleccione</option>";
-                                                                 while ($fila = $result->fetch_object()) {
-                                                                        echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
-                                                                     }
-                                                             }
+                                                  if(isset($_GET['op'])){
+                                                      $op=$_GET['op'];
+                                                  }
+                                                  $result = $conexion->query("SELECT id_categoria as id,nombre FROM  tcartera ");
+                                                  echo "<option value='0' selected>Seleccione</option>";
+                                                    if ($result) {
+                                                        
+                                                        while ($fila = $result->fetch_object()) {
+                                                            $idcart = $fila->id;
+                                                            if($op===$idcart){
+                                                                echo "<option value='".$fila->id."' selected>".$fila->nombre."</option>";
+                                                            }else{
+                                                                echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
+                                                            }
+                                                        }
+                                                    }
                                                  ?>
                                         </select>
                                     </div>
                                 </div>
-
+                                
                                 <table id="datatable-buttons"
                                     class="table table-striped table-bordered dt-responsive nowrap">
                                     <thead>
@@ -151,8 +170,15 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
 
                                     <tbody> 
                                         <?php
-                                             include "config/conexion.php";
-                                        $result = $conexion->query("SELECT * from tclientes ORDER BY id_cliente");
+                                        
+                                        include "config/conexion.php";
+
+                                        if(isset($_GET['op'])&&$_GET['op']>0){
+                                            $ide=$_GET['op'];
+                                            $result = $conexion->query("select id_cliente,nombre,apellido,dui,nit,celular, id_cartera FROM tclientes as c where c.id_cartera='".$ide."' order by nombre");
+                                        }else{
+                                            $result = $conexion->query("SELECT * from tclientes ORDER BY nombre");
+                                        }
                                         if ($result) {
                                             while ($fila = $result->fetch_object()) {
                                                 echo "<tr>";
@@ -217,6 +243,7 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                         ?>
                                     </tbody>
                                 </table>
+                                </form>
                             </div>
                         </div>
                     </div>

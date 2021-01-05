@@ -3,7 +3,6 @@ include "../config/conexion.php";
 $accion = $_REQUEST['bandera'];
 $baccion  = $_REQUEST["baccion2"];
 if($accion==1){
-  echo'<script type="text/javascript"> alert("Tarea Guardada");</script>';
   $id = $_POST["id_cliente"];
   $nombre   = $_POST['nombre'];
   $apellido   = $_POST['apellido'];
