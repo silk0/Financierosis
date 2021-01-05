@@ -75,7 +75,6 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 function go(){
 
     //Validaciones
-    alert('Mensaje','success');
    if(document.getElementById('nombre').value==""){
      notify(' Advertencia:','El campo Nombre es obligatorio.','top', 'right', 'any', 'warning');
        document.getElementById("nombre").focus();
@@ -120,7 +119,7 @@ function enviar(id){
         url: 'scriptsphp/recuperarFiador.php',
         type: 'post',
         beforeSend: function(){
-            alert("Por favr espere...");
+            alert("Por favor espere...");
         },
         success: function(response){
             alert(response);
@@ -248,7 +247,7 @@ function enviar(id){
                                     </div>
                                     <div class="form-row">
                                         <label for="inputEmail4" class="col-form-label">Descripcion</label>
-                                        <textarea class="form-control" id="observm" name="observm" rows="5" readonly></textarea>
+                                        <textarea class="form-control" id="observ" name="observ" rows="5"></textarea>
                                     </div>   
                                     <div class="form-row">                                        
                                         <div class="form-group col-md-4">
