@@ -129,33 +129,39 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
 
                                 </p>
                                 <form id="fCartera" name= "fCartera" action="" method="GET"  class="parsley-examples">
-                                <div  class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Clientes por Cartera:</label>
-                                    <div class="col-sm-10">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4" class="col-form-label">Clientes por Cartera:</label>
                                         <select class="form-control" name="op" id="op" onchange="filtrar()">
-                                            <?php
-                                                  include "config/conexion.php";
-                                                  if(isset($_GET['op'])){
-                                                      $op=$_GET['op'];
-                                                  }
-                                                  $result = $conexion->query("SELECT id_categoria as id,nombre FROM  tcartera ");
-                                                  echo "<option value='0' selected>Seleccione</option>";
-                                                    if ($result) {
-                                                        
-                                                        while ($fila = $result->fetch_object()) {
-                                                            $idcart = $fila->id;
-                                                            if($op===$idcart){
-                                                                echo "<option value='".$fila->id."' selected>".$fila->nombre."</option>";
-                                                            }else{
-                                                                echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
-                                                            }
+                                        <?php
+                                            include "config/conexion.php";
+                                            if(isset($_GET['op'])){
+                                                $op=$_GET['op'];
+                                            }
+                                            $result = $conexion->query("SELECT id_categoria as id,nombre FROM  tcartera ");
+                                            echo "<option value='0' selected>Seleccione</option>";
+                                                if ($result) {
+                                                    
+                                                    while ($fila = $result->fetch_object()) {
+                                                        $idcart = $fila->id;
+                                                        if($op===$idcart){
+                                                            echo "<option value='".$fila->id."' selected>".$fila->nombre."</option>";
+                                                        }else{
+                                                            echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
                                                         }
                                                     }
-                                                 ?>
-                                        </select>
+                                                }
+                                            ?>
+                                        </select>                                            
                                     </div>
+                                    
                                 </div>
-                                
+                                <div class="form-row">
+                                        <div class="form-group form-group col-md-6">
+                                          
+                                            <button type="button" class="btn  btn-primary waves-effect" id ="cambios" name = "cambios"  onclick="go();" >Ingresar Nuevo</button>
+                                        </div>
+                                </div>
                                 <table id="datatable-buttons"
                                     class="table table-striped table-bordered dt-responsive nowrap">
                                     <thead>
