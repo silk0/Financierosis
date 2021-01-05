@@ -205,3 +205,49 @@ if(document.getElementById('nombre').value==""){
 </body>
 
 </html>
+
+<?php
+    include "config/conexion.php";
+    $accion = $_REQUEST['bandera'];
+        if($accion==1){
+        $nombre   = $_POST['nombre'];
+        $apellido   = $_POST['apellido'];
+        $direccion   = $_POST['direc'];
+        $dui  = $_POST['dui'];
+        $nit   = $_POST['nit'];
+        $email   = $_POST['email'];
+        $tel   = $_POST['telefono'];
+        $cel  = $_POST['celular'];
+        $tipo = $_POST['tipo'];
+        $prof=$_POST['profecion'];
+        $salario=$_POST['salario'];
+        //$egreso = $_POST['egreso'];
+        //$observ  = $_POST['observ'];
+        msgI($egreso);
+        $consulta  = "INSERT INTO tfiador VALUES('null','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$prof. "','" .$tipo. "','" .$salario. "','" .$tel. "','" .$cel. "','" .$email. "','" .$observ. "','" .$egreso. "')";
+        $resultado = $conexion->query($consulta);
+        if ($resultado) {
+            msgI("Los datos fueron almacenados con exito");
+        } else {
+            msgE("Los datos no pudieron almacenarce");
+        }     
+    }
+function msgI($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
+    echo "</script>";
+}
+?>
