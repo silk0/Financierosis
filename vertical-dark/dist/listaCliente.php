@@ -75,7 +75,7 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
 }
 </script>
 
-<body>
+<body class="left-side-menu-dark">
 
     <!-- Begin page -->
     <div id="wrapper">
