@@ -171,7 +171,7 @@ function enviar(id){
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box" >                                
-                                <h4 class="page-title" align="center">Registro de cliente</h4>
+                                <h4 class="page-title">Registro de cliente</h4>
                             </div>
                         </div>
                     </div>
@@ -245,6 +245,10 @@ function enviar(id){
                                             <label for="inputZip" class="col-form-label">Egreso Promedio Mensual ($)</label>
                                             <input type="number" class="form-control" name="egreso" id="egreso" placeholder="0.00" >
                                         </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <label for="inputEmail4" class="col-form-label">Descripcion</label>
+                                        <textarea class="form-control" id="observm" name="observm" rows="5" readonly></textarea>
                                     </div>   
                                     <div class="form-row">                                        
                                         <div class="form-group col-md-4">
