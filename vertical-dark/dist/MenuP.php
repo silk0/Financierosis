@@ -6,7 +6,7 @@
 
         <li>
             <a href="javascript: void(0);">
-                <i class="mdi mdi-account-group"></i>
+                <i class="mdi mdi-account-multiple"></i>
                 <span>Clientes </span>
                 <span class="menu-arrow"></span>
             </a>
@@ -21,22 +21,22 @@
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="dripicons-mail"></i>
+                <i class="mdi mdi-shield-account"></i>
                 <span> Fiadores </span>
                 <span class="menu-arrow"></span>
             </a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li>
-                    <a href="">Nuevo Fiador</a>
+                    <a href="ingresoFiador.php">Nuevo Fiador</a>
                 </li>
                 <li>
-                    <a href="">Lista de Fiadores</a>
+                    <a href="listaFiador.php">Lista de Fiadores</a>
                 </li>
             </ul>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="dripicons-mail"></i>
+                <i class="mdi mdi-truck-check"></i>
                 <span> Proveedores </span>
                 <span class="menu-arrow"></span>
             </a>

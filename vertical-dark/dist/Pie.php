@@ -55,6 +55,7 @@
         maxcheck:       "Debe seleccionar %s opciones o menos.",
         check:          "Debe seleccionar entre %s y %s opciones.",
         equalto:        "Este valor debe ser idéntico."
+        /*Ejemplo de uso ---> data-parsley-type="alphanum"*/
         
     });
 
