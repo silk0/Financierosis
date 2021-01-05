@@ -42,10 +42,10 @@
             </a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li>
-                    <a href="">Nuevo Proveedor</a>
+                    <a href="IngresoProveedor.php">Nuevo Proveedor</a>
                 </li>
                 <li>
-                    <a href="">Lista de Proveedores</a>
+                    <a href="ListaProveedor.php">Lista de Proveedores</a>
                 </li>
             </ul>
         </li>
