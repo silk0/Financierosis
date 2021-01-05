@@ -142,19 +142,6 @@ if(document.getElementById('nombre').value==""){
                                             <label for="inputCity" class="col-form-label">Ingresos Mensuales ($)</label>
                                             <input type="number" class="form-control" name="salario" id="salario" required  placeholder="0.00">
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="inputState" class="col-form-label">Tipo de ingreso</label>
-                                            <select class="form-control" name="tipo" id="tipo" required >
-                                                <option selected >Seleccione</option>
-                                                <option>Salario</option>
-											    <option>Remesa</option>
-											    <option>Salario Informal</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="inputZip" class="col-form-label">Egreso Promedio Mensual ($)</label>
-                                            <input type="number" class="form-control" name="egreso" id="egreso" placeholder="0.00" >
-                                        </div>
                                     </div>
                                     </br>
                                     <div class="form-row"> 
@@ -218,13 +205,12 @@ if(document.getElementById('nombre').value==""){
         $email   = $_POST['email'];
         $tel   = $_POST['telefono'];
         $cel  = $_POST['celular'];
-        $tipo = $_POST['tipo'];
         $prof=$_POST['profecion'];
         $salario=$_POST['salario'];
         //$egreso = $_POST['egreso'];
         //$observ  = $_POST['observ'];
         msgI($egreso);
-        $consulta  = "INSERT INTO tfiador VALUES('null','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$prof. "','" .$tipo. "','" .$salario. "','" .$tel. "','" .$cel. "','" .$email. "','" .$observ. "','" .$egreso. "')";
+        $consulta  = "INSERT INTO tfiador VALUES('null','" .$nombre. "','" .$apellido. "','" .$direccion. "','" .$dui. "','" .$nit. "','" .$email. "','" .$prof. "','" .$salario. "','" .$tel. "','" .$cel. "')";
         $resultado = $conexion->query($consulta);
         if ($resultado) {
             msgI("Los datos fueron almacenados con exito");
