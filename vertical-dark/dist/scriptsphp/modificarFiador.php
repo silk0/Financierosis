@@ -1,7 +1,6 @@
 <?php
 include "../config/conexion.php";
 $accion = $_REQUEST['bandera'];
-$baccion  = $_REQUEST["baccion2"];
 if($accion==1){
   $id = $_POST["id_fiador"];
   $nombre   = $_POST['nombre'];
@@ -25,7 +24,7 @@ if($accion==1){
   $resultado = $conexion->query($consulta);
   if ($resultado) {   
     header('Location:../listaFiador.php?bandera=1');
-  } else {
+  }  else {
     header('Location:../listaFiador.php?bandera=2');
   }   
 }

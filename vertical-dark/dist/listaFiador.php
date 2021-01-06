@@ -7,7 +7,7 @@
 function go(){
     //validacion respectiva me da hueva
     enviarDatos(2);
-    $("#editarForm").submit();;         
+    $("#editarForm").submit();;      
 } 
     function edit(id,nom,ape,dui,nit,tel,cel,direc,email,prof,sal)
 {
