@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
+<html lang="en">
 <?php
 //Codigo que muestra solo los errores exceptuando los notice.
     error_reporting(E_ALL & ~E_NOTICE);
@@ -20,7 +20,7 @@
 	}
 
 
-?>>
+?>
 <?php include_once 'Cabecera.php';?>
 <script>
     function filtrar() {
@@ -256,8 +256,7 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
 
                     <!-- Bootstrap Modals -->
                     <div class="row">
-                        <div class="col-12">
-                            <div class="card-box">                                
+                        <div class="col-12">                               
                                 <!--  Modal mostrar cliente-->
                                 <div id="mostrarCliente" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog modal-lg">
@@ -490,7 +489,7 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->                              
-                            </div>
+                            
                         </div>
                     </div>      
                 </div> <!-- container -->

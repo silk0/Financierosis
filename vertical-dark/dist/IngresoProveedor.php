@@ -69,10 +69,9 @@
                                         <label for="inputAddress" class="col-form-label">Direccion</label>
                                         <input type="text" class="form-control"  name="direc" id="direc" required placeholder="Calle Juan Ulloa Canas y Avenida Crescencio Miranda Casa #23">
                                     </div>
-                                    </div>
-                                    <div class="page-title-box" >                                
-                                <h4 class="page-title" align="center">Datos del representante del proveedor</h4>
-                            </div>
+                                    </div>  
+                                    </br>                            
+                                    <h4 class="header-title">Datos del representante del proveedor</h4>                                    
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputEmail4" class="col-form-label">Representante</label>
