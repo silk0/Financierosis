@@ -49,6 +49,21 @@
                 </li>
             </ul>
         </li>
+        <li>
+            <a href="javascript: void(0);">
+                <i class="mdi mdi-truck-check"></i>
+                <span> Empleados </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <ul class="nav-second-level" aria-expanded="false">
+                <li>
+                    <a href="ingresoEmpleado.php">Nuevo Empleado</a>
+                </li>
+                <li>
+                    <a href="listaEmpleado.php">Lista de Empleados</a>
+                </li>
+            </ul>
+        </li>
 
         <li>
             <a href="javascript: void(0);">
