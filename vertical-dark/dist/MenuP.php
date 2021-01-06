@@ -68,15 +68,15 @@
         <li>
             <a href="javascript: void(0);">
                 <i class="dripicons-mail"></i>
-                <span> Email </span>
+                <span>Inventario</span>
                 <span class="menu-arrow"></span>
             </a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li>
-                    <a href="email-inbox.html">Inbox</a>
+                    <a href="ingresarProducto.php">Inbox</a>
                 </li>
                 <li>
-                    <a href="email-read.html">Read Email</a>
+                    <a href="listadoProducto.php">Read Email</a>
                 </li>
                 <li>
                     <a href="email-compose.html">Compose Email</a>
