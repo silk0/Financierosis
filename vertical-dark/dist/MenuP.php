@@ -73,13 +73,13 @@
             </a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li>
-                    <a href="ingresarProducto.php">Inbox</a>
+                    <a href="ingresarProducto.php">Nuevo articulo</a>
                 </li>
                 <li>
-                    <a href="listadoProducto.php">Read Email</a>
+                    <a href="listadoProducto.php">Lista de articulos</a>
                 </li>
                 <li>
-                    <a href="email-compose.html">Compose Email</a>
+                    <a href="email-compose.html">Categoria de articulos</a>
                 </li>
             </ul>
         </li>

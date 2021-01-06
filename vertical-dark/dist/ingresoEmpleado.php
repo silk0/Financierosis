@@ -155,7 +155,9 @@
                                         Empleados</button>
                                     <button type="button"
                                         class="btn btn-outline-success btn-rounded waves-effect waves-light width-md">Mostrar
-                                        Usuarios</button></div><br>
+                                        Usuarios</button>
+                                </div>
+                                <br>
                                 <h4 class="header-title">Ingreso de datos generales del empleado</h4>
                                 <form name="form" method="post" action="ingresoEmpleado.php?bandera=1"
                                     class="parsley-examples">
