@@ -51,7 +51,7 @@
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="mdi mdi-truck-check"></i>
+                <i class="mdi mdi-account-card-details"></i>
                 <span> Empleados </span>
                 <span class="menu-arrow"></span>
             </a>
