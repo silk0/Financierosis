@@ -33,7 +33,6 @@
 <SCRIPT  language=JavaScript> 
 function go(){
     //validacion respectiva me da hueva
-    enviarDatos(2);
     $("#editarForm").submit();;         
 } 
 
