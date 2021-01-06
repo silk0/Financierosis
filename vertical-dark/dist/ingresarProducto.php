@@ -42,7 +42,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box">                                
-                                <h4 class="page-title">Contenido</h4>
+                                <h4 class="page-title">Registro de articulos</h4>
                             </div>
                         </div>
                     </div>
