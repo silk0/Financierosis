@@ -67,19 +67,19 @@
 
         <li>
             <a href="javascript: void(0);">
-                <i class="dripicons-mail"></i>
+                <i class="mdi mdi-view-compact"></i>
                 <span>Inventario</span>
                 <span class="menu-arrow"></span>
             </a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li>
-                    <a href="ingresarProducto.php">Nuevo articulo</a>
+                    <a href="ingresarProducto.php">Nuevo Articulo</a>
                 </li>
                 <li>
-                    <a href="listadoProducto.php">Lista de articulos</a>
+                    <a href="listadoProducto.php">Lista de Articulos</a>
                 </li>
                 <li>
-                    <a href="email-compose.html">Categoria de articulos</a>
+                    <a href="ingresoCategoria.php">Categoria de Articulos</a>
                 </li>
             </ul>
         </li>
