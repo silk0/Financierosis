@@ -19,7 +19,8 @@ if($accion==1){
   dui='" . $dui . "',
   nit='" . $nit . "',
   celu='" . $celu . "',
-  email='" . $email . "'";
+  email='" . $email . "',
+  where id_proveedor='". $id ."'";
   $resultado = $conexion->query($consulta);
   if ($resultado) {   
     header('Location:../ListaProveedor.php?bandera=1');

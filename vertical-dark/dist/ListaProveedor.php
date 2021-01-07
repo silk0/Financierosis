@@ -25,8 +25,7 @@
 <SCRIPT  language=JavaScript> 
 function go(){
     //validacion respectiva me da hueva
-    enviarDatos(2);
-    $("#editarForm").submit();;         
+    $("#editarForm").submit();;      
 } 
 
 function edit(id,nom,tel,direc,repre,dui,nit,cel,email)
@@ -155,7 +154,7 @@ function modify(id,nom,tel,direc,repre,dui,nit,cel,email){
 
                                         if(isset($_GET['op'])&&$_GET['op']>0){
                                             $ide=$_GET['op'];
-                                            $result = $conexion->query("select id_proveedor,nombre,telefono,representante,dui,nit,celular,email, FROM tproveedor as c where c.id_proveedor='".$ide."' order by nombre");
+                                            $result = $conexion->query("select id_proveedor,nombre,telefono,direccion,representante,dui,nit,celular,email, FROM tproveedor as c where c.id_proveedor='".$ide."' order by nombre");
                                         }else{
                                             $result = $conexion->query("SELECT * from tproveedor ORDER BY nombre");
                                         }
@@ -366,7 +365,7 @@ function modify(id,nom,tel,direc,repre,dui,nit,cel,email){
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn  btn-primary waves-effect" id ="cambios" name = "cambios"  onclick="go();" >Guardar Cambios</button>
+                                                <button type="button" class="btn  btn-primary waves-effect" id ="cambios" name = "cambios" onclick="go();" >Guardar Cambios</button>
                                                 <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
                                             </div>
                                         </div><!-- /.modal-content -->
