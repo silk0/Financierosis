@@ -32,6 +32,12 @@
         document.getElementById("categoria").value=id_cat;
         document.getElementById("descrip").value=desc;
     }
+    function compra(id_prod,cod,id_prov,nomb)
+    {
+        document.getElementById("codigoC").value=cod;
+        document.getElementById("nombreC").value=nomb;
+        document.getElementById("idproveedorC").value=Number(id_prov);
+    }
 </script>
 
 <body class="left-side-menu-dark">
@@ -81,10 +87,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card-box">
-                                <h4 class="header-title">Buttons example</h4>
-                                <p class="sub-header">
-                                    The Buttons extension for DataTables provides a common set of options, API methods and styling to display buttons on a page that will interact with a DataTable. The core library provides the based framework upon which plug-ins can built.
-                                </p>        
+                                <p >En la siguiente tabla se puede realizar la compras, ventas, edicion de datos de los articulos registrados en el inventario.</p>                                      
                                 <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
                                     <thead>
                                         <tr>
@@ -117,13 +120,13 @@
                                                 echo "<td> Activo </td>";
                                             else{ echo "<td> Inactivo </td>";}
                                             
-                                                echo "<td align='center'>                                                 
+                                                echo "<td align='center'> 
+                                                <span  data-toggle='modal' data-target='#verProducto' >                                                                                                                          
                                                 <button
                                                 button type='button'
-                                                data-toggle='modal'                                                    
-                                                data-target='#verProducto'    
-                                                title='Ver tarjeta kardex.'
-                                                data-toggle='tooltip'                                                
+                                                title='Informacion'
+                                                data-toggle='tooltip' 
+                                                data-placement='bottom'                                                                     
                                                 class='btn btn-primary waves-effect waves-light' onclick=\"
                                                 ver(
                                                 '$fila->id_producto',
@@ -140,78 +143,55 @@
                                                 )\";>
                                                     <i class='mdi mdi-eye'></i> 
                                                 </button>  
+                                                </span>
+
+
+                                                <span  data-toggle='modal' data-target='#' >
                                                 <button 
                                                 type='button'
-                                                data-toggle='modal'                                                    
-                                                data-target='#editarCliente'
+                                                title='Editar'
+                                                data-toggle='tooltip' 
+                                                data-placement='bottom'     
                                                 class='btn btn-pink waves-effect waves-light' onclick=\"
-                                                modify(
-                                                '$fila->id_cliente',
-                                                '$fila->nombre',
-                                                '$fila->apellido',
-                                                '$fila->dui',
-                                                '$fila->nit',
-                                                '$fila->profecion',
-                                                '$fila->direccion',
-                                                '$fila->telefono',
-                                                '$fila->celular',
-                                                '$fila->correo',
-                                                '$fila->tipo_ingreso',                                                    
-                                                '$fila->salario',
-                                                '$fila->observaciones',
-                                                '$fila->egreso',
-                                                '$fila->id_cartera'
+                                                edicion(
+
                                                 )\";>                                                    
                                                     <i class='mdi mdi-pencil-outline'></i></i>
                                                 </button>
+                                                </span>
+
+
+                                                <span  data-toggle='modal' data-target='#comprarProducto' >
                                                 <button 
                                                 button type='button'
-                                                data-toggle='modal'                                                    
-                                                data-target='#mostrarCliente'                                                    
+                                                title='Compra'
+                                                data-toggle='tooltip' 
+                                                data-placement='bottom'                                                    
                                                 class='btn btn-success waves-effect waves-light' onclick=\"
-                                                edit(
-                                                '$fila->id_cliente',
-                                                '$fila->nombre',
-                                                '$fila->apellido',
-                                                '$fila->dui',
-                                                '$fila->nit',
-                                                '$fila->profecion',
-                                                '$fila->direccion',
-                                                '$fila->telefono',
-                                                '$fila->celular',
-                                                '$fila->correo',
-                                                '$fila->tipo_ingreso',                                                    
-                                                '$fila->salario',
-                                                '$fila->observaciones',
-                                                '$fila->egreso',
-                                                '$fila->id_cartera'
+                                                compra(                                                
+                                                    '$fila->id_producto',
+                                                    '$fila->codigo',
+                                                    '$fila->id_proveedor',
+                                                    '$fila->nombre'
                                                 )\";>
                                                     <i class='dripicons-enter'></i> 
-                                                </button>  
+                                                </button>
+                                                </span>
+
+
+                                                <span  data-toggle='modal' data-target='#' >  
                                                 <button 
                                                 button type='button'
-                                                data-toggle='modal'                                                    
-                                                data-target='#mostrarCliente'                                                    
+                                                title='Devolucion'
+                                                data-toggle='tooltip' 
+                                                data-placement='bottom'                                                              
                                                 class='btn btn-info waves-effect waves-light' onclick=\"
                                                 edit(
-                                                '$fila->id_cliente',
-                                                '$fila->nombre',
-                                                '$fila->apellido',
-                                                '$fila->dui',
-                                                '$fila->nit',
-                                                '$fila->profecion',
-                                                '$fila->direccion',
-                                                '$fila->telefono',
-                                                '$fila->celular',
-                                                '$fila->correo',
-                                                '$fila->tipo_ingreso',                                                    
-                                                '$fila->salario',
-                                                '$fila->observaciones',
-                                                '$fila->egreso',
-                                                '$fila->id_cartera'
+
                                                 )\";>
                                                     <i class='dripicons-exit'></i> 
-                                                </button>  
+                                                </button> 
+                                                </span> 
                                                 </td>";
                                             echo "</tr>";
                                         }
@@ -226,109 +206,185 @@
 
                     <!-- Bootstrap Modals -->
                     <div class="row">
-                        <div class="col-12">
-                            <div class="card-box">                                
-                                <!--  Modal mostrar cliente-->
-                                <div id="verProducto" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="myLargeModalLabel">Datos del cliente</h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="card-box">
-                                                            <form id="verProducto" name="verProducto" method="post"  class="parsley-examples" readonly>
-                                                                <input type="hidden" id="bandera" name="bandera" value="1">
-                                                                
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-md-4">
-                                                                        <label for="codigo" class="col-form-label">Codigo</label>
-                                                                        <input type="text" class="form-control" name="codigo" id="codigo" readonly
-                                                                            placeholder="0000000">
-                                                                    </div>
-                                                                    <div class="form-group col-md-8">
-                                                                        <label for="nombre" class="col-form-label">Nombre</label>
-                                                                        <input type="text" class="form-control" name="nombre" id="nombre"
-                                                                        readonly placeholder="Refrigeradora">
-                                                                    </div>
-                                                                </div>     
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-md-3">
-                                                                        <label for="stock" class="col-form-label">Stock minimo</label>
-                                                                        <input type="number" class="form-control" name="stock" id="stock" readonly
-                                                                            placeholder="0">
-                                                                    </div>
-                                                                    <div class="form-group col-md-3">
-                                                                        <label for="pcompra" class="col-form-label">Precio de compra</label>
-                                                                        <input type="number" class="form-control" name="pcompra" id="pcompra" readonly
-                                                                            placeholder="$0.00">
-                                                                    </div>
-                                                                    <div class="form-group col-md-3">
-                                                                        <label for="mganancia" class="col-form-label">Porcentaje de ganancia</label>
-                                                                        <input type="number" class="form-control" name="mganancia" id="mganancia"
-                                                                            required placeholder="0%" readonly>
-                                                                    </div>
-                                                                    <div class="form-group col-md-3">
-                                                                        <label for="pventa" class="col-form-label">Precio de venta</label>
-                                                                        <input type="number" class="form-control" name="pventa" id="pventa"
-                                                                            required placeholder="$0.00" readonly>
-                                                                    </div>
-                                                                </div> 
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="idproveedor" class="col-form-label">Proveedor</label>
-                                                                        <select  class="form-control" name="idproveedor" id="idproveedor"  disabled>
-                                                                        <option value='0' selected>Seleccione</option>
-                                                                        <?php
-                                                                            include 'config/conexion.php';
-                                                                            $result = $conexion->query("select id_proveedor, nombre, representante,email FROM tproveedor");
-                                                                            if ($result) {
-                                                                                while ($fila = $result->fetch_object()) {
-                                                                                
-                                                                                    echo '<option value="' . $fila->id_proveedor . '">' . $fila->nombre . ' - ' . $fila->representante . ' ('. $fila->email .')</opcion>';
-                                                                                
-                                                                                }
+                        <div class="col-12">                               
+                            <!--  Modal mostrar VerProductos-->
+                            <div id="verProducto" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="myLargeModalLabel">Datos del Producto</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card-box">
+                                                        <form id="verProducto" name="verProducto" method="post"  class="parsley-examples" readonly>
+                                                            <input type="hidden" id="bandera" name="bandera" value="1">
+                                                            
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="codigo" class="col-form-label">Codigo</label>
+                                                                    <input type="text" class="form-control" name="codigo" id="codigo" readonly
+                                                                        placeholder="0000000">
+                                                                </div>
+                                                                <div class="form-group col-md-8">
+                                                                    <label for="nombre" class="col-form-label">Nombre</label>
+                                                                    <input type="text" class="form-control" name="nombre" id="nombre"
+                                                                    readonly placeholder="Refrigeradora">
+                                                                </div>
+                                                            </div>     
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-3">
+                                                                    <label for="stock" class="col-form-label">Stock minimo</label>
+                                                                    <input type="number" class="form-control" name="stock" id="stock" readonly
+                                                                        placeholder="0">
+                                                                </div>
+                                                                <div class="form-group col-md-3">
+                                                                    <label for="pcompra" class="col-form-label">Precio de compra</label>
+                                                                    <input type="number" class="form-control" name="pcompra" id="pcompra" readonly
+                                                                        placeholder="$0.00">
+                                                                </div>
+                                                                <div class="form-group col-md-3">
+                                                                    <label for="mganancia" class="col-form-label">Porcentaje de ganancia</label>
+                                                                    <input type="number" class="form-control" name="mganancia" id="mganancia"
+                                                                        required placeholder="0%" readonly>
+                                                                </div>
+                                                                <div class="form-group col-md-3">
+                                                                    <label for="pventa" class="col-form-label">Precio de venta</label>
+                                                                    <input type="number" class="form-control" name="pventa" id="pventa"
+                                                                        required placeholder="$0.00" readonly>
+                                                                </div>
+                                                            </div> 
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="idproveedor" class="col-form-label">Proveedor</label>
+                                                                    <select  class="form-control" name="idproveedor" id="idproveedor"  disabled>
+                                                                    <option value='0' selected>Seleccione</option>
+                                                                    <?php
+                                                                        include 'config/conexion.php';
+                                                                        $result = $conexion->query("select id_proveedor, nombre, representante,email FROM tproveedor");
+                                                                        if ($result) {
+                                                                            while ($fila = $result->fetch_object()) {
+                                                                            
+                                                                                echo '<option value="' . $fila->id_proveedor . '">' . $fila->nombre . ' - ' . $fila->representante . ' ('. $fila->email .')</opcion>';
+                                                                            
                                                                             }
-                                                                            ?> 
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="categoria" class="col-form-label">Categoria</label>
-                                                                        <select  class="form-control" name="categoria" id="categoria" disabled>
-                                                                        <option value='0' selected>Seleccione</option>
-                                                                        <?php
-                                                                            include 'config/conexion.php';
-                                                                            $result = $conexion->query("select id_categoria, categoria, estado FROM tcategoria");
-                                                                            if ($result) {
-                                                                                while (($fila = $result->fetch_object() )&& ($fila->estado>0)) {
-                                                                                
-                                                                                    echo '<option value="' . $fila->id_categoria . '">' . $fila->categoria . '</opcion>';
-                                                                                
-                                                                                }
+                                                                        }
+                                                                        ?> 
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="categoria" class="col-form-label">Categoria</label>
+                                                                    <select  class="form-control" name="categoria" id="categoria" disabled>
+                                                                    <option value='0' selected>Seleccione</option>
+                                                                    <?php
+                                                                        include 'config/conexion.php';
+                                                                        $result = $conexion->query("select id_categoria, categoria, estado FROM tcategoria");
+                                                                        if ($result) {
+                                                                            while (($fila = $result->fetch_object() )&& ($fila->estado>0)) {
+                                                                            
+                                                                                echo '<option value="' . $fila->id_categoria . '">' . $fila->categoria . '</opcion>';
+                                                                            
                                                                             }
-                                                                            ?> 
-                                                                        </select>                                                
-                                                                    </div>                                            
-                                                                </div>      
-                                                                <div class="form-row">
-                                                                    <label for="descrip" class="col-form-label">Descripcion</label>
-                                                                    <textarea class="form-control" id="descrip" name="descrip" rows="5" readonly></textarea>
-                                                                </div>                                
-                                                            </form>
-                                                        </div>
+                                                                        }
+                                                                        ?> 
+                                                                    </select>                                                
+                                                                </div>                                            
+                                                            </div>      
+                                                            <div class="form-row">
+                                                                <label for="descrip" class="col-form-label">Descripcion</label>
+                                                                <textarea class="form-control" id="descrip" name="descrip" rows="5" readonly></textarea>
+                                                            </div>                                
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal --> 
+                            <!--  Modal mostrar ComprarProductos-->
+                            <div id="comprarProducto" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Comprar producto</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card-box">
+                                                        <form id="comprarProducto" name="comprarProducto" method="post"  class="parsley-examples" readonly>                                                            
+                                                            
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="codigoC" class="col-form-label">Codigo</label>
+                                                                    <input type="text" class="form-control" name="codigoC" id="codigoC" readonly
+                                                                        placeholder="0000000">
+                                                                </div> 
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="nombreC" class="col-form-label">Nombre</label>
+                                                                    <input type="text" class="form-control" name="nombreC" id="nombreC" readonly
+                                                                        placeholder="Nombre">
+                                                                </div>                                                                   
+                                                            </div>
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-12">
+                                                                    <label for="idproveedorC" class="col-form-label">Proveedor</label>
+                                                                    <select  class="form-control" name="idproveedorC" id="idproveedorC" disabled >
+                                                                    <option value='0' selected>Seleccione</option>
+                                                                    <?php
+                                                                        include 'config/conexion.php';
+                                                                        $result = $conexion->query("select id_proveedor, nombre, representante,email FROM tproveedor");
+                                                                        if ($result) {
+                                                                            while ($fila = $result->fetch_object()) {                                                                                
+                                                                                echo '<option value="' . $fila->id_proveedor . '">' . $fila->nombre . ' - ' . $fila->representante . ' ('. $fila->email .')</opcion>';                                                                                
+                                                                            }
+                                                                        }
+                                                                        ?> 
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="stock" class="col-form-label">Precio</label>
+                                                                    <input type="number" class="form-control" name="precioC" id="precioC" 
+                                                                        placeholder="$0.00">
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="stock" class="col-form-label">Cantidad</label>
+                                                                    <input type="number" class="form-control" name="cantidadC" id="cantidadC"
+                                                                        placeholder="$0.00">
+                                                                </div>
+                                                            </div> 
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="stock" class="col-form-label">Precio Total</label>
+                                                                    <input type="text" class="form-control" name="precioTC" id="precioTC" 
+                                                                        placeholder="$0.00" readonly>
+                                                                </div>                                                                
+                                                            </div>   
+                                                                                        
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->                                                                
-                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Registrar compra</button>
+                                            <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->                              
                         </div>
                     </div> 
                                         
@@ -364,7 +420,35 @@
     <div class="rightbar-overlay"></div>
 
     <?php include_once 'Pie.php';?>
-
+    <script type="text/javascript">
+        //genracion de codigo
+        $(document).ready(function () {    
+            $("#cantidadC").keyup(function () {
+                var cantidad = $(this).val();
+                var precio = document.getElementById("precioC").value;
+                var precioTotal = cantidad*precio;
+                if(isNaN(precioTotal)){
+                    $("#precioTC").val("$0.00");
+                }else{
+                    $("#precioTC").val("$ "+precioTotal);
+                }              
+                
+            });
+        });
+        $(document).ready(function () {    
+            $("#precioC").keyup(function () {
+                var cantidad = document.getElementById("cantidadC").value;
+                var precio = $(this).val();
+                var precioTotal = Number(cantidad)*Number(precio);
+                if(isNaN(precioTotal)){
+                    $("#precioTC").val("$0.00");
+                }else{
+                    $("#precioTC").val("$ "+precioTotal);
+                }              
+                
+            });
+        });
+    </script>
 </body>
 
 </html>

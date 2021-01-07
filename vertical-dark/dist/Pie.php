@@ -60,6 +60,10 @@
     });
 
     Parsley.setLocale('es');
+
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
     
 </script>
 <!-- Modal-Effect -->
