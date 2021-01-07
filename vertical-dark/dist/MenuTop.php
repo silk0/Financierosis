@@ -160,7 +160,7 @@
 
                 <ul class="list-unstyled menu-left mb-0">
                     <li class="float-left">
-                        <a href="index.html" class="logo">
+                        <a href="Contenido.php" class="logo">
                             <span class="logo-lg">
                                 <img src="assets/images/logo-dark.png" alt="" height="22">
                             </span>

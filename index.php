@@ -59,7 +59,7 @@
 
                                     <div class="form-group mb-3">                                        
                                         <label for="password">Contraseña</label>
-                                        <input name="pass" id="pass" class="form-control" type="password" required="" id="password" placeholder="Ingrese s contraseña">
+                                        <input name="pass" id="pass" class="form-control" type="password" required="" id="password" placeholder="Ingrese su contraseña">
                                     </div>
                                     
 
