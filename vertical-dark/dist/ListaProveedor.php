@@ -108,30 +108,8 @@ function modify(id,nom,tel,direc,repre,dui,nit,cel,email){
                                 </p>
                                 <form id="fCartera" name= "fCartera" action="" method="GET"  class="parsley-examples">
                                 <div  class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Proveedores:</label>
-                                    <div class="col-sm-10">
-                                        <select class="form-control" name="op" id="op" onchange="filtrar()">
-                                            <?php
-                                                  include "config/conexion.php";
-                                                  if(isset($_GET['op'])){
-                                                      $op=$_GET['op'];
-                                                  }
-                                                  $result = $conexion->query("SELECT id_proveedor as id,nombre FROM  tproveedor ");
-                                                  echo "<option value='0' selected>Seleccione</option>";
-                                                    if ($result) {
-                                                        
-                                                        while ($fila = $result->fetch_object()) {
-                                                            $idcart = $fila->id;
-                                                            if($op===$idcart){
-                                                                echo "<option value='".$fila->id."' selected>".$fila->nombre."</option>";
-                                                            }else{
-                                                                echo "<option value='".$fila->id."'>".$fila->nombre."</option>";
-                                                            }
-                                                        }
-                                                    }
-                                                 ?>
-                                        </select>
-                                    </div>
+                                 
+                                   
                                 </div>
                                 
                                 <table id="datatable-buttons"
