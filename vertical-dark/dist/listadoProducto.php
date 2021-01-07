@@ -32,8 +32,19 @@
         document.getElementById("categoria").value=id_cat;
         document.getElementById("descrip").value=desc;
     }
+
     function compra(id_prod,cod,id_prov,nomb)
     {
+        document.getElementById("tituloC").innerHTML="Compra de articulos";
+        document.getElementById("codigoC").value=cod;
+        document.getElementById("nombreC").value=nomb;
+        document.getElementById("idproveedorC").value=Number(id_prov);
+    }
+
+    function devolucion(id_prod,cod,id_prov,nomb)
+    {   
+        document.getElementById("tituloC").innerHTML="Devolucion de articulos";
+        document.getElementById("id").value=id_prod;
         document.getElementById("codigoC").value=cod;
         document.getElementById("nombreC").value=nomb;
         document.getElementById("idproveedorC").value=Number(id_prov);
@@ -78,7 +89,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box">                                
-                                <h4 class="page-title">Contenido</h4>
+                                <h4 class="page-title">Inventario de articulos</h4>
                             </div>
                         </div>
                     </div>
@@ -179,15 +190,18 @@
                                                 </span>
 
 
-                                                <span  data-toggle='modal' data-target='#' >  
+                                                <span  data-toggle='modal' data-target='#comprarProducto' >  
                                                 <button 
                                                 button type='button'
                                                 title='Devolucion'
                                                 data-toggle='tooltip' 
                                                 data-placement='bottom'                                                              
                                                 class='btn btn-info waves-effect waves-light' onclick=\"
-                                                edit(
-
+                                                devolucion(
+                                                    '$fila->id_producto',
+                                                    '$fila->codigo',
+                                                    '$fila->id_proveedor',
+                                                    '$fila->nombre'
                                                 )\";>
                                                     <i class='dripicons-exit'></i> 
                                                 </button> 
@@ -312,7 +326,7 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title">Comprar producto</h4>
+                                            <h4 class="modal-title" id="tituloC" name="tituloC">Comprar producto</h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                         </div>
                                         <div class="modal-body">
@@ -320,7 +334,12 @@
                                                 <div class="col-md-12">
                                                     <div class="card-box">
                                                         <form id="comprarProducto" name="comprarProducto" method="post"  class="parsley-examples" readonly>                                                            
-                                                            
+                                                        
+                                                            <div class="form-row">                                                               
+                                                                <div class="form-group col-md-6">
+                                                                    <input type="hidden" class="form-control" name="id" id="id">
+                                                                </div>                                                                   
+                                                            </div>
                                                             <div class="form-row">
                                                                 <div class="form-group col-md-6">
                                                                     <label for="codigoC" class="col-form-label">Codigo</label>
@@ -378,9 +397,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer">    
                                             <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Registrar compra</button>
-                                            <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
+                                            <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Cerrar</button>
                                         </div>
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
