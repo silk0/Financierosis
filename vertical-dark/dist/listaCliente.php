@@ -138,7 +138,7 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                                 $op=$_GET['op'];
                                             }
                                             $result = $conexion->query("SELECT id_categoria as id,nombre FROM  tcartera ");
-                                            echo "<option value='0' selected>Seleccione</option>";
+                                            echo "<option value='0' selected>Todas las carteras</option>";
                                                 if ($result) {
                                                     
                                                     while ($fila = $result->fetch_object()) {
@@ -155,12 +155,7 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                     </div>
                                     
                                 </div>
-                                <div class="form-row">
-                                        <div class="form-group form-group col-md-6">
-                                          
-                                            <button type="button" class="btn  btn-primary waves-effect" id ="cambios" name = "cambios"  onclick="go();" >Ingresar Nuevo</button>
-                                        </div>
-                                </div>
+                                
                                 <table id="datatable-buttons"
                                     class="table table-striped table-bordered dt-responsive nowrap">
                                     <thead>

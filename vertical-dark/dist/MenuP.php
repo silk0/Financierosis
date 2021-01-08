@@ -67,7 +67,7 @@
 
         <li>
             <a href="javascript: void(0);">
-                <i class="mdi mdi-view-compact"></i>
+                <i class=" mdi mdi-dropbox"></i>
                 <span>Inventario</span>
                 <span class="menu-arrow"></span>
             </a>
@@ -85,9 +85,16 @@
         </li>
 
         <li>
-            <a href="calendar.html">
-                <i class="dripicons-calendar"></i> <span> Calendar </span>
+        <a href="javascript: void(0);">
+                <i class="mdi mdi-cart"></i>
+                <span>ventas</span>
+                <span class="menu-arrow"></span>
             </a>
+            <ul class="nav-second-level" aria-expanded="false">
+                <li>
+                    <a href="venderContado.php">Ventas al contado</a>
+                </li>                
+            </ul>
         </li>
 
         <li class="menu-title">Components</li>
