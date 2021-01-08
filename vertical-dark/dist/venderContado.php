@@ -86,9 +86,20 @@
                                     </div><!-- end col -->
                                     <div class="col-md-6">
                                         <div class="mt-3 float-right">
-                                            <p><strong>Order Date : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp;&nbsp; Jan 17, 2016</span></p>
-                                            <p><strong>Order Status : </strong> <span class="float-right"><span class="badge badge-danger">Unpaid</span></span></p>
-                                            <p><strong>Order No. : </strong> <span class="float-right">000028 </span></p>
+                                            
+                                            <?php 
+                                                include 'config/conexion.php';
+                                                echo'<p><strong>Fecha : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp;&nbsp; '.date("d-m-Y").'</span></p>';
+                                                $result = $conexion->query("SHOW TABLE STATUS LIKE 'tventas'");
+                                                if ($result) {
+                                                    while ($fila = $result->fetch_object()) {                                               
+                                                        $codigoR=str_pad($fila->Auto_increment, 6, "0", STR_PAD_LEFT);
+                                                        echo'<p><strong>Venta No. : </strong> <span class="float-right">'. $codigoR .'</span></p>';
+                                                    }
+                                                }                                               
+
+                                            ?>
+                                            
                                         </div>
                                     </div><!-- end col -->
                                 </div>
