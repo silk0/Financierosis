@@ -6,7 +6,7 @@
 
 function go(){
     //validacion respectiva me da hueva
-    enviarDatos(2);
+    //enviarDatos(2);
     $("#editarForm").submit();;      
 } 
     function edit(id,nom,ape,dui,nit,tel,cel,direc,email,prof,sal)
@@ -176,7 +176,7 @@ function modify(id,nom,ape,dui,nit,tel,cel,direc,email,prof,sal){
                     <!-- Bootstrap Modals -->
                     <div class="row">
                         <div class="col-12">
-                            <div class="card-box">                                
+                            <div class="">                                
                                 <!--  Modal mostrar fiador-->
                                 <div id="mostrarFiador" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog modal-lg">

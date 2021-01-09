@@ -202,6 +202,8 @@
 
     <?php include_once 'Pie.php';?>
 
+    <script src="script.js"></script>
+
 </body>
 
 </html>

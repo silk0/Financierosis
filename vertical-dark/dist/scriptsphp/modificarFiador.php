@@ -1,5 +1,6 @@
 <?php
 include "../config/conexion.php";
+$baccion  = $_REQUEST["baccion2"];
 $accion = $_REQUEST['bandera'];
 if($accion==1){
   $id = $_POST["id_fiador"];
@@ -18,8 +19,7 @@ if($accion==1){
   direccion='" . $direccion . "',
   correo='" . $email . "',
   profecion='". $prof ."',
-  salario='" . $salario . "',
-  
+  salario='" . $salario . "'
   where id_fiador='". $id ."'";
   $resultado = $conexion->query($consulta);
   if ($resultado) {   

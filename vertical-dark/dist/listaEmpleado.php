@@ -1,7 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
-//Codigo que muestra solo los errores exceptuando los notice.
+    //Codigo que muestra solo los errores exceptuando los notice.
     error_reporting(E_ALL & ~E_NOTICE);
     session_start();
     if($_SESSION["logueado"] == TRUE) {
@@ -10,9 +8,11 @@
     $tipo  = $_REQUEST["tipo"];
     $id  = $_REQUEST["id"];
     }else {
-        header("Location:index.php");
+        header("Location:../../../index.php");
     }
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <?php include_once 'Cabecera.php';?>
 

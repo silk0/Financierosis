@@ -1,6 +1,18 @@
+<?php
+    //Codigo que muestra solo los errores exceptuando los notice.
+    error_reporting(E_ALL & ~E_NOTICE);
+    session_start();
+    if($_SESSION["logueado"] == TRUE) {
+    $usuario=$_SESSION["usuario"];
+    $nombre = $_SESSION["nombre"];
+    $tipo  = $_REQUEST["tipo"];
+    $id  = $_REQUEST["id"];
+    }else {
+        header("Location:../../../index.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 
 <?php include_once 'Cabecera.php';?>
 
@@ -203,13 +215,13 @@
                                         <div class="form-group col-md-4">
                                             <label for="inputPassword4" class="col-form-label">Contraseña</label>
                                             <input type="password" class="form-control" name="contra" id="contra"
-                                                required placeholder="xxxxxx">
+                                                required placeholder="xxxxxx" value="">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="inputPassword4" class="col-form-label">Repetir
                                                 Contraseña</label>
                                             <input type="password" class="form-control" name="contra1" id="contra1"
-                                                required placeholder="xxxxxx">
+                                                required placeholder="xxxxxx" value="">
                                         </div>
                                     </div>
                                     </br>
@@ -237,9 +249,9 @@
                                     <button type="button" class="close" data-dismiss="modal"
                                         aria-hidden="true">×</button>
                                 </div>
-                                <div class="modal-body" class="col-md-10">
+                                <div class="modal-body" class="col-md-12">
                                     <div class="row" >
-                                        <div class="col-md-10">
+                                        <div class="col-md-12">
                                             <div class="card-box">
                                                 <form id="fCartera" name="fCartera" action="" method="GET"
                                                     class="parsley-examples">
@@ -250,9 +262,10 @@
                                                             <tr>
                                                                 <th>DUI</th>
                                                                 <th>Direcciòn</th>
+                                                                <th>Nombre</th>
+                                                                <th>Apellido</th>
                                                                 <th>Usuario</th>
                                                                 <th>Rol</th>
-                                                                <th>Acciones</th>
                                                             </tr>
                                                         </thead>
 
@@ -266,9 +279,10 @@
                                                 echo "<tr>";
                                                 echo "<td>" . $fila->dui . "</td>";
                                                 echo "<td>" . $fila->zona . "</td>";
+                                                echo "<td>" . $fila->nombre . "</td>";
+                                                echo "<td>" . $fila->apellido . "</td>";
                                                 echo "<td>" . $fila->usuario . "</td>";
                                                 echo "<td>" . $fila->rol . "</td>";
-                                                echo "<td></td>";
                                                 echo "</tr>";
                                             }
                                         }
