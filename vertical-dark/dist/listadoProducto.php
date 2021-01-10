@@ -144,8 +144,8 @@
                                             echo "<tr>";                                                
                                             echo "<td>" . $fila->codigo . "</td>";
                                             echo "<td>" . $fila->nombre . "</td>";
-                                            echo "<td>" . $fila->precio_compra. "</td>"; 
-                                            echo "<td>" . $fila->precio_venta . "</td>";
+                                            echo "<td>$ " . $fila->precio_compra. "</td>"; 
+                                            echo "<td>$ " . $fila->precio_venta . "</td>";
                                             echo "<td>" . $fila->stock . "</td>"; 
                                             if(($fila->estado)>0)                                               
                                                 echo "<td> Activo </td>";

@@ -37,7 +37,7 @@
                     echo '
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle waves-effect waves-light"  href="carrito.php" role="button" aria-haspopup="false" aria-expanded="false">
-                            <i class="mdi mdi-cart-outline noti-icon"></i>
+                            <i class="dripicons-cart noti-icon"></i>
                             <span class="badge badge-info noti-icon-badge">'.$fila->cantidad.'</span>
                         </a>
                     </li>';
