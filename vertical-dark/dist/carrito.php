@@ -17,7 +17,8 @@
 <script  language=JavaScript> 
     function eliminar(id_pro){
         //validacion respectiva me da hueva
-        $("#editarForm").submit();;         
+        document.getElementById("id_producto").value=id_pro;
+        $("#carritoForm").submit();;         
     } 
 </script>
 
@@ -84,6 +85,8 @@
     
                                 <div class="row">
                                     <div class="col-12">
+                                    <form id="carritoForm" name="carritoForm" method="post" action="scriptsphp/ajaxCarrito.php?op=2"  class="parsley-examples">
+                                       <input type="hidden" id="id_producto" name="id_producto">
                                         <div class="table-responsive">
                                             <table class="table mt-4 table-centered">
                                                 <thead>
@@ -96,12 +99,12 @@
                                                     <th style="width: 10%" class="text-right">Total</th>
                                                 </tr></thead>
                                                 <tbody>
-                                               
+                                                
                                                 <?php
                                                     include 'config/conexion.php';
                                                     $result = $conexion->query("
-                                                        select p.codigo,p.nombre, p.descripcion, p.precio_venta,
-                                                        t.cantidad, p.precio_venta*t.cantidad,p.precio_venta*t.cantidad as total
+                                                        select p.id_producto as id,p.codigo,p.nombre, p.descripcion, p.precio_venta,
+                                                        t.cantidad,p.precio_venta*t.cantidad as total
                                                         FROM tcarrito t
                                                         inner join tproducto as p on p.id_producto=t.id_producto
                                                         order by p.codigo asc;
@@ -120,7 +123,7 @@
                                                                         data-placement='bottom'                                                                     
                                                                         class='btn btn-icon btn-danger waves-effect waves-light' onclick=\"
                                                                         eliminar(
-                                                                        '$fila->id_carrito'                                                                        
+                                                                        '$fila->id'                                                                        
                                                                         )\";>
                                                                             <i class='mdi mdi-close'></i> 
                                                                         </button>  
@@ -141,10 +144,11 @@
                                                     }
                                                 ?>                                                    
                                                 
-    
+
                                                 </tbody>
                                             </table>
                                         </div> <!-- end table-responsive -->
+                                    </form>
                                     </div> <!-- end col -->
                                 </div>
                                 <!-- end row -->

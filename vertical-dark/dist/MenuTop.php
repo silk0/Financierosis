@@ -34,13 +34,22 @@
             $result = $conexion->query("SELECT sum(cantidad) as cantidad from tcarrito;");
             if ($result) {
                 while ($fila = $result->fetch_object()) {
-                    echo '
-                    <li class="dropdown notification-list">
-                        <a class="nav-link dropdown-toggle waves-effect waves-light"  href="carrito.php" role="button" aria-haspopup="false" aria-expanded="false">
-                            <i class="dripicons-cart noti-icon"></i>
-                            <span class="badge badge-info noti-icon-badge">'.$fila->cantidad.'</span>
-                        </a>
-                    </li>';
+                    if(($fila->cantidad)!=null)
+                        echo '
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle waves-effect waves-light"  href="carrito.php" role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="dripicons-cart noti-icon"></i>
+                                <span class="badge badge-info noti-icon-badge">'.$fila->cantidad.'</span>
+                            </a>
+                        </li>';
+                    else
+                        echo '
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle waves-effect waves-light"  href="carrito.php" role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="dripicons-cart noti-icon"></i>
+                                <span class="badge badge-info noti-icon-badge">0</span>
+                            </a>
+                        </li>';
                 }
             }
                 
