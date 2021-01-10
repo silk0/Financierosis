@@ -31,11 +31,7 @@
     </script> 
 
     <body class="authentication-bg authentication-bg-pattern d-flex align-items-center">
-
-        <div class="home-btn d-none d-sm-block">
-            <a href="index.html"><i class="fas fa-home h2 text-white"></i></a>
-        </div>
-        
+               
         <div class="account-pages w-100 mt-5 mb-5">
             <div class="container">
                 <div class="row justify-content-center">

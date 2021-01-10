@@ -30,7 +30,7 @@
                 session_start();
                 
                 $_SESSION["logueado"] = TRUE;
-                $_SESSION["nombre"] = $Nombre." ".$apellido;
+                $_SESSION["nombre"] = $Nombre;
                 $_SESSION["usuario"] = $usuario;
                 $_SESSION["id"] = $id;
                 $_SESSION["tipo"] = $tipo;

@@ -17,18 +17,18 @@ if($accion==1){
   $observ  = $_POST['observ'];
   $egres  = $_POST['egreso'];
   $consulta  = "UPDATE tclientes set nombre='" . $nombre . "',
-  apellido='" . $apellido . "',
-  id_cartera='" . $cartera . "',
-  direccion='" . $direccion . "',
-  profecion='". $prof ."',
-  tipo_ingreso='".$tipo."',
-  salario='" . $salario . "',
-  telefono='" . $tel . "',
-  celular='" . $cel . "',
-  correo='" . $email . "',
-  observaciones='" . $observ . "',
-  egreso='" . $egres . "' 
-  where id_cliente='". $id ."'";
+      apellido='" . $apellido . "',
+      id_cartera='" . $cartera . "',
+      direccion='" . $direccion . "',
+      profecion='". $prof ."',
+      tipo_ingreso='".$tipo."',
+      salario='" . $salario . "',
+      telefono='" . $tel . "',
+      celular='" . $cel . "',
+      correo='" . $email . "',
+      observaciones='" . $observ . "',
+      egreso='" . $egres . "' 
+      where id_cliente='". $id ."'";
   $resultado = $conexion->query($consulta);
   if ($resultado) {   
     header('Location:../listaCliente.php?bandera=1');

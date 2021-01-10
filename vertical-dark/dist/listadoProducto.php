@@ -5,7 +5,24 @@
     function go(){
         //validacion respectiva me da hueva
         $("#editarForm").submit();;         
-    } 
+    }
+    
+    function añadircarrito(){
+        var cantidadDeseada=document.getElementById("carritoA").value;
+        var id = document.getElementById("id_producto").value;
+        alert(id);
+        var stock = document.getElementById("cantidadI").value;
+         if(cantidadDeseada==""){
+            alert("Ingrese una cantidad para poder agregar al carrito.");
+         }else if(parseInt(cantidadDeseada)>parseInt(stock)){
+            
+            alert("La cantidad deseada supera a la cantidad disponible.");
+    
+         }else{
+           alert("La canditdad deseada es correcta y va A ser anadida al carrito");
+            $("#carritoForm").submit(); 
+         }
+    }     
 
     function ver(id_prod,id_prov,id_cat,nomb,desc,pc,mg,pv,st,cod,esta)
     {
@@ -26,6 +43,19 @@
         document.getElementById("codigoC").value=cod;
         document.getElementById("nombreC").value=nomb;
         document.getElementById("idproveedorC").value=Number(id_prov);
+    }
+    
+    function carrit(id,nom,cod,stock,cant)
+    {
+        document.getElementById("id_producto").value=id;
+        document.getElementById("codigoA").value=cod;
+        document.getElementById("nombreA").value=nom;
+        document.getElementById("cantidadI").value=Number(stock);
+        if(isNaN(cant)) {      
+            document.getElementById("carritoC").value=Number(0);
+        }else{
+            document.getElementById("carritoC").value=Number(cant);
+        }
     }
 
     function devolucion(id_prod,cod,id_prov,nomb)
@@ -104,7 +134,10 @@
                                     
                                     include "config/conexion.php";
                                 
-                                    $result = $conexion->query("SELECT * from tproducto ORDER BY stock,stock_minimo ASC");
+                                    $result = $conexion->query("SELECT *,(select sum(cantidad)
+                                        from tcarrito t
+                                        where t.id_producto=p.id_producto) as cantidad from tproducto p
+                                        order by  stock, stock_minimo asc;");
                                     
                                     if ($result) {
                                         while ($fila = $result->fetch_object()) {
@@ -127,7 +160,7 @@
                                                 data-placement='bottom'                                                                     
                                                 class='btn btn-primary waves-effect waves-light' onclick=\"
                                                 ver(
-                                                '$fila->id_producto',
+                                                '$fila->p.id',
                                                 '$fila->id_proveedor',
                                                 '$fila->id_categoria',
                                                 '$fila->nombre',
@@ -144,18 +177,22 @@
                                                 </span>
 
 
-                                                <span  data-toggle='modal' data-target='#' >
-                                                <button 
-                                                type='button'
-                                                title='Editar'
-                                                data-toggle='tooltip' 
-                                                data-placement='bottom'     
-                                                class='btn btn-pink waves-effect waves-light' onclick=\"
-                                                edicion(
-
-                                                )\";>                                                    
-                                                    <i class='mdi mdi-pencil-outline'></i></i>
-                                                </button>
+                                                <span  data-toggle='modal' data-target='#carrito' >
+                                                    <button 
+                                                    type='button'
+                                                    title='Añadir al carrito'
+                                                    data-toggle='tooltip' 
+                                                    data-placement='bottom'     
+                                                    class='btn btn-pink waves-effect waves-light' onclick=\"
+                                                    carrit(
+                                                        '$fila->id_producto',
+                                                        '$fila->nombre',
+                                                        '$fila->codigo',
+                                                        '$fila->stock',
+                                                        '$fila->cantidad'
+                                                    )\";>                                                    
+                                                        <i class='mdi mdi-cart'></i></i>
+                                                    </button>
                                                 </span>
 
 
@@ -167,7 +204,7 @@
                                                 data-placement='bottom'                                                    
                                                 class='btn btn-success waves-effect waves-light' onclick=\"
                                                 compra(                                                
-                                                    '$fila->id_producto',
+                                                    '$fila->p.id',
                                                     '$fila->codigo',
                                                     '$fila->id_proveedor',
                                                     '$fila->nombre'
@@ -185,7 +222,7 @@
                                                 data-placement='bottom'                                                              
                                                 class='btn btn-info waves-effect waves-light' onclick=\"
                                                 devolucion(
-                                                    '$fila->id_producto',
+                                                    '$fila->p.id',
                                                     '$fila->codigo',
                                                     '$fila->id_proveedor',
                                                     '$fila->nombre'
@@ -220,7 +257,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="card-box">
-                                                        <form id="verProducto" name="verProducto" method="post"  class="parsley-examples" readonly>
+                                                        <form  method="post"  class="parsley-examples" readonly>
                                                             <input type="hidden" id="bandera" name="bandera" value="1">
                                                             
                                                             <div class="form-row">
@@ -390,7 +427,69 @@
                                         </div>
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->                              
+                            </div><!-- /.modal --> 
+                            <!--  Modal mostrar añadir carrito-->
+                            <div id="carrito" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" >Añadir al carrito</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card-box">
+                                                        <form id="carritoForm" name="carritoForm" method="post" action="scriptsphp/ajaxCarrito.php?op=1"  class="parsley-examples">                                                            
+                                                            
+                                                            <div class="form-row">
+                                                                <input type="hidden" class="form-control" name="id_producto" id="id_producto" readonly>                                                                                                                                
+                                                            </div>
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="codigoC" class="col-form-label">Codigo</label>
+                                                                    <input type="text" class="form-control" name="codigoA" id="codigoA" readonly
+                                                                        placeholder="0000000">
+                                                                </div> 
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="nombreC" class="col-form-label">Articulo</label>
+                                                                    <input type="text" class="form-control" name="nombreA" id="nombreA" readonly
+                                                                        placeholder="Nombre">
+                                                                </div>                                                                   
+                                                            </div>
+                                                        
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="stock" class="col-form-label">Inventario</label>
+                                                                    <input type="number" class="form-control" name="cantidadI" id="cantidadI" 
+                                                                        placeholder="0" readonly>
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="stock" class="col-form-label">Carrito</label>
+                                                                    <input type="number" class="form-control" name="carritoC" id="carritoC"
+                                                                        placeholder="0" readonly>
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="stock" class="col-form-label">Añadir articulo</label>
+                                                                    <input type="number" class="form-control" name="carritoA" id="carritoA" 
+                                                                        placeholder="0">
+                                                                </div> 
+                                                            </div>  
+                                                                                        
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">    
+                                            <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal" onclick="añadircarrito();">Añadir al carrito</button>
+                                            <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->                     
                         </div>
                     </div> 
                                         

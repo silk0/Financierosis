@@ -14,6 +14,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once 'Cabecera.php';?>
+<script  language=JavaScript> 
+    function eliminar(id_pro){
+        //validacion respectiva me da hueva
+        $("#editarForm").submit();;         
+    } 
+</script>
 
 <body class="left-side-menu-dark">
 
@@ -31,7 +37,9 @@
 
                 <!--- Sidemenu -->
                 <?php include_once 'MenuP.php';?>
-                <!-- End Sidebar -->               
+                <!-- End Sidebar -->
+
+                
 
             </div>
             <!-- Sidebar -left -->
@@ -53,7 +61,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box">                                
-                                <h4 class="page-title">Venta</h4>
+                                <h4 class="page-title"></h4>
                             </div>
                         </div>
                     </div>
@@ -70,81 +78,9 @@
 
                                     </div>
                                     <div class="float-right">
-                                        <h4 class="m-0 d-print-none">Venta al contado</h4>
+                                        <h4 class="m-0 d-print-none">Carrito de articulos</h4>
                                     </div>
-                                </div>
-    
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mt-3">
-                                        <label for="inputState" class="col-form-label">Clientes</label>
-                                            <select  class="form-control" name="cartera" id="cartera" style="overflow-y: scroll;" required >
-                                                <option selected >Seleccione</option>
-                                                <?php
-                                                include 'config/conexion.php';
-                                                $result = $conexion->query("select id_cliente as id, CONCAT(nombre, ' ', apellido) as nombre, apellido  FROM tclientes");
-                                                if ($result) {
-                                                    while ($fila = $result->fetch_object()) {
-                                                        
-                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre .'</opcion>';
-                                                        
-                                                    }
-                                                }
-                                                ?> 
-                                            </select>
-                                        </div>
-    
-                                    </div><!-- end col -->
-                                    <div class="col-md-6">
-                                        <div class="mt-2 float-right">
-                                            
-                                            <?php 
-                                                include 'config/conexion.php';
-                                                $fecha_actual = date("d-m-Y");
-                                                $hoy = date("d-m-Y",strtotime($fecha_actual."- 1 days"));
-                                                echo'
-                                                    <p><strong>Fecha : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp; '. $hoy .'</span></p>
-                                                ';
-                                                $result = $conexion->query("SHOW TABLE STATUS LIKE 'tventas'");
-                                                if ($result) {
-                                                    while ($fila = $result->fetch_object()) {                                               
-                                                        $codigoR=str_pad($fila->Auto_increment, 6, "0", STR_PAD_LEFT);
-                                                        echo'<p><strong>Venta No. : </strong> <span class="float-right">'. $codigoR .'</span></p>';
-                                                    }
-                                                } 
-                                                echo'<p><strong>Fecha : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp; '. $hoy .'</span></p>';                                             
-
-                                            ?>
-                                            
-                                        </div>
-                                    </div><!-- end col -->
-                                </div>
-                                <!-- end row -->
-    
-                                <div class="row mt-3">
-                                    <div class="col-md-6">
-                                        <h6>Billing Address</h6>
-                                        <address class="line-h-24">
-                                            Stanley Jones<br>
-                                            795 Folsom Ave, Suite 600<br>
-                                            San Francisco, CA 94107<br>
-                                            <abbr title="Phone">P:</abbr> (123) 456-7890
-                                        </address>
-                                    </div> <!-- end col -->
-    
-                                    <div class="col-md-6">
-                                        <div class="text-md-right">
-                                            <h6>Shipping Address</h6>
-                                            <address class="line-h-24">
-                                                Stanley Jones<br>
-                                                795 Folsom Ave, Suite 600<br>
-                                                San Francisco, CA 94107<br>
-                                                <abbr title="Phone">P:</abbr> (123) 456-7890
-                                            </address>
-                                        </div>
-                                    </div> <!-- end col -->
-                                </div> 
-                                <!-- end row -->
+                                </div>      
     
                                 <div class="row">
                                     <div class="col-12">
@@ -152,6 +88,7 @@
                                             <table class="table mt-4 table-centered">
                                                 <thead>
                                                 <tr>
+                                                    <th style="width: 10%">Quitar</th>
                                                     <th style="width: 10%">Codigo</th>
                                                     <th>Articulo</th>
                                                     <th style="width: 10%" class="text-center">Cantidad</th>
@@ -172,19 +109,34 @@
                                                     if ($result) {
                                                         while ($fila = $result->fetch_object()) {                                                                               
                                                             
-                                                            echo '
+                                                            echo "
                                                             <tr>
-                                                                <td>' . $fila->codigo . '</td>
-                                                                <td>
-                                                                    <b>' . $fila->nombre . '</b> 
-                                                                    <br/>
-                                                                    ' . $fila->descripcion . '
+                                                                <td align='center'> 
+                                                                    <span  data-toggle='modal' data-target='#verProducto'>                                                                                                                          
+                                                                        <button
+                                                                        button type='button'
+                                                                        title='Quitar articulo del carrito'
+                                                                        data-toggle='tooltip' 
+                                                                        data-placement='bottom'                                                                     
+                                                                        class='btn btn-icon btn-danger waves-effect waves-light' onclick=\"
+                                                                        eliminar(
+                                                                        '$fila->id_carrito'                                                                        
+                                                                        )\";>
+                                                                            <i class='mdi mdi-close'></i> 
+                                                                        </button>  
+                                                                    </span>
                                                                 </td>
-                                                                <td class="text-center">' . $fila->cantidad . '</td>
-                                                                <td class="text-center">$' . $fila->precio_venta . '</td>
-                                                                <td class="text-right">$' . $fila->total . '</td>
+                                                                <td>$fila->codigo</td>
+                                                                <td>
+                                                                    <b>$fila->nombre</b> 
+                                                                    <br/>
+                                                                    $fila->descripcion
+                                                                </td>
+                                                                <td class='text-center'> $fila->cantidad</td>
+                                                                <td class='text-center'>$ $fila->precio_venta</td>
+                                                                <td class='text-center'>$ $fila->total</td>
                                                             </tr>
-                                                            ';                                                                                
+                                                            ";                                                                                
                                                         }
                                                     }
                                                 ?>                                                    
@@ -224,31 +176,23 @@
                                                     while ($fila = $result->fetch_object()) {                                                                               
                                                         
                                                         echo '
-                                                        <p><b>Sub-total:</b> <span class="float-right">$' . $fila->total . '</span></p>
+                                                        <p><b>Sub-total:</b> <span class="float-right">&nbsp;&nbsp;&nbsp;$' . $fila->total . ' USD</span></p>
                                                         ';                                                                                
                                                     }
                                                 }
                                             ?>                                             
-                                            <p><b>Discount (10%):</b> <span class="float-right"> &nbsp;&nbsp;&nbsp; $0.00</span></p>
-                                            <h3>$4137.75 USD</h3>
+                                            
                                         </div>
                                         <div class="clearfix"></div>
                                     </div> <!-- end col -->
                                 </div>
                                 <!-- end row -->
-    
-                                <div class="mt-4 mb-1">
-                                    <div class="text-right d-print-none">
-                                        <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-printer mr-1"></i> Print</a>
-                                        <a href="#" class="btn btn-info waves-effect waves-light">Submit</a>
-                                    </div>
-                                </div>
                             </div>
     
                         </div>
     
                     </div>
-                    <!-- end row -->
+                                        
                 </div> <!-- container -->
 
             </div> <!-- content -->
