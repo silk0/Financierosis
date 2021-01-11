@@ -2,7 +2,7 @@
 
     <ul class="metismenu" id="side-menu">
 
-        <li class="menu-title">Navigation</li>
+        <li class="menu-title">Ventas e inventario</li>
 
         <li>
             <a href="javascript: void(0);">
@@ -100,7 +100,7 @@
             </ul>
         </li>
 
-        <li class="menu-title">Components</li>
+        <li class="menu-title">Activo</li>
 
         <li>
             <a href="javascript: void(0);">
