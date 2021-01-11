@@ -91,7 +91,7 @@ function go(){
 
 </script>
 
-<body class="left-side-menu-dark">
+<body>
 
     <!-- Begin page -->
     <div id="wrapper">

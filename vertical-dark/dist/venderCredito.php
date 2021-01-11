@@ -14,15 +14,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once 'Cabecera.php';?>
-<script  language=JavaScript> 
-    function eliminar(id_pro){
-        //validacion respectiva me da hueva
-        document.getElementById("id_producto").value=id_pro;
-        $("#carritoForm").submit();;         
-    } 
+<script language=JavaScript>
+    
+    
+    function prueba(){
+        
+        toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": true,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+        };
+        toastr["warning"]("gfhg");
+    
+    }  
 </script>
-
-<body>
+<body >
 
     <!-- Begin page -->
     <div id="wrapper">
@@ -38,9 +56,7 @@
 
                 <!--- Sidemenu -->
                 <?php include_once 'MenuP.php';?>
-                <!-- End Sidebar -->
-
-                
+                <!-- End Sidebar -->               
 
             </div>
             <!-- Sidebar -left -->
@@ -62,7 +78,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box">                                
-                                <h4 class="page-title"></h4>
+                                <h4 class="page-title">Venta</h4>
                             </div>
                         </div>
                     </div>
@@ -79,19 +95,82 @@
 
                                     </div>
                                     <div class="float-right">
-                                        <h4 class="m-0 d-print-none">Carrito de articulos</h4>
+                                        <h4 class="m-0 d-print-none">Venta al contado</h4>
                                     </div>
-                                </div>      
+                                </div>
+    
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="mt-3">
+                                            <label for="inputState" class="col-form-label">Clientes</label>
+                                            <select  class="form-control" name="cartera" id="cartera" style="overflow-y: scroll;" required >
+                                                <option selected >Seleccione</option>
+                                                <?php
+                                                include 'config/conexion.php';
+                                                $result = $conexion->query("select id_cliente as id, CONCAT(nombre, ' ', apellido) as nombre, apellido  FROM tclientes");
+                                                if ($result) {
+                                                    while ($fila = $result->fetch_object()) {
+                                                        
+                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre .'</opcion>';
+                                                        
+                                                    }
+                                                }
+                                                ?> 
+                                            </select>
+                                        </div>    
+                                    </div><!-- end col -->
+                                    <div class="col-md-4">
+                                        <div class="mt-3">
+                                            <label for="inputState" class="col-form-label">Plan de pago</label>
+                                            <select  class="form-control" name="cartera" id="cartera" style="overflow-y: scroll;" required >
+                                                <option selected >Seleccione</option>
+                                                <?php
+                                                include 'config/conexion.php';
+                                                $result = $conexion->query("select id_cliente as id, CONCAT(nombre, ' ', apellido) as nombre, apellido  FROM tclientes");
+                                                if ($result) {
+                                                    while ($fila = $result->fetch_object()) {
+                                                        
+                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre .'</opcion>';
+                                                        
+                                                    }
+                                                }
+                                                ?> 
+                                            </select>
+                                        </div>    
+                                    </div><!-- end col -->
+                                    <div class="col-md-4">
+                                        <div class="mt-2 float-right">
+                                            
+                                            <?php 
+                                                include 'config/conexion.php';
+                                                $fecha_actual = date("d-m-Y");
+                                                $hoy = date("d-m-Y",strtotime($fecha_actual."- 1 days"));
+                                                echo'
+                                                    <p><strong>Fecha : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp; '. $hoy .'</span></p>
+                                                ';
+                                                $result = $conexion->query("SHOW TABLE STATUS LIKE 'tventas'");
+                                                if ($result) {
+                                                    while ($fila = $result->fetch_object()) {                                               
+                                                        $codigoR=str_pad($fila->Auto_increment, 6, "0", STR_PAD_LEFT);
+                                                        echo'<p><strong>Venta No. : </strong> <span class="float-right">'. $codigoR .'</span></p>';
+                                                    }
+                                                } 
+                                                echo'<p><strong>NRC : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp; 0</span></p>
+                                                     <p><strong>NIT : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp; 0</span></p>';                                             
+
+                                            ?>
+                                            
+                                        </div>
+                                    </div><!-- end col -->
+                                </div>
+                                <!-- end row -->
     
                                 <div class="row">
                                     <div class="col-12">
-                                    <form id="carritoForm" name="carritoForm" method="post" action="scriptsphp/ajaxCarrito.php?op=2"  class="parsley-examples">
-                                       <input type="hidden" id="id_producto" name="id_producto">
                                         <div class="table-responsive">
                                             <table class="table mt-4 table-centered">
                                                 <thead>
                                                 <tr>
-                                                    <th style="width: 10%">Quitar</th>
                                                     <th style="width: 10%">Codigo</th>
                                                     <th>Articulo</th>
                                                     <th style="width: 10%" class="text-center">Cantidad</th>
@@ -99,12 +178,12 @@
                                                     <th style="width: 10%" class="text-right">Total</th>
                                                 </tr></thead>
                                                 <tbody>
-                                                
+                                               
                                                 <?php
                                                     include 'config/conexion.php';
                                                     $result = $conexion->query("
-                                                        select p.id_producto as id,p.codigo,p.nombre, p.descripcion, p.precio_venta,
-                                                        t.cantidad,p.precio_venta*t.cantidad as total
+                                                        select p.codigo,p.nombre, p.descripcion, p.precio_venta,
+                                                        t.cantidad, p.precio_venta*t.cantidad,p.precio_venta*t.cantidad as total
                                                         FROM tcarrito t
                                                         inner join tproducto as p on p.id_producto=t.id_producto
                                                         order by p.codigo asc;
@@ -112,43 +191,27 @@
                                                     if ($result) {
                                                         while ($fila = $result->fetch_object()) {                                                                               
                                                             
-                                                            echo "
+                                                            echo '
                                                             <tr>
-                                                                <td align='center'> 
-                                                                    <span  data-toggle='modal' data-target='#verProducto'>                                                                                                                          
-                                                                        <button
-                                                                        button type='button'
-                                                                        title='Quitar articulo del carrito'
-                                                                        data-toggle='tooltip' 
-                                                                        data-placement='bottom'                                                                     
-                                                                        class='btn btn-icon btn-danger waves-effect waves-light' onclick=\"
-                                                                        eliminar(
-                                                                        '$fila->id'                                                                        
-                                                                        )\";>
-                                                                            <i class='mdi mdi-close'></i> 
-                                                                        </button>  
-                                                                    </span>
-                                                                </td>
-                                                                <td>$fila->codigo</td>
+                                                                <td>' . $fila->codigo . '</td>
                                                                 <td>
-                                                                    <b>$fila->nombre</b> 
+                                                                    <b>' . $fila->nombre . '</b> 
                                                                     <br/>
-                                                                    $fila->descripcion
+                                                                    ' . $fila->descripcion . '
                                                                 </td>
-                                                                <td class='text-center'> $fila->cantidad</td>
-                                                                <td class='text-center'>$ $fila->precio_venta</td>
-                                                                <td class='text-center'>$ $fila->total</td>
+                                                                <td class="text-center">' . $fila->cantidad . '</td>
+                                                                <td class="text-center">$' . $fila->precio_venta . '</td>
+                                                                <td class="text-right">$' . $fila->total . '</td>
                                                             </tr>
-                                                            ";                                                                                
+                                                            ';                                                                                
                                                         }
                                                     }
                                                 ?>                                                    
                                                 
-
+    
                                                 </tbody>
                                             </table>
                                         </div> <!-- end table-responsive -->
-                                    </form>
                                     </div> <!-- end col -->
                                 </div>
                                 <!-- end row -->
@@ -172,7 +235,7 @@
                                             <?php
                                                 include 'config/conexion.php';
                                                 $result = $conexion->query("
-                                                    select sum(p.precio_venta*t.cantidad) as total
+                                                    select CONCAT('$',sum(p.precio_venta*t.cantidad)) as total
                                                     FROM tcarrito t
                                                     inner join tproducto as p on p.id_producto=t.id_producto;
                                                 ");
@@ -180,23 +243,30 @@
                                                     while ($fila = $result->fetch_object()) {                                                                               
                                                         
                                                         echo '
-                                                        <p><b>Sub-total:</b> <span class="float-right">&nbsp;&nbsp;&nbsp;$' . $fila->total . ' USD</span></p>
+                                                        <p><b>Total pagar:</b> <span class="float-right">' . $fila->total . '</span></p>
                                                         ';                                                                                
                                                     }
                                                 }
-                                            ?>                                             
+                                            ?>                                            
                                             
                                         </div>
                                         <div class="clearfix"></div>
                                     </div> <!-- end col -->
                                 </div>
                                 <!-- end row -->
+    
+                                <div class="mt-4 mb-1">
+                                    <div class="text-right d-print-none">
+                                        <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-printer mr-1"></i> Print</a>
+                                        <button href="#" class="btn btn-info waves-effect waves-light" id="otro" onclick="prueba();">Realizar venta</button>                                        
+                                    </div>
+                                </div>
                             </div>
     
                         </div>
     
                     </div>
-                                        
+                    <!-- end row -->
                 </div> <!-- container -->
 
             </div> <!-- content -->
@@ -229,6 +299,7 @@
     <div class="rightbar-overlay"></div>
 
     <?php include_once 'Pie.php';?>
+    
 
 </body>
 

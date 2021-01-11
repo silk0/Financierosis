@@ -15,8 +15,11 @@
          if(cantidadDeseada==""){
             alert("Ingrese una cantidad para poder agregar al carrito.");
          }else if(parseInt(cantidadDeseada)>parseInt(stock)){
-            
-            alert("La cantidad deseada supera a la cantidad disponible.");
+            Swal.fire(
+                'Error',
+                'La cantidad deseada supera a la cantidad disponible',
+                'error'
+            );
     
          }else{
            alert("La canditdad deseada es correcta y va A ser anadida al carrito");
@@ -68,7 +71,7 @@
     }
 </script>
 
-<body class="left-side-menu-dark">
+<body >
 
     <!-- Begin page -->
     <div id="wrapper">
@@ -137,7 +140,7 @@
                                     $result = $conexion->query("SELECT *,(select sum(cantidad)
                                         from tcarrito t
                                         where t.id_producto=p.id_producto) as cantidad from tproducto p
-                                        order by  stock, stock_minimo asc;");
+                                        order by  estado, stock, stock_minimo asc;");
                                     
                                     if ($result) {
                                         while ($fila = $result->fetch_object()) {
@@ -151,7 +154,7 @@
                                                 echo "<td> Activo </td>";
                                             else{ echo "<td> Inactivo </td>";}
                                             
-                                                echo "<td align='center'> 
+                                                $a = "<td align='center'> 
                                                 <span  data-toggle='modal' data-target='#verProducto' >                                                                                                                          
                                                 <button
                                                 button type='button'
@@ -174,29 +177,29 @@
                                                 )\";>
                                                     <i class='mdi mdi-eye'></i> 
                                                 </button>  
-                                                </span>
+                                                </span>";
+
+                                                if((($fila->estado)>0)&&(($fila->stock)>0))
+                                                    $a .="<span  data-toggle='modal' data-target='#carrito' >
+                                                        <button 
+                                                        type='button'
+                                                        title='Añadir al carrito'
+                                                        data-toggle='tooltip' 
+                                                        data-placement='bottom'     
+                                                        class='btn btn-pink waves-effect waves-light' onclick=\"
+                                                        carrit(
+                                                            '$fila->id_producto',
+                                                            '$fila->nombre',
+                                                            '$fila->codigo',
+                                                            '$fila->stock',
+                                                            '$fila->cantidad'
+                                                        )\";>                                                    
+                                                            <i class='mdi mdi-cart'></i></i>
+                                                        </button>
+                                                    </span>";
 
 
-                                                <span  data-toggle='modal' data-target='#carrito' >
-                                                    <button 
-                                                    type='button'
-                                                    title='Añadir al carrito'
-                                                    data-toggle='tooltip' 
-                                                    data-placement='bottom'     
-                                                    class='btn btn-pink waves-effect waves-light' onclick=\"
-                                                    carrit(
-                                                        '$fila->id_producto',
-                                                        '$fila->nombre',
-                                                        '$fila->codigo',
-                                                        '$fila->stock',
-                                                        '$fila->cantidad'
-                                                    )\";>                                                    
-                                                        <i class='mdi mdi-cart'></i></i>
-                                                    </button>
-                                                </span>
-
-
-                                                <span  data-toggle='modal' data-target='#comprarProducto' >
+                                                $a .="<span  data-toggle='modal' data-target='#comprarProducto' >
                                                 <button 
                                                 button type='button'
                                                 title='Compra'
@@ -231,6 +234,7 @@
                                                 </button> 
                                                 </span> 
                                                 </td>";
+                                            echo $a;
                                             echo "</tr>";
                                         }
                                     }

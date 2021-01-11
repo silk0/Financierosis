@@ -15,7 +15,7 @@
 <html lang="en">
 <?php include_once 'Cabecera.php';?>
 
-<body class="left-side-menu-dark">
+<body >
 
     <!-- Begin page -->
     <div id="wrapper">
@@ -112,38 +112,14 @@
                                                         echo'<p><strong>Venta No. : </strong> <span class="float-right">'. $codigoR .'</span></p>';
                                                     }
                                                 } 
-                                                echo'<p><strong>Fecha : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp; '. $hoy .'</span></p>';                                             
+                                                echo'<p><strong>NRC : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp; 0</span></p>
+                                                     <p><strong>NIT : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp; 0</span></p>';                                             
 
                                             ?>
                                             
                                         </div>
                                     </div><!-- end col -->
                                 </div>
-                                <!-- end row -->
-    
-                                <div class="row mt-3">
-                                    <div class="col-md-6">
-                                        <h6>Billing Address</h6>
-                                        <address class="line-h-24">
-                                            Stanley Jones<br>
-                                            795 Folsom Ave, Suite 600<br>
-                                            San Francisco, CA 94107<br>
-                                            <abbr title="Phone">P:</abbr> (123) 456-7890
-                                        </address>
-                                    </div> <!-- end col -->
-    
-                                    <div class="col-md-6">
-                                        <div class="text-md-right">
-                                            <h6>Shipping Address</h6>
-                                            <address class="line-h-24">
-                                                Stanley Jones<br>
-                                                795 Folsom Ave, Suite 600<br>
-                                                San Francisco, CA 94107<br>
-                                                <abbr title="Phone">P:</abbr> (123) 456-7890
-                                            </address>
-                                        </div>
-                                    </div> <!-- end col -->
-                                </div> 
                                 <!-- end row -->
     
                                 <div class="row">
@@ -216,7 +192,7 @@
                                             <?php
                                                 include 'config/conexion.php';
                                                 $result = $conexion->query("
-                                                    select sum(p.precio_venta*t.cantidad) as total
+                                                    select CONCAT('$',sum(p.precio_venta*t.cantidad)) as total
                                                     FROM tcarrito t
                                                     inner join tproducto as p on p.id_producto=t.id_producto;
                                                 ");
@@ -224,13 +200,12 @@
                                                     while ($fila = $result->fetch_object()) {                                                                               
                                                         
                                                         echo '
-                                                        <p><b>Sub-total:</b> <span class="float-right">$' . $fila->total . '</span></p>
+                                                        <p><b>Total pagar:</b> <span class="float-right">' . $fila->total . '</span></p>
                                                         ';                                                                                
                                                     }
                                                 }
-                                            ?>                                             
-                                            <p><b>Discount (10%):</b> <span class="float-right"> &nbsp;&nbsp;&nbsp; $0.00</span></p>
-                                            <h3>$4137.75 USD</h3>
+                                            ?>                                            
+                                            
                                         </div>
                                         <div class="clearfix"></div>
                                     </div> <!-- end col -->
@@ -240,7 +215,7 @@
                                 <div class="mt-4 mb-1">
                                     <div class="text-right d-print-none">
                                         <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-printer mr-1"></i> Print</a>
-                                        <a href="#" class="btn btn-info waves-effect waves-light">Submit</a>
+                                        <a href="#" class="btn btn-info waves-effect waves-light">Realizar venta</a>                                        
                                     </div>
                                 </div>
                             </div>

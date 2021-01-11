@@ -93,6 +93,9 @@
             <ul class="nav-second-level" aria-expanded="false">
                 <li>
                     <a href="venderContado.php">Ventas al contado</a>
+                </li>
+                <li>
+                    <a href="venderCredito.php">Ventas al credito</a>
                 </li>                
             </ul>
         </li>

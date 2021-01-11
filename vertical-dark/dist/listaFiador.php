@@ -39,7 +39,7 @@ function modify(id,nom,ape,dui,nit,tel,cel,direc,email,prof,sal){
 }
 </script>
 
-<body class="left-side-menu-dark">
+<body >
 
     <!-- Begin page -->
     <div id="wrapper">
