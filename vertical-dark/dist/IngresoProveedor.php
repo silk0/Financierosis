@@ -91,16 +91,11 @@
                                             <label for="inputPassword4" class="col-form-label">Celular</label>
                                             <input type="text" class="form-control" name="cel" id="cel" required data-mask="9999-9999"  placeholder="9999-9999">
                                         </div>
-                                        
-                                      
                                         <div class="form-group col-md-6">
                                             <label for="inputEmail4" class="col-form-label">Email</label>
                                             <input type="email"  class="form-control" name="email" id="email"  required  placeholder="Correo@correo.com">
                                         </div>
-                                     
-                                    </div> 
-                                    </div>   
-                                
+                                    </div>
                                     </br>
                                     <div class="form-row"> 
                                     <div class="form-group">

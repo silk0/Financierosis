@@ -146,7 +146,8 @@
                                                 echo "<td>" . $fila->email . "</td>";
                                                 echo "<td>                                                 
                                                     <button 
-                                                    button type='button'
+                                                    button type='button' title='Informacion' data-toggle='tooltip' 
+                                                    data-placement='bottom'
                                                     data-toggle='modal'                                                    
                                                     data-target='#mostrarProveedor'                                                    
                                                     class='btn btn-primary waves-effect waves-light' onclick=\"
@@ -165,7 +166,8 @@
                                                         <i class='mdi mdi-eye'></i> 
                                                     </button>
                                                     <button 
-                                                    type='button'
+                                                    type='button' title='Modificar' data-toggle='tooltip' 
+                                                    data-placement='bottom'
                                                     data-toggle='modal'                                                    
                                                     data-target='#editarProveedor'
                                                     class='btn btn-warning waves-effect waves-light' onclick=\"
