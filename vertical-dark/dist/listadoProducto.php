@@ -13,17 +13,22 @@
         alert(id);
         var stock = document.getElementById("cantidadI").value;
          if(cantidadDeseada==""){
-            alert("Ingrese una cantidad para poder agregar al carrito.");
+            Swal.fire(
+                'Error',
+                'La cantidad deseada supera a la cantidad disponible',
+                'error'
+            );
          }else if(parseInt(cantidadDeseada)>parseInt(stock)){
             Swal.fire(
                 'Error',
                 'La cantidad deseada supera a la cantidad disponible',
                 'error'
             );
-    
+           
          }else{
-           alert("La canditdad deseada es correcta y va A ser anadida al carrito");
+            
             $("#carritoForm").submit(); 
+            
          }
     }     
 
@@ -137,10 +142,10 @@
                                     
                                     include "config/conexion.php";
                                 
-                                    $result = $conexion->query("SELECT *,(select sum(cantidad)
-                                        from tcarrito t
-                                        where t.id_producto=p.id_producto) as cantidad from tproducto p
-                                        order by  estado, stock, stock_minimo asc;");
+                                    $result = $conexion->query("Select *,(select sum(cantidad)
+                                    from tcarrito t
+                                    where t.id_producto=p.id_producto) as cantidad from tproducto p
+                                    order by stock desc;");
                                     
                                     if ($result) {
                                         while ($fila = $result->fetch_object()) {
