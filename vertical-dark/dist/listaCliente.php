@@ -188,7 +188,8 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                                 echo "<td>" . $fila->telefono . "</td>";
                                                 echo "<td>                                                 
                                                     <button 
-                                                    button type='button'
+                                                    button type='button' title='Informacion' data-toggle='tooltip' 
+                                                    data-placement='bottom'
                                                     data-toggle='modal'                                                    
                                                     data-target='#mostrarCliente'                                                    
                                                     class='btn btn-primary waves-effect waves-light' onclick=\"
@@ -212,7 +213,8 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                                         <i class='mdi mdi-eye'></i> 
                                                     </button>
                                                     <button 
-                                                    type='button'
+                                                    type='button' title='Modificar' data-toggle='tooltip' 
+                                                    data-placement='bottom'
                                                     data-toggle='modal'                                                    
                                                     data-target='#editarCliente'
                                                     class='btn btn-warning waves-effect waves-light' onclick=\"
