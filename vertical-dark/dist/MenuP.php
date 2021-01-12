@@ -116,6 +116,9 @@
                     <a href="venderCredito.php">Ventas al credito</a>
                 </li>  
                 <li>
+                    <a href="ingresoInstituciones.php">Instituciones</a>
+                </li>
+                <li>
                     <a href="departamentos.php">Departamentos</a>
                 </li>  
                 <li>
