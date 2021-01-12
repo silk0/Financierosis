@@ -114,7 +114,16 @@
                 </li>
                 <li>
                     <a href="venderCredito.php">Ventas al credito</a>
-                </li>                
+                </li>  
+                <li>
+                    <a href="departamentos.php">Departamentos</a>
+                </li>  
+                <li>
+                    <a href="tiposActivo.php">Tipos de Activo</a>
+                </li>
+                <li>
+                    <a href="clasificacionActivo.php">Clasificaciòn de Activo</a>
+                </li>              
             </ul>
         </li>
 
