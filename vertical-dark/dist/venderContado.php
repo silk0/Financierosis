@@ -196,6 +196,7 @@
                                                     FROM tcarrito t
                                                     inner join tproducto as p on p.id_producto=t.id_producto;
                                                 ");
+                                                
                                                 if ($result) {
                                                     while ($fila = $result->fetch_object()) {                                                                               
                                                         
@@ -214,7 +215,9 @@
     
                                 <div class="mt-4 mb-1">
                                     <div class="text-right d-print-none">
-                                        <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-printer mr-1"></i> Print</a>
+                                        <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light">
+                                            <i class="mdi mdi-printer mr-1"></i> Print
+                                        </a>
                                         <a href="#" class="btn btn-info waves-effect waves-light">Realizar venta</a>                                        
                                     </div>
                                 </div>
