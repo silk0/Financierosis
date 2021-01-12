@@ -99,6 +99,21 @@
                 </li>                
             </ul>
         </li>
+        <li>
+        <a href="javascript: void(0);">
+                <i class="mdi mdi-cart"></i>
+                <span>Activo Fijo</span>
+                <span class="menu-arrow"></span>
+            </a>
+            <ul class="nav-second-level" aria-expanded="false">
+                <li>
+                    <a href="ingresoActivo.php">Registro Activo</a>
+                </li>
+                <li>
+                    <a href="venderCredito.php">Ventas al credito</a>
+                </li>                
+            </ul>
+        </li>
 
         <li class="menu-title">Components</li>
 
