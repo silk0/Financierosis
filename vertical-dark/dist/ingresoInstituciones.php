@@ -29,7 +29,7 @@
     }
 
     function edit(id, nom, corre) {
-        // document.getElementById("baccion2").value=id;
+        //document.getElementById("baccion2").value=id;
         document.getElementById("nombre").value = nom;
         document.getElementById("correlativo").value = corre;
     }
@@ -37,7 +37,7 @@
     function modify(id, nomb,correl) {
         document.getElementById("id_institucion").value = id;
         document.getElementById("nombre").value = nomb;
-        document.getElementById("telefono").value = correl;
+        document.getElementById("correlativo").value = correl;
        
     }
 </script>
@@ -122,20 +122,21 @@
                                                 echo "<td>" . $fila->correlativo . "</td>";
                                                 echo "<td> 
                                                 <span data-toggle='modal'                                                    
-                                                data-target='#mostrarInsti>                                                
+                                                data-target='#mostrarInstitucion'>                                             
                                                     <button 
-                                                    type='button' title='Informacion' data-toggle='tooltip' 
-                                                    data-placement='bottom'                          
+                                                    button type='button' title='Informacion' data-toggle='tooltip' 
+                                                    data-placement='bottom'                         
                                                     class='btn btn-primary waves-effect waves-light' onclick=\"
                                                     edit(
-                                                        '$fila->id_institucion',
-                                                        '$fila->nombre',
-                                                        '$fila->correlativo',
+                                                    '$fila->id_institucion',
+                                                    '$fila->nombre',
+                                                    '$fila->correlativo',
                                                 
-                                                    )\";><i class='mdi mdi-eye'></i> 
+                                                    )\";>
+                                                        <i class='mdi mdi-eye'></i> 
                                                     </button></span>
                                                     <span data-toggle='modal'                                                    
-                                                    data-target='#editarInsti'>
+                                                    data-target='#editarInstitucion'>
                                                     <button 
                                                     type='button' title='Modificar' data-toggle='tooltip' 
                                                     data-placement='bottom'
@@ -144,6 +145,7 @@
                                                         '$fila->id_institucion',
                                                         '$fila->nombre',
                                                         '$fila->correlativo',
+                                                        
                                                     )\";>                                                    
                                                         <i class='mdi mdi-pencil-outline'></i></i>
                                                     </button></span>
@@ -160,8 +162,8 @@
                         </div>
                     </div>
                     <!-- end row -->
-<!-- Bootstrap Modals -->
-<div class="row">
+                          <!-- Bootstrap Modals -->
+                         <div class="row">
                         <div class="col-12">
                             <div class="">
                                 <!--  Modal mostrar Proveedor-->
@@ -185,19 +187,19 @@
                                                                         <label for="inputEmail4"
                                                                             class="col-form-label">Nombre</label>
                                                                         <input type="text" class="form-control"
-                                                                            name="nombrem" id="nombrem" required
+                                                                            name="nombre" id="nombre" required
                                                                             placeholder="Jose Alfredo" readonly>
                                                                     </div>
                                                                     <div class="form-group col-md-6">
                                                                         <label for="inputPassword4"
                                                                             class="col-form-label">Correlativo</label>
                                                                         <input type="text" class="form-control"
-                                                                            name="telm" id="telm" required
+                                                                            name="correlativo" id="correlativo" required
                                                                             data-mask="9999-9999"
                                                                             placeholder="9999-9999" readonly>
                                                                     </div>
                                                                 </div>
-                                                                
+                                                            
                                                         </div>
                                                         </form>
                                                     </div>
@@ -235,9 +237,59 @@
                                                                 required class="parsley-examples">
 
                                                                 <div class="form-row">
-                                                                    <input type="hidden" id="idfiador" name="idfiador">
-                                                                    <input type="hidden" id="id_fiador"
-                                                                        name="id_fiador">
+                                                                    <input type="hidden" id="idinstitucion" name="idinstitucion">
+                                                                    <input type="hidden" id="id_institucion"
+                                                                        name="id_institucion">
+                                                                </div>
+
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputEmail4"
+                                                                            class="col-form-label">Nombre</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="nombre" id="nombre" required
+                                                                            placeholder="Nombre de la Institucion">
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                                
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn  btn-primary waves-effect" id="cambios"
+                                                    name="cambios" onclick="go();">Regisrar</button>
+                                                <button type="button" class="btn  btn-primary waves-effect"
+                                                    data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+                                <!--  Modal editar fiador-->
+                                <div id="editarInstitucion" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                                    aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myLargeModalLabel">Datos Institucion
+                                                </h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="card-box">
+                                                            <form name="editarForm" id="editarForm" method="post"
+                                                                action="scriptsphp/modificarInstitucion.php?bandera=1"
+                                                                required class="parsley-examples">
+
+                                                                <div class="form-row">
+                                                                <input type="hidden" id="idinstitucion" name="idinstitucion">
+                                                                    <input type="hidden" id="id_institucion"
+                                                                        name="id_institucion">
                                                                 </div>
 
                                                                 <div class="form-row">
