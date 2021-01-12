@@ -119,12 +119,12 @@ function modify(id,nom,ape,dui,nit,tel,cel,direc,email,prof,sal){
                                                 echo "<td>" . $fila->apellido . "</td>";
                                                 echo "<td>" . $fila->direccion . "</td>"; 
                                                 echo "<td>" . $fila->telefono . "</td>";
-                                                echo "<td>                                                 
+                                                echo "<td> 
+                                                <span data-toggle='modal'                                                    
+                                                data-target='#mostrarFiador'>                                                
                                                     <button 
-                                                    button type='button' title='Informacion' data-toggle='tooltip' 
-                                                    data-placement='bottom'
-                                                    data-toggle='modal'                                                    
-                                                    data-target='#mostrarFiador'                                                    
+                                                    type='button' title='Informacion' data-toggle='tooltip' 
+                                                    data-placement='bottom'                          
                                                     class='btn btn-primary waves-effect waves-light' onclick=\"
                                                     edit(
                                                     '$fila->id_fiador',
@@ -139,12 +139,12 @@ function modify(id,nom,ape,dui,nit,tel,cel,direc,email,prof,sal){
                                                     '$fila->profecion',
                                                     '$fila->salario',
                                                     )\";><i class='mdi mdi-eye'></i> 
-                                                    </button>
+                                                    </button></span>
+                                                    <span data-toggle='modal'                                                    
+                                                    data-target='#editarFiador'>
                                                     <button 
                                                     type='button' title='Modificar' data-toggle='tooltip' 
                                                     data-placement='bottom'
-                                                    data-toggle='modal'                                                    
-                                                    data-target='#editarFiador'
                                                     class='btn btn-warning waves-effect waves-light' onclick=\"
                                                     modify(
                                                         '$fila->id_fiador',
@@ -160,7 +160,7 @@ function modify(id,nom,ape,dui,nit,tel,cel,direc,email,prof,sal){
                                                         '$fila->salario',
                                                     )\";>                                                    
                                                         <i class='mdi mdi-pencil-outline'></i></i>
-                                                    </button>
+                                                    </button></span>
                                                 </div>
                                                 </td>";
                                                 echo "</tr>";

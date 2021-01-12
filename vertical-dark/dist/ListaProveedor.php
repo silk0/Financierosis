@@ -144,12 +144,12 @@
                                                 echo "<td>" . $fila->representante . "</td>"; 
                                                 echo "<td>" . $fila->celular . "</td>";
                                                 echo "<td>" . $fila->email . "</td>";
-                                                echo "<td>                                                 
+                                                echo "<td>    
+                                                <span data-toggle='modal'                                                    
+                                                data-target='#mostrarProveedor'>                                             
                                                     <button 
                                                     button type='button' title='Informacion' data-toggle='tooltip' 
-                                                    data-placement='bottom'
-                                                    data-toggle='modal'                                                    
-                                                    data-target='#mostrarProveedor'                                                    
+                                                    data-placement='bottom'                         
                                                     class='btn btn-primary waves-effect waves-light' onclick=\"
                                                     edit(
                                                     '$fila->id_proveedor',
@@ -161,15 +161,14 @@
                                                     '$fila->nit',
                                                     '$fila->celular',
                                                     '$fila->email'
-                                        
                                                     )\";>
                                                         <i class='mdi mdi-eye'></i> 
-                                                    </button>
+                                                    </button></span>
+                                                    <span data-toggle='modal'                                                    
+                                                    data-target='#editarProveedor'>
                                                     <button 
                                                     type='button' title='Modificar' data-toggle='tooltip' 
                                                     data-placement='bottom'
-                                                    data-toggle='modal'                                                    
-                                                    data-target='#editarProveedor'
                                                     class='btn btn-warning waves-effect waves-light' onclick=\"
                                                     modify(
                                                         '$fila->id_proveedor',
@@ -183,8 +182,7 @@
                                                         '$fila->email'
                                                     )\";>                                                    
                                                         <i class='mdi mdi-pencil-outline'></i></i>
-                                                    </button>
-                                                  
+                                                    </button></span>
                                                 </div>
                                                 </td>";
                                                 echo "</tr>";
