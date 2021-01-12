@@ -161,27 +161,27 @@
                                             
                                                 $a = "<td align='center'> 
                                                 <span  data-toggle='modal' data-target='#verProducto' >                                                                                                                          
-                                                <button
-                                                button type='button'
-                                                title='Informacion'
-                                                data-toggle='tooltip' 
-                                                data-placement='bottom'                                                                     
-                                                class='btn btn-primary waves-effect waves-light' onclick=\"
-                                                ver(
-                                                '$fila->p.id',
-                                                '$fila->id_proveedor',
-                                                '$fila->id_categoria',
-                                                '$fila->nombre',
-                                                '$fila->descripcion',
-                                                '$fila->precio_compra',
-                                                '$fila->margen',
-                                                '$fila->precio_venta',
-                                                '$fila->stock_minimo',
-                                                '$fila->codigo',
-                                                '$fila->estado'
-                                                )\";>
-                                                    <i class='mdi mdi-eye'></i> 
-                                                </button>  
+                                                    <button
+                                                        button type='button'
+                                                        title='Informacion'
+                                                        data-toggle='tooltip' 
+                                                        data-placement='bottom'                                                                     
+                                                        class='btn btn-primary waves-effect waves-light' onclick=\"
+                                                        ver(
+                                                        '$fila->p.id',
+                                                        '$fila->id_proveedor',
+                                                        '$fila->id_categoria',
+                                                        '$fila->nombre',
+                                                        '$fila->descripcion',
+                                                        '$fila->precio_compra',
+                                                        '$fila->margen',
+                                                        '$fila->precio_venta',
+                                                        '$fila->stock_minimo',
+                                                        '$fila->codigo',
+                                                        '$fila->estado'
+                                                        )\";>
+                                                            <i class='mdi mdi-eye'></i> 
+                                                    </button>  
                                                 </span>";
 
                                                 if((($fila->estado)>0)&&(($fila->stock)>0))
