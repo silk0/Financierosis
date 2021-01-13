@@ -31,7 +31,7 @@
     function edit(id, nom, corre) {
         //document.getElementById("baccion2").value=id;
         document.getElementById("nombre").value = nom;
-        document.getElementById("correlativo").value = corre;
+        //document.getElementById("correlativo").value = corre;
     }
 
     function modify(id, nomb,correl) {
@@ -375,7 +375,7 @@
         $correlativo   = $_POST['correlativo'];
     
 
-        $consulta  = "INSERT INTO tinstituciones VALUES('null','" .$nombre. "','" .$correlativo. "',')";
+        $consulta  = "INSERT INTO tinstitucion VALUES('null','" .$nombre. "','" .$correlativo. "')";
         $resultado = $conexion->query($consulta);
         if ($resultado) {
             msgI("Los datos fueron almacenados con exito");
