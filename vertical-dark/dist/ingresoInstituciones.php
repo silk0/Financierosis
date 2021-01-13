@@ -217,56 +217,67 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="">
-                                <!--  Modal editar fiador-->
+                                <!--  Modal AGREGAR INSTITUCION-->
                                 <div id="nuevo" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
                                     aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
+
                                             <div class="modal-header">
                                                 <h4 class="modal-title" id="myLargeModalLabel">Datos Institucion
                                                 </h4>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-hidden="true">×</button>
                                             </div>
+
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="card-box">
-                                                            <form name="editarForm" id="editarForm" method="post"
-                                                                action="scriptsphp/modificarInstitucion.php?bandera=1"
-                                                                required class="parsley-examples">
-
-                                                                <div class="form-row">
-                                                                    <input type="hidden" id="idinstitucion" name="idinstitucion">
-                                                                    <input type="hidden" id="id_institucion"
-                                                                        name="id_institucion">
-                                                                </div>
+                                                            <form action="ingresoInstituciones.php" method="POST" class="parsley-examples">
 
                                                                 <div class="form-row">
                                                                     <div class="form-group col-md-6">
                                                                         <label for="inputEmail4"
                                                                             class="col-form-label">Nombre</label>
                                                                         <input type="text" class="form-control"
-                                                                            name="nombre" id="nombre" required
+                                                                            name="nombreinsti" id="nombreinsti" required
                                                                             placeholder="Nombre de la Institucion">
                                                                     </div>
                                                                     
                                                                 </div>
                                                                 
-                                                            </form>
+                                                           
                                                         </div>
-                                                    </div>
-                                                </div>
+                                                   
+                                                
                                             </div>
+
                                             <div class="modal-footer">
-                                                <button type="button" class="btn  btn-primary waves-effect" id="cambios"
-                                                    name="cambios" onclick="go();">Regisrar</button>
+                                                <div align="right">
+
+                                                    <button type="submit" name="agregar" class="btn  btn-primary waves-effect">Regisrar</button>
                                                 <button type="button" class="btn  btn-primary waves-effect"
-                                                    data-dismiss="modal">Cerrar</button>
+                                                    data-dismiss="modal">Cerrar</button>                                                   
+
+                                                </div>
+                                                
                                             </div>
+
+                                             </form>
+
+
+
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
+                       
+                            
+
+                    
+
+
                                 <!--  Modal editar fiador-->
                                 <div id="editarInstitucion" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
                                     aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
@@ -324,6 +335,7 @@
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
+
                             </div>
                         </div>
                     </div>
@@ -369,20 +381,26 @@
 
 <?php
     include "config/conexion.php";
-    $accion = $_REQUEST['bandera'];
-        if($accion==1){
-        $nombre   = $_POST['nombre'];
-        $correlativo   = $_POST['correlativo'];
+   
+        if(isset($_POST['agregar'])){
+        $nombre   = $_POST['nombreinsti'];
+        //$correlativo   = $_POST['correlativo'];
     
 
-        $consulta  = "INSERT INTO tinstitucion VALUES('null','" .$nombre. "','" .$correlativo. "')";
+        $consulta  = "INSERT INTO tinstitucion (nombre) VALUES('$nombre')";
         $resultado = $conexion->query($consulta);
         if ($resultado) {
             msgI("Los datos fueron almacenados con exito");
+           
         } else {
             msgE("Los datos no pudieron almacenarce");
-        }     
+         
+        }
+
+echo '<script>location.href="ingresoInstituciones.php";</script>';  
     }
+
+
 function msgI($texto)
 {
     echo "<script type='text/javascript'>";
