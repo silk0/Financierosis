@@ -8,7 +8,7 @@
         $tipo  = $_REQUEST["tipo"];
         $id  = $_REQUEST["id"];
     }else {
-        header("Location:/Financierosis/");
+        header("Location:../../index.php");
     }
 ?>
 <!DOCTYPE html>
