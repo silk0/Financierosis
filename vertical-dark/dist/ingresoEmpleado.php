@@ -3,12 +3,12 @@
     error_reporting(E_ALL & ~E_NOTICE);
     session_start();
     if($_SESSION["logueado"] == TRUE) {
-    $usuario=$_SESSION["usuario"];
-    $nombre = $_SESSION["nombre"];
-    $tipo  = $_REQUEST["tipo"];
-    $id  = $_REQUEST["id"];
+        $usuario=$_SESSION["usuario"];
+        $nombre = $_SESSION["nombre"];
+        $tipo  = $_REQUEST["tipo"];
+        $id  = $_REQUEST["id"];
     }else {
-        header("Location:../../../index.php");
+        header("Location:/Financierosis/");
     }
 ?>
 <!DOCTYPE html>
@@ -80,7 +80,9 @@
 
     function go() {
 
+        
         //Validaciones
+        
         if (document.getElementById('nombre').value == "") {
             notify(' Advertencia:', 'El campo Nombre es obligatorio.', 'top', 'right', 'any', 'warning');
             document.getElementById("nombre").focus();
@@ -105,7 +107,10 @@
         } else if (document.getElementById('contra1').value == "") {
             notify(' Advertencia:', 'El campo Repetir Contraseña es obligatorio', 'top', 'right', 'any', 'warning');
             document.getElementById("contra1").focus();
-        } else {
+        } else if (document.getElementById('contra').value.localeCompare(document.getElementById('contra1').value)!=0) {
+            document.getElementById("contra1").focus();
+            document.getElementById("contra").focus();
+        } else{  
             document.form.submit();
         }
     }
@@ -215,13 +220,13 @@
                                         <div class="form-group col-md-4">
                                             <label for="inputPassword4" class="col-form-label">Contraseña</label>
                                             <input type="password" class="form-control" name="contra" id="contra"
-                                                required placeholder="xxxxxx" value="">
+                                                required >
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="inputPassword4" class="col-form-label">Repetir
                                                 Contraseña</label>
-                                            <input type="password" class="form-control" name="contra1" id="contra1"
-                                                required placeholder="xxxxxx" value="">
+                                            <input type="password" data-parsley-equalto="#contra" placeholder="Password" class="form-control"  name="contra1" id="contra1"
+                                                required >
                                         </div>
                                     </div>
                                     </br>

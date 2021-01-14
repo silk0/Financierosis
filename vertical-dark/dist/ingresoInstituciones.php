@@ -183,12 +183,13 @@
                                                         <div class="card-box">
                                                             <form name="form" required class="parsley-examples">
                                                                 <div class="form-row">
+                                                                    
                                                                     <div class="form-group col-md-6">
                                                                         <label for="inputEmail4"
                                                                             class="col-form-label">Nombre</label>
                                                                         <input type="text" class="form-control"
                                                                             name="nombre" id="nombre" required
-                                                                            placeholder="Jose Alfredo" readonly>
+                                                                            placeholder="Jose Alfredo">
                                                                     </div>
                                                                     <div class="form-group col-md-6">
                                                                         <label for="inputPassword4"
@@ -238,6 +239,24 @@
                                                             <form action="ingresoInstituciones.php" method="POST" class="parsley-examples">
 
                                                                 <div class="form-row">
+                                                                    <?php 
+                                                                        include 'config/conexion.php';                                                                        
+                                                                        $result = $conexion->query("SHOW TABLE STATUS LIKE 'tinstitucion'");
+                                                                        if ($result) {
+                                                                            while ($fila = $result->fetch_object()) {                                               
+                                                                                $codigoR=str_pad($fila->Auto_increment, 4, "0", STR_PAD_LEFT);
+                                                                                echo'
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label for="inputEmail4"
+                                                                                        class="col-form-label">Correlativo</label>
+                                                                                    <input type="text" class="form-control"
+                                                                                        name="nombre" id="nombre" value ="'.$codigoR.'" required
+                                                                                        placeholder="0000" readonly>
+                                                                                </div>
+                                                                                ';
+                                                                            }
+                                                                        } 
+                                                                    ?>
                                                                     <div class="form-group col-md-6">
                                                                         <label for="inputEmail4"
                                                                             class="col-form-label">Nombre</label>
