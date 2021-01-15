@@ -27,10 +27,10 @@
         document.getElementById("correlativo").value = corre;
     }
 
-    function modify(id, nomb, correl) {
+    function modify(id, nomb) {
         document.getElementById("id_institucion").value = id;
         document.getElementById("nombree").value = nomb;
-        document.getElementById("correlativo").value = correl;
+       // document.getElementById("correlativo").value = correl;
 
     }
 </script>
@@ -92,7 +92,7 @@
                                 <h4 class="header-title"></h4>
                                 <p class="sub-header">
                                 </p>
-                                <form id="fCartera" name="fCartera" action="" method="GET" class="parsley-examples">
+                                <form id="fInstitucion" name="fInstitucion" action="" method="GET" class="parsley-examples">
 
                                     <table id="datatable-buttons"
                                         class="table table-striped table-bordered dt-responsive nowrap">
@@ -137,7 +137,7 @@
                                                     modify(
                                                         '$fila->id_institucion',
                                                         '$fila->nombre',
-                                                        '$fila->correlativo',
+                                                    
                                                         
                                                     )\";>                                                    
                                                         <i class='mdi mdi-pencil-outline'></i></i>
