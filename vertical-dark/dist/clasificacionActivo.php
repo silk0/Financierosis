@@ -115,6 +115,7 @@
                                         if ($result) {
                                             while ($fila = $result->fetch_object()) {
                                                 echo "<tr>";
+                                                
                                                 echo "<td>" . $fila->nombre . "</td>";
                                                 echo "<td>" . $fila->tiempo_depreciacion . "</td>";
                                                 echo "<td>" . $fila->correlativo . "</td>";
@@ -416,7 +417,7 @@
         $nombre   = $_POST['nombre'];
         $tiempo   = $_POST['tip'];
         $corre   = $_POST['corre'];
-        $consulta  = "INSERT INTO tclasificacion (nombre,correlativo,tiempo_depreciacion) VALUES('$nombre','$tiempo','$corre')";
+        $consulta  = "INSERT INTO tclasificacion (nombre,tiempo_depreciacion,correlativo) VALUES('$nombre','$tiempo','$corre')";
         $resultado = $conexion->query($consulta);
         if ($resultado) {
             msgI("Los datos fueron almacenados con exito");
