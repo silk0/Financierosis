@@ -21,7 +21,7 @@ function enviar(){
         var idd=document.getElementById("depa").value;
        
         if(idt=="Seleccione" || idd=="Seleccione"){
-           // notify(' Advertencia:','Seleccione el tipo de activo y el departamento al que pertenece para generar correlativo','top', 'right', 'any', 'warning');
+            notify(' Advertencia:','Seleccione el tipo de activo y el departamento al que pertenece para generar correlativo','top', 'right', 'any', 'warning');
         }else{
             $.ajax({
         data:{"id":5,"idd":idd,"idt":idt,},
@@ -94,7 +94,7 @@ function enviar(){
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="inputState" class="col-form-label">Tipo de Activo</label>
-                                            <select class="form-control" name="tipoA" id="tipoA">
+                                            <select class="form-control" name="tipoA" id="tipoA" onchange="enviar();">
                                             <option selected>Seleccione</option>
                                                 <?php
                                                  include 'config/conexion.php';
@@ -109,7 +109,7 @@ function enviar(){
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="inputState" class="col-form-label">Departamento</label>
-                                            <select class="form-control" name="depa" id="depa">
+                                            <select class="form-control" name="depa" id="depa" onchange="enviar();">
                                             <option selected>Seleccione</option>
                                                 <?php
                                                     include 'config/conexion.php';
@@ -166,13 +166,13 @@ function enviar(){
                                         ?>
                                             </select>
                                         </div>
-                                    </div>
-                                    <div class="form-row">
                                         <div class="form-group col-md-3">
                                             <label for="inputEmail4" class="col-form-label">Valor del Activo</label>
                                             <input type="text" class="form-control" name="valor" id="valor"
                                                 required  placeholder="0.00">
                                         </div>
+                                    </div>
+                                    <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="inputPassword4" class="col-form-label">Marca</label>
                                             <input type="text" class="form-control" name="marca" id="marca" required
@@ -180,8 +180,8 @@ function enviar(){
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="inputPassword4" class="col-form-label">Correlativo</label>
-                                            <input type="text" class="form-control" name="corre" id="corre" required
-                                            placeholder="9999">
+                                            <input type="number" class="form-control" name="correlativo" id="correlativo" required
+                                            placeholder="9999" readonly>
                                         </div>
                                     </div>
                                     <div class="form-row">
