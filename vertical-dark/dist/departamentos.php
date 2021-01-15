@@ -14,6 +14,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once 'Cabecera.php';?>
+<script>
+    function go() {
+        //Validaciones
+        if (document.getElementById('nombre').value == "") {
+            notify(' Advertencia:', 'El campo Nombre es obligatorio.', 'top', 'right', 'any', 'warning');
+            document.getElementById("nombre").focus();
+        } else if (document.getElementById('insti').value == "") {
+            notify(' Advertencia:', 'El campo Instituciòn es obligatorio,', 'top', 'right', 'any', 'warning');
+            document.getElementById("apellido").focus();
+        } else if (document.getElementById('corre').value == "") {
+            notify(' Advertencia:', 'El campo Correlativo es obligatorio', 'top', 'right', 'any', 'warning');
+            document.getElementById("corre").focus();
+        } else {
+            document.form.submit();
+        }
+    }
+
+    function edi(){
+    //validacion respectiva me da hueva
+    //enviarDatos(2);
+    $("#editarForm").submit();;      
+} 
+
+    function edit(nom, insti, corre) {
+        // document.getElementById("baccion2").value=id;
+        document.getElementById("nombrev").value = nom;
+        document.getElementById("instiv").value = insti;
+        document.getElementById("correv").value = corre;
+    }
+
+    function modify(id,nom, insti, corre) {
+        document.getElementById("id_departamento").value = id;
+        document.getElementById("nombrem").value = nom;
+        document.getElementById("instim").value = insti;
+        document.getElementById("correm").value = corre;
+    }
+</script>
 
 <body>
 
@@ -94,20 +131,29 @@
                                                 echo "<td>" . $fila->correlativo . "</td>";
                                                 echo "<td> 
                                                 <span data-toggle='modal'                                                    
-                                                data-target='#mostrarFiador'>                                                
+                                                data-target='#ver'>                                                
                                                     <button 
                                                     type='button' title='Informacion' data-toggle='tooltip' 
                                                     data-placement='bottom'                          
                                                     class='btn btn-primary waves-effect waves-light' onclick=\"
-                                                    edit()\";><i class='mdi mdi-eye'></i> 
+                                                    edit(
+                                                        '$fila->nombre',
+                                                        '$fila->id_institucion',
+                                                        '$fila->correlativo',
+                                                    )\";><i class='mdi mdi-eye'></i> 
                                                     </button></span>
                                                     <span data-toggle='modal'                                                    
-                                                    data-target='#editarFiador'>
+                                                    data-target='#editar'>
                                                     <button 
                                                     type='button' title='Modificar' data-toggle='tooltip' 
                                                     data-placement='bottom'
                                                     class='btn btn-warning waves-effect waves-light' onclick=\"
-                                                    modify()\";>                                                    
+                                                    modify(
+                                                        '$fila->id_departamento',
+                                                        '$fila->nombre',
+                                                        '$fila->id_institucion',
+                                                        '$fila->correlativo'
+                                                    )\";>                                                    
                                                         <i class='mdi mdi-pencil-outline'></i></i>
                                                     </button></span>
                                                 </div>
@@ -143,8 +189,8 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="card-box">
-                                                            <form name="editarForm" id="editarForm" method="post"
-                                                                action=".php?bandera=1" required
+                                                            <form name="form" id="form" method="post"
+                                                                action="departamentos.php?bandera=1" required
                                                                 class="parsley-examples">
 
                                                                 <div class="form-row">
@@ -198,7 +244,150 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn  btn-primary waves-effect" id="cambios"
-                                                    name="cambios" onclick="go();">Regisrar</button>
+                                                    name="cambios" onclick="go();">Registrar</button>
+                                                <button type="button" class="btn  btn-primary waves-effect"
+                                                    data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+
+                                <!--  Modal VER-->
+                                <div id="ver" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                                    aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Informaciòn del Departamento</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="card-box">
+                                                            <form name="form" id="form" method="post" action="" required
+                                                                class="parsley-examples">
+
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Departamento</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="nombrev" id="nombrev" required
+                                                                            placeholder="Nombre del Departamento"
+                                                                            readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Instituciòn</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="instiv" id="instiv" required readonly>
+                                                                    </div>
+                                                                    <?php 
+                                                                        include 'config/conexion.php';                                                                        
+                                                                        $result = $conexion->query("SHOW TABLE STATUS LIKE 'tdepartamento'");
+                                                                        if ($result) {
+                                                                            while ($fila = $result->fetch_object()) {                                               
+                                                                                $codigoR=str_pad($fila->Auto_increment, 4, "0", STR_PAD_LEFT);
+                                                                                echo'
+                                                                                <div class="form-group col-md-4">
+                                                                                    <label for="inputEmail4"
+                                                                                        class="col-form-label">Correlativo</label>
+                                                                                    <input type="text" class="form-control"
+                                                                                        name="correv" id="correv" value ="'.$codigoR.'" required placeholder="0000" readonly>
+                                                                                </div>
+                                                                                ';
+                                                                            }
+                                                                        } 
+                                                                    ?>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn  btn-primary waves-effect"
+                                                    data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+
+                                <!--  Modal EDITAR-->
+                                <div id="editar" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                                    aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Modificar Datos del Departamento</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="card-box">
+                                                            <form name="editarForm" id="editarForm" method="post" action="scriptsphp/modificarDpto.php?bandera=1" required
+                                                                class="parsley-examples">
+                                                                <div class="form-row">
+                                                                <input type="hidden" id="id_departamento" name="id_departamento">
+                                                            </div>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Departamento</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="nombrem" id="nombrem" required
+                                                                            placeholder="Nombre del Departamento">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Instituciòn</label>
+                                                                        <select class="form-control" name="instim"
+                                                                            id="instim">
+                                                                            <?php
+                                                                                  include 'config/conexion.php';
+                                                                                    $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                                                                     if ($result) {
+                                                                                        while ($fila = $result->fetch_object()) {                                                                                
+                                                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
+                                                                                         }
+                                                                                    }
+                                                                                ?>
+                                                                        </select>
+                                                                    </div>
+                                                                    <?php 
+                                                                        include 'config/conexion.php';                                                                        
+                                                                        $result = $conexion->query("SHOW TABLE STATUS LIKE 'tdepartamento'");
+                                                                        if ($result) {
+                                                                            while ($fila = $result->fetch_object()) {                                               
+                                                                                $codigoR=str_pad($fila->Auto_increment, 4, "0", STR_PAD_LEFT);
+                                                                                echo'
+                                                                                <div class="form-group col-md-4">
+                                                                                    <label for="inputEmail4"
+                                                                                        class="col-form-label">Correlativo</label>
+                                                                                    <input type="text" class="form-control"
+                                                                                        name="correm" id="correm" value ="'.$codigoR.'" required placeholder="0000" readonly>
+                                                                                </div>
+                                                                                ';
+                                                                            }
+                                                                        } 
+                                                                    ?>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn  btn-primary waves-effect" id="cambios"
+                                                    name="cambios" onclick="edi();">Guardar Cambios</button>
                                                 <button type="button" class="btn  btn-primary waves-effect"
                                                     data-dismiss="modal">Cerrar</button>
                                             </div>
@@ -242,3 +431,38 @@
 </body>
 
 </html>
+
+<?php
+    include "config/conexion.php";
+        $accion = $_REQUEST['bandera'];
+        if($accion==1){
+        $nombre   = $_POST['nombre'];
+        $insti   = $_POST['insti'];
+        $corre   = $_POST['corre'];
+        $consulta  = "INSERT INTO tdepartamento VALUES('null','" .$insti. "','" .$nombre. "','" .$corre. "')";
+        $resultado = $conexion->query($consulta);
+        if ($resultado) {
+            msgI("Los datos fueron almacenados con exito");
+        } else {
+            msgE("Los datos no pudieron almacenarce");
+        }     
+    }
+function msgI($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
+    echo "</script>";
+}
+?>
