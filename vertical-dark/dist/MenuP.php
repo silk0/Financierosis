@@ -119,11 +119,7 @@
                     <a href="ingresoActivo.php">Registro Activo</a>
                 </li>
                 <li>
-<<<<<<< HEAD
                     <a href="Contenido.php">Depreciacion</a>
-=======
-                    <a href="#">Depreciacion</a>
->>>>>>> 089c4faa3837e0fdcd084654fa3d7daecf3e17cf
                 </li>  
                 <li>
                     <a href="ingresoInstituciones.php">Instituciones</a>
