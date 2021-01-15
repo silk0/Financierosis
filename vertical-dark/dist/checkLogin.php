@@ -12,7 +12,7 @@
     FROM
     templeados where templeados.usuario='$loginNombre' AND templeados.pass='$loginPassword'");
     if ($result) {
-        Header("Location:../../../index.php?error=login2");
+        Header("Location:../../index.php?error=login2");
         while ($fila = $result->fetch_object()) {
             $passR = $fila->pass;
             $Nombre=$fila->nombre;
@@ -44,7 +44,7 @@
                 }
         }else{
         
-            Header("Location:../../../index.php?error=login");
+            Header("Location:../../index.php?error=login");
         }
         function msg($texto){
             echo "<script type='text/javascript'>";

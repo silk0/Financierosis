@@ -47,7 +47,7 @@ if ($op==1) {
         echo "No se pudo eliminar el producto del carrito.";
     }
 }else{
-     $consulta  = "TRUNCATE TABLE tcarrito";
+    $consulta  = "TRUNCATE TABLE tcarrito";
     $resultado = $conexion->query($consulta);
     if($resultado){
         $resultCant = $conexion->query("SELECT * from tcarrito");

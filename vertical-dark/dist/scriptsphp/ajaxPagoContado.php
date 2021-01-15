@@ -5,10 +5,10 @@
     
     //  Obtener la cartera a la que pertenece el cliente.
     if($bandera==0){
-        $id_cl = $_POST['id_cliente'];
+        $id_cl = $_POST['cliente'];
         $cod = $_POST['venta'];
         $emp = $_POST['id_empleado'];
-        
+        $totalV = $_POST['total'];
         $result = $conexion->query("insert into
             tventas(
             id_cliente,
@@ -40,6 +40,11 @@
                from tcarrito t;
                ");
             if ($result) {
+                $result = $conexion->query("TRUNCATE TABLE tcarrito;");
+                if ($result) {
+
+                }
+                
                 header('Location:../venderContado.php?bandera=1');
             }
         }       
