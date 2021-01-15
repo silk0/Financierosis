@@ -89,10 +89,17 @@
                                                     <option selected >Seleccione</option>
                                                     <?php
                                                     include 'config/conexion.php';
-                                                    $result = $conexion->query("select id_cliente as id, CONCAT(nombre, ' ', apellido) as nombre, apellido  FROM tclientes");
+                                                    $duiC=null;
+                                                    $nitC=null;
+                                                    $direccionC=null;
+                                                    $nombreC=null;
+                                                    $result = $conexion->query("select id_cliente as id, CONCAT(nombre, ' ', apellido) as nombre, dui, nit, direccion  FROM tclientes");
                                                     if ($result) {
                                                         while ($fila = $result->fetch_object()) {
-                                                            
+                                                            $duiC = $fila->dui;
+                                                            $nitC = $fila->nit;
+                                                            $nombreC=$fila->nombre;
+                                                            $direccionC = $fila -> direccion;
                                                             echo '<option value="' . $fila->id . '">' . $fila->nombre .'</opcion>';
                                                             
                                                         }
@@ -276,7 +283,7 @@
                                                                     <div class="text-md-right">
                                                                         <div class="line-h-24 " align="left" style=" padding: 5px 5px 5px 5px;
                                                                                                                         border: solid;">
-                                                                            <label>Factura No.</label>
+                                                                            <label>Factura No. <?php echo $codigoR;?></label>
                                                                             <br>
                                                                             <label>NRC:</label><br>
                                                                             <LABEL>NIT:</LABEL><br>
@@ -285,17 +292,17 @@
                                                                 </div> <!-- end col -->
                                                             </div> 
                                                             <div class="row mt-3">
-                                                                <div class="col-md-6">    
-                                                                    <h6>Cliente: </h6>                                   
-                                                                    <h6>Direccion: </h6>
-                                                                    <h6>Dui:      Nit:</h6>
+                                                                <div class="col-md-8">    
+                                                                    <h6>Cliente: <small><?php echo $nombreC;?></small></h6>                                   
+                                                                    <h5>Direccion: <?php echo $direccionC;?></h5>
+                                                                    <h5>Dui: <?php echo $duiC;?>   Nit: <?php echo $nitC;?></h5>
                                                                 </div> <!-- end col -->
                                 
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-4">
                                                                     <div class="text-md-right" >
-                                                                        <h6>Fecha: </h6>
-                                                                        <h6>Condicion venta: </h6>
-                                                                        <h6>vendedor: </h6>                                            
+                                                                        <h5>Fecha: </h5>
+                                                                        <h5>Condicion venta: </h5>
+                                                                        <h5>vendedor: </h5>                                            
                                                                     </div>
                                                                 </div> <!-- end col -->
                                                             </div>    
@@ -309,7 +316,7 @@
                                                                                 <th><small>Descripcion</small></th>
                                                                                 <th style="width: 10%"><small>Precio unitario</small></th>
                                                                                 <th style="width: 10%"><small>Ventas sujetas</small></th>
-                                                                                <th style="width: 10%"><small>Ventas no sujetas</small></th>     
+                                                                                <th style="width: 10%"><small>Vts no sujetas</small></th>     
                                                                                 <th style="width: 10%"><small>Ventas gravadas</small></th>
                                                                             </tr>
                                                                         </thead>
