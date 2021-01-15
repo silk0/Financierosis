@@ -5,7 +5,7 @@ $baccion  = $_REQUEST["baccion2"];
 if($accion==1){
 $id = $_POST["id_institucion"];
 $nombre   = $_POST['nombre'];
-$correlativo   = $_POST['correlativo'];
+//$correlativo   = $_POST['correlativo'];
 
 $consulta  = "UPDATE tinstitucion set nombre='" . $nombre . "' ,correlativo='" . $correlativo. "',
 where id_institucion='" . $id ."'";
