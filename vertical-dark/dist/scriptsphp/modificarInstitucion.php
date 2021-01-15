@@ -4,10 +4,10 @@ $accion = $_REQUEST['bandera'];
 $baccion  = $_REQUEST["baccion2"];
 if($accion==1){
 $id = $_POST["id_institucion"];
-$nombre   = $_POST['nombre'];
-$correlativo   = $_POST['correlativo'];
+$nombre   = $_POST['nombree'];
+//$correlativo   = $_POST['correlativo'];
 
-$consulta  = "UPDATE tinstitucion set nombre='" . $nombre . "' ,correlativo='" . $correlativo. "',
+$consulta  = "UPDATE tinstitucion set nombree='" . $nombre . "' ,
 where id_institucion='" . $id ."'";
 $resultado = $conexion->query($consulta);
   if ($resultado) {   

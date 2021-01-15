@@ -6,7 +6,12 @@
         //validacion respectiva me da hueva
         $("#editarForm").submit();;         
     }
-    
+
+    function kardex(){   
+         var id = document.getElementById("id_producto").value;
+        document.location.href="verKardex.php?id="+id;
+    }
+
     function añadircarrito(){
         var cantidadDeseada=document.getElementById("carritoA").value;
         var id = document.getElementById("id_producto").value;
@@ -34,6 +39,7 @@
 
     function ver(id_prod,id_prov,id_cat,nomb,desc,pc,mg,pv,st,cod,esta)
     {
+        document.getElementById("id_producto").value=id_prod;
         document.getElementById("codigo").value=cod;
         document.getElementById("nombre").value=nomb;
         document.getElementById("stock").value=Number(st);
@@ -168,17 +174,17 @@
                                                         data-placement='bottom'                                                                     
                                                         class='btn btn-primary waves-effect waves-light' onclick=\"
                                                         ver(
-                                                        '$fila->p.id',
-                                                        '$fila->id_proveedor',
-                                                        '$fila->id_categoria',
-                                                        '$fila->nombre',
-                                                        '$fila->descripcion',
-                                                        '$fila->precio_compra',
-                                                        '$fila->margen',
-                                                        '$fila->precio_venta',
-                                                        '$fila->stock_minimo',
-                                                        '$fila->codigo',
-                                                        '$fila->estado'
+                                                            '$fila->id_producto',
+                                                            '$fila->id_proveedor',
+                                                            '$fila->id_categoria',
+                                                            '$fila->nombre',
+                                                            '$fila->descripcion',
+                                                            '$fila->precio_compra',
+                                                            '$fila->margen',
+                                                            '$fila->precio_venta',
+                                                            '$fila->stock_minimo',
+                                                            '$fila->codigo',
+                                                            '$fila->estado'
                                                         )\";>
                                                             <i class='mdi mdi-eye'></i> 
                                                     </button>  
@@ -348,8 +354,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
+                                        <div class="modal-footer">                                        
+                                            <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal" onclick="kardex();"><span>Kardex</span><i class="icon-doc ml-1"></i></button>                                        
+                                            <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal"><span>Guardar Cambios</span><i class="mdi mdi-content-save ml-1"></i></button> 
+                                            <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Cerrar</button>
                                         </div>
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
