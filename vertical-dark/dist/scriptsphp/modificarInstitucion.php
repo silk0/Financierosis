@@ -7,7 +7,7 @@ $id = $_POST["id_institucion"];
 $nombre   = $_POST['nombree'];
 //$correlativo   = $_POST['correlativo'];
 
-$consulta  = "UPDATE tinstitucion set nombree='" . $nombre . "' ,
+$consulta  = "UPDATE tinstitucion set nombre='" . $nombre . "'
 where id_institucion='" . $id ."'";
 $resultado = $conexion->query($consulta);
   if ($resultado) {   
