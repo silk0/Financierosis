@@ -27,10 +27,10 @@
         document.getElementById("correlativo").value = corre;
     }
 
-    function modify(id, nomb) {
+    function modify(id, nomb,correl) {
         document.getElementById("id_institucion").value = id;
         document.getElementById("nombree").value = nomb;
-       // document.getElementById("correlativo").value = correl;
+        document.getElementById("correlativoo").value = correl;
 
     }
 </script>
@@ -137,6 +137,7 @@
                                                     modify(
                                                         '$fila->id_institucion',
                                                         '$fila->nombre',
+                                                        '$fila->correlativo',
                                                     
                                                         
                                                     )\";>                                                    
@@ -255,7 +256,7 @@
                                                                             data-mask="000"
                                                                             placeholder="000" readonly>
                                                                     </div>
-                                                                </div>
+                                                                
                                                                 </div>
                                                         </div>
                                                         </form>
@@ -302,8 +303,17 @@
                                                                     <input type="text" class="form-control"
                                                                         name="nombree" id="nombree" required
                                                                         placeholder="Jose Alfredo">
+
+                                                                       
                                                                 </div>
-                                                                
+                                                                <div class="form-group col-md-6">
+                                                                        <label for="inputPassword4"
+                                                                            class="col-form-label">Correlativo</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="correlativoo" id="correlativoo" required
+                                                                            data-mask="000"
+                                                                            placeholder="000" readonly>
+                                                                    </div>
                                                           
                                                             </div>
                                                         </form>
