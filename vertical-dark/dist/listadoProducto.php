@@ -53,6 +53,7 @@
 
     function compra(id_prod,cod,id_prov,nomb)
     {
+        document.getElementById("id_producto").value=id_prod;
         document.getElementById("tituloC").innerHTML="Compra de articulos";
         document.getElementById("codigoC").value=cod;
         document.getElementById("nombreC").value=nomb;
@@ -74,6 +75,7 @@
 
     function devolucion(id_prod,cod,id_prov,nomb)
     {   
+        document.getElementById("id_producto").value=id_prod;
         document.getElementById("tituloC").innerHTML="Devolucion de articulos";
         document.getElementById("id").value=id_prod;
         document.getElementById("codigoC").value=cod;

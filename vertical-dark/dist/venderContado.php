@@ -15,7 +15,7 @@
 <html lang="en">
 <?php include_once 'Cabecera.php';?>
 
-<body >
+<body>
 
     <!-- Begin page -->
     <div id="wrapper">
@@ -77,8 +77,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mt-3">
-                                        <label for="inputState" class="col-form-label">Clientes</label>
-                                            <select  class="form-control" name="cartera" id="cartera" style="overflow-y: scroll;" required >
+                                            <label for="inputState" class="col-form-label">Clientes</label>
+                                            <select class="form-control" data-toggle="select2" name="cliente" id="cliente" required >
                                                 <option selected >Seleccione</option>
                                                 <?php
                                                 include 'config/conexion.php';
@@ -92,7 +92,7 @@
                                                 }
                                                 ?> 
                                             </select>
-                                        </div>
+                                        </div>                                       
     
                                     </div><!-- end col -->
                                     <div class="col-md-6">
@@ -111,9 +111,7 @@
                                                         $codigoR=str_pad($fila->Auto_increment, 6, "0", STR_PAD_LEFT);
                                                         echo'<p><strong>Venta No. : </strong> <span class="float-right">'. $codigoR .'</span></p>';
                                                     }
-                                                } 
-                                                echo'<p><strong>NRC : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp; 0</span></p>
-                                                     <p><strong>NIT : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp; 0</span></p>';                                             
+                                                }                                                                                             
 
                                             ?>
                                             

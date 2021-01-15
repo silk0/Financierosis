@@ -55,6 +55,12 @@
 <!-- Datatables init -->
 <script src="assets/js/pages/datatables.init.js"></script>
 
+<!-- select2 js -->
+<script src="assets/libs/select2/select2.min.js"></script>
+<script src="assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+<script src="assets/libs/switchery/switchery.min.js"></script>
+<script src="assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+
 <script type="text/javascript">
     Parsley.addMessages('es', {
         defaultMessage: "Este valor parece ser inválido.",

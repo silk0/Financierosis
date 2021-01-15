@@ -3,13 +3,35 @@
     error_reporting(E_ALL & ~E_NOTICE);
     session_start();
     if($_SESSION["logueado"] == TRUE) {
-        $usuario=$_SESSION["usuario"];
-        $nombre = $_SESSION["nombre"];
-        $tipo  = $_REQUEST["tipo"];
-        $id  = $_REQUEST["id"];
-    }else {
-        header("Location:../../index.php");
+    $usuario=$_SESSION["usuario"];
+    $nombre = $_SESSION["nombre"];
+    $tipo  = $_REQUEST["tipo"];
+    $id  = $_REQUEST["id"];
+}else {
+    header("Location:index.php");
+  }
+?>
+<?php
+    $id = $_REQUEST["id"];
+    include "config/conexion.php";
+    $result = $conexion->query("select p.id_producto as idp, 
+     p.nombre as namep,prov.id_proveedor as idprov,prov.nombre as nameprov,
+     p.stock as stock, stock_minimo as stockm,p.codigo as cod, concat('$ ',precio_compra*stock) as total
+     from tproducto as p,tproveedor as prov  
+     where p.id_proveedor=prov.id_proveedor and id_producto=" . $id);
+    if ($result) {
+        while ($fila = $result->fetch_object()) {
+            $idR            = $fila->idp;
+            $nombreprod     = $fila->namep;
+            $idprov         = $fila->idprov;
+            $nombreprov      = $fila->nameprov;   
+            $stock      = $fila->stock;   
+            $codigo      = $fila->cod;  
+            $stockm      = $fila->stockm;   
+            $total      = $fila->total;       
+        }
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,35 +77,35 @@
                     <div class="row">        
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <h4 class="header-title">Contextual classes</h4>
+                                    <h4 class="header-title">Kardex</h4>
                                     <p class="sub-header">
-                                        Use contextual classes to color table rows or individual cells.
+                                        Se lleva el control de los articulos en el inventario sus entradas y salidas de producto.
                                     </p>
                                     <div class="row ">
                                         <div class="col-md-3">
                                             <div class="text-md-right">
                                                 <div class="line-h-24" align="left">
-                                                    <label>Articulo:</label>
+                                                    <label>Articulo: <?php  echo $nombreprod;?></label>
                                                     <br>
-                                                    <label>Proveedor:</label><br>
+                                                    <label>Proveedor: <?php  echo $nombreprov;?></label><br>
                                                 </div>
                                             </div>
                                         </div> <!-- end col -->
                                         <div class="col-md-3">
                                             <div class="text-md-right">
                                                 <div class="line-h-24" align="left">
-                                                    <label>Stock Minimo:</label>
+                                                    <label>Stock Minimo: <?php  echo $stockm;?></label>
                                                     <br>
-                                                    <label>Cantidad en stock:</label><br>
+                                                    <label>Cantidad en stock: <?php  echo $stock;?></label><br>
                                                 </div>
                                             </div>
                                         </div> <!-- end col -->
                                         <div class="col-md-3">
                                             <div class="text-md-right">
                                                 <div class="line-h-24" align="left">
-                                                    <label>Codigo articulo:</label>
+                                                    <label>Codigo articulo: <?php  echo $codigo;?></label>
                                                     <br>
-                                                    <label>Valor total:</label><br>
+                                                    <label>Valor total: <?php  echo $total;?></label><br>
                                                 </div>
                                             </div>
                                         </div> <!-- end col -->
@@ -98,7 +120,7 @@
                                                 <tr class="table-info text-info">                                                
                                                     <th style="width: 10%;">Fecha</th>
                                                     <th style="width: 30%;">Descripción</th>
-                                                    <th colspan="3" style="width: 10%;">Entradas</th>
+                                                    <th colspan="3" style="width: 12%;">Entradas</th>
                                                     <th colspan="3" style="width: 10%;">Salidas</th>
                                                     <th colspan="3" style="width: 10%;">Saldo</th>                                                
                                                 </tr>
@@ -107,14 +129,14 @@
                                                 <tr class="table-info text-info">
                                                     <td></td>
                                                     <td></td>
-                                                    <td >Cantidad</td>
-                                                    <td >Valor Unitario</td>
-                                                    <td >Valor Total</td>
-                                                    <td >Cantidad</td>
-                                                    <td >V.Unitario</td>
-                                                    <td >V.Total</td>
-                                                    <td >Cantidad</td>
-                                                    <td >Unitario</td>
+                                                    <td >Cant.</td>
+                                                    <td >P.Unitario</td>
+                                                    <td >Total</td>
+                                                    <td >Cant.</td>
+                                                    <td >P.Unitario</td>
+                                                    <td >Total</td>
+                                                    <td >Cant.</td>
+                                                    <td >P.Unitario</td>
                                                     <td >Total</td>                       
                                                 </tr>
                                                 <?php
