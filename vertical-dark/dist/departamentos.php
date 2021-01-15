@@ -28,13 +28,9 @@
         <div class="left-side-menu">
 
             <div class="slimscroll-menu">
-
                 <!--- Sidemenu -->
                 <?php include_once 'MenuP.php';?>
                 <!-- End Sidebar -->
-
-
-
             </div>
             <!-- Sidebar -left -->
 
@@ -61,6 +57,7 @@
                     </div>
                     <!-- end page title -->
 
+                    <!-- STAR row -->
                     <div class="row">
                         <div class="col-12">
                             <div class="card-box">
@@ -85,7 +82,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php
+                                            <?php
                                         
                                         include "config/conexion.php";
                                             $result = $conexion->query("SELECT * from tdepartamento ORDER BY nombre");
@@ -131,13 +128,13 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="">
-                                <!--  Modal editar fiador-->
+                                <!--  Modal NUEVO-->
                                 <div id="nuevo" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
                                     aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog modal-lg">
+                                    <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title" id="myLargeModalLabel">Datos del Departamento
+                                                <h4 class="modal-title">Datos del Departamento
                                                 </h4>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-hidden="true">×</button>
@@ -147,47 +144,52 @@
                                                     <div class="col-md-12">
                                                         <div class="card-box">
                                                             <form name="editarForm" id="editarForm" method="post"
-                                                                action="scriptsphp/modificarFiador.php?bandera=1"
-                                                                required class="parsley-examples">
-
-                                                                <div class="form-row">
-                                                                    <input type="hidden" id="idfiador" name="idfiador">
-                                                                    <input type="hidden" id="id_fiador"
-                                                                        name="id_fiador">
-                                                                </div>
+                                                                action=".php?bandera=1" required
+                                                                class="parsley-examples">
 
                                                                 <div class="form-row">
                                                                     <div class="form-group col-md-6">
-                                                                        <label for="inputEmail4"
+                                                                        <label for="inputState"
                                                                             class="col-form-label">Departamento</label>
                                                                         <input type="text" class="form-control"
                                                                             name="nombre" id="nombre" required
                                                                             placeholder="Nombre del Departamento">
                                                                     </div>
-                                                                    <div class="form-group col-md-4">
-                                                                    <label for="inputState" class="col-form-label">Instituciòn</label>
-                                                                    <select class="form-control" name="carteram" id="carteram" >                                                                        
-                                                                        <?php
-                                                                        include 'config/conexion.php';
-                                                                        $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
-                                                                        if ($result) {
-                                                                            while ($fila = $result->fetch_object()) {                                                                                
-                                                                                echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
-                                                                            }
-                                                                        }
-                                                                        ?> 
-                                                                    </select>
-                                                                </div>
                                                                 </div>
                                                                 <div class="form-row">
                                                                     <div class="form-group col-md-6">
-                                                                        <label for="inputPassword4"
-                                                                            class="col-form-label">Correlativo</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="celular" id="celular" required
-                                                                            data-mask="9999"
-                                                                            placeholder="9999">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Instituciòn</label>
+                                                                        <select class="form-control" name="insti"
+                                                                            id="insti">
+                                                                            <?php
+                                                                                  include 'config/conexion.php';
+                                                                                    $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                                                                     if ($result) {
+                                                                                        while ($fila = $result->fetch_object()) {                                                                                
+                                                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
+                                                                                         }
+                                                                                    }
+                                                                                ?>
+                                                                        </select>
                                                                     </div>
+                                                                    <?php 
+                                                                        include 'config/conexion.php';                                                                        
+                                                                        $result = $conexion->query("SHOW TABLE STATUS LIKE 'tdepartamento'");
+                                                                        if ($result) {
+                                                                            while ($fila = $result->fetch_object()) {                                               
+                                                                                $codigoR=str_pad($fila->Auto_increment, 4, "0", STR_PAD_LEFT);
+                                                                                echo'
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label for="inputEmail4"
+                                                                                        class="col-form-label">Correlativo</label>
+                                                                                    <input type="text" class="form-control"
+                                                                                        name="corre" id="corre" value ="'.$codigoR.'" required placeholder="0000" readonly>
+                                                                                </div>
+                                                                                ';
+                                                                            }
+                                                                        } 
+                                                                    ?>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -205,31 +207,26 @@
                                 </div><!-- /.modal -->
                             </div>
                         </div>
-                    </div>
+                    </div><!-- FIN Bootstrap Modals -->
+
                 </div> <!-- container -->
             </div> <!-- content -->
-
         </div> <!-- container -->
 
-    </div> <!-- content -->
-
-    <!-- Footer Start -->
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <?php echo date('Y'); ?> - Financiero UES-FMP
+        <!-- Footer Start -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <?php echo date('Y'); ?> - Financiero UES-FMP
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
-    <!-- end Footer -->
-
-    </div>
-
-    <!-- ============================================================== -->
-    <!-- End Page content -->
-    <!-- ============================================================== -->
+        </footer>
+        <!-- end Footer -->
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
 
 
     </div>

@@ -14,13 +14,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once 'Cabecera.php';?>
-<script>
-    function filtrar() {
-        id = document.getElementById("op").value;
-        $("#ide").val(id);
-        $("#fCartera").submit();
-    }
-</script>
 
 <SCRIPT language=JavaScript>
     function go() {
@@ -34,11 +27,11 @@
         //document.getElementById("correlativo").value = corre;
     }
 
-    function modify(id, nomb,correl) {
+    function modify(id, nomb, correl) {
         document.getElementById("id_institucion").value = id;
         document.getElementById("nombre").value = nomb;
         document.getElementById("correlativo").value = correl;
-       
+
     }
 </script>
 
@@ -105,13 +98,13 @@
                                         class="table table-striped table-bordered dt-responsive nowrap">
                                         <thead>
                                             <tr>
-                                                 <th>Nombre</th>
-                                                 <th>Correlativo</th>
+                                                <th>Nombre</th>
+                                                <th>Correlativo</th>
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php
+                                            <?php
                                         
                                         include "config/conexion.php";
                                             $result = $conexion->query("SELECT * from tinstitucion ORDER BY nombre");
@@ -162,58 +155,7 @@
                         </div>
                     </div>
                     <!-- end row -->
-                          <!-- Bootstrap Modals -->
-                         <div class="row">
-                        <div class="col-12">
-                            <div class="">
-                                <!--  Modal mostrar Proveedor-->
-                                <div id="mostrarInstitucion" class="modal fade bs-example-modal-lg" tabindex="-1"
-                                    role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
-                                    style="display: none;">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="myLargeModalLabel">Datos Institucion</h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-hidden="true">×</button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="card-box">
-                                                            <form name="form" required class="parsley-examples">
-                                                                <div class="form-row">
-                                                                    
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputEmail4"
-                                                                            class="col-form-label">Nombre</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="nombre" id="nombre" required
-                                                                            placeholder="Jose Alfredo">
-                                                                    </div>
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputPassword4"
-                                                                            class="col-form-label">Correlativo</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="correlativo" id="correlativo" required
-                                                                            data-mask="9999-9999"
-                                                                            placeholder="9999-9999" readonly>
-                                                                    </div>
-                                                                </div>
-                                                            
-                                                        </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn  btn-primary waves-effect"
-                                                data-dismiss="modal">Cerrar</button>
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
-                    
+
                     <!-- Bootstrap Modals -->
                     <div class="row">
                         <div class="col-12">
@@ -221,22 +163,19 @@
                                 <!--  Modal AGREGAR INSTITUCION-->
                                 <div id="nuevo" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
                                     aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-
-                                    <div class="modal-dialog modal-lg">
+                                    <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
-
                                             <div class="modal-header">
-                                                <h4 class="modal-title" id="myLargeModalLabel">Datos Institucion
-                                                </h4>
+                                                <h4 class="modal-title">Datos Institucion</h4>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-hidden="true">×</button>
                                             </div>
-
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="card-box">
-                                                            <form action="ingresoInstituciones.php" method="POST" class="parsley-examples">
+                                                            <form action="ingresoInstituciones.php" method="POST"
+                                                                class="parsley-examples">
 
                                                                 <div class="form-row">
                                                                     <?php 
@@ -250,8 +189,7 @@
                                                                                     <label for="inputEmail4"
                                                                                         class="col-form-label">Correlativo</label>
                                                                                     <input type="text" class="form-control"
-                                                                                        name="nombre" id="nombre" value ="'.$codigoR.'" required
-                                                                                        placeholder="0000" readonly>
+                                                                                        name="corre" id="corre" value ="'.$codigoR.'" required placeholder="0000" readonly>
                                                                                 </div>
                                                                                 ';
                                                                             }
@@ -264,135 +202,55 @@
                                                                             name="nombreinsti" id="nombreinsti" required
                                                                             placeholder="Nombre de la Institucion">
                                                                     </div>
-                                                                    
+
                                                                 </div>
-                                                                
-                                                           
-                                                        </div>
-                                                   
-                                                
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <div align="right">
-
-                                                    <button type="submit" name="agregar" class="btn  btn-primary waves-effect">Regisrar</button>
-                                                <button type="button" class="btn  btn-primary waves-effect"
-                                                    data-dismiss="modal">Cerrar</button>                                                   
-
-                                                </div>
-                                                
-                                            </div>
-
-                                             </form>
-
-
-
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->
-                       
-                            
-
-                    
-
-
-                                <!--  Modal editar fiador-->
-                                <div id="editarInstitucion" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-                                    aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="myLargeModalLabel">Datos Institucion
-                                                </h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-hidden="true">×</button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="card-box">
-                                                            <form name="editarForm" id="editarForm" method="post"
-                                                                action="scriptsphp/modificarInstitucion.php?bandera=1"
-                                                                required class="parsley-examples">
-
-                                                                <div class="form-row">
-                                                                <input type="hidden" id="idinstitucion" name="idinstitucion">
-                                                                    <input type="hidden" id="id_institucion"
-                                                                        name="id_institucion">
-                                                                </div>
-
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputEmail4"
-                                                                            class="col-form-label">Nombre</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="nombre" id="nombre" required
-                                                                            placeholder="Nombre de la Institucion">
-                                                                    </div>
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputPassword4"
-                                                                            class="col-form-label">Correlativo</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="correlativo" id="correlativo" required
-                                                                            data-mask="9999"
-                                                                            placeholder="9999">
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                            </form>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn  btn-primary waves-effect" id="cambios"
-                                                    name="cambios" onclick="go();">Regisrar</button>
-                                                <button type="button" class="btn  btn-primary waves-effect"
-                                                    data-dismiss="modal">Cerrar</button>
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->
+                                                    <div class="modal-footer">
+                                                        <button type="submit" name="agregar"
+                                                            class="btn  btn-primary waves-effect">Regisrar</button>
+                                                        <button type="button" class="btn  btn-primary waves-effect"
+                                                            data-dismiss="modal">Cerrar</button>
+                                                    </div>
 
+                                                    </form><!-- form-->
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+                                    </div>
+                                </div>
+                            </div> <!-- container -->
+                        </div> <!-- FIN BOOSTRA MODAL -->
+
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <!-- Footer Start -->
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <?php echo date('Y'); ?> - Financiero UES-FMP
                             </div>
                         </div>
                     </div>
-                </div> <!-- container -->
-            </div> <!-- content -->
-
-        </div> <!-- container -->
-
-    </div> <!-- content -->
-
-    <!-- Footer Start -->
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <?php echo date('Y'); ?> - Financiero UES-FMP
-                </div>
+                </footer>
+                <!-- end Footer -->
             </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
         </div>
-    </footer>
-    <!-- end Footer -->
-
-    </div>
-
-    <!-- ============================================================== -->
-    <!-- End Page content -->
-    <!-- ============================================================== -->
-
-
-    </div>
-    <!-- END wrapper -->
+        <!-- END wrapper -->
 
 
 
-    <!-- Right bar overlay-->
-    <div class="rightbar-overlay"></div>
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
 
-    <?php include_once 'Pie.php';?>
+        <?php include_once 'Pie.php';?>
 
 </body>
 
@@ -403,10 +261,8 @@
    
         if(isset($_POST['agregar'])){
         $nombre   = $_POST['nombreinsti'];
-        //$correlativo   = $_POST['correlativo'];
-    
-
-        $consulta  = "INSERT INTO tinstitucion (nombre) VALUES('$nombre')";
+        $correlativo   = $_POST['corre'];
+        $consulta  = "INSERT INTO tinstitucion (nombre,correlativo) VALUES('$nombre','$correlativo')";
         $resultado = $conexion->query($consulta);
         if ($resultado) {
             msgI("Los datos fueron almacenados con exito");
