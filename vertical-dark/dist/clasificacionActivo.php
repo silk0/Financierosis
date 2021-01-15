@@ -171,19 +171,34 @@
                                 <div id="nuevo" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
                                     aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Datos Clasificacion</h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-hidden="true">×</button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="card-box">
-                                                            <form action="clasificacionActivo.php" method="POST"
-                                                                class="parsley-examples">
-
+                                        <form action="clasificacionActivo.php" method="POST" class="parsley-examples">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Datos Clasificacion</h4>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">×</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="card-box">
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputEmail4"
+                                                                            class="col-form-label">Nombre</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="nombre" id="nombre" required
+                                                                            placeholder="Nombre de la Clasificacion">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputEmail4"
+                                                                            class="col-form-label">Tiempo de
+                                                                            Depreciacion</label>
+                                                                        <input type="number" class="form-control"
+                                                                            name="tip" id="tip" required
+                                                                            placeholder="Tiempo en años">
+                                                                    </div>
+                                                                </div>
                                                                 <div class="form-row">
                                                                     <?php 
                                                                         include 'config/conexion.php';                                                                        
@@ -202,75 +217,59 @@
                                                                             }
                                                                         } 
                                                                     ?>
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputEmail4"
-                                                                            class="col-form-label">Nombre</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="nombre" id="nombre" required
-                                                                            placeholder="Nombre de la Clasificacion">
-                                                                    </div>
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputEmail4"
-                                                                            class="col-form-label">Tiempo
-                                                                            Depreciacion</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="tip" id="tip" required
-                                                                            placeholder="0">
-                                                                    </div>
-
                                                                 </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="submit" name="agregar"
-                                                            class="btn  btn-primary waves-effect">Regisrar</button>
-                                                        <button type="button" class="btn  btn-primary waves-effect"
-                                                            data-dismiss="modal">Cerrar</button>
-                                                    </div>
-
-                                                    </form><!-- form-->
-                                                </div><!-- /.modal-content -->
-                                            </div><!-- /.modal-dialog -->
-                                        </div><!-- /.modal -->
-                                    </div>
-                                </div>
-                            </div> <!-- container -->
-                        </div> <!-- FIN BOOSTRA MODAL -->
-
-                        <!--  Modal VER-->
-                        <div id="ver" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-                            aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Informaciòn Clasificacion</h4>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-hidden="true">×</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="card-box">
-                                                    <form name="form" id="form" method="post" action="" required
-                                                        class="parsley-examples">
-
-                                                        <div class="form-row">
-                                                            <div class="form-group col-md-6">
-                                                                <label for="inputState"
-                                                                    class="col-form-label">Clasificacion</label>
-                                                                <input type="text" class="form-control" name="nombrev"
-                                                                    id="nombrev" required
-                                                                    placeholder="Nombre de la clasificaion" readonly>
                                                             </div>
                                                         </div>
-                                                        <div class="form-row">
-                                                            <div class="form-group col-md-6">
-                                                                <label for="inputState" class="col-form-label">Tiempo
-                                                                    Depreciacion</label>
-                                                                <input type="text" class="form-control" name="tiempo"
-                                                                    id="tiempo" required readonly>
-                                                            </div>
-                                                            <?php 
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" name="agregar" id="agregar"
+                                                        class="btn  btn-primary waves-effect">Registrar</button>
+                                                    <button type="button" class="btn  btn-primary waves-effect"
+                                                        data-dismiss="modal">Cerrar</button>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </form><!-- form-->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+                            </div>
+                        </div>
+                    </div> <!-- container -->
+                </div> <!-- FIN BOOSTRA MODAL -->
+
+                <!--  Modal VER-->
+                <div id="ver" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                    aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Informaciòn Clasificacion</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card-box">
+                                            <form name="form" id="form" method="post" action="" required
+                                                class="parsley-examples">
+
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="inputState"
+                                                            class="col-form-label">Clasificacion</label>
+                                                        <input type="text" class="form-control" name="nombrev"
+                                                            id="nombrev" required
+                                                            placeholder="Nombre de la clasificaion" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="inputState" class="col-form-label">Tiempo
+                                                            Depreciacion</label>
+                                                        <input type="text" class="form-control" name="tiempo"
+                                                            id="tiempo" required readonly>
+                                                    </div>
+                                                    <?php 
                                                                         include 'config/conexion.php';                                                                        
                                                                         $result = $conexion->query("SHOW TABLE STATUS LIKE 'tclasificacion'");
                                                                         if ($result) {
@@ -287,62 +286,60 @@
                                                                             }
                                                                         } 
                                                                     ?>
-                                                        </div>
-                                                    </form>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn  btn-primary waves-effect"
-                                            data-dismiss="modal">Cerrar</button>
-                                    </div>
-                                </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
-                        </div><!-- /.modal -->
-                        <!--  Modal EDITAR INSTITUCION -->
-                        <div id="editar" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-                            aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Editar Datos Clasificacion
-                                        </h4>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-hidden="true">×</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="card-box">
-                                                    <form name="editarForm" id="editarForm" method="post"
-                                                        action="scriptsphp/modificarClasificacion.php?bandera=1"
-                                                        required class="parsley-examples">
-                                                        <div class="form-row">
-                                                            <input type="hidden" id="id_clasificaion"
-                                                                name="id_clasificaion">
-                                                        </div>
-                                                        <div class="form-row">
-                                                            <div class="form-group col-md-6">
-                                                                <label for="inputEmail4"
-                                                                    class="col-form-label">Clasificacion</label>
-                                                                <input type="text" class="form-control" name="nombree"
-                                                                    id="nombree" required placeholder="Clasificacion">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn  btn-primary waves-effect"
+                                    data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+                <!--  Modal EDITAR INSTITUCION -->
+                <div id="editar" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                    aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Editar Datos Clasificacion
+                                </h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card-box">
+                                            <form name="editarForm" id="editarForm" method="post"
+                                                action="scriptsphp/modificarClasificacion.php?bandera=1" required
+                                                class="parsley-examples">
+                                                <div class="form-row">
+                                                    <input type="hidden" id="id_clasificaion" name="id_clasificaion">
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="inputEmail4"
+                                                            class="col-form-label">Clasificacion</label>
+                                                        <input type="text" class="form-control" name="nombree"
+                                                            id="nombree" required placeholder="Clasificacion">
 
 
-                                                            </div>
+                                                    </div>
 
 
-                                                            <div class="form-group col-md-6">
-                                                                <label for="inputEmail4" class="col-form-label">Tiempo
-                                                                    Depreciacion</label>
-                                                                <input type="number" class="form-control" name="timpom"
-                                                                    id="timpom" required placeholder="9999">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="inputEmail4" class="col-form-label">Tiempo
+                                                            Depreciacion</label>
+                                                        <input type="number" class="form-control" name="timpom"
+                                                            id="timpom" required placeholder="9999">
 
 
-                                                            </div>
+                                                    </div>
 
-                                                            <?php 
+                                                    <?php 
                                                                         include 'config/conexion.php';                                                                        
                                                                         $result = $conexion->query("SHOW TABLE STATUS LIKE 'tclasificacion'");
                                                                         if ($result) {
@@ -360,54 +357,54 @@
                                                                         } 
                                                                     ?>
 
-                                                        </div>
-                                                    </form>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn  btn-primary waves-effect" id="cambios"
-                                            name="cambios" onclick="go();">Guardar Cambios</button>
-                                        <button type="button" class="btn  btn-primary waves-effect"
-                                            data-dismiss="modal">Cerrar</button>
-                                    </div>
-                                </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
-                        </div><!-- /.modal -->
-
-                    </div> <!-- content -->
-                </div> <!-- container -->
-
-
-                <!-- Footer Start -->
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12 text-center">
-                                <?php echo date('Y'); ?> - Financiero UES-FMP
+                                </div>
                             </div>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn  btn-primary waves-effect" id="cambios" name="cambios"
+                                    onclick="go();">Guardar Cambios</button>
+                                <button type="button" class="btn  btn-primary waves-effect"
+                                    data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+            </div> <!-- content -->
+        </div> <!-- container -->
+
+
+        <!-- Footer Start -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <?php echo date('Y'); ?> - Financiero UES-FMP
                     </div>
-                </footer>
-                <!-- end Footer -->
-
+                </div>
             </div>
+        </footer>
+        <!-- end Footer -->
 
-            <!-- ============================================================== -->
-            <!-- End Page content -->
-            <!-- ============================================================== -->
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
 
 
-        </div>
-        <!-- END wrapper -->
+    </div>
+    <!-- END wrapper -->
 
 
 
-        <!-- Right bar overlay-->
-        <div class="rightbar-overlay"></div>
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
 
-        <?php include_once 'Pie.php';?>
+    <?php include_once 'Pie.php';?>
 
 </body>
 
@@ -415,18 +412,18 @@
 
 <?php
     include "config/conexion.php";
-        $accion = $_REQUEST['bandera'];
-        if($accion==1){
+        if(isset($_POST['agregar'])){
         $nombre   = $_POST['nombre'];
         $tiempo   = $_POST['tip'];
         $corre   = $_POST['corre'];
-        $consulta  = "INSERT INTO tclasificacion VALUES('null','" .$nombre. "','" .$tiempo. "','" .$corre. "')";
+        $consulta  = "INSERT INTO tclasificacion (nombre,correlativo,tiempo_depreciacion) VALUES('$nombre','$tiempo','$corre')";
         $resultado = $conexion->query($consulta);
         if ($resultado) {
             msgI("Los datos fueron almacenados con exito");
         } else {
             msgE("Los datos no pudieron almacenarce");
         }     
+        echo '<script>location.href="clasificacionActivo.php";</script>';
     }
 function msgI($texto)
 {
