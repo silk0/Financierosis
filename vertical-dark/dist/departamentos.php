@@ -178,6 +178,7 @@
                                 <div id="nuevo" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
                                     aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog modal-dialog-centered">
+                                    <form method="POST" action="departamentos.php" required class="parsley-examples">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h4 class="modal-title">Datos del Departamento
@@ -189,10 +190,6 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="card-box">
-                                                            <form name="form" id="form" method="post"
-                                                                action="departamentos.php?bandera=1" required
-                                                                class="parsley-examples">
-
                                                                 <div class="form-row">
                                                                     <div class="form-group col-md-6">
                                                                         <label for="inputState"
@@ -237,18 +234,19 @@
                                                                         } 
                                                                     ?>
                                                                 </div>
-                                                            </form>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn  btn-primary waves-effect" id="cambios"
-                                                    name="cambios" onclick="go();">Registrar</button>
+                                                <button type="submit" class="btn  btn-primary waves-effect" id="cambios"
+                                                    name="cambios">Registrar</button>
                                                 <button type="button" class="btn  btn-primary waves-effect"
                                                     data-dismiss="modal">Cerrar</button>
                                             </div>
                                         </div><!-- /.modal-content -->
+                                        </form>
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
 
@@ -434,18 +432,18 @@
 
 <?php
     include "config/conexion.php";
-        $accion = $_REQUEST['bandera'];
-        if($accion==1){
+        if(isset($_POST['cambios'])){
         $nombre   = $_POST['nombre'];
         $insti   = $_POST['insti'];
         $corre   = $_POST['corre'];
-        $consulta  = "INSERT INTO tdepartamento VALUES('null','" .$insti. "','" .$nombre. "','" .$corre. "')";
+        $consulta  = "INSERT INTO tdepartamento (id_institucion,nombre,correlativo) VALUES('$insti','$nombre','$corre')";
         $resultado = $conexion->query($consulta);
         if ($resultado) {
             msgI("Los datos fueron almacenados con exito");
         } else {
             msgE("Los datos no pudieron almacenarce");
-        }     
+        }    
+        echo '<script>location.href="departamentos.php";</script>';  
     }
 function msgI($texto)
 {

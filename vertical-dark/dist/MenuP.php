@@ -113,7 +113,7 @@
                     <a href="ingresoActivo.php">Registro Activo</a>
                 </li>
                 <li>
-                    <a href="venderCredito.php">Depreciacion</a>
+                    <a href="Contenido.php">Depreciacion</a>
                 </li>  
                 <li>
                     <a href="ingresoInstituciones.php">Instituciones</a>

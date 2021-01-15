@@ -14,6 +14,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once 'Cabecera.php';?>
+<SCRIPT language=JavaScript>
+    function go() {
+        //validacion respectiva me da hueva
+        $("#editarForm").submit();;
+    }
+
+    function edit(nom, clasi, corre) {
+        //document.getElementById("baccion2").value=id;
+        document.getElementById("nomv").value = nom;
+        document.getElementById("clasiv").value = clasi;
+        document.getElementById("correv").value = corre;
+    }
+
+    function modify(id, nomb, clas, correl) {
+        document.getElementById("id_tipo").value = id;
+        document.getElementById("nomm").value = nomb;
+        document.getElementById("clasim").value = clas;
+        document.getElementById("correm").value = correl;
+
+    }
+</script>
 
 <body>
 
@@ -85,12 +106,49 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                                <th>Tipo de Activo</th>
-                                                <th>Clasificaciòn</th>
-                                                <th>Correlativo</th>
-                                                <th>Acciones</th>
-                                            </tr>
+                                            <?php
+                                        
+                                        include "config/conexion.php";
+                                            $result = $conexion->query("SELECT * from ttipo_activo ORDER BY nombre");
+                                        if ($result) {
+                                            while ($fila = $result->fetch_object()) {
+                                                echo "<tr>";
+                                                echo "<td>" . $fila->nombre . "</td>";
+                                                echo "<td>" . $fila->id_clasificacion . "</td>";
+                                                echo "<td>" . $fila->correlativo . "</td>";
+                                                echo "<td> 
+                                                <span data-toggle='modal'                                                    
+                                                data-target='#ver'>                                                
+                                                    <button 
+                                                    type='button' title='Informacion' data-toggle='tooltip' 
+                                                    data-placement='bottom'                          
+                                                    class='btn btn-primary waves-effect waves-light' onclick=\"
+                                                    edit(
+                                                        '$fila->nombre',
+                                                        '$fila->id_clasificacion',
+                                                        '$fila->correlativo'
+                                                    )\";><i class='mdi mdi-eye'></i> 
+                                                    </button></span>
+                                                    <span data-toggle='modal'                                                    
+                                                    data-target='#editar'>
+                                                    <button 
+                                                    type='button' title='Modificar' data-toggle='tooltip' 
+                                                    data-placement='bottom'
+                                                    class='btn btn-warning waves-effect waves-light' onclick=\"
+                                                    modify(
+                                                        '$fila->id_tipo',
+                                                        '$fila->nombre',
+                                                        '$fila->id_clasificacion',
+                                                        '$fila->correlativo'
+                                                    )\";>                                                    
+                                                        <i class='mdi mdi-pencil-outline'></i></i>
+                                                    </button></span>
+                                                </div>
+                                                </td>";
+                                                echo "</tr>";
+                                            }
+                                        }
+                                        ?>
                                         </tbody>
                                     </table>
                                 </form>
@@ -103,14 +161,153 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="">
-                                <!--  Modal editar fiador-->
+                                <!--  Modal NUEVO-->
                                 <div id="nuevo" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
                                     aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog modal-lg">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <form method="POST" action="tiposActivo.php" class="parsley-examples">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Datos del Activo
+                                                    </h4>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">×</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="card-box">
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Tipo de
+                                                                            Activo</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="nombre" id="nombre" required
+                                                                            placeholder="Nombre del Tipo de Activo">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Clasificaciòn</label>
+                                                                        <select class="form-control" name="clasi"
+                                                                            id="clasi">
+                                                                            <?php
+                                                                                  include 'config/conexion.php';
+                                                                                    $result = $conexion->query("select id_clasificaion as id,nombre FROM tclasificacion");
+                                                                                     if ($result) {
+                                                                                        while ($fila = $result->fetch_object()) {                                                                                
+                                                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
+                                                                                         }
+                                                                                    }
+                                                                                ?>
+                                                                        </select>
+                                                                    </div>
+                                                                    <?php 
+                                                                        include 'config/conexion.php';                                                                        
+                                                                        $result = $conexion->query("SHOW TABLE STATUS LIKE 'ttipo_activo'");
+                                                                        if ($result) {
+                                                                            while ($fila = $result->fetch_object()) {                                               
+                                                                                $codigoR=str_pad($fila->Auto_increment, 4, "0", STR_PAD_LEFT);
+                                                                                echo'
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label for="inputEmail4"
+                                                                                        class="col-form-label">Correlativo</label>
+                                                                                    <input type="text" class="form-control"
+                                                                                        name="corre" id="corre" value ="'.$codigoR.'" required placeholder="0000" readonly>
+                                                                                </div>
+                                                                                ';
+                                                                            }
+                                                                        } 
+                                                                    ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn  btn-primary waves-effect"
+                                                        id="cambios" name="agg">Registrar</button>
+                                                    <button type="button" class="btn  btn-primary waves-effect"
+                                                        data-dismiss="modal">Cerrar</button>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </form>
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+
+                                <!--  Modal VER-->
+                                <div id="ver" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                                    aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title" id="myLargeModalLabel">Datos del Activo
-                                                </h4>
+                                                <h4 class="modal-title">Informaciòn de Tipo Activo</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="card-box">
+                                                            <form name="form" id="form" method="post" action="" required
+                                                                class="parsley-examples">
+
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Tipo de
+                                                                            Activo</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="nomv" id="nomv" required readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Clasificaciòn</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="clasiv" id="clasiv" required readonly>
+                                                                    </div>
+                                                                    <?php 
+                                                                        include 'config/conexion.php';                                                                        
+                                                                        $result = $conexion->query("SHOW TABLE STATUS LIKE 'ttipo_activo'");
+                                                                        if ($result) {
+                                                                            while ($fila = $result->fetch_object()) {                                               
+                                                                                $codigoR=str_pad($fila->Auto_increment, 4, "0", STR_PAD_LEFT);
+                                                                                echo'
+                                                                                <div class="form-group col-md-4">
+                                                                                    <label for="inputEmail4"
+                                                                                        class="col-form-label">Correlativo</label>
+                                                                                    <input type="text" class="form-control"
+                                                                                        name="correv" id="correv" value ="'.$codigoR.'" required placeholder="0000" readonly>
+                                                                                </div>
+                                                                                ';
+                                                                            }
+                                                                        } 
+                                                                    ?>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn  btn-primary waves-effect"
+                                                    data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+
+                                <!--  Modal EDITAR-->
+                                <div id="editar" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                                    aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Modificar Datos del Tipo Activo</h4>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-hidden="true">×</button>
                                             </div>
@@ -119,47 +316,54 @@
                                                     <div class="col-md-12">
                                                         <div class="card-box">
                                                             <form name="editarForm" id="editarForm" method="post"
-                                                                action="scriptsphp/modificarFiador.php?bandera=1"
-                                                                required class="parsley-examples">
-
+                                                                action="scriptsphp/modificarTipo.php?bandera=1" required
+                                                                class="parsley-examples">
                                                                 <div class="form-row">
-                                                                    <input type="hidden" id="idfiador" name="idfiador">
-                                                                    <input type="hidden" id="id_fiador"
-                                                                        name="id_fiador">
+                                                                    <input type="hidden" id="id_tipo" name="id_tipo">
                                                                 </div>
-
                                                                 <div class="form-row">
                                                                     <div class="form-group col-md-6">
-                                                                        <label for="inputEmail4"
-                                                                            class="col-form-label">Tipo de Activo</label>
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Tipo de
+                                                                            Activo</label>
                                                                         <input type="text" class="form-control"
-                                                                            name="nombre" id="nombre" required
-                                                                            placeholder="Nombre del Activo">
+                                                                            name="nomm" id="nomm" required>
                                                                     </div>
-                                                                    <div class="form-group col-md-4">
-                                                                    <label for="inputState" class="col-form-label">Clasificaciòn</label>
-                                                                    <select class="form-control" name="carteram" id="carteram" >                                                                        
-                                                                        <?php
-                                                                        include 'config/conexion.php';
-                                                                        $result = $conexion->query("select id_clasificaion as id,nombre FROM tclasificacion");
+                                                                </div>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Clasificaciòn</label>
+                                                                        <select class="form-control" name="clasim"
+                                                                            id="clasim">
+                                                                            <?php
+                                                                                  include 'config/conexion.php';
+                                                                                    $result = $conexion->query("select id_clasificaion as id,nombre FROM tclasificacion");
+                                                                                     if ($result) {
+                                                                                        while ($fila = $result->fetch_object()) {                                                                                
+                                                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
+                                                                                         }
+                                                                                    }
+                                                                                ?>
+                                                                        </select>
+                                                                    </div>
+                                                                    <?php 
+                                                                        include 'config/conexion.php';                                                                        
+                                                                        $result = $conexion->query("SHOW TABLE STATUS LIKE 'ttipo_activo'");
                                                                         if ($result) {
-                                                                            while ($fila = $result->fetch_object()) {                                                                                
-                                                                                echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
+                                                                            while ($fila = $result->fetch_object()) {                                               
+                                                                                $codigoR=str_pad($fila->Auto_increment, 4, "0", STR_PAD_LEFT);
+                                                                                echo'
+                                                                                <div class="form-group col-md-4">
+                                                                                    <label for="inputEmail4"
+                                                                                        class="col-form-label">Correlativo</label>
+                                                                                    <input type="text" class="form-control"
+                                                                                        name="correm" id="correm" value ="'.$codigoR.'" required placeholder="0000" readonly>
+                                                                                </div>
+                                                                                ';
                                                                             }
-                                                                        }
-                                                                        ?> 
-                                                                    </select>
-                                                                </div>
-                                                                </div>
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputPassword4"
-                                                                            class="col-form-label">Correlativo</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="celular" id="celular" required
-                                                                            data-mask="9999"
-                                                                            placeholder="9999">
-                                                                    </div>
+                                                                        } 
+                                                                    ?>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -168,7 +372,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn  btn-primary waves-effect" id="cambios"
-                                                    name="cambios" onclick="go();">Regisrar</button>
+                                                    name="cambios" onclick="go();">Guardar Cambios</button>
                                                 <button type="button" class="btn  btn-primary waves-effect"
                                                     data-dismiss="modal">Cerrar</button>
                                             </div>
@@ -177,11 +381,13 @@
                                 </div><!-- /.modal -->
                             </div>
                         </div>
-                    </div>
-                </div> <!-- container -->
-            </div> <!-- content -->
+                    </div><!-- FIN Bootstrap Modals -->
 
-        </div> <!-- container -->
+                </div>
+            </div> <!-- container -->
+        </div> <!-- content -->
+
+    </div> <!-- container -->
 
     </div> <!-- content -->
 
@@ -217,3 +423,39 @@
 </body>
 
 </html>
+
+<?php
+    include "config/conexion.php";
+      //  $accion = $_REQUEST[''];
+        if(isset($_POST['agg'])){
+        $nombre   = $_POST['nombre'];
+        $clasi   = $_POST['clasi'];
+        $corre   = $_POST['corre'];
+        $consulta  = "INSERT INTO ttipo_activo (id_clasificacion,nombre,correlativo) VALUES('$clasi','$nombre','$corre')";
+        $resultado = $conexion->query($consulta);
+        if ($resultado) {
+            msgI("Los datos fueron almacenados con exito");
+        } else {
+            msgE("Los datos no pudieron almacenarce");
+        }   
+        echo '<script>location.href="tiposActivo.php";</script>';  
+    }
+function msgI($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    echo "</script>";
+}
+function msgA($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Advertencia','$texto','top', 'right', 'any', 'warning');";
+    echo "</script>";
+}
+function msgE($texto)
+{
+    echo "<script type='text/javascript'>";
+    echo "notify('Error','$texto','top', 'right', 'any', 'danger');";
+    echo "</script>";
+}
+?>
