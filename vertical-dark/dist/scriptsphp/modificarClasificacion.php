@@ -1,13 +1,14 @@
 <?php
 include "../config/conexion.php";
 $accion = $_REQUEST['bandera'];
-$baccion  = $_REQUEST["baccion2"];
 if($accion==1){
-$id = $_POST["id_clasificacion"];
-$nombre   = $_POST['nombre'];
-$correlativo    = $_REQUEST['correlativo'];
-$depreciacion   = $_REQUEST['tiempo_depreciacion'];
-    $consulta  = "UPDATE tclasificacion set nombre='" . $nombre. "',correlativo='" . $correlativo . "',tiempo_depreciacion='" . $depreciacion . "' 
+$id = $_POST["id_clasificaion"];
+$nombre   = $_POST['nombree'];
+$correlativo    = $_REQUEST['correm'];
+$depreciacion   = $_REQUEST['timpom'];
+    $consulta  = "UPDATE tclasificacion set nombre='" . $nombre. "',
+    correlativo='" . $correlativo . "',
+    tiempo_depreciacion='" . $depreciacion . "' 
     where id_clasificaion='" . $id . "'";
     $resultado = $conexion->query($consulta);
       if ($resultado) {
