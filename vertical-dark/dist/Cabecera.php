@@ -44,6 +44,16 @@
          <link href="assets/libs/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/libs/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/libs/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/datatables/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />    
+        <link href="assets/libs/datatables/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        
+        <!-- Plugins css -->
+        <link href="assets/libs/select2/select2.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+        <link href="assets/libs/switchery/switchery.min.css" rel="stylesheet">
+        <link href="assets/libs/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+        <link href="assets/libs/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet" />
+        <link href="assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet" />
+        <link href="assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+        <link href="assets/libs/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />  
 
     </head>

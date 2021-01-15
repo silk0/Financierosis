@@ -96,7 +96,13 @@
                 </li>
                 <li>
                     <a href="venderCredito.php">Ventas al credito</a>
-                </li>                
+                </li>  
+                <li>
+                    <a href="#">Lista de ventas</a>
+                </li> 
+                <li>
+                    <a href="#">Cuentas por cobrar</a>
+                </li>               
             </ul>
         </li>
         
@@ -104,7 +110,7 @@
         <li class="menu-title">Activo</li>
         <li>
             <a href="javascript: void(0);">
-                <i class="mdi mdi-cart"></i>
+                <i class="mdi mdi-notebook"></i>
                 <span>Activo Fijo</span>
                 <span class="menu-arrow"></span>
             </a>
@@ -113,7 +119,11 @@
                     <a href="ingresoActivo.php">Registro Activo</a>
                 </li>
                 <li>
+<<<<<<< HEAD
                     <a href="Contenido.php">Depreciacion</a>
+=======
+                    <a href="#">Depreciacion</a>
+>>>>>>> 089c4faa3837e0fdcd084654fa3d7daecf3e17cf
                 </li>  
                 <li>
                     <a href="ingresoInstituciones.php">Instituciones</a>
