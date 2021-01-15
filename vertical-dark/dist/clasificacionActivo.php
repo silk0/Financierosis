@@ -302,53 +302,52 @@ function edi(){
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
+<!--  Modal EDITAR INSTITUCION -->
+<div id="editar" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                            aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Editar Datos Clasificacion
+                                        </h4>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-hidden="true">×</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card-box">
+                                                    <form name="editarForm" id="editarForm" method="post"
+                                                        action="scriptsphp/modificarClasificacion.php?bandera=1" required
+                                                        class="parsley-examples">
 
-                                <!--  Modal EDITAR-->
-                                <div id="editar" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-                                    aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Modificar Datos Clasificacion</h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-hidden="true">×</button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="card-box">
-                                                            <form name="editarForm" id="editarForm" method="post" action="scriptsphp/modificarClasificacion.php?bandera=1" required
-                                                                class="parsley-examples">
-                                                                <div class="form-row">
-                                                                <input type="hidden" id="id_clasificacion" name="id_clasificacion">
+                                                        <div class="form-row">
+
+                                                            <input type="hidden" id="id_clasificacion"
+                                                                name="id_clasificacion">
+                                                        </div>
+
+                                                        <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                                <label for="inputEmail4"
+                                                                    class="col-form-label">Clasificacion</label>
+                                                                <input type="text" class="form-control" name="nombree"
+                                                                    id="nombree" required placeholder="Clasificacion">
+
+
                                                             </div>
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputState"
-                                                                            class="col-form-label">Clasificacion</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="nombrem" id="nombrem" required
-                                                                            placeholder="Nombre Clasificacion">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                        <label for="inputState"
-                                                                            class="col-form-label">Tiempo Depreciacion</label>
-                                                                        <select class="form-control" name="instim"
-                                                                            id="timpo">
-                                                                            <?php
-                                                                                  include 'config/conexion.php';
-                                                                                    $result = $conexion->query("select id_clasificacion as id,nombre FROM tclasificacion");
-                                                                                     if ($result) {
-                                                                                        while ($fila = $result->fetch_object()) {                                                                                
-                                                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
-                                                                                         }
-                                                                                    }
-                                                                                ?>
-                                                                        </select>
-                                                                    </div>
-                                                                    <?php 
+
+
+                                                            <div class="form-group col-md-6">
+                                                                <label for="inputEmail4"
+                                                                    class="col-form-label">Tiempo Depreciacion</label>
+                                                                <input type="text" class="form-control" name="nombrem"
+                                                                    id="nombrem" required placeholder="Clasificacion">
+
+
+                                                            </div>
+                                                            
+                                                            <?php 
                                                                         include 'config/conexion.php';                                                                        
                                                                         $result = $conexion->query("SHOW TABLE STATUS LIKE 'tclasificacion'");
                                                                         if ($result) {
@@ -365,26 +364,23 @@ function edi(){
                                                                             }
                                                                         } 
                                                                     ?>
-                                                                </div>
-                                                            </form>
+
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                            <button type="button" class="btn  btn-primary waves-effect" id="cambios"
-                                                    name="cambios" onclick="edi();">Guardar Cambios</button>
-                                                <button type="button" class="btn  btn-primary waves-effect"
-                                                    data-dismiss="modal">Cerrar</button>
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->
-                            </div>
-                        </div>
-                    </div><!-- FIN Bootstrap Modals -->
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn  btn-primary waves-effect" id="cambios"
+                                            name="cambios" onclick="go();">Guardar Cambios</button>
+                                        <button type="button" class="btn  btn-primary waves-effect"
+                                            data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
 
-                </div> <!-- container -->
             </div> <!-- content -->
         </div> <!-- container -->
 
@@ -429,7 +425,7 @@ function edi(){
         $nombre   = $_POST['nombre'];
         $tiempo   = $_POST['tip'];
         $corre   = $_POST['corre'];
-        $consulta  = "INSERT INTO tclasificacion VALUES('null','" .$tiempo. "','" .$nombre. "','" .$corre. "')";
+        $consulta  = "INSERT INTO tclasificacion VALUES('null','" .$nombre. "','" .$tiempo. "','" .$corre. "')";
         $resultado = $conexion->query($consulta);
         if ($resultado) {
             msgI("Los datos fueron almacenados con exito");
