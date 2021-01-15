@@ -129,7 +129,7 @@ function edi(){
                                                     data-placement='bottom'                          
                                                     class='btn btn-primary waves-effect waves-light' onclick=\"
                                                     edit(
-                                                        '$fila->id_clasificacion',
+                                                       
                                                         '$fila->nombre',
                                                         '$fila->correlativo',
                                                         '$fila->tiempo_depreciacion',
@@ -143,9 +143,10 @@ function edi(){
                                                     data-placement='bottom'
                                                     class='btn btn-warning waves-effect waves-light' onclick=\"
                                                     modify(
+                                                        
                                                         '$fila->nombre',
+                                                         '$fila->correlativo',
                                                          '$fila->tiempo_depreciacion',
-                                                        '$fila->correlativo',
                                                     )\";>                                                    
                                                         <i class='mdi mdi-pencil-outline'></i></i>
                                                     </button></span>
