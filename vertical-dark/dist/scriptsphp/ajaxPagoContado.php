@@ -42,10 +42,13 @@
             if ($result) {
                 $result = $conexion->query("TRUNCATE TABLE tcarrito;");
                 if ($result) {
+                    $result = $conexion->query("TRUNCATE TABLE tcarrito;");
+                    if ($result) {
 
+                    }
+                    
+                    header('Location:../venderContado.php?bandera=1');
                 }
-                
-                header('Location:../venderContado.php?bandera=1');
             }
         }       
 

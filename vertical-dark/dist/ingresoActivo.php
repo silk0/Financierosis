@@ -16,6 +16,20 @@
 <?php include_once 'Cabecera.php';?>
 
 <script>
+function selectDepartamentos() {
+	var id = $("#institucion").val();
+	$.ajax({
+		url: "scriptsphp/ajaxDepartamentos.php",
+		method: "POST",
+		data: {
+			"id":id
+		},
+		success: function(respuesta){
+			$("#depa").attr("disabled", false);
+			$("#depa").html(respuesta);
+		}
+	})
+}
 function enviar(){
         var idt=document.getElementById("tipoA").value;
         var idd=document.getElementById("depa").value;
@@ -95,48 +109,43 @@ function enviar(){
                                         <div class="form-group col-md-4">
                                             <label for="inputState" class="col-form-label">Tipo de Activo</label>
                                             <select class="form-control" name="tipoA" id="tipoA" onchange="enviar();">
-                                            <option selected>Seleccione</option>
+                                            <option  value="0" selected>Seleccione</option>
                                                 <?php
                                                  include 'config/conexion.php';
-                                                  $result = $conexion->query("select id_tipo as id,nombre FROM ttipo_activo");
+                                                  $result = $conexion->query("select correlativo as co,nombre FROM ttipo_activo");
                                                    if ($result) {
                                                    while ($fila = $result->fetch_object()) {                                                                                
-                                                   echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
+                                                   echo '<option value="' . $fila->co . '">' . $fila->nombre . '</opcion>';                                                                                
                                                     }
-                                                    }
+                                                }
                                                 ?>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="inputState" class="col-form-label">Departamento</label>
-                                            <select class="form-control" name="depa" id="depa" onchange="enviar();">
-                                            <option selected>Seleccione</option>
+                                            <label for="inputState" class="col-form-label">Institucion</label>
+                                            <select class="form-control" name="institucion" id="institucion"  onchange="selectDepartamentos();">
+                                            <option  value="0" selected>Seleccione</option>
                                                 <?php
                                                     include 'config/conexion.php';
-                                                    $result = $conexion->query("select id_departamento as id,nombre FROM tdepartamento");
+                                                    $result = $conexion->query("select correlativo, nombre
+                                                                                from tinstitucion;");
                                                     if ($result) {
                                                     while ($fila = $result->fetch_object()) {                                                                                
-                                                    echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
+                                                    echo '<option value="' . $fila->correlativo . '">' . $fila->nombre . '</opcion>';                                                                                
                                                       }
                                                     }
                                                  ?>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="inputState" class="col-form-label">Proveedor</label>
-                                            <select class="form-control" name="prove" id="prove">
-                                            <option selected>Seleccione</option>
-                                                <?php
-                                                    include 'config/conexion.php';
-                                                    $result = $conexion->query("select id_proveedor as id,nombre FROM tproveedor");
-                                                    if ($result) {
-                                                    while ($fila = $result->fetch_object()) {                                                                                
-                                                    echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
-                                                      }
-                                                    }
-                                                 ?>
+                                            <label for="inputState" class="col-form-label">Departamento</label>
+                                            <select class="form-control" name="depa" id="depa" disabled>
+                                            <option value="0" selected>Seleccione</option>
+                                                
                                             </select>
                                         </div>
+                                        
+                                        
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
@@ -178,10 +187,38 @@ function enviar(){
                                             <input type="text" class="form-control" name="marca" id="marca" required
                                              placeholder="Marca del Activo">
                                         </div>
+                                        <?php 
+                                            include 'config/conexion.php';                                                                        
+                                            $result = $conexion->query("SHOW TABLE STATUS LIKE 'tactivo';");
+                                            if ($result) {
+                                                while ($fila = $result->fetch_object()) {                                               
+                                                    $codigoR=str_pad($fila->Auto_increment, 4, "0", STR_PAD_LEFT);
+                                                    echo'
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputPassword4" class="col-form-label">Correlativo</label>
+                                                        <input type="hidden" value="'.$codigoR.'" id="corre" name = "corre">
+                                                        <input type="text" value="'.$codigoR.'" class="form-control" name="correlativo" id="correlativo" required
+                                                        placeholder="9999" readonly>
+                                                    </div>
+                                                    ';
+                                                }
+                                            } 
+                                        ?>
+                                        
                                         <div class="form-group col-md-4">
-                                            <label for="inputPassword4" class="col-form-label">Correlativo</label>
-                                            <input type="number" class="form-control" name="correlativo" id="correlativo" required
-                                            placeholder="9999" readonly>
+                                            <label for="inputState" class="col-form-label">Proveedor</label>
+                                            <select class="form-control" name="prove" id="prove">
+                                            <option selected>Seleccione</option>
+                                                <?php
+                                                    include 'config/conexion.php';
+                                                    $result = $conexion->query("select id_proveedor as id,nombre FROM tproveedor");
+                                                    if ($result) {
+                                                    while ($fila = $result->fetch_object()) {                                                                                
+                                                    echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
+                                                      }
+                                                    }
+                                                 ?>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -221,6 +258,7 @@ function enviar(){
                 </div>
             </footer>
             <!-- end Footer -->
+            
 
         </div>
 
@@ -238,7 +276,46 @@ function enviar(){
     <div class="rightbar-overlay"></div>
 
     <?php include_once 'Pie.php';?>
-
+    <script type="text/javascript">   
+                 
+        $('select#institucion').on('change',function(){
+            $inst = $(this).val();
+            $dep= $('select#depa').val();
+            $tipo = $('select#tipoA').val();
+            $co = document.getElementById("corre").value;
+            $codi =$inst+"-"+$dep+"-"+$tipo+"-"+$co;
+            if($inst>0&&$dep>0&&$tipo>0&&$co>0){
+                $("#correlativo").val($codi);
+            }else{
+                $("#correlativo").val($co);
+            }
+                      
+        });
+        $('select#depa').on('change',function(){
+            $inst = $("select#institucion").val();
+            $dep= $(this).val();
+            $tipo = $('select#tipoA').val();
+            $co = document.getElementById("corre").value;            
+            $codi =$inst+"-"+$dep+"-"+$tipo+"-"+$co;            
+            if($inst>0&&$dep>0&&$tipo>0&&$co>0){
+                $("#correlativo").val($codi);
+            }else{
+                $("#correlativo").val($co);
+            }
+        });
+        $('select#tipoA').on('change',function(){
+            $inst = $("select#institucion").val();
+            $dep= $('select#depa').val();
+            $tipo = $(this).val();
+            $co = document.getElementById("corre").value;
+            $codi =$inst+"-"+$dep+"-"+$tipo+"-"+$co;
+            if($inst>0&&$dep>0&&$tipo>0&&$co>0){
+                $("#correlativo").val($codi);
+            }else{
+                $("#correlativo").val($co);
+            }
+        });
+    </script>
 </body>
 
 </html>

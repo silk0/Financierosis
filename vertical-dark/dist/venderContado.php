@@ -16,9 +16,15 @@
 <?php include_once 'Cabecera.php';?>
 <SCRIPT  language=JavaScript> 
     function go(){
-        //validacion respectiva me da hueva
         $("#venderContado").submit();;         
-    }     
+    }  
+    function goFactura(){
+        if(document.getElementById("facturaC").value>0){
+            $url = "facturaConsumidor.php?id_client="+document.getElementById("facturaC").value;
+            window.open($url,"_blank"); 
+         }       
+    }    
+    
 </script>
 <body>
 
@@ -63,7 +69,7 @@
                         </div>
                     </div>
                     <!-- end page title -->
-                    <div class="row">
+                    <div class="row" id="parte1">
                         <div class="col-md-12">
                             <div class="card-box">
     
@@ -85,14 +91,15 @@
                                             <div class="mt-3">
                                                 <input type="hidden" name="id_empleado" id="id_empleado" value="<?php echo $_SESSION["id"];?>" >
                                                 <label for="inputState" class="col-form-label">Clientes</label>
-                                                <select class="form-control" data-toggle="select2" name="cliente" id="cliente" required >
-                                                    <option selected >Seleccione</option>
+                                                <select class="form-control"  name="id_cliente" id="id_cliente" required >
+                                                    <option selected value="0">Seleccione</option>
                                                     <?php
                                                     include 'config/conexion.php';
                                                     $duiC=null;
                                                     $nitC=null;
                                                     $direccionC=null;
                                                     $nombreC=null;
+                                                    $id=null;
                                                     $result = $conexion->query("select id_cliente as id, CONCAT(nombre, ' ', apellido) as nombre, dui, nit, direccion  FROM tclientes");
                                                     if ($result) {
                                                         while ($fila = $result->fetch_object()) {
@@ -111,7 +118,7 @@
                                         </div><!-- end col -->
                                         <div class="col-md-6">
                                             <div class="mt-2 float-right">
-                                                
+                                                <input  type="hidden" id="facturaC">
                                                 <?php 
                                                     include 'config/conexion.php';
                                                     $fecha_actual = date("d-m-Y");
@@ -240,10 +247,11 @@
                                         <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light">
                                             <i class="mdi mdi-printer mr-1"></i> Factura credito fiscal
                                         </a>
-                                        <a data-toggle='modal' data-target='#consumidorFinal' class="btn btn-primary waves-effect waves-light">
+                                        <button  onclick="goFactura();"
+                                            class="btn btn-primary waves-effect waves-light">
                                             <i class="mdi mdi-printer mr-1"></i> Factura consumidor final
-                                        </a>
-                                        <a type=button onclick="go();" class="btn btn-info waves-effect waves-light">Realizar venta</a>                                        
+                                        </button>
+                                        <button type=button onclick="go();" class="btn btn-info waves-effect waves-light">Realizar venta</button>                                        
                                     </div>
                                 </div>
                             </div>
@@ -252,264 +260,7 @@
     
                     </div>
                     <!-- end row -->
-                    <!-- Bootstrap Modals -->
-                    <div class="row">
-                        <div class="col-12">                               
-                            <!--  Modal mostrar Factura consumidor Final-->
-                            <div id="consumidorFinal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card-box">
-                                                        <form  method="post"  class="parsley-examples" readonly>
-                                                        
-                                                            <h4 class="header-title" align="center">FACTURA DE CONSUMIDOR FINAL</h4>
-                                                            <div class="row ">
-                                                                <div class="col-md-3">
-                                                                    
-                                                                </div> <!-- end col -->
-                                                                <div class="col-md-3">
-                                                                    
-                                                                </div> <!-- end col -->
-                                                                <div class="col-md-3">
-                                                                    
-                                                                </div> <!-- end col -->
-                                                                <div class="col-md-3" >
-                                                                    <div class="text-md-right">
-                                                                        <div class="line-h-24 " align="left" style=" padding: 5px 5px 5px 5px;
-                                                                                                                        border: solid;">
-                                                                            <label>Factura No. <?php echo $codigoR;?></label>
-                                                                            <br>
-                                                                            <label>NRC:</label><br>
-                                                                            <LABEL>NIT:</LABEL><br>
-                                                                        </div>
-                                                                    </div>
-                                                                </div> <!-- end col -->
-                                                            </div> 
-                                                            <div class="row mt-3">
-                                                                <div class="col-md-8">    
-                                                                    <h6>Cliente: <small><?php echo $nombreC;?></small></h6>                                   
-                                                                    <h5>Direccion: <?php echo $direccionC;?></h5>
-                                                                    <h5>Dui: <?php echo $duiC;?>   Nit: <?php echo $nitC;?></h5>
-                                                                </div> <!-- end col -->
-                                
-                                                                <div class="col-md-4">
-                                                                    <div class="text-md-right" >
-                                                                        <h5>Fecha: </h5>
-                                                                        <h5>Condicion venta: </h5>
-                                                                        <h5>vendedor: </h5>                                            
-                                                                    </div>
-                                                                </div> <!-- end col -->
-                                                            </div>    
-                                                            </br>                     		
-                                                            <div class="col-12">      
-                                                                <div class="table-responsive">
-                                                                    <table class="table table-bordered table-striped mb-0">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th class="text-center" style="width: 10%"><small>Cantidad</small></th>
-                                                                                <th><small>Descripcion</small></th>
-                                                                                <th style="width: 10%"><small>Precio unitario</small></th>
-                                                                                <th style="width: 10%"><small>Ventas sujetas</small></th>
-                                                                                <th style="width: 10%"><small>Vts no sujetas</small></th>     
-                                                                                <th style="width: 10%"><small>Ventas gravadas</small></th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td></td>
-                                                                                <td><small>540px</small></td>
-                                                                                <td></td>
-                                                                                <td></td>
-                                                                                <td><small>540px</small></td>                      
-                                                                                <td><small>540px</small></td>
-                                                                            </tr>          
-                                                                        </tbody>                                            
-                                                                    </table>
-                                                                    <table class="table table-bordered table-striped mb-0">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th style="padding: 0px; width: 49.5%;" >
-                                                                                    <table class="table table-bordered table-striped mb-0">       
-                                                                                        <tbody>
-                                                                                            <tr>
-                                                                                                <td  style="height: 50px;"><small>Son:</small></td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td class="text-center" style="padding: 0px 0px 0px 0px; height: 5px;"><small>Llenar si la operacion es igual o superior a $200</small></td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td style="padding: 0px 0px 0px 0px;">
-                                                                                                    <table class="table table-bordered table-striped mb-0">       
-                                                                                                        <tbody>
-                                                                                                            <tr>
-                                                                                                                <td style="padding: 10px 0px 5px 0px;">
-                                                                                                                    <small>Recibido:</small>
-                                                                                                                    </br>
-                                                                                                                    <small>Nombre:</small>
-                                                                                                                    </br>
-                                                                                                                    <small>D.u.i.:</small>
-                                                                                                                    </br>
-                                                                                                                    <small>Firma:</small>
-                                                                                                                </td>
-                                                                                                                <td style="padding: 10px 0px 5px 0px;">
-                                                                                                                    <small>Entregado:</small>
-                                                                                                                    </br>
-                                                                                                                    <small>Nombre:</small>
-                                                                                                                    </br>
-                                                                                                                    <small>D.u.i.:</small>
-                                                                                                                    </br>
-                                                                                                                    <small>Firma:</small>
-                                                                                                                </td>
-                                                                                                            </tr>                  
-                                                                                                        </tbody>                     
-                                                                                                    </table>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </tbody>                     
-                                                                                    </table>
-                                                                                </th>
-                                                                                <th style="width: 19%; padding: 0px 0px 5px 10px;">
-                                                                                    <small>SUMAS</small>
-                                                                                    </br>
-                                                                                    <small>13% IVA</small>
-                                                                                    </br>
-                                                                                    <small>SUB-TOTAL</small>
-                                                                                    </br>
-                                                                                    <small>(-)IVA RETENIDO</small>
-                                                                                    </br>
-                                                                                    <small>VENTAS EXENTAS</small>
-                                                                                    </br>
-                                                                                    <small>VENTAS NO SUJETAS</small>
-                                                                                    </br>
-                                                                                    <small>VENTA TOTAL</small>
-                                                                                </th>  
-                                                                                <th style="width: 19.5%; padding: 0px 0px 5px 10px;" class="text-md-right">
-                                                                                    <small>$</small>
-                                                                                    </br>
-                                                                                <small>$</small>
-                                                                                    </br>
-                                                                                    <small>$</small>
-                                                                                    </br>
-                                                                                    <small>$</small>
-                                                                                    </br>
-                                                                                    <small>$</small>
-                                                                                    </br>
-                                                                                    <small>$</small>
-                                                                                    </br>
-                                                                                    <small>$</small>
-                                                                                    </br>
-                                                                                </th>
-                                                                                <th style="width: 10.4%;"></th>   
-                                                                            </tr>
-                                                                        </thead>                                                                                                                           
-                                                                    </table>
-                                                                </div> <!-- end table-responsive-->
-                                                                
-                                                            </div> <!-- end col -->                                                            
-                                                                            
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">                                                                                
-                                            <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal"><span>Guardar Cambios</span><i class="mdi mdi-content-save ml-1"></i></button> 
-                                            <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Cerrar</button>
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal --> 
-                            <!--  Modal mostrar ComprarProductos-->
-                            <div id="creditoFiscal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="tituloC" name="tituloC">Comprar producto</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card-box">
-                                                        <form id="comprarProducto" name="comprarProducto" method="post"  class="parsley-examples" readonly>                                                            
-                                                        
-                                                            <div class="form-row">                                                               
-                                                                <div class="form-group col-md-6">
-                                                                    <input type="hidden" class="form-control" name="id" id="id">
-                                                                </div>                                                                   
-                                                            </div>
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="codigoC" class="col-form-label">Codigo</label>
-                                                                    <input type="text" class="form-control" name="codigoC" id="codigoC" readonly
-                                                                        placeholder="0000000">
-                                                                </div> 
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="nombreC" class="col-form-label">Nombre</label>
-                                                                    <input type="text" class="form-control" name="nombreC" id="nombreC" readonly
-                                                                        placeholder="Nombre">
-                                                                </div>                                                                   
-                                                            </div>
-
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-12">
-                                                                    <label for="idproveedorC" class="col-form-label">Proveedor</label>
-                                                                    <select  class="form-control" name="idproveedorC" id="idproveedorC" disabled >
-                                                                    <option value='0' selected>Seleccione</option>
-                                                                    <?php
-                                                                        include 'config/conexion.php';
-                                                                        $result = $conexion->query("select id_proveedor, nombre, representante,email FROM tproveedor");
-                                                                        if ($result) {
-                                                                            while ($fila = $result->fetch_object()) {                                                                                
-                                                                                echo '<option value="' . $fila->id_proveedor . '">' . $fila->nombre . ' - ' . $fila->representante . ' ('. $fila->email .')</opcion>';                                                                                
-                                                                            }
-                                                                        }
-                                                                        ?> 
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="stock" class="col-form-label">Precio</label>
-                                                                    <input type="number" class="form-control" name="precioC" id="precioC" 
-                                                                        placeholder="$0.00">
-                                                                </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="stock" class="col-form-label">Cantidad</label>
-                                                                    <input type="number" class="form-control" name="cantidadC" id="cantidadC"
-                                                                        placeholder="$0.00">
-                                                                </div>
-                                                            </div> 
-
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="stock" class="col-form-label">Precio Total</label>
-                                                                    <input type="text" class="form-control" name="precioTC" id="precioTC" 
-                                                                        placeholder="$0.00" readonly>
-                                                                </div>                                                                
-                                                            </div>   
-                                                                                        
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">    
-                                            <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Registrar compra</button>
-                                            <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Cerrar</button>
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->                                            
-                        </div>
-                    </div> 
+                    
                 </div> <!-- container -->
 
             </div> <!-- content -->
@@ -542,6 +293,13 @@
     <div class="rightbar-overlay"></div>
 
     <?php include_once 'Pie.php';?>
+    <script type="text/javascript">
+       
+        $('select#id_cliente').on('change',function(){
+            var valor = $(this).val();
+            $("#facturaC").val(valor);
+        });
+    </script>
 
 </body>
 
