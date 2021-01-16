@@ -132,7 +132,8 @@
                                                         while ($fila = $result->fetch_object()) {                                               
                                                             $codigoR=str_pad($fila->Auto_increment, 6, "0", STR_PAD_LEFT);
                                                             echo'                                                                
-                                                                <input type="hidden" name="venta" id="venta" value="' . $codigoR . '" >
+                                                                <input type="hidden" name="ventaCod" id="ventaCod" value="' .$codigoR . '" >
+                                                                <input type="hidden" name="ventaId" id="ventaId" value="' .$fila->Auto_increment . '" >
                                                                 <p><strong>Venta No. : </strong> <span class="float-right">'. $codigoR .'</span></p>
                                                                 
                                                             ';
