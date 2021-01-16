@@ -3,10 +3,10 @@
     error_reporting(E_ALL & ~E_NOTICE);
     session_start();
     if($_SESSION["logueado"] == TRUE) {
-        $usuario=$_SESSION["usuario"];
+        $usuario = $_SESSION["usuario"];
         $nombre = $_SESSION["nombre"];
         $tipo  = $_REQUEST["tipo"];
-        $id  = $_REQUEST["id"];
+        $id  = $_SESSION["id"];
     }else {
         header("Location:../../index.php");
     }
@@ -14,45 +14,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once 'Cabecera.php';?>
-<script language=JavaScript>
-    function imprim2(){
-        var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-        mywindow.document.write('<html><head>');
-        mywindow.document.write('<style>.tabla{width:100%;border-collapse:collapse;margin:16px 0 16px 0;}.tabla th{border:1px solid #ddd;padding:4px;background-color:#d4eefd;text-align:left;font-size:15px;}.tabla td{border:1px solid #ddd;text-align:left;padding:6px;}</style>');
-        mywindow.document.write('</head><body >');
-        mywindow.document.write(document.getElementById('muestra').innerHTML);
-        mywindow.document.write('</body></html>');
-       // mywindow.document.close(); // necesario para IE >= 10
-        mywindow.focus(); // necesario para IE >= 10
-        mywindow.print();
-        mywindow.close();
-        return true;
-    }
-    
-    function prueba(){
-        
-        toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": true,
-        "positionClass": "toast-top-right",
-        "preventDuplicates": true,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-        };
-        toastr["warning"]("gfhg");
-    
+<SCRIPT  language=JavaScript> 
+    function go(){
+        $("#venderContado").submit();;         
     }  
+    function goFactura(){
+        if(document.getElementById("facturaC").value>0){
+            $url = "facturaConsumidor.php?id_client="+document.getElementById("facturaC").value;
+            window.open($url,"_blank"); 
+         }       
+    }    
+    
 </script>
-<body >
+<body>
 
     <!-- Begin page -->
     <div id="wrapper">
@@ -95,7 +69,7 @@
                         </div>
                     </div>
                     <!-- end page title -->
-                    <div class="row">
+                    <div class="row" id="parte1">
                         <div class="col-md-12">
                             <div class="card-box">
     
@@ -107,170 +81,203 @@
 
                                     </div>
                                     <div class="float-right">
-                                        <h4 class="m-0 d-print-none">Venta al contado</h4>
+                                        <h4 class="m-0 d-print-none">Venta al credito</h4>
                                     </div>
                                 </div>
-    
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mt-3">
-                                            <label for="inputState" class="col-form-label">Clientes</label>
-                                            <select  class="form-control" name="cartera" id="cartera" style="overflow-y: scroll;" required >
-                                                <option selected >Seleccione</option>
-                                                <?php
-                                                include 'config/conexion.php';
-                                                $result = $conexion->query("select id_cliente as id, CONCAT(nombre, ' ', apellido) as nombre, apellido  FROM tclientes");
-                                                if ($result) {
-                                                    while ($fila = $result->fetch_object()) {
-                                                        
-                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre .'</opcion>';
-                                                        
+                                <form action="scriptsphp/ajaxPagoContado.php?bandera=0" id="venderContado" name="venderContado" method="POST" class="parsley-examples">
+                                
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="mt-3">
+                                                <input type="hidden" name="id_empleado" id="id_empleado" value="<?php echo $_SESSION["id"];?>" >
+                                                <label for="inputState" class="col-form-label">Clientes</label>
+                                                <select class="form-control"  name="id_cliente" id="id_cliente" required >
+                                                    <option selected value="0">Seleccione</option>
+                                                    <?php
+                                                    include 'config/conexion.php';
+                                                    $duiC=null;
+                                                    $nitC=null;
+                                                    $direccionC=null;
+                                                    $nombreC=null;
+                                                    $id=null;
+                                                    $result = $conexion->query("select id_cliente as id, CONCAT(nombre, ' ', apellido) as nombre, dui, nit, direccion  FROM tclientes");
+                                                    if ($result) {
+                                                        while ($fila = $result->fetch_object()) {
+                                                            $duiC = $fila->dui;
+                                                            $nitC = $fila->nit;
+                                                            $nombreC=$fila->nombre;
+                                                            $direccionC = $fila -> direccion;
+                                                            echo '<option value="' . $fila->id . '">' . $fila->nombre .'</opcion>';
+                                                            
+                                                        }
                                                     }
-                                                }
-                                                ?> 
-                                            </select>
-                                        </div>    
-                                    </div><!-- end col -->
-                                    <div class="col-md-4">
-                                        <div class="mt-3">
-                                            <label for="inputState" class="col-form-label">Plan de pago</label>
-                                            <select  class="form-control" name="cartera" id="cartera" style="overflow-y: scroll;" required >
-                                                <option selected >Seleccione</option>
-                                                <?php
-                                                include 'config/conexion.php';
-                                                $result = $conexion->query("select id_cliente as id, CONCAT(nombre, ' ', apellido) as nombre, apellido  FROM tclientes");
-                                                if ($result) {
-                                                    while ($fila = $result->fetch_object()) {
-                                                        
-                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre .'</opcion>';
-                                                        
-                                                    }
-                                                }
-                                                ?> 
-                                            </select>
-                                        </div>    
-                                    </div><!-- end col -->
-                                    <div class="col-md-4">
-                                        <div class="mt-2 float-right">
-                                            
-                                            <?php 
-                                                include 'config/conexion.php';
-                                                $fecha_actual = date("d-m-Y");
-                                                $hoy = date("d-m-Y",strtotime($fecha_actual."- 1 days"));
-                                                echo'
-                                                    <p><strong>Fecha : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp; '. $hoy .'</span></p>
-                                                ';
-                                                $result = $conexion->query("SHOW TABLE STATUS LIKE 'tventas'");
-                                                if ($result) {
-                                                    while ($fila = $result->fetch_object()) {                                               
-                                                        $codigoR=str_pad($fila->Auto_increment, 6, "0", STR_PAD_LEFT);
-                                                        echo'<p><strong>Venta No. : </strong> <span class="float-right">'. $codigoR .'</span></p>';
-                                                    }
-                                                } 
-                                                echo'<p><strong>NRC : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp; 0</span></p>
-                                                     <p><strong>NIT : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp; 0</span></p>';                                             
+                                                    ?> 
+                                                </select>
+                                            </div>                                       
 
-                                            ?>
+                                        </div><!-- end col -->
+                                        <div class="col-md-4">
+                                            <div class="mt-2 float-right">
+                                                <input  type="hidden" id="facturaC">
+                                                <?php 
+                                                    include 'config/conexion.php';
+                                                    $fecha_actual = date("d-m-Y");
+                                                    $hoy = date("d-m-Y",strtotime($fecha_actual."- 1 days"));
+                                                    echo'
+                                                        <p><strong>Fecha : </strong> <span class="float-right"> &nbsp;&nbsp;&nbsp; '. $hoy .'</span></p>
+                                                    ';
+                                                    $result = $conexion->query("SHOW TABLE STATUS LIKE 'tventas'");
+                                                    $codigoR = null;
+                                                    if ($result) {
+                                                        while ($fila = $result->fetch_object()) {                                               
+                                                            $codigoR=str_pad($fila->Auto_increment, 6, "0", STR_PAD_LEFT);
+                                                            echo'                                                                
+                                                                <input type="hidden" name="ventaCod" id="ventaCod" value="' .$codigoR . '" >
+                                                                <input type="hidden" name="ventaId" id="ventaId" value="' .$fila->Auto_increment . '" >
+                                                                <p><strong>Venta No. : </strong> <span class="float-right">'. $codigoR .'</span></p>
+                                                                
+                                                            ';
+                                                        }
+                                                    }
+
+
+                                                ?>
+                                                
+                                            </div>
+                                        </div><!-- end col -->
+                                    </div>
+                                    <!-- end row -->
+                                    
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                        
+                                            <div class="mt-3">
+                                                <input type="hidden" name="id_empleado" id="id_empleado" value="<?php echo $_SESSION["id"];?>" >
+                                                <label for="inputState" class="col-form-label">Primer cuota</label>
+                                                <div>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" placeholder="00/00/00" data-provide="datepicker" data-date-autoclose="true">
+
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                                       
+
+                                        </div><!-- end col -->
+                                        <div class="col-md-4">
                                             
-                                        </div>
-                                    </div><!-- end col -->
-                                </div>
-                                <!-- end row -->
-    
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="table-responsive">
-                                            <table class="table mt-4 table-centered">
-                                                <thead>
-                                                <tr>
-                                                    <th style="width: 10%">Codigo</th>
-                                                    <th>Articulo</th>
-                                                    <th style="width: 10%" class="text-center">Cantidad</th>
-                                                    <th style="width: 10%" class="text-center">Precio Unitario</th>
-                                                    <th style="width: 10%" class="text-right">Total</th>
-                                                </tr></thead>
-                                                <tbody>
-                                               
+                                        </div><!-- end col -->
+                                    </div>
+                                    <!-- end row -->
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="table-responsive">
+                                                <table class="table mt-4 table-centered">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width: 10%">Codigo</th>
+                                                        <th>Articulo</th>
+                                                        <th style="width: 10%" class="text-center">Cantidad</th>
+                                                        <th style="width: 10%" class="text-center">Precio Unitario</th>
+                                                        <th style="width: 10%" class="text-right">Total</th>
+                                                    </tr></thead>
+                                                    <tbody>
+                                                    
+                                                    <?php
+                                                        include 'config/conexion.php';
+                                                        $result = $conexion->query("
+                                                            select p.codigo,p.nombre, p.descripcion, p.precio_venta,
+                                                            t.cantidad, p.precio_venta*t.cantidad,p.precio_venta*t.cantidad as total
+                                                            FROM tcarrito t
+                                                            inner join tproducto as p on p.id_producto=t.id_producto
+                                                            order by p.codigo asc;
+                                                        ");
+                                                        if ($result) {
+                                                            while ($fila = $result->fetch_object()) {                                                                               
+                                                                
+                                                                echo '
+                                                                <tr>
+                                                                    <td>' . $fila->codigo . '</td>
+                                                                    <td>
+                                                                        <b>' . $fila->nombre . '</b> 
+                                                                        <br/>
+                                                                        ' . $fila->descripcion . '
+                                                                    </td>
+                                                                    <td class="text-center">' . $fila->cantidad . '</td>
+                                                                    <td class="text-center">$' . $fila->precio_venta . '</td>
+                                                                    <td class="text-right">$' . $fila->total . '</td>
+                                                                </tr>
+                                                                ';                                                                                
+                                                            }
+                                                        }
+                                                    ?>                                                    
+                                                    
+
+                                                    </tbody>
+                                                </table>
+                                            </div> <!-- end table-responsive -->
+                                        </div> <!-- end col -->
+                                    </div>
+                                    <!-- end row -->
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="clearfix pt-5">
+                                                <h6>Notes:</h6>
+
+                                                <small class="text-muted">
+                                                    All accounts are to be paid within 7 days from receipt of
+                                                    invoice. To be paid by cheque or credit card or direct payment
+                                                    online. If account is not paid within 7 days the credits details
+                                                    supplied as confirmation of work undertaken will be charged the
+                                                    agreed quoted fee noted above.
+                                                </small>
+                                            </div>
+                                        </div> <!-- end col -->
+                                        <div class="col-md-6">
+                                            <div class="float-right pt-4">
                                                 <?php
                                                     include 'config/conexion.php';
-                                                    $result = $conexion->query("
-                                                        select p.codigo,p.nombre, p.descripcion, p.precio_venta,
-                                                        t.cantidad, p.precio_venta*t.cantidad,p.precio_venta*t.cantidad as total
+                                                    $result = $conexion->query("select CONCAT(' $',sum(p.precio_venta*t.cantidad)) as subtotal,
+                                                        CONCAT(' $',ROUND(sum(p.precio_venta*t.cantidad)*0.13,1)) as iva,
+                                                        CONCAT(' $', (sum(p.precio_venta*t.cantidad)*0.13)+sum(p.precio_venta*t.cantidad)) as total,
+                                                        (sum(p.precio_venta*t.cantidad)*0.13)+sum(p.precio_venta*t.cantidad) as tota
                                                         FROM tcarrito t
-                                                        inner join tproducto as p on p.id_producto=t.id_producto
-                                                        order by p.codigo asc;
+                                                        inner join tproducto as p on p.id_producto=t.id_producto;
                                                     ");
+                                                    
                                                     if ($result) {
                                                         while ($fila = $result->fetch_object()) {                                                                               
                                                             
                                                             echo '
-                                                            <tr>
-                                                                <td>' . $fila->codigo . '</td>
-                                                                <td>
-                                                                    <b>' . $fila->nombre . '</b> 
-                                                                    <br/>
-                                                                    ' . $fila->descripcion . '
-                                                                </td>
-                                                                <td class="text-center">' . $fila->cantidad . '</td>
-                                                                <td class="text-center">$' . $fila->precio_venta . '</td>
-                                                                <td class="text-right">$' . $fila->total . '</td>
-                                                            </tr>
+                                                                <input type="hidden" name="totalV" id="totalV" value="' . $fila->tota . '" >
+                                                                <p><b>Sub-total: </b> <span class="float-right">' . $fila->subtotal . '</span></p>
+                                                                <p><b>Iva (13%): </b> <span class="float-right">' . $fila->iva . '</span></p>
+                                                                <h4><p><b>Total: </b> <span class="float-right">' . $fila->total . '</span></p></h4>
                                                             ';                                                                                
                                                         }
                                                     }
-                                                ?>                                                    
+                                                ?>                                            
                                                 
-    
-                                                </tbody>
-                                            </table>
-                                        </div> <!-- end table-responsive -->
-                                    </div> <!-- end col -->
-                                </div>
-                                <!-- end row -->
-    
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="clearfix pt-5">
-                                            <h6>Notes:</h6>
-    
-                                            <small class="text-muted">
-                                                All accounts are to be paid within 7 days from receipt of
-                                                invoice. To be paid by cheque or credit card or direct payment
-                                                online. If account is not paid within 7 days the credits details
-                                                supplied as confirmation of work undertaken will be charged the
-                                                agreed quoted fee noted above.
-                                            </small>
-                                        </div>
-                                    </div> <!-- end col -->
-                                    <div class="col-md-6">
-                                        <div class="float-right pt-4">
-                                            <?php
-                                                include 'config/conexion.php';
-                                                $result = $conexion->query("
-                                                    select CONCAT('$',sum(p.precio_venta*t.cantidad)) as total
-                                                    FROM tcarrito t
-                                                    inner join tproducto as p on p.id_producto=t.id_producto;
-                                                ");
-                                                if ($result) {
-                                                    while ($fila = $result->fetch_object()) {                                                                               
-                                                        
-                                                        echo '
-                                                        <p><b>Total pagar:</b> <span class="float-right">' . $fila->total . '</span></p>
-                                                        ';                                                                                
-                                                    }
-                                                }
-                                            ?>                                            
-                                            
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div> <!-- end col -->
-                                </div>
-                                <!-- end row -->
-    
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div> <!-- end col -->
+                                    </div>
+                                    <!-- end row -->
+                                </form>
                                 <div class="mt-4 mb-1">
                                     <div class="text-right d-print-none">
-                                        <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-printer mr-1"></i> Print</a>
-                                        <button href="#" class="btn btn-info waves-effect waves-light" id="otro" onclick="prueba();">Realizar venta</button>                                        
+                                        <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light">
+                                            <i class="mdi mdi-printer mr-1"></i> Factura credito fiscal
+                                        </a>
+                                        <button  onclick="goFactura();"
+                                            class="btn btn-primary waves-effect waves-light">
+                                            <i class="mdi mdi-printer mr-1"></i> Factura consumidor final
+                                        </button>
+                                        <button type=button onclick="go();" class="btn btn-info waves-effect waves-light">Realizar venta</button>                                        
                                     </div>
                                 </div>
                             </div>
@@ -279,6 +286,7 @@
     
                     </div>
                     <!-- end row -->
+                    
                 </div> <!-- container -->
 
             </div> <!-- content -->
@@ -311,7 +319,13 @@
     <div class="rightbar-overlay"></div>
 
     <?php include_once 'Pie.php';?>
-    
+    <script type="text/javascript">
+       
+        $('select#id_cliente').on('change',function(){
+            var valor = $(this).val();
+            $("#facturaC").val(valor);
+        });
+    </script>
 
 </body>
 

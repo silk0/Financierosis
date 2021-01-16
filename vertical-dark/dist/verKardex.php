@@ -118,25 +118,23 @@
                                         <table class="table mb-0">
                                             <thead>
                                                 <tr class="table-info text-info">                                                
-                                                    <th style="width: 10%;">Fecha</th>
-                                                    <th style="width: 30%;">Descripción</th>
-                                                    <th colspan="3" style="width: 12%;">Entradas</th>
-                                                    <th colspan="3" style="width: 10%;">Salidas</th>
-                                                    <th colspan="3" style="width: 10%;">Saldo</th>                                                
+                                                    <th style="width: 10%;"></th>
+                                                    <th style="width: 30%;" colspan="2"></th>
+                                                    <th colspan="2" style="width: 12%;">Entradas</th>
+                                                    <th colspan="2" style="width: 10%;">Salidas</th>
+                                                    <th colspan="2" style="width: 10%;">Saldo</th>                                                
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr class="table-info text-info">
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>Fecha</td>
+                                                    <td>Descripción</td>                                                    
+                                                    <td >Precio Unidad</td>
                                                     <td >Cant.</td>
-                                                    <td >P.Unitario</td>
                                                     <td >Total</td>
                                                     <td >Cant.</td>
-                                                    <td >P.Unitario</td>
                                                     <td >Total</td>
                                                     <td >Cant.</td>
-                                                    <td >P.Unitario</td>
                                                     <td >Total</td>                       
                                                 </tr>
                                                 <?php
@@ -148,28 +146,25 @@
                                                         echo "<tr class='table-success text-success'>";
                                                         echo "<td>".$fila->fecha."</td>";
                                                         echo "<td>".$fila->descripcion."</td>";
+                                                        echo "<td class='danger'>$ ".$fila->vunitario."</td>";
+                                                        $total=($fila->cantidad)*$fila->vunitario;                                                        
                                                         echo "<td class='warning'>".$fila->cantidad."</td>";
-                                                        echo "<td class='danger'>".$fila->vunitario."</td>";
-                                                        $total=($fila->cantidad)*$fila->vunitario;
-                                                        echo "<td class='info'>".$total."</td>";
-                                                        echo "<td class='warning'></td>";
+                                                        echo "<td class='info'>$ ".$total."</td>";
                                                         echo "<td class='danger'></td>";
                                                         echo "<td class='info'></td>";
                                                     }else {
                                                         echo "<tr class='table-danger text-danger'>";
                                                         echo "<td>".$fila->fecha."</td>";
                                                         echo "<td>".$fila->descripcion."</td>";
-                                                        echo "<td class='warning'></td>";
+                                                        echo "<td class='danger'>$ ".$fila->vunitario."</td>";
                                                         echo "<td class='danger'></td>";
                                                         echo "<td class='info'></td>";
-                                                        echo "<td class='warning'>".$fila->cantidad."</td>";
-                                                        echo "<td class='danger'>".$fila->vunitario."</td>";
+                                                        echo "<td class='warning'>".$fila->cantidad."</td>";                                                       
                                                         $total=($fila->cantidad)*$fila->vunitario;
-                                                        echo "<td class='info'>".$total."</td>";
+                                                        echo "<td class='info'>$ ".$total."</td>";
                                                     }
                                                     echo "<td class='warning'>".$fila->cantidads."</td>";
-                                                    echo "<td class='danger'>".$fila->vunitarios."</td>";
-                                                    echo "<td class='info'>".$fila->vtotals."</td>";
+                                                    echo "<td class='info'>$ ".$fila->vtotals."</td>";
 
                                                     echo "</tr>";
                                                     }

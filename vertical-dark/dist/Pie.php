@@ -61,6 +61,19 @@
 <script src="assets/libs/switchery/switchery.min.js"></script>
 <script src="assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
 
+<!-- Bootstrap Select -->
+<script src="assets/libs/bootstrap-select/bootstrap-select.min.js"></script>
+
+<script src="assets/libs/moment/moment.min.js"></script>
+<script src="assets/libs/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+
+<script src="assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
+
+<script src="assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+<script src="assets/libs/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+
 <script type="text/javascript">
     Parsley.addMessages('es', {
         defaultMessage: "Este valor parece ser inválido.",

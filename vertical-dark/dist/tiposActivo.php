@@ -99,10 +99,10 @@
                                         class="table table-striped table-bordered dt-responsive nowrap">
                                         <thead>
                                             <tr>
+                                                <th>Correlativo</th>
                                                 <th>Tipo de Activo</th>
                                                 <th>Clasificaciòn</th>
-                                                <th>Correlativo</th>
-                                                <th>Acciones</th>
+                                               <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -113,9 +113,10 @@
                                         if ($result) {
                                             while ($fila = $result->fetch_object()) {
                                                 echo "<tr>";
+                                                echo "<td>" . $fila->correlativo . "</td>";
                                                 echo "<td>" . $fila->nombre . "</td>";
                                                 echo "<td>" . $fila->id_clasificacion . "</td>";
-                                                echo "<td>" . $fila->correlativo . "</td>";
+                                               
                                                 echo "<td> 
                                                 <span data-toggle='modal'                                                    
                                                 data-target='#ver'>                                                
@@ -177,34 +178,8 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="card-box">
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputState"
-                                                                            class="col-form-label">Tipo de
-                                                                            Activo</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="nombre" id="nombre" required
-                                                                            placeholder="Nombre del Tipo de Activo">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputState"
-                                                                            class="col-form-label">Clasificaciòn</label>
-                                                                        <select class="form-control" name="clasi"
-                                                                            id="clasi">
-                                                                            <?php
-                                                                                  include 'config/conexion.php';
-                                                                                    $result = $conexion->query("select id_clasificaion as id,nombre FROM tclasificacion");
-                                                                                     if ($result) {
-                                                                                        while ($fila = $result->fetch_object()) {                                                                                
-                                                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
-                                                                                         }
-                                                                                    }
-                                                                                ?>
-                                                                        </select>
-                                                                    </div>
-                                                                    <?php 
+                                                             <div class="form-row">
+                                                                  <?php 
                                                                         include 'config/conexion.php';                                                                        
                                                                         $result = $conexion->query("SHOW TABLE STATUS LIKE 'ttipo_activo'");
                                                                         if ($result) {
@@ -222,7 +197,34 @@
                                                                         } 
                                                                     ?>
                                                                 </div>
-                                                            </div>
+                                                                    <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Tipo de
+                                                                            Activo</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="nombre" id="nombre" required
+                                                                            placeholder="Nombre del Tipo de Activo">
+                                                                    </div>
+
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Clasificaciòn</label>
+                                                                        <select class="form-control" name="clasi"
+                                                                            id="clasi">
+                                                                            <?php
+                                                                                  include 'config/conexion.php';
+                                                                                    $result = $conexion->query("select id_clasificaion as id,nombre FROM tclasificacion");
+                                                                                     if ($result) {
+                                                                                        while ($fila = $result->fetch_object()) {                                                                                
+                                                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
+                                                                                         }
+                                                                                    }
+                                                                                ?>
+                                                                        </select>
+                                                                    </div>
+                                                                    </div>
+                                                                    </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -255,22 +257,8 @@
                                                                 class="parsley-examples">
 
                                                                 <div class="form-row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputState"
-                                                                            class="col-form-label">Tipo de
-                                                                            Activo</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="nomv" id="nomv" required readonly>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputState"
-                                                                            class="col-form-label">Clasificaciòn</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="clasiv" id="clasiv" required readonly>
-                                                                    </div>
-                                                                    <?php 
+                                                                    
+                                                                 <?php 
                                                                         include 'config/conexion.php';                                                                        
                                                                         $result = $conexion->query("SHOW TABLE STATUS LIKE 'ttipo_activo'");
                                                                         if ($result) {
@@ -288,6 +276,20 @@
                                                                         } 
                                                                     ?>
                                                                 </div>
+                                                                <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Tipo de
+                                                                            Activo</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="nomv" id="nomv" required readonly>
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Clasificaciòn</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="clasiv" id="clasiv" required readonly>
+                                                                    </div>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -322,31 +324,7 @@
                                                                     <input type="hidden" id="id_tipo" name="id_tipo">
                                                                 </div>
                                                                 <div class="form-row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputState"
-                                                                            class="col-form-label">Tipo de
-                                                                            Activo</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="nomm" id="nomm" required>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputState"
-                                                                            class="col-form-label">Clasificaciòn</label>
-                                                                        <select class="form-control" name="clasim"
-                                                                            id="clasim">
-                                                                            <?php
-                                                                                  include 'config/conexion.php';
-                                                                                    $result = $conexion->query("select id_clasificaion as id,nombre FROM tclasificacion");
-                                                                                     if ($result) {
-                                                                                        while ($fila = $result->fetch_object()) {                                                                                
-                                                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
-                                                                                         }
-                                                                                    }
-                                                                                ?>
-                                                                        </select>
-                                                                    </div>
+                                                                
                                                                     <?php 
                                                                         include 'config/conexion.php';                                                                        
                                                                         $result = $conexion->query("SHOW TABLE STATUS LIKE 'ttipo_activo'");
@@ -365,6 +343,31 @@
                                                                         } 
                                                                     ?>
                                                                 </div>
+                                                                <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Tipo de
+                                                                            Activo</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="nomm" id="nomm" required>
+                                                                    </div>
+                                                              
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Clasificaciòn</label>
+                                                                        <select class="form-control" name="clasim"
+                                                                            id="clasim">
+                                                                            <?php
+                                                                                  include 'config/conexion.php';
+                                                                                    $result = $conexion->query("select id_clasificaion as id,nombre FROM tclasificacion");
+                                                                                     if ($result) {
+                                                                                        while ($fila = $result->fetch_object()) {                                                                                
+                                                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
+                                                                                         }
+                                                                                    }
+                                                                                ?>
+                                                                        </select>
+                                                                    </div>
+                                                                    </div> 
                                                             </form>
                                                         </div>
                                                     </div>
@@ -383,7 +386,7 @@
                         </div>
                     </div><!-- FIN Bootstrap Modals -->
 
-                </div>
+                    </div>
             </div> <!-- container -->
         </div> <!-- content -->
 
@@ -431,7 +434,7 @@
         $nombre   = $_POST['nombre'];
         $clasi   = $_POST['clasi'];
         $corre   = $_POST['corre'];
-        $consulta  = "INSERT INTO ttipo_activo (id_clasificacion,nombre,correlativo) VALUES('$clasi','$nombre','$corre')";
+        $consulta  = "INSERT INTO ttipo_activo (correlativo,nombre,id_clasificacion) VALUES('$corre','$nombre','$clasi')";
         $resultado = $conexion->query($consulta);
         if ($resultado) {
             msgI("Los datos fueron almacenados con exito");
