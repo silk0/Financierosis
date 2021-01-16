@@ -102,8 +102,8 @@
                                         <thead>
                                             <tr>
                                                 <th>Correlativo</th>
-                                                <th>Tiempo Depreciacion</th>
                                                 <th>Clasificacion</th>
+                                                <th>Tiempo Depreciacion</th>
                                                  <th>Acciones</th>
                                             </tr>
                                         </thead>
@@ -117,8 +117,8 @@
                                                 echo "<tr>";
                                                 
                                                 echo "<td>" . $fila->correlativo . "</td>";
-                                                echo "<td>" . $fila->tiempo_depreciacion . "</td>";
                                                 echo "<td>" . $fila->nombre . "</td>";
+                                                echo "<td>" . $fila->tiempo_depreciacion . "</td>";
                                                 echo "<td> 
                                                 <span data-toggle='modal'                                                    
                                                 data-target='#ver'>                                                
