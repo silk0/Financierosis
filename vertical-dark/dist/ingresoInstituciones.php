@@ -99,8 +99,8 @@
                                         class="table table-striped table-bordered dt-responsive nowrap">
                                         <thead>
                                             <tr>
-                                                <th>Nombre</th>
                                                 <th>Correlativo</th>
+                                                <th>Nombre</th>
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>
@@ -112,8 +112,8 @@
                                         if ($result) {
                                             while ($fila = $result->fetch_object()) {
                                                 echo "<tr>";
-                                                echo "<td>" . $fila->nombre . "</td>";
                                                 echo "<td>" . $fila->correlativo . "</td>";
+                                                echo "<td>" . $fila->nombre . "</td>";
                                                 echo "<td> 
                                                 <span data-toggle='modal'                                                    
                                                 data-target='#mostrarInstitucion'>                                             
@@ -204,7 +204,6 @@
                                                                             name="nombreinsti" id="nombreinsti" required
                                                                             placeholder="Nombre de la Institucion">
                                                                     </div>
-
                                                                 </div>
                                                         </div>
                                                     </div>
@@ -241,6 +240,13 @@
                                                 <div class="card-box">
                                                     <form name="form" required class="parsley-examples">
                                                         <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                                <label for="inputPassword4"
+                                                                    class="col-form-label">Correlativo</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="correlativo" id="correlativo" required
+                                                                    data-mask="000" placeholder="000" readonly>
+                                                            </div>
                                                             <div class="form-group col-md-6">
                                                                 <label for="inputEmail4"
                                                                     class="col-form-label">Nombre</label>
@@ -248,14 +254,6 @@
                                                                     id="nombre" required placeholder="Jose Alfredo"
                                                                     readonly>
                                                             </div>
-                                                            <div class="form-group col-md-6">
-                                                                <label for="inputPassword4"
-                                                                    class="col-form-label">Correlativo</label>
-                                                                <input type="text" class="form-control"
-                                                                    name="correlativo" id="correlativo" required
-                                                                    data-mask="000" placeholder="000" readonly>
-                                                            </div>
-
                                                         </div>
                                                 </div>
                                                 </form>
@@ -296,15 +294,7 @@
                                                         </div>
 
                                                         <div class="form-row">
-                                                            <div class="form-group col-md-6">
-                                                                <label for="inputEmail4"
-                                                                    class="col-form-label">Nombre</label>
-                                                                <input type="text" class="form-control" name="nombree"
-                                                                    id="nombree" required placeholder="Jose Alfredo">
-
-
-                                                            </div>
-                                                            <?php 
+                                                        <?php 
                                                                         include 'config/conexion.php';                                                                        
                                                                         $result = $conexion->query("SHOW TABLE STATUS LIKE 'tinstitucion'");
                                                                         if ($result) {
@@ -321,7 +311,14 @@
                                                                             }
                                                                         } 
                                                                     ?>
+                                                            <div class="form-group col-md-6">
+                                                                <label for="inputEmail4"
+                                                                    class="col-form-label">Nombre</label>
+                                                                <input type="text" class="form-control" name="nombree"
+                                                                    id="nombree" required placeholder="Jose Alfredo">
 
+
+                                                            </div>
                                                         </div>
                                                     </form>
                                                 </div>

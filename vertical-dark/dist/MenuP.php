@@ -125,7 +125,7 @@
                     <a href="ingresoInstituciones.php">Instituciones</a>
                 </li>
                 <li>
-                    <a href="departamentos.php">Departamentos</a>
+                    <a href="departamentos.php">Unidades</a>
                 </li>  
                 <li>
                     <a href="tiposActivo.php">Tipos de Activo</a>

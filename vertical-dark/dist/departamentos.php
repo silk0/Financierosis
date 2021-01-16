@@ -88,7 +88,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box">
-                                <h4 class="page-title">Departamentos</h4>
+                                <h4 class="page-title">Unidades</h4>
                             </div>
                         </div>
                     </div>
@@ -112,9 +112,9 @@
                                         class="table table-striped table-bordered dt-responsive nowrap">
                                         <thead>
                                             <tr>
-                                                <th>Departamento</th>
-                                                <th>Instituciòn</th>
                                                 <th>Correlativo</th>
+                                                <th>Unidad</th>
+                                                <th>Instituciòn</th>
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>
@@ -126,9 +126,10 @@
                                         if ($result) {
                                             while ($fila = $result->fetch_object()) {
                                                 echo "<tr>";
+                                                echo "<td>" . $fila->correlativo . "</td>";
                                                 echo "<td>" . $fila->nombre . "</td>";
                                                 echo "<td>" . $fila->id_institucion . "</td>";
-                                                echo "<td>" . $fila->correlativo . "</td>";
+                                                
                                                 echo "<td> 
                                                 <span data-toggle='modal'                                                    
                                                 data-target='#ver'>                                                
@@ -181,7 +182,7 @@
                                     <form method="POST" action="departamentos.php" required class="parsley-examples">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Datos del Departamento
+                                                <h4 class="modal-title">Datos de la Unidad
                                                 </h4>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-hidden="true">×</button>
@@ -191,15 +192,32 @@
                                                     <div class="col-md-12">
                                                         <div class="card-box">
                                                                 <div class="form-row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputState"
-                                                                            class="col-form-label">Departamento</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="nombre" id="nombre" required
-                                                                            placeholder="Nombre del Departamento">
-                                                                    </div>
+                                                                <?php 
+                                                                        include 'config/conexion.php';                                                                        
+                                                                        $result = $conexion->query("SHOW TABLE STATUS LIKE 'tdepartamento'");
+                                                                        if ($result) {
+                                                                            while ($fila = $result->fetch_object()) {                                               
+                                                                                $codigoR=str_pad($fila->Auto_increment, 4, "0", STR_PAD_LEFT);
+                                                                                echo'
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label for="inputEmail4"
+                                                                                        class="col-form-label">Correlativo</label>
+                                                                                    <input type="text" class="form-control"
+                                                                                        name="corre" id="corre" value ="'.$codigoR.'" required placeholder="0000" readonly>
+                                                                                </div>
+                                                                                ';
+                                                                            }
+                                                                        } 
+                                                                    ?> 
                                                                 </div>
                                                                 <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Unidad</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="nombre" id="nombre" required
+                                                                            placeholder="Nombre de la Unidad">
+                                                                    </div>
                                                                     <div class="form-group col-md-6">
                                                                         <label for="inputState"
                                                                             class="col-form-label">Instituciòn</label>
@@ -216,25 +234,7 @@
                                                                                 ?>
                                                                         </select>
                                                                     </div>
-                                                                    <?php 
-                                                                        include 'config/conexion.php';                                                                        
-                                                                        $result = $conexion->query("SHOW TABLE STATUS LIKE 'tdepartamento'");
-                                                                        if ($result) {
-                                                                            while ($fila = $result->fetch_object()) {                                               
-                                                                                $codigoR=str_pad($fila->Auto_increment, 4, "0", STR_PAD_LEFT);
-                                                                                echo'
-                                                                                <div class="form-group col-md-6">
-                                                                                    <label for="inputEmail4"
-                                                                                        class="col-form-label">Correlativo</label>
-                                                                                    <input type="text" class="form-control"
-                                                                                        name="corre" id="corre" value ="'.$codigoR.'" required placeholder="0000" readonly>
-                                                                                </div>
-                                                                                ';
-                                                                            }
-                                                                        } 
-                                                                    ?>
                                                                 </div>
-                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -256,7 +256,7 @@
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Informaciòn del Departamento</h4>
+                                                <h4 class="modal-title">Informaciòn de la Unidad</h4>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-hidden="true">×</button>
                                             </div>
@@ -268,23 +268,7 @@
                                                                 class="parsley-examples">
 
                                                                 <div class="form-row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputState"
-                                                                            class="col-form-label">Departamento</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="nombrev" id="nombrev" required
-                                                                            placeholder="Nombre del Departamento"
-                                                                            readonly>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputState"
-                                                                            class="col-form-label">Instituciòn</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="instiv" id="instiv" required readonly>
-                                                                    </div>
-                                                                    <?php 
+                                                                <?php 
                                                                         include 'config/conexion.php';                                                                        
                                                                         $result = $conexion->query("SHOW TABLE STATUS LIKE 'tdepartamento'");
                                                                         if ($result) {
@@ -301,6 +285,22 @@
                                                                             }
                                                                         } 
                                                                     ?>
+                                                                </div>
+                                                                <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Unidad</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="nombrev" id="nombrev" required
+                                                                            placeholder="Nombre de de la Unidad"
+                                                                            readonly>
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Instituciòn</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="instiv" id="instiv" required readonly>
+                                                                    </div>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -321,7 +321,7 @@
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Modificar Datos del Departamento</h4>
+                                                <h4 class="modal-title">Modificar Datos de la Unidad</h4>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-hidden="true">×</button>
                                             </div>
@@ -335,32 +335,7 @@
                                                                 <input type="hidden" id="id_departamento" name="id_departamento">
                                                             </div>
                                                                 <div class="form-row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="inputState"
-                                                                            class="col-form-label">Departamento</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="nombrem" id="nombrem" required
-                                                                            placeholder="Nombre del Departamento">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                        <label for="inputState"
-                                                                            class="col-form-label">Instituciòn</label>
-                                                                        <select class="form-control" name="instim"
-                                                                            id="instim">
-                                                                            <?php
-                                                                                  include 'config/conexion.php';
-                                                                                    $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
-                                                                                     if ($result) {
-                                                                                        while ($fila = $result->fetch_object()) {                                                                                
-                                                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
-                                                                                         }
-                                                                                    }
-                                                                                ?>
-                                                                        </select>
-                                                                    </div>
-                                                                    <?php 
+                                                                <?php 
                                                                         include 'config/conexion.php';                                                                        
                                                                         $result = $conexion->query("SHOW TABLE STATUS LIKE 'tdepartamento'");
                                                                         if ($result) {
@@ -377,6 +352,31 @@
                                                                             }
                                                                         } 
                                                                     ?>
+                                                                </div>
+                                                                <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Unidad</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="nombrem" id="nombrem" required
+                                                                            placeholder="Nombre de la Unidad">
+                                                                    </div>
+                                                                <div class="form-group col-md-6">
+                                                                        <label for="inputState"
+                                                                            class="col-form-label">Instituciòn</label>
+                                                                        <select class="form-control" name="instim"
+                                                                            id="instim">
+                                                                            <?php
+                                                                                  include 'config/conexion.php';
+                                                                                    $result = $conexion->query("select id_institucion as id,nombre FROM tinstitucion");
+                                                                                     if ($result) {
+                                                                                        while ($fila = $result->fetch_object()) {                                                                                
+                                                                                        echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
+                                                                                         }
+                                                                                    }
+                                                                                ?>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </form>
                                                         </div>
