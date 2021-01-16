@@ -84,14 +84,14 @@
                                         <h4 class="m-0 d-print-none">Venta al credito</h4>
                                     </div>
                                 </div>
-                                <form action="scriptsphp/ajaxPagoContado.php?bandera=0" id="venderContado" name="venderContado" method="POST" class="parsley-examples">
+                                <form action="" id="venderContado" name="venderContado" method="POST" class="parsley-examples">
                                 
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="mt-3">
                                                 <input type="hidden" name="id_empleado" id="id_empleado" value="<?php echo $_SESSION["id"];?>" >
                                                 <label for="inputState" class="col-form-label">Clientes</label>
-                                                <select class="form-control"  name="id_cliente" id="id_cliente" required >
+                                                <select class="form-control"  name="id_cliente" id="id_cliente" data-parsley-type="required" required >
                                                     <option selected value="0">Seleccione</option>
                                                     <?php
                                                     include 'config/conexion.php';
@@ -152,11 +152,11 @@
                                         <div class="col-md-2">
                                         
                                             <div class="mt-3">
-                                                <input type="hidden" name="id_empleado" id="id_empleado" value="<?php echo $_SESSION["id"];?>" >
+                                               
                                                 <label for="inputState" class="col-form-label">Primer cuota</label>
                                                 <div>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder="00/00/00" data-provide="datepicker" data-date-autoclose="true">
+                                                        <input type="text" class="form-control" placeholder="00/00/00" data-parsley-type="required"  data-provide="datepicker" data-date-autoclose="true">
 
                                                         <div class="input-group-append">
                                                             <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
@@ -166,8 +166,39 @@
                                             </div>                                       
 
                                         </div><!-- end col -->
-                                        <div class="col-md-4">
-                                            
+                                        <div class="col-md-2">
+                                             <div class="mt-3">
+                                                
+                                                <label for="inputState" class="col-form-label">Prima</label>
+                                                <div>
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" placeholder="0%" data-parsley-type="required"  >                                                        
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div><!-- end col -->
+                                        <div class="col-md-2">
+                                             <div class="mt-3">
+                                                
+                                                <label for="inputState" class="col-form-label">Interes mensual</label>
+                                                <div>
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" placeholder="0%" min="0"
+                                                        max="100"data-parsley-type="required"  >                                                        
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div><!-- end col -->
+                                        <div class="col-md-2">
+                                             <div class="mt-3">
+                                                
+                                                <label for="inputState" class="col-form-label">Meses</label>
+                                                <div>
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" placeholder="0" data-parsley-type="required"  >                                                        
+                                                    </div>
+                                                </div>
+                                            </div> 
                                         </div><!-- end col -->
                                     </div>
                                     <!-- end row -->
@@ -267,7 +298,7 @@
                                         </div> <!-- end col -->
                                     </div>
                                     <!-- end row -->
-                                </form>
+                                
                                 <div class="mt-4 mb-1">
                                     <div class="text-right d-print-none">
                                         <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light">
@@ -280,6 +311,7 @@
                                         <button type=button onclick="go();" class="btn btn-info waves-effect waves-light">Realizar venta</button>                                        
                                     </div>
                                 </div>
+                                </form>
                             </div>
     
                         </div>
