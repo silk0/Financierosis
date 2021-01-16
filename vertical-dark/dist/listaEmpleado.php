@@ -34,7 +34,7 @@
                 <?php include_once 'MenuP.php';?>
                 <!-- End Sidebar -->
 
-                
+
 
             </div>
             <!-- Sidebar -left -->
@@ -55,13 +55,54 @@
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
-                            <div class="page-title-box">                                
+                            <div class="page-title-box">
                                 <h4 class="page-title">Listado de Empleado</h4>
                             </div>
                         </div>
                     </div>
                     <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card-box">
+                                <form id="fCartera" name="fCartera" action="" method="GET" class="parsley-examples">
+                                    <table id="datatable-buttons"
+                                        class="table table-striped table-bordered dt-responsive nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>DUI</th>
+                                                <th>Nombre</th>
+                                                <th>Apellido</th>
+                                                <th>Direcciòn</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <?php
                                         
+                                        include "config/conexion.php";
+                                            $result = $conexion->query("SELECT * from templeados ORDER BY nombre");
+                                        if ($result) {
+                                            while ($fila = $result->fetch_object()) {
+                                                echo "<tr>";
+                                                echo "<td>" . $fila->dui . "</td>";
+                                                echo "<td>" . $fila->nombre . "</td>";
+                                                echo "<td>" . $fila->apellido . "</td>";
+                                                echo "<td>" . $fila->zona . "</td>";
+                                                echo "<td></td>";
+                                                echo "</tr>";
+                                            }
+                                        }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
                 </div> <!-- container -->
 
             </div> <!-- content -->
@@ -71,7 +112,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                        <?php echo date('Y'); ?> - Financiero UES-FMP 
+                            <?php echo date('Y'); ?> - Financiero UES-FMP
                         </div>
                     </div>
                 </div>
@@ -88,7 +129,7 @@
     </div>
     <!-- END wrapper -->
 
-    
+
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>

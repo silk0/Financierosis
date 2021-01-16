@@ -155,8 +155,10 @@ function go(){
                                             <label for="inputState" class="col-form-label">Estado</label>
                                             <select class="form-control" name="tipo" id="tipo" required>
                                                 <option selected>Seleccione</option>
-                                                <option>Activo</option>
-                                                <option>Inactivo</option>
+                                                <?php
+                                             echo "<option value='1'>Activo</option>";
+                                             echo "<option value='0'>Inactivo</option>";
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -201,7 +203,12 @@ function go(){
                                             while ($fila = $result->fetch_object()) {
                                                 echo "<tr>";
                                                 echo "<td>" . $fila->categoria . "</td>";
-                                                echo "<td>" . $fila->estado . "</td>";
+                                                if($fila->estado==1){
+                                                    echo "<td>Activo</td>";
+                                                }else{
+                                                    echo "<td>Inactivo</td>";
+                                                }
+
                                                 echo "<td> </td>";
                                                 echo "</tr>";
                                             }

@@ -122,13 +122,13 @@
                                             <?php
                                         
                                         include "config/conexion.php";
-                                            $result = $conexion->query("SELECT * from tdepartamento ORDER BY nombre");
+                                            $result = $conexion->query("SELECT tdepartamento.nombre,tdepartamento.correlativo,tinstitucion.nombre as nombrei,tdepartamento.id_departamento FROM tinstitucion INNER JOIN tdepartamento ON tdepartamento.id_institucion = tinstitucion.id_institucion ORDER BY id_departamento");
                                         if ($result) {
                                             while ($fila = $result->fetch_object()) {
                                                 echo "<tr>";
                                                 echo "<td>" . $fila->correlativo . "</td>";
                                                 echo "<td>" . $fila->nombre . "</td>";
-                                                echo "<td>" . $fila->id_institucion . "</td>";
+                                                echo "<td>" . $fila->nombrei . "</td>";
                                                 
                                                 echo "<td> 
                                                 <span data-toggle='modal'                                                    
@@ -139,8 +139,8 @@
                                                     class='btn btn-primary waves-effect waves-light' onclick=\"
                                                     edit(
                                                         '$fila->nombre',
-                                                        '$fila->id_institucion',
-                                                        '$fila->correlativo',
+                                                        '$fila->nombrei',
+                                                        '$fila->correlativo'
                                                     )\";><i class='mdi mdi-eye'></i> 
                                                     </button></span>
                                                     <span data-toggle='modal'                                                    
@@ -152,7 +152,7 @@
                                                     modify(
                                                         '$fila->id_departamento',
                                                         '$fila->nombre',
-                                                        '$fila->id_institucion',
+                                                        '$fila->nombrei',
                                                         '$fila->correlativo'
                                                     )\";>                                                    
                                                         <i class='mdi mdi-pencil-outline'></i></i>
