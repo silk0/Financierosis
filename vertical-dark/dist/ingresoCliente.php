@@ -71,23 +71,7 @@ function notify(titulo,texto,from, align, icon, type, animIn, animOut){
 
         Toast.fire({icon: icono, title: str});  
     }
-    function prueba(str, icono){
-        var t={
-            heading:t,text:"nuevo",
-            position:o,
-            loaderBg:e,
-            icon:n,
-            hideAfter:a,
-            stack:s
-        }
-        r&&(c.showHideTransition=r),
-        console.log(c),
-        p.toast().reset("all"),
-        p.toast(c)},
-        p.NotificationApp=new t,
-        p.NotificationApp.Constructor=t}
-        (window.jQuery);  
-    }
+    
 	
 function go(){
 
