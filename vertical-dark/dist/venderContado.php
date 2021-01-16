@@ -87,7 +87,7 @@
                                 <form action="scriptsphp/ajaxPagoContado.php?bandera=0" id="venderContado" name="venderContado" method="POST" class="parsley-examples">
                                 
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <div class="mt-3">
                                                 <input type="hidden" name="id_empleado" id="id_empleado" value="<?php echo $_SESSION["id"];?>" >
                                                 <label for="inputState" class="col-form-label">Clientes</label>
@@ -116,7 +116,7 @@
                                             </div>                                       
 
                                         </div><!-- end col -->
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="mt-2 float-right">
                                                 <input  type="hidden" id="facturaC">
                                                 <?php 
@@ -219,7 +219,8 @@
                                                     include 'config/conexion.php';
                                                     $result = $conexion->query("select CONCAT(' $',sum(p.precio_venta*t.cantidad)) as subtotal,
                                                         CONCAT(' $',ROUND(sum(p.precio_venta*t.cantidad)*0.13,1)) as iva,
-                                                        CONCAT(' $', (sum(p.precio_venta*t.cantidad)*0.13)+sum(p.precio_venta*t.cantidad)) as total
+                                                        CONCAT(' $', (sum(p.precio_venta*t.cantidad)*0.13)+sum(p.precio_venta*t.cantidad)) as total,
+                                                        (sum(p.precio_venta*t.cantidad)*0.13)+sum(p.precio_venta*t.cantidad) as tota
                                                         FROM tcarrito t
                                                         inner join tproducto as p on p.id_producto=t.id_producto;
                                                     ");
@@ -228,7 +229,7 @@
                                                         while ($fila = $result->fetch_object()) {                                                                               
                                                             
                                                             echo '
-                                                                <input type="hidden" name="total" id="total" value="' . $fila->total . '" >
+                                                                <input type="hidden" name="totalV" id="totalV" value="' . $fila->tota . '" >
                                                                 <p><b>Sub-total: </b> <span class="float-right">' . $fila->subtotal . '</span></p>
                                                                 <p><b>Iva (13%): </b> <span class="float-right">' . $fila->iva . '</span></p>
                                                                 <h4><p><b>Total: </b> <span class="float-right">' . $fila->total . '</span></p></h4>
