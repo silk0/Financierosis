@@ -102,8 +102,8 @@
                                         <thead>
                                             <tr>
                                                 <th>Correlativo</th>
-                                                <th>Tiempo Depreciacion</th>
                                                 <th>Clasificacion</th>
+                                                <th>Tiempo Depreciacion</th>
                                                  <th>Acciones</th>
                                             </tr>
                                         </thead>
@@ -117,8 +117,8 @@
                                                 echo "<tr>";
                                                 
                                                 echo "<td>" . $fila->correlativo . "</td>";
-                                                echo "<td>" . $fila->tiempo_depreciacion . "</td>";
                                                 echo "<td>" . $fila->nombre . "</td>";
+                                                echo "<td>" . $fila->tiempo_depreciacion . "</td>";
                                                 echo "<td> 
                                                 <span data-toggle='modal'                                                    
                                                 data-target='#ver'>                                                
@@ -311,7 +311,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Editar Datos Clasificacion
+                                <h4 class="modal-title">Modificar Datos Clasificacion
                                 </h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             </div>
@@ -346,7 +346,7 @@
                                                                     ?>
 
                                                 </div>
-                                                <div class="form-row">
+                                                
                                                 <div class="form-group col-md-6">
                                                         <label for="inputEmail4"
                                                             class="col-form-label">Clasificacion</label>
