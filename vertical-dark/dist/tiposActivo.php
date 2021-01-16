@@ -22,17 +22,17 @@
 
     function edit(nom, clasi, corre) {
         //document.getElementById("baccion2").value=id;
+        document.getElementById("correv").value = corre;
         document.getElementById("nomv").value = nom;
         document.getElementById("clasiv").value = clasi;
-        document.getElementById("correv").value = corre;
+        
     }
 
     function modify(id, nomb, clas, correl) {
         document.getElementById("id_tipo").value = id;
+        document.getElementById("correm").value = correl;
         document.getElementById("nomm").value = nomb;
         document.getElementById("clasim").value = clas;
-        document.getElementById("correm").value = correl;
-
     }
 </script>
 
@@ -102,21 +102,20 @@
                                                 <th>Correlativo</th>
                                                 <th>Tipo de Activo</th>
                                                 <th>Clasificaciòn</th>
-                                               <th>Acciones</th>
+                                                <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                         
                                         include "config/conexion.php";
-                                            $result = $conexion->query("SELECT * from ttipo_activo ORDER BY nombre");
+                                            $result = $conexion->query("SELECT ttipo_activo.nombre, tclasificacion.nombre as clasi, ttipo_activo.correlativo, ttipo_activo.id_tipo FROM ttipo_activo INNER JOIN tclasificacion ON ttipo_activo.id_clasificacion = tclasificacion.id_clasificaion ORDER BY id_tipo");
                                         if ($result) {
                                             while ($fila = $result->fetch_object()) {
                                                 echo "<tr>";
                                                 echo "<td>" . $fila->correlativo . "</td>";
                                                 echo "<td>" . $fila->nombre . "</td>";
-                                                echo "<td>" . $fila->id_clasificacion . "</td>";
-                                               
+                                                echo "<td>" . $fila->clasi . "</td>";
                                                 echo "<td> 
                                                 <span data-toggle='modal'                                                    
                                                 data-target='#ver'>                                                
@@ -126,7 +125,7 @@
                                                     class='btn btn-primary waves-effect waves-light' onclick=\"
                                                     edit(
                                                         '$fila->nombre',
-                                                        '$fila->id_clasificacion',
+                                                        '$fila->clasi',
                                                         '$fila->correlativo'
                                                     )\";><i class='mdi mdi-eye'></i> 
                                                     </button></span>
@@ -139,8 +138,9 @@
                                                     modify(
                                                         '$fila->id_tipo',
                                                         '$fila->nombre',
-                                                        '$fila->id_clasificacion',
+                                                        '$fila->clasi',
                                                         '$fila->correlativo'
+                                                        
                                                     )\";>                                                    
                                                         <i class='mdi mdi-pencil-outline'></i></i>
                                                     </button></span>
@@ -178,8 +178,8 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="card-box">
-                                                             <div class="form-row">
-                                                                  <?php 
+                                                                <div class="form-row">
+                                                                <?php 
                                                                         include 'config/conexion.php';                                                                        
                                                                         $result = $conexion->query("SHOW TABLE STATUS LIKE 'ttipo_activo'");
                                                                         if ($result) {
@@ -197,8 +197,8 @@
                                                                         } 
                                                                     ?>
                                                                 </div>
-                                                                    <div class="form-row">
-                                                                    <div class="form-group col-md-6">
+                                                                <div class="form-row">
+                                                                <div class="form-group col-md-6">
                                                                         <label for="inputState"
                                                                             class="col-form-label">Tipo de
                                                                             Activo</label>
@@ -206,7 +206,6 @@
                                                                             name="nombre" id="nombre" required
                                                                             placeholder="Nombre del Tipo de Activo">
                                                                     </div>
-
                                                                     <div class="form-group col-md-6">
                                                                         <label for="inputState"
                                                                             class="col-form-label">Clasificaciòn</label>
@@ -223,8 +222,8 @@
                                                                                 ?>
                                                                         </select>
                                                                     </div>
-                                                                    </div>
-                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -257,8 +256,7 @@
                                                                 class="parsley-examples">
 
                                                                 <div class="form-row">
-                                                                    
-                                                                 <?php 
+                                                                <?php 
                                                                         include 'config/conexion.php';                                                                        
                                                                         $result = $conexion->query("SHOW TABLE STATUS LIKE 'ttipo_activo'");
                                                                         if ($result) {
@@ -283,13 +281,14 @@
                                                                             Activo</label>
                                                                         <input type="text" class="form-control"
                                                                             name="nomv" id="nomv" required readonly>
-                                                                    </div>
+                                                                </div>
                                                                     <div class="form-group col-md-6">
                                                                         <label for="inputState"
                                                                             class="col-form-label">Clasificaciòn</label>
                                                                         <input type="text" class="form-control"
                                                                             name="clasiv" id="clasiv" required readonly>
                                                                     </div>
+                                                                </div>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -324,8 +323,7 @@
                                                                     <input type="hidden" id="id_tipo" name="id_tipo">
                                                                 </div>
                                                                 <div class="form-row">
-                                                                
-                                                                    <?php 
+                                                                <?php 
                                                                         include 'config/conexion.php';                                                                        
                                                                         $result = $conexion->query("SHOW TABLE STATUS LIKE 'ttipo_activo'");
                                                                         if ($result) {
@@ -343,6 +341,7 @@
                                                                         } 
                                                                     ?>
                                                                 </div>
+                                                                <div class="form-row">
                                                                 <div class="form-group col-md-6">
                                                                         <label for="inputState"
                                                                             class="col-form-label">Tipo de
@@ -350,7 +349,6 @@
                                                                         <input type="text" class="form-control"
                                                                             name="nomm" id="nomm" required>
                                                                     </div>
-                                                              
                                                                     <div class="form-group col-md-6">
                                                                         <label for="inputState"
                                                                             class="col-form-label">Clasificaciòn</label>
@@ -367,7 +365,7 @@
                                                                                 ?>
                                                                         </select>
                                                                     </div>
-                                                                    </div> 
+                                                                </div>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -386,7 +384,7 @@
                         </div>
                     </div><!-- FIN Bootstrap Modals -->
 
-                    </div>
+                </div>
             </div> <!-- container -->
         </div> <!-- content -->
 
@@ -434,7 +432,7 @@
         $nombre   = $_POST['nombre'];
         $clasi   = $_POST['clasi'];
         $corre   = $_POST['corre'];
-        $consulta  = "INSERT INTO ttipo_activo (correlativo,nombre,id_clasificacion) VALUES('$corre','$nombre','$clasi')";
+        $consulta  = "INSERT INTO ttipo_activo (id_clasificacion,nombre,correlativo) VALUES('$clasi','$nombre','$corre')";
         $resultado = $conexion->query($consulta);
         if ($resultado) {
             msgI("Los datos fueron almacenados con exito");
