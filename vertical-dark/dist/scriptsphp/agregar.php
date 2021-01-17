@@ -30,7 +30,7 @@
         '".$emple."','".$prove."','".$corre."','".$fechaBD."','".$observ."','1','".$valor."','".$marca."',0.0,'".$tipo."';");
 
         if ($resultado) {
-            header('Location:../.php');  
+            header('Location:../ingresoActivo.php');  
         } else {
             echo 'No funciona';  
         }        
