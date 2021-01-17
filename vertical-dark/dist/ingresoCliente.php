@@ -235,7 +235,7 @@ function enviar(id){
                                         <div class="form-group col-md-4">
                                             <label for="inputState" class="col-form-label">Tipo de ingreso</label>
                                             <select class="form-control" name="tipo" id="tipo" required >
-                                                <option selected >Seleccione</option>
+                                                
                                                 <option>Salario</option>
 											    <option>Remesa</option>
 											    <option>Salario Informal</option>
@@ -254,7 +254,7 @@ function enviar(id){
                                         <div class="form-group col-md-4">
                                             <label for="inputState" class="col-form-label">Agregar a la cartera</label>
                                             <select  class="form-control" name="cartera" id="cartera" required >
-                                                <option selected >Seleccione</option>
+                                                
                                                 <?php
                                                 include 'config/conexion.php';
                                                 $result = $conexion->query("select id_categoria as id,nombre FROM tcartera");

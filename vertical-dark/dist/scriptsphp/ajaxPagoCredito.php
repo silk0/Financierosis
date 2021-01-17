@@ -13,20 +13,8 @@
 
        
         $result = $conexion->query("insert into
-            tventas(
-            id_cliente,
-            codigo,
-            id_plan,
-            id_empleado,
-            prestamo_original,
-            saldo_actual,
-            mora_acumulada,
-            intereses_acumulados,
-            estado,
-            proximo_pago,
-            fecha,
-            interes,
-            prima)
+            tventas(id_cliente,codigo,id_plan,id_empleado,prestamo_original,saldo_actual,
+            mora_acumulada,intereses_acumulados,estado,proximo_pago,fecha,interes,prima)
             values ('".$id_cl."', 
             '".$codC."', 
             null,

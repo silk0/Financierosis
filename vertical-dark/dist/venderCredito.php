@@ -16,7 +16,7 @@
 <?php include_once 'Cabecera.php';?>
 <SCRIPT  language=JavaScript> 
     function go(){
-        $("#venderContado").submit();;         
+        $("#venderCredito").submit();;         
     }  
     function goFactura(){
         if(document.getElementById("facturaC").value>0){
@@ -84,14 +84,14 @@
                                         <h4 class="m-0 d-print-none">Venta al credito</h4>
                                     </div>
                                 </div>
-                                <form action="" id="venderContado" name="venderContado" method="POST" class="parsley-examples">
+                                <form action="" id="venderCredito" name="venderContado" method="POST" class="parsley-examples">
                                 
-                                    <div class="row">
+                                    <div class="form-row">
                                         <div class="col-md-8">
                                             <div class="mt-3">
                                                 <input type="hidden" name="id_empleado" id="id_empleado" value="<?php echo $_SESSION["id"];?>" >
                                                 <label for="inputState" class="col-form-label">Clientes</label>
-                                                <select class="form-control"  name="id_cliente" id="id_cliente" data-parsley-type="required" required >
+                                                <select class="form-control"  name="id_cliente" id="id_cliente" class="form-control" required >
                                                     <option selected value="0">Seleccione</option>
                                                     <?php
                                                     include 'config/conexion.php';
@@ -155,12 +155,12 @@
                                                
                                                 <label for="inputState" class="col-form-label">Primer cuota</label>
                                                 <div>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder="00/00/00" data-parsley-type="required"  data-provide="datepicker" data-date-autoclose="true">
-
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
-                                                        </div>
+                                                    <div class="input-group" required >
+                                                        <input type="date"  placeholder="00/00/00"  
+                                                        class="form-control"  data-date-autoclose="true"
+                                                        id="primerC" name="primerC"
+                                                        data-parsley-type="notblank" required>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>                                       
@@ -172,7 +172,9 @@
                                                 <label for="inputState" class="col-form-label">Prima</label>
                                                 <div>
                                                     <div class="input-group">
-                                                        <input type="number" class="form-control" placeholder="0%" data-parsley-type="required"  >                                                        
+                                                        <input type="number" class="form-control" required placeholder="0%" data-parsley-type="required"  
+                                                        min="0" id="prima" name="prima"
+                                                        max="100" required>                                                        
                                                     </div>
                                                 </div>
                                             </div> 
@@ -180,11 +182,11 @@
                                         <div class="col-md-2">
                                              <div class="mt-3">
                                                 
-                                                <label for="inputState" class="col-form-label">Interes mensual</label>
+                                                <label for="inputState" class="col-form-label">Interes nominal anual</label>
                                                 <div>
                                                     <div class="input-group">
                                                         <input type="number" class="form-control" placeholder="0%" min="0"
-                                                        max="100"data-parsley-type="required"  >                                                        
+                                                        id="interesN" name="interesN" max="100" required>                                                        
                                                     </div>
                                                 </div>
                                             </div> 
@@ -195,7 +197,20 @@
                                                 <label for="inputState" class="col-form-label">Meses</label>
                                                 <div>
                                                     <div class="input-group">
-                                                        <input type="number" class="form-control" placeholder="0" data-parsley-type="required"  >                                                        
+                                                        <input type="number" class="form-control" min="1"
+                                                        id="meses" name="meses" max="60" placeholder="0 Meses" required  >                                                        
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div><!-- end col -->
+                                        <div class="col-md-2">
+                                             <div class="mt-3">
+                                                
+                                                <label for="inputState" class="col-form-label">Total+interes</label>
+                                                <div>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="total" name="total"
+                                                         value="$ 0.0" readonly >                                                        
                                                     </div>
                                                 </div>
                                             </div> 
@@ -257,14 +272,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="clearfix pt-5">
-                                                <h6>Notes:</h6>
+                                                <h6>Nota: </h6>
 
                                                 <small class="text-muted">
-                                                    All accounts are to be paid within 7 days from receipt of
-                                                    invoice. To be paid by cheque or credit card or direct payment
-                                                    online. If account is not paid within 7 days the credits details
-                                                    supplied as confirmation of work undertaken will be charged the
-                                                    agreed quoted fee noted above.
+                                                        El boton de realizar venta al credito se desbloqueara
+                                                        si los productos en el carrito no superen un producto. Solo se registra
+                                                        las ventas al credito de un producto a la vez.
                                                 </small>
                                             </div>
                                         </div> <!-- end col -->
@@ -300,15 +313,28 @@
                                     <!-- end row -->
                                 
                                 <div class="mt-4 mb-1">
-                                    <div class="text-right d-print-none">
-                                        <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light">
-                                            <i class="mdi mdi-printer mr-1"></i> Factura credito fiscal
-                                        </a>
-                                        <button  onclick="goFactura();"
-                                            class="btn btn-primary waves-effect waves-light">
-                                            <i class="mdi mdi-printer mr-1"></i> Factura consumidor final
-                                        </button>
-                                        <button type=button onclick="go();" class="btn btn-info waves-effect waves-light">Realizar venta</button>                                        
+                                    <div class="form-group">
+                                    <?php
+                                        include 'config/conexion.php';
+                                        $result = $conexion->query("select sum(t.cantidad) as cantidad
+                                        from tcarrito t;
+                                        ");
+                                        if ($result) {
+                                            while ($fila = $result->fetch_object()) {                                                                               
+                                                if(($fila->cantidad)>1  OR  ($fila->cantidad)==null)
+                                                    echo '
+                                                        <button type=button onclick="go();" disabled 
+                                                        class="btn btn-info waves-effect waves-light">Realizar venta</button> 
+                                                    '; 
+                                                else
+                                                    echo '
+                                                        <button type=button onclick="go();"
+                                                        class="btn btn-info waves-effect waves-light">Realizar venta</button> 
+                                                    ';                                                                                
+                                            }
+                                        }
+                                    ?>                                         
+                                                                               
                                     </div>
                                 </div>
                                 </form>
@@ -351,11 +377,55 @@
     <div class="rightbar-overlay"></div>
 
     <?php include_once 'Pie.php';?>
+    
     <script type="text/javascript">
-       
-        $('select#id_cliente').on('change',function(){
-            var valor = $(this).val();
-            $("#facturaC").val(valor);
+        $('#prima').on('change', function () {
+            $prima= $(this).val();
+            $int = $('#interesN').val();
+            $m = $('#meses').val();            
+            $toV = $('#totalV').val();
+            if ($int > 0 && $m > 0 && $toV > 0) {
+                var power = Math.pow(10, 6);
+                $totalInteres = Math.round(($toV*($int/100)*($m/12)) * power) / power;                
+                if($prima>0){
+                    $sumaP=$toV*$prima;
+
+                }else{
+                    alert('INTERES: '+$totalInteres);
+                    $totalPagar = Number($toV)+Number(Number($toV)*Number($totalInteres/100));                                  
+                    var redondear = Math.pow(10, 2);
+                    $total = Math.round($totalPagar * redondear) /redondear;
+                    $('#total').val('$'+$total);              
+                }                  
+               
+            } else {
+                $('#total').val("$00.00");
+            }
+
+        });
+        $('#interesN').on('change', function () {
+            $inst = $("select#institucion").val();
+            $dep = $(this).val();
+            $tipo = $('select#tipoA').val();
+            $co = document.getElementById("corre").value;
+            $codi = $inst + "-" + $dep + "-" + $tipo + "-" + $co;
+            if ($inst > 0 && $dep > 0 && $tipo > 0 && $co > 0) {
+                $("#correlativo").val($codi);
+            } else {
+                $("#correlativo").val($co);
+            }
+        });
+        $('meses').on('change', function () {
+            $inst = $("total").val();
+            $dep = $('select#depa').val();
+            $tipo = $(this).val();
+            $co = document.getElementById("corre").value;
+            $codi = $inst + "-" + $dep + "-" + $tipo + "-" + $co;
+            if ($inst > 0 && $dep > 0 && $tipo > 0 && $co > 0) {
+                $("#correlativo").val($codi);
+            } else {
+                $("#correlativo").val($co);
+            }
         });
     </script>
 
