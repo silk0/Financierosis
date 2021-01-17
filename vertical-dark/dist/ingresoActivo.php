@@ -16,6 +16,10 @@
 <?php include_once 'Cabecera.php';?>
 
 <script>
+    function go() {
+        //validacion respectiva me da hueva
+        $("#editarForm").submit();;
+    }
     function selectDepartamentos() {
         var id = $("#institucion").val();
         $.ajax({
@@ -57,8 +61,6 @@
             });
         }
     }
-
-    
 </script>
 
 <body>
@@ -106,13 +108,15 @@
                         </div>
                     </div>
                     <!-- end page title -->
+
                     <!-- Form row -->
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card-box">
                                 <h4 class="header-title">Ingreso de datos generales</h4>
-                                <form method="POST" action="ingresoActivo.php?bandera=1" required
-                                    class="parsley-examples">
+                                <form  method="POST" action="scriptsphp/agregar.php" required
+                                                        class="parsley-examples">
+                                                        <input type="hidden" value="Guardar" name="bandera">
                                     <div class="form-row">
                                         <?php 
                                             include 'config/conexion.php';                                                                        
@@ -188,7 +192,7 @@
                                         <div class="form-group col-md-4">
                                             <label class="col-form-label" for="example-date">Fecha de
                                                 Adquisicion</label>
-                                            <input class="form-control" type="date" id="date" name="date">
+                                            <input class="form-control" type="date" id="fecha" name="fecha">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="inputState" class="col-form-label">Encargado</label>
@@ -241,8 +245,7 @@
                                     </br>
                                     <div class="form-row">
                                         <div class="form-group">
-                                            <button type="submit" id="cambios"
-                                                    name="cambios"
+                                            <button type="submit"
                                                 class="btn btn-success btn-rounded waves-light width-md">Registrar</button>
                                             <button type="reset"
                                                 class="btn btn-danger btn-rounded waves-light width-md">Cancelar</button>
@@ -330,42 +333,3 @@
 </body>
 
 </html>
-
-<?php
-    include "config/conexion.php";
-        if($_REQUEST['bandera']==1){
-        $corre   = $_POST['corre'];
-        $insti   = $_POST['institucion'];
-        $d   = $_POST['depa'];
-        $ta   = $_POST['tipoA'];
-        $t   = $_POST['tipo'];
-        if($t==1){
-            $t="Nuevo";
-        }else if($t==2){
-            $t="Usado";
-        }else if($t==3){
-            $t="Donado";
-        }
-        $da   = $_POST['date'];
-        $fechaBD = date("Y-m-d", strtotime($da));
-        $em   = $_POST['emple'];
-        $ma   = $_POST['marca'];
-        $pr   = $_POST['prove'];
-        $va   = $_POST['valor'];
-        $ob   = $_POST['observ'];
-        $consulta  = "insert into tactivo (id_tipo,id_departamento,id_encargado,
-        id_proveedor,correlativo,fecha_adquisicion,
-        descripcion,estado,precio,
-        marca,depreciacionacum,tipo_adquicicion) 
-        values('".$ta."','".$d."','".$insti."','".$em."',
-        '".$pr."','".$corre."','".$fechaBD."',
-        '".$ob."','1','".$va."',
-        '".$ma."','0','".$t."');";
-        $resultado = $conexion->query($consulta);
-        if ($resultado) {
-            msgI("Los datos fueron almacenados con exito");
-        } else {
-            echo 'No funciona';  
-        }           
-    }
-?>
