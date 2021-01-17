@@ -7,6 +7,7 @@
     $codI = $_POST['ventaId'];
     $codC = $_POST['ventaCod'];
     $emp = $_POST['id_empleado'];
+    $fecha = $_POST['fechaC'];
     $totalV = $_POST['totalV'];
     echo $totalV;
     if($bandera==0){
@@ -22,11 +23,11 @@
             '".$totalV."','".$totalV."',0,0,'Cancelado',now(),now(),0,0 );");
         if ($result) {            
             $result = $conexion->query("insert into tdetalle_venta(
-            id_venta,
-            id_producto,
-            cantidad,
-            preciovendido,
-            tipo)
+                id_venta,
+                id_producto,
+                cantidad,
+                preciovendido,
+                tipo)
             select '".$codI."',t.id_producto,
             t.cantidad,
             (select p.precio_venta from tproducto p where t.id_producto = p.id_producto),0
@@ -45,21 +46,16 @@
                     join tcarrito c
                     on p.id_producto = c.id_producto
                     set p.stock = (p.stock-c.cantidad);");
-                    if ($result) {
-                        $result = $conexion->query("insert into tbanco(descripcion, cantidad, id_venta)  
-                        values(concat('Venta al contado el ',DATE_FORMAT(now(), '%d/%m/%Y'),' No.',
-                        '".$codC."'),'".$totalV."','".$codI."');");
+                    if ($result) {                        
+                        
+                        $result = $conexion->query("TRUNCATE TABLE tcarrito;");
                         if ($result) {
-                            $result = $conexion->query("TRUNCATE TABLE tcarrito;");
-                            if ($result) {
-                                
-                                header('Location:../venderContado.php?bandera=1');                                   
-                                        
-                            }else
-                                echo "no se elimino los datos del carrito";      
-                        }else{
-                            echo "no se guardo dinero en el la tabla banco"; 
-                        }  
+                            
+                            header('Location:../venderContado.php?bandera=1');                                   
+                                    
+                        }else
+                            echo "no se elimino los datos del carrito";      
+                          
                     }else
                     echo "No se actualizo inventario";      
                          
