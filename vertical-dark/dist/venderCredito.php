@@ -84,7 +84,7 @@
                                         <h4 class="m-0 d-print-none">Venta al credito</h4>
                                     </div>
                                 </div>
-                                <form action="" id="venderCredito" name="venderContado" method="POST" class="parsley-examples">
+                                <form action="scriptsphp/ajaxPagoCredito.php?bandera=0" id="venderCredito" name="venderCredito" method="POST" class="parsley-examples">
                                 
                                     <div class="form-row">
                                         <div class="col-md-8">

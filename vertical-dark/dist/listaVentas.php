@@ -99,8 +99,7 @@
                                             <tr>
                                                 <th>Concepto</th>
                                                 <th>Precio</th>
-                                                <th>prueba</th>
-                                                <th>Acciones</th>
+                                                <th>Venta</th>
                                             </tr>
                                         </thead>
 
@@ -108,7 +107,7 @@
                                             <?php
                                         
                                         include "config/conexion.php";
-                                            $result = $conexion->query("select  v.fecha, b.descripcion, concat('$ ',dv.preciovendido) as precio,dv.tipo
+                                            $result = $conexion->query("select  v.fecha, b.descripcion, concat('$ ',b.cantidad) as precio,dv.tipo
                                                     from tdetalle_venta as dv inner join tventas v on dv.id_venta = v.id_venta
                                                     inner join tbanco b on v.id_venta = b.id_venta order by v.codigo desc ;
                                             ");
@@ -118,46 +117,10 @@
                                                 echo "<td>" . $fila->descripcion . "</td>";
                                                 echo "<td>" . $fila->precio . "</td>";
                                                 if($fila->tipo == 0 )
-                                                    echo "<td> <h5><span class='badge badge-pill badge-info'>Contado</span></h5></td>";
-                                                echo "<td>    
-                                                <span data-toggle='modal'                                                    
-                                                data-target='#ver'>                                             
-                                                    <button 
-                                                    button type='button' title='Informacion' data-toggle='tooltip' 
-                                                    data-placement='bottom'                            
-                                                    class='btn btn-primary waves-effect waves-light' onclick=\"
-                                                    edit(
-                                                        '$fila->id_empleado',
-                                                        '$fila->nombre',
-                                                        '$fila->apellido',
-                                                        '$fila->dui',
-                                                        '$fila->rol',
-                                                        '$fila->usuario',
-                                                        '$fila->pass',
-                                                        '$fila->zona'
-                                                    )\";>
-                                                        <i class='mdi mdi-eye'></i> 
-                                                    </button></span>
-                                                    <span data-toggle='modal'                                                    
-                                                    data-target='#editar'>
-                                                    <button 
-                                                    type='button' title='Modificar' data-toggle='tooltip' 
-                                                    data-placement='bottom'
-                                                    class='btn btn-warning waves-effect waves-light' onclick=\"
-                                                    modify(
-                                                        '$fila->id_empleado',
-                                                        '$fila->nombre',
-                                                        '$fila->apellido',
-                                                        '$fila->dui',
-                                                        '$fila->rol',
-                                                        '$fila->usuario',
-                                                        '$fila->pass',
-                                                        '$fila->zona'
-                                                    )\";>                                                    
-                                                        <i class='mdi mdi-pencil-outline'></i></i>
-                                                    </button></span>
-                                                </div>
-                                                </td>";
+                                                    echo "<td align='center'> <h5><span class='badge badge-pill badge-success'>Contado</span></h5></td>";
+                                                if($fila->tipo == 1 )
+                                                echo "<td align='center'> <h5><span class='badge badge-pill badge-info'>Credito</span></h5></td>";
+                                                
                                                 echo "</tr>";
                                                 echo "</tr>";
                                             }

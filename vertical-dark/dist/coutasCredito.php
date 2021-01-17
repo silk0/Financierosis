@@ -14,7 +14,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once 'Cabecera.php';?>
+<script>
+    function obtenerId(id){
+    //validacion respectiva me da hueva
+        if(id>0){
+            document.getElementById("id").value=id;
+            $("#idCuota").submit();  
+        }                 
+    } 
 
+</script>
 <body>
 
     <!-- Begin page -->
@@ -67,31 +76,38 @@
                             inner join tdetalle_venta dv on v.id_venta = dv.id_venta
                             where dv.id_detalleventa='".$_REQUEST["id"]."';
                         ");
+                        echo '<form id="idCuota" name="form" method="post" action="scriptsphp/pagarCuota.php?bandera=1"
+                                class="parsley-examples">
+                            <input type="hidden" id="id" name="id">
+                        ';
                         if ($result) {
                             while ($fila = $result->fetch_object()) {                                                                               
                                 echo '<div class="row">';
                                 $b=0;
                                 while($b<3 and ($fila->fecha)!=null){
                                     
-                                    echo '  <div class="col-lg-4">
+                                    echo '<div class="col-lg-4">
                                             <div class="card-box ribbon-box">';
-                                        if(($fila->estado)==0)
-                                             echo '<div class="ribbon ribbon-primary   float-left">Pendiente</div>';
-                                        if(($fila->estado)==1)
-                                             echo '<div class="ribbon ribbon-success float-left">Cancelado</div>';
-                                        if(($fila->estado)==2)
-                                             echo '<div class="ribbon ribbon-danger float-left">Moroso</div>';
-                                        echo '<div class="ribbon-content">
+                                            if(($fila->estado)==0)
+                                                echo '<div class="ribbon ribbon-primary   float-left">Pendiente</div>';
+                                            if(($fila->estado)==1)
+                                                echo '<div class="ribbon ribbon-success float-left">Cancelado</div>';
+                                            if(($fila->estado)==2)
+                                                echo '<div class="ribbon ribbon-danger float-left">Moroso</div>';
+                                             echo '<div class="ribbon-content">
                                                 <h4>fecha de pago: '.$fila->fecha.'</h4>
                                                 <p class="mb-0">Monto: '.$fila->monto.'</p>
                                                 <p class="mb-0">Mora: '.$fila->mora.'</p>  
-                                                </br>
-                                                <button type=button onclick="go('.$fila->mora.');"
-                                                class="btn btn-info waves-effect waves-light" >Pagar</button>                                    
-                                            </div>                                    
+                                                </br>';
+                                                if(($fila->estado)==1)
+                                                    echo '<button type=button onclick="obtenerId('.$fila->id_pago.');"                                                
+                                                    class="btn btn-info waves-effect waves-light" disabled>Pagar</button>';
+                                                else
+                                                    echo '<button type=button onclick="obtenerId('.$fila->id_pago.');"                                                
+                                                    class="btn btn-info waves-effect waves-light" >Pagar</button>';                            
+                                           echo'</div>                                    
                                             </div> 
-                                        </div> 
-                                    ';
+                                        </div>';
                                     if($b!=2)
                                         $fila = $result->fetch_object();
                                     $b++;
@@ -99,7 +115,8 @@
                                 echo '</div>';
                                                                                                              
                             }
-                        }
+                            
+                        }echo '</form>';
                     ?>
                     <!-- end page title -->
                   
