@@ -55,43 +55,54 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box">                                
-                                <h4 class="page-title">Contenido<?php echo $_REQUEST["id"];?></h4>
+                                <h4 class="page-title">Contenido</h4>
                             </div>
                         </div>
                     </div>
-                    <!-- end page title -->
-                    <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card-box ribbon-box">
-                                    <div class="ribbon ribbon-dark float-left">Dark Ribbon</div>
-                                    <div class="ribbon-content">
-                                        <p class="mb-0">Quisque nec turpis at urna dictum luctus. Suspendisse convallis dignissim eros at volutpat. In egestas mattis dui. Aliquam mattis dictum aliquet. Nulla sapien mauris, eleifend et sem ac, commodo dapibus odio.</p>
-                                    </div>
+                    <?php
+                        include 'config/conexion.php';
+                        $result = $conexion->query("select p.id_pago, p.monto, p.fecha,p.mora,p.estado
+                            from tpago p
+                            inner join tventas v on p.id_venta = v.id_venta
+                            inner join tdetalle_venta dv on v.id_venta = dv.id_venta
+                            where dv.id_detalleventa='".$_REQUEST["id"]."';
+                        ");
+                        if ($result) {
+                            while ($fila = $result->fetch_object()) {                                                                               
+                                echo '<div class="row">';
+                                $b=0;
+                                while($b<3 and ($fila->fecha)!=null){
                                     
-                                </div> <!-- end card-box-->
-                            </div> <!-- end col-->
-        
-                            <div class="col-lg-4">
-                                <div class="card-box ribbon-box">
-                                    <div class="ribbon ribbon-primary float-left">Primary Ribbon</div>
-                                    <div class="ribbon-content">
-                                        <p class="mb-0">Quisque nec turpis at urna dictum luctus. Suspendisse convallis dignissim eros at volutpat. In egestas mattis dui. Aliquam mattis dictum aliquet. Nulla sapien mauris, eleifend et sem ac, commodo dapibus odio.</p>
-                                    </div>
-                                </div> <!-- end card-box-->
-                            </div> <!-- end col-->
-        
-                            <div class="col-lg-4">
-                                <div class="card-box ribbon-box">
-                                    <div class="ribbon ribbon-success float-left">Success Ribbon</div>
-                                    <div class="ribbon-content">
-                                        <p class="mb-0">Quisque nec turpis at urna dictum luctus. Suspendisse convallis dignissim eros at volutpat. In egestas mattis dui. Aliquam mattis dictum aliquet. Nulla sapien mauris, eleifend et sem ac, commodo dapibus odio.</p>
-                                    </div>
-                                </div> <!-- end card-box-->
-                            </div> <!-- end col-->
-                        </div>
-                        <!-- end row -->
-                                        
-                </div> <!-- container -->
+                                    echo '  <div class="col-lg-4">
+                                            <div class="card-box ribbon-box">';
+                                        if(($fila->estado)==0)
+                                             echo '<div class="ribbon ribbon-primary   float-left">Pendiente</div>';
+                                        if(($fila->estado)==1)
+                                             echo '<div class="ribbon ribbon-success float-left">Cancelado</div>';
+                                        if(($fila->estado)==2)
+                                             echo '<div class="ribbon ribbon-danger float-left">Moroso</div>';
+                                        echo '<div class="ribbon-content">
+                                                <h4>fecha de pago: '.$fila->fecha.'</h4>
+                                                <p class="mb-0">Monto: '.$fila->monto.'</p>
+                                                <p class="mb-0">Mora: '.$fila->mora.'</p>  
+                                                </br>
+                                                <button type=button onclick="go('.$fila->mora.');"
+                                                class="btn btn-info waves-effect waves-light" >Pagar</button>                                    
+                                            </div>                                    
+                                            </div> 
+                                        </div> 
+                                    ';
+                                    if($b!=2)
+                                        $fila = $result->fetch_object();
+                                    $b++;
+                                }
+                                echo '</div>';
+                                                                                                             
+                            }
+                        }
+                    ?>
+                    <!-- end page title -->
+                  
 
             </div> <!-- content -->
 
