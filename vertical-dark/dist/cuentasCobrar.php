@@ -53,7 +53,24 @@
 
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
-        <!-- ============================================================== -->
+        <!-- ============================================================== 
+        
+        Consultas que agregar
+
+        /*Cambio de saldo de la tabla tventas*/
+        update tventas v set v.saldo_actual= (select 248.20-truncate(sum(monto),2)+truncate(sum(mora),2) from tpago where id_venta=28 and estado=1)
+        where v.id_venta = 28;
+        select truncate(sum(monto),2)+truncate(sum(mora),2) from tpago where id_venta=28
+        group by id_venta;
+
+        /*Calculo de mora de tabla tpago*/
+        update tpago as p inner join tventas v on p.id_venta = v.id_venta
+            set p.estado= if(curdate()>p.fecha, 2, p.estado),
+            p.mora=((v.interes/100)*p.monto*(DATEDIFF(p.fecha,curdate())*-1))
+        where curdate()>p.fecha;
+    
+    
+        -->
 
         <div class="content-page">
             <div class="content">
