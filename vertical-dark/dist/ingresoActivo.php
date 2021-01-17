@@ -156,7 +156,7 @@
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="inputState" class="col-form-label">Unidad</label>
-                                            <select class="form-control" name="depa" id="depa" disabled>
+                                            <select class="form-control" name="depa" id="depa" >
                                                 <option value="0" selected>Seleccione</option>
 
                                             </select>

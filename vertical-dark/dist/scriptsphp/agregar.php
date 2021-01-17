@@ -1,9 +1,10 @@
 <?php
     include "../config/conexion.php";
+    
     $bandera = $_POST["bandera"];
         if($bandera=="Guardar"){
             $tipoA   = $_POST["tipoA"];
-           // $depa   = $_POST["depa"];
+            $depa   = $_POST["depa"];
             $emple   = $_POST["emple"];
             $prove   = $_POST["prove"];
             $corre   = $_POST["corre"];
@@ -20,16 +21,19 @@
         }else if($tipo==3){
             $tipo="Donado";
         }
-        $consulta  = "INSERT INTO tactivo (id_tipo,id_departamento,id_encargado,id_proveedor,
-            correlativo,fecha_adquisicion,descripcion,estado,precio,marca, depreciacionacum,
-            tipo_adquicicion) values ((select id_tipo from ttipo_activo where correlativo='$tipoA'),(select id_departamento from tdepartamento where correlativo= '$depa'),$emple','$prove','$corre','$fechaBD','$observ','1','$valor','$marca','0','$tipo')";
 
-        $resultado = $conexion->query($consulta);
+        $resultado = $conexion->query("insert into tactivo (id_tipo,id_departamento,id_encargado,id_proveedor,
+        correlativo,fecha_adquisicion,descripcion,estado,precio,marca, depreciacionacum,
+        tipo_adquicicion)
+        select(select id_tipo from ttipo_activo where correlativo='".$tipoA."'),
+        (select id_departamento from tdepartamento where correlativo= '".$depa."'),
+        '".$emple."','".$prove."','".$corre."','".$fechaBD."','".$observ."','1','".$valor."','".$marca."',0.0,'".$tipo."';");
+
         if ($resultado) {
-            msgI("Los datos fueron almacenados con exito");
+            header('Location:../.php');  
         } else {
             echo 'No funciona';  
         }        
-        echo '<script>location.href="../ingresoActivo.php";</script>';  
+       
     }
 ?>

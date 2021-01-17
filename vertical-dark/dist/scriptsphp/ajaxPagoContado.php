@@ -8,7 +8,6 @@
     $codC = $_POST['ventaCod'];
     $emp = $_POST['id_empleado'];
     $totalV = $_POST['totalV'];
-    echo $totalV;
     if($bandera==0){
 
        

@@ -166,23 +166,11 @@
                                             </div>                                       
 
                                         </div><!-- end col -->
+                                        
                                         <div class="col-md-2">
                                              <div class="mt-3">
                                                 
-                                                <label for="inputState" class="col-form-label">Prima</label>
-                                                <div>
-                                                    <div class="input-group">
-                                                        <input type="number" class="form-control" required placeholder="0%" data-parsley-type="required"  
-                                                        min="0" id="prima" name="prima"
-                                                        max="100" required>                                                        
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                        </div><!-- end col -->
-                                        <div class="col-md-2">
-                                             <div class="mt-3">
-                                                
-                                                <label for="inputState" class="col-form-label">Interes nominal anual</label>
+                                                <label for="inputState" class="col-form-label">Interes mensual</label>
                                                 <div>
                                                     <div class="input-group">
                                                         <input type="number" class="form-control" placeholder="0%" min="0"
@@ -379,52 +367,33 @@
     <?php include_once 'Pie.php';?>
     
     <script type="text/javascript">
-        $('#prima').on('change', function () {
-            $prima= $(this).val();
-            $int = $('#interesN').val();
+       
+        $('#interesN').on('change', function () {
+            $int = $(this).val();
             $m = $('#meses').val();            
             $toV = $('#totalV').val();
+            if ($int > 0 && $m > 0 && $toV > 0) {      
+                $totalPagar = Number($m)*Number($toV)*(Number($int)/100);
+                $totalPagar = Number($totalPagar)+Number($toV);                              
+                var redondear = Math.pow(10, 2);
+                $total = Math.round($totalPagar * redondear) /redondear;
+                $('#total').val('$'+$total);       
+            } else {
+                $('#total').val("$0.00");
+            }
+        });
+        $('#meses').on('change', function () {
+            $int = $('#interesN').val();
+            $m = $(this).val();            
+            $toV = $('#totalV').val();
             if ($int > 0 && $m > 0 && $toV > 0) {
-                var power = Math.pow(10, 6);
-                $totalInteres = Math.round(($toV*($int/100)*($m/12)) * power) / power;                
-                if($prima>0){
-                    $sumaP=$toV*$prima;
-
-                }else{
-                    alert('INTERES: '+$totalInteres);
-                    $totalPagar = Number($toV)+Number(Number($toV)*Number($totalInteres/100));                                  
-                    var redondear = Math.pow(10, 2);
-                    $total = Math.round($totalPagar * redondear) /redondear;
-                    $('#total').val('$'+$total);              
-                }                  
-               
+                $totalPagar = Number($m)*Number($toV)*(Number($int)/100);
+                $totalPagar = Number($totalPagar)+Number($toV);                                  
+                var redondear = Math.pow(10, 2);
+                $total = Math.round($totalPagar * redondear) /redondear;
+                $('#total').val('$'+$total);       
             } else {
-                $('#total').val("$00.00");
-            }
-
-        });
-        $('#interesN').on('change', function () {
-            $inst = $("select#institucion").val();
-            $dep = $(this).val();
-            $tipo = $('select#tipoA').val();
-            $co = document.getElementById("corre").value;
-            $codi = $inst + "-" + $dep + "-" + $tipo + "-" + $co;
-            if ($inst > 0 && $dep > 0 && $tipo > 0 && $co > 0) {
-                $("#correlativo").val($codi);
-            } else {
-                $("#correlativo").val($co);
-            }
-        });
-        $('meses').on('change', function () {
-            $inst = $("total").val();
-            $dep = $('select#depa').val();
-            $tipo = $(this).val();
-            $co = document.getElementById("corre").value;
-            $codi = $inst + "-" + $dep + "-" + $tipo + "-" + $co;
-            if ($inst > 0 && $dep > 0 && $tipo > 0 && $co > 0) {
-                $("#correlativo").val($codi);
-            } else {
-                $("#correlativo").val($co);
+                $('#total').val("$0.00");
             }
         });
     </script>

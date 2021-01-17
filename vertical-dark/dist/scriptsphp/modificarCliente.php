@@ -16,6 +16,7 @@ if($accion==1){
   $salario = $_POST['salario'];
   $observ  = $_POST['observ'];
   $egres  = $_POST['egreso'];
+  
   $consulta  = "UPDATE tclientes set nombre='" . $nombre . "',
       apellido='" . $apellido . "',
       id_cartera='" . $cartera . "',
