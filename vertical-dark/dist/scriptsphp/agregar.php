@@ -25,7 +25,7 @@
 
         $resultado = $conexion->query("insert into tactivo (id_tipo,id_departamento,id_encargado,id_proveedor,
         correlativo,fecha_adquisicion,descripcion,estado,precio,marca, depreciacionacum,
-        tipo_adquicicion,vidaU)
+        tipo_adquicicion,vidaUtil)
         select(select id_tipo from ttipo_activo where correlativo='".$tipoA."'),
         (select id_departamento from tdepartamento where correlativo= '".$depa."'),
         '".$emple."','".$prove."','".$corre."','".$fechaBD."','".$observ."','1','".$valor."','".$marca."',0.0,'".$tipo."','".$vidaU."';");
