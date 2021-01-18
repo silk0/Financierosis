@@ -87,10 +87,10 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card-box">
-                                <div align="right"><button type="button"
+                                <!--   <div align="right"><button type="button"
                                         class="btn btn-outline-success btn-rounded waves-effect waves-light width-md"
                                         data-toggle='modal' data-target='#nuevo'>Nuevo</button>
-                                </div>
+                                </div> -->
                                 <br>
                                 <h4 class="header-title"></h4>
                                 <p class="sub-header">
@@ -103,8 +103,8 @@
                                             <tr>
                                                 <th>Correlativo</th>
                                                 <th>Clasificacion</th>
-                                                <th>Tiempo Depreciacion</th>
-                                                 <th>Acciones</th>
+                                                <th>% de Depreciacion</th>
+                                                <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -254,11 +254,8 @@
                                         <div class="card-box">
                                             <form name="form" id="form" method="post" action="" required
                                                 class="parsley-examples">
-
-                                              
                                                 <div class="form-row">
-                                                  
-                                                   <?php 
+                                                    <?php 
                                                     include 'config/conexion.php';                                                                        
                                                                         $result = $conexion->query("SHOW TABLE STATUS LIKE 'tclasificacion'");
                                                                         if ($result) {
@@ -275,9 +272,9 @@
                                                                             }
                                                                         } 
                                                                     ?>
-                                                               </div>
+                                                </div>
                                                 <div class="form-row">
-                                                <div class="form-group col-md-6">
+                                                    <div class="form-group col-md-6">
                                                         <label for="inputState"
                                                             class="col-form-label">Clasificacion</label>
                                                         <input type="text" class="form-control" name="nombrev"
@@ -295,10 +292,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn  btn-primary waves-effect"
-                                    data-dismiss="modal">Cerrar</button>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn  btn-primary waves-effect"
+                                        data-dismiss="modal">Cerrar</button>
+                                </div>
                             </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
@@ -326,42 +323,35 @@
                                                     <input type="hidden" id="id_clasificaion" name="id_clasificaion">
                                                 </div>
                                                 <div class="form-row">
-                                                    
                                                     <?php 
-                                                                        include 'config/conexion.php';                                                                        
-                                                                        $result = $conexion->query("SHOW TABLE STATUS LIKE 'tclasificacion'");
-                                                                        if ($result) {
-                                                                            while ($fila = $result->fetch_object()) {                                               
-                                                                                $codigoR=str_pad($fila->Auto_increment, 4, "300", STR_PAD_LEFT);
-                                                                                echo'
-                                                                                <div class="form-group col-md-4">
-                                                                                    <label for="inputEmail4"
-                                                                                        class="col-form-label">Correlativo</label>
-                                                                                    <input type="text" class="form-control"
-                                                                                        name="correm" id="correm" value ="'.$codigoR.'" required placeholder="0000" readonly>
-                                                                                </div>
-                                                                                ';
-                                                                            }
-                                                                        } 
-                                                                    ?>
-
+                                                    include 'config/conexion.php';                                                                        
+                                                    $result = $conexion->query("SHOW TABLE STATUS LIKE 'tclasificacion'");
+                                                    if ($result) {
+                                                    while ($fila = $result->fetch_object()) {                                               
+                                                            $codigoR=str_pad($fila->Auto_increment, 4, "300", STR_PAD_LEFT);
+                                                            echo'
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="inputEmail4"
+                                                                            class="col-form-label">Correlativo</label>
+                                                                    <input type="text" class="form-control"
+                                                                    name="correm" id="correm" value ="'.$codigoR.'" required placeholder="0000" readonly>
+                                                                </div>';
+                                                    }}?>
                                                 </div>
-                                                
-                                                <div class="form-group col-md-6">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
                                                         <label for="inputEmail4"
                                                             class="col-form-label">Clasificacion</label>
                                                         <input type="text" class="form-control" name="nombree"
-                                                            id="nombree" required placeholder="Clasificacion">
-                                               </div>
-                                                 <div class="form-group col-md-6">
-                                                        <label for="inputEmail4" class="col-form-label">Tiempo
+                                                            id="nombree" required placeholder="Clasificacion" readonly>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="inputEmail4" class="col-form-label">% de
                                                             Depreciacion</label>
                                                         <input type="number" class="form-control" name="timpom"
                                                             id="timpom" required placeholder="9999">
-
-
                                                     </div>
-                                                    </div>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
