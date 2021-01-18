@@ -73,6 +73,12 @@
 
 <script src="assets/libs/bootstrap-daterangepicker/daterangepicker.js"></script>
 
+<!--Chartist Chart-->
+<script src="assets/libs/chartist/chartist.min.js"></script>
+
+<!-- Init js -->
+<script src="assets/js/pages/chartist.init.js"></script>
+
 
 <script type="text/javascript">
     Parsley.addMessages('es', {

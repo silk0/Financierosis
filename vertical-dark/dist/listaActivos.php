@@ -24,47 +24,34 @@
 <?php include_once 'Cabecera.php';?>
 
 <SCRIPT  language=JavaScript> 
-function go(){
-    //validacion respectiva me da hueva
-    $("#editarForm").submit();;         
-} 
+    function go(){
+        //validacion respectiva me da hueva
+        $("#editarForm").submit();
+            
+    } 
 
-function edit(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,cart)
-{
-    // document.getElementById("baccion2").value=id;
-    document.getElementById("nombrem").value=nom;
-    document.getElementById("apellidom").value=ape;
-    document.getElementById("duim").value=dui;
-    document.getElementById("nitm").value=nit;
-    document.getElementById("direcm").value=direc;
-    document.getElementById("telm").value=tel;
-    document.getElementById("celm").value=cel;
-    document.getElementById("emailm").value=email;    
-    document.getElementById("profeciom").value=prof;
-    document.getElementById("tipom").value=tipo;
-    document.getElementById("salm").value=sal;
-    document.getElementById("observm").value=ob;    
-    document.getElementById("egres").value=egres;
-    document.getElementById("carteram").value=cart; 
-}
+    function grafica(dDia,dMes,dAno)
+    {
+        $dia=Number(dDia);
+        $mes=Number(dMes);
+        $ano=Number(dAno);
+        document.getElementById("id_depreciacion").innerHTML="Dia: $"+$dia+"    Mes: $"+$mes+"    Año: $"+$ano;
+        depre = new Chartist.Bar('#distributed-series', {
+        labels: ['Dias', 'Meses', 'Años'],
+        series: [dDia,dMes,dAno]
+        }, {
+            distributeSeries: true, 
+            ticks: ['One', 'Two', 'Three'],
+            fullWidth: true,
+            width: '300px',
+            chartPadding: {
+                right: 40
+            }                
+        });
+                        
+    }  
 
-function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,cart){
-    document.getElementById("id_cliente").value=id;
-    document.getElementById("nombre").value=nom;
-    document.getElementById("apellido").value=ape;
-    document.getElementById("dui").value=dui;
-    document.getElementById("nit").value=nit;
-    document.getElementById("direc").value=direc;
-    document.getElementById("telefono").value=tel;
-    document.getElementById("celular").value=cel;
-    document.getElementById("email").value=email;    
-    document.getElementById("profecion").value=prof;  
-    document.getElementById("tipo").value=tipo;
-    document.getElementById("salario").value=Number(sal);
-    document.getElementById("observ").value=ob;    
-    document.getElementById("egreso").value=Number(egres);    
-    document.getElementById("cartera").value=cart;  
-}
+
 </script>
 
 <body>
@@ -139,7 +126,12 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                         <?php
                                         
                                         include "config/conexion.php";
-                                            $result = $conexion->query("SELECT tactivo.correlativo, ttipo_activo.nombre as tipoa, tactivo.descripcion, tactivo.tipo_adquicicion, tactivo.fecha_adquisicion FROM tactivo INNER JOIN tdepartamento ON tactivo.id_departamento = tdepartamento.id_departamento INNER JOIN ttipo_activo ON tactivo.id_tipo = ttipo_activo.id_tipo INNER JOIN tclasificacion ON ttipo_activo.id_clasificacion = tclasificacion.id_clasificaion");
+                                            $result = $conexion->query("SELECT tactivo.id_activo,tactivo.correlativo, 
+                                            ttipo_activo.nombre as tipoa, tactivo.descripcion, 
+                                            tactivo.tipo_adquicicion, tactivo.fecha_adquisicion FROM tactivo
+                                             INNER JOIN tdepartamento ON tactivo.id_departamento = tdepartamento.id_departamento 
+                                             INNER JOIN ttipo_activo ON tactivo.id_tipo = ttipo_activo.id_tipo 
+                                             INNER JOIN tclasificacion ON ttipo_activo.id_clasificacion = tclasificacion.id_clasificaion");
                                         if ($result) {
                                             while ($fila = $result->fetch_object()) {
                                                 echo "<tr>";
@@ -157,19 +149,77 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                                     class='btn btn-primary waves-effect waves-light' onclick=\"
                                                     edit(
                                                     )\";>
-                                                        <i class='mdi mdi-eye'></i> 
-                                                    </button></span>
-                                                    <span data-toggle='modal'                                                    
-                                                    data-target='#editar'>
-                                                    <button 
-                                                    type='button' title='Modificar' data-toggle='tooltip' 
-                                                    data-placement='bottom'
-                                                    class='btn btn-warning waves-effect waves-light' onclick=\"
-                                                    modify(
-                                                    )\";>                                                    
-                                                        <i class='mdi mdi-pencil-outline'></i></i>
-                                                    </button></span>
-                                                </div>
+                                                        <i class='mdi mdi-18px mdi-eye'></i> 
+                                                    </button></span>";
+                                                $nuevo = $conexion->query("select round(if((dias/365)<=vida,d.depreA*ano,d.depreA*vida),2) depreA,
+                                                            round(if((dias/365)<=vida,(d.depreA/12)*meses,d.depreA*vida),2) depreM,
+                                                            round(if((dias/365)<=vida,(d.depreA/365)*dias,d.depreA*vida),2) depreD
+                                                    from (
+                                                        select
+                                                            ((a.precio/a.vidaUtil)*(c.tiempo_depreciacion/100)) depreA
+                                                            ,a.vidaUtil as vida,
+                                                            TIMESTAMPDIFF(day , a.fecha_adquisicion,curdate()) AS dias,
+                                                            TIMESTAMPDIFF(month , a.fecha_adquisicion,curdate()) AS meses,
+                                                            TIMESTAMPDIFF(year , a.fecha_adquisicion,curdate()) AS ano
+                                                    from tactivo  a
+                                                    inner join ttipo_activo ta on a.id_tipo = ta.id_tipo
+                                                    inner join tclasificacion c on ta.id_clasificacion = c.id_clasificaion
+                                                    where a.tipo_adquicicion='Nuevo' and a.id_activo='".$fila->id_activo."') as d;");
+                                                if($nuevo){
+                                                    while ($filo = $nuevo->fetch_object()){
+                                                        echo "<span data-toggle='modal' data-target='#depreciacion'>
+                                                            <button 
+                                                            type='button' title='Depreciacion' data-toggle='tooltip' 
+                                                            data-placement='bottom'
+                                                            class='btn btn-success waves-effect waves-light' onclick=\"
+                                                            grafica(
+                                                                '".$filo-> depreD."',
+                                                                '".$filo-> depreM."',
+                                                                '".$filo-> depreA."'
+                                                            )\";>                                                    
+                                                                <i class='mdi mdi-18px mdi-chart-bar'></i></i>
+                                                            </button></span>";
+                                                        }
+                                                    }
+                                                $usado = $conexion->query("select round(if((dias/365)<=vida,(d.depreA*ano),d.depreA*vida),2) depreA,
+                                                    round(if((dias/365)<=vida,((d.depreA/12)*meses),d.depreA*vida),2) depreM,
+                                                    round(if((dias/365)<=vida,((d.depreA/365)*d.dias),d.depreA*vida),2) depreD
+                                                    from (
+                                                        select
+                                                            if(a.vidaUtil=1, (a.precio/a.vidaUtil)*0.8,
+                                                                if(a.vidaUtil=2,(a.precio/a.vidaUtil)*0.6,
+                                                                    if(a.vidaUtil=3,(a.precio/a.vidaUtil)*0.4,
+                                                                        if(a.vidaUtil>=4,(a.precio/a.vidaUtil)*0.2,
+                                                                            0.0)
+                                                                    )
+                                                                )
+                                                            ) depreA,a.vidaUtil as vida,
+                                                            TIMESTAMPDIFF(day , a.fecha_adquisicion,curdate()) AS dias,
+                                                            TIMESTAMPDIFF(month , a.fecha_adquisicion,curdate()) AS meses,
+                                                            TIMESTAMPDIFF(year , a.fecha_adquisicion,curdate()) AS ano
+                                                    from tactivo  a
+                                                    inner join ttipo_activo ta on a.id_tipo = ta.id_tipo
+                                                    inner join tclasificacion c on ta.id_clasificacion = c.id_clasificaion
+                                                    where a.tipo_adquicicion='Usado' and (c.nombre='Otros bienes muebles' or c.nombre='Maquinaria')
+                                                    and a.id_activo='".$fila->id_activo."') as d;");
+                                                if($usado){
+                                                    while($filo = $usado->fetch_object()){
+                                                        echo "<span data-toggle='modal' data-target='#depreciacion'>
+                                                            <button 
+                                                            type='button' title='Depreciacion' data-toggle='tooltip' 
+                                                            data-placement='bottom'
+                                                            class='btn btn-success waves-effect waves-light' onclick=\"
+                                                            grafica(
+                                                                '".$filo-> depreD."',
+                                                                '".$filo-> depreM."',
+                                                                '".$filo-> depreA."'
+                                                            )\";>                                                    
+                                                                <i class='mdi mdi-18px mdi-chart-bar'></i></i>
+                                                            </button></span>";
+                                                        }
+                                                    }
+
+                                                echo "</div>
                                                 </td>";
                                                 echo "</tr>";
                                             }
@@ -181,8 +231,8 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                             </div>
                         </div>
                     </div>
-                    <!-- end row --> 
-
+                    <!-- end row -->                     
+                    
                     <!-- Bootstrap Modals -->
                     <div class="row">
                         <div class="col-12">                               
@@ -298,127 +348,24 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->   
                                 <!--  Modal editar cliente-->
-                                <div id="editarCliente" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog modal-lg">
+                                <div id="depreciacion" class="modal fade bs-example-modal-lg" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title" id="myLargeModalLabel">Editar datos del cliente</h4>
+                                                <h4 class="modal-title" id="myLargeModalLabel">Depreciacion Acumulada</h4>
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                             </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="card-box">
-                                                            <form name="editarForm" id="editarForm" method="post" action="scriptsphp/modificarCliente.php?bandera=1" required class="parsley-examples">
-                                                            
-                                                            <div class="form-row">
-                                                                <input type="hidden" id="idfiador" name="idfiador">
-                                                                <input type="hidden" id="id_cliente" name="id_cliente">
-                                                            </div>
-
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputEmail4" class="col-form-label">Nombre</label>
-                                                                    <input type="text"  class="form-control" name="nombre" id="nombre" required  placeholder="Jose Alfredo">
-                                                                </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputPassword4" class="col-form-label">Apellido</label>
-                                                                    <input type="text" class="form-control" name="apellido" id="apellido" required  placeholder="Rodriguez Perez">
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputEmail4" class="col-form-label">Dui</label>
-                                                                    <input type="text"  class="form-control" name="dui" id="dui" required  data-mask="99999999-9" placeholder="99999999-9" readonly>
-                                                                </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputPassword4" class="col-form-label">Nit</label>
-                                                                    <input type="text" class="form-control" name="nit" id="nit" required  data-mask="9999-999999-999-9" placeholder="9999-999999-999-9" readonly>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputEmail4" class="col-form-label">Telefono fijo</label>
-                                                                    <input type="text"  class="form-control" name="telefono" id="telefono" required  data-mask="9999-9999" placeholder="9999-9999" >
-                                                                </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputPassword4" class="col-form-label">Telefono Movil</label>
-                                                                    <input type="text" class="form-control" name="celular" id="celular" required data-mask="9999-9999" placeholder="9999-9999">
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-row">
-                                                                <label for="inputAddress" class="col-form-label">Direccion</label>
-                                                                <input type="text" class="form-control"  name="direc" id="direc" required placeholder="Calle Juan Ulloa Canas y Avenida Crescencio Miranda Casa #23">
-                                                            </div>
-
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputEmail4" class="col-form-label">Correo</label>
-                                                                    <input type="email"  class="form-control" name="email" id="email"  required  placeholder="Correo@correo.com">
-                                                                </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputPassword4" class="col-form-label">Profesion u oficio</label>
-                                                                    <input type="text"  class="form-control" name="profecion" id="profecion" required  placeholder="Ing. Civil">
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-4">
-                                                                    <label for="inputCity" class="col-form-label">Ingresos Mensuales</label>
-                                                                    <input type="number" class="form-control" name="salario" id="salario" required  placeholder="0.00">
-                                                                </div>
-                                                                <div class="form-group col-md-4">
-                                                                    <label for="inputState" class="col-form-label">Tipo de ingreso</label>
-                                                                    <select class="form-control" name="tipo" id="tipo" required >
-                                                                        <option>Salario</option>
-                                                                        <option>Remesa</option>
-                                                                        <option>Salario Informal</option>
-                                                                    </select>                                                                   
-                                                                </div>
-                                                                <div class="form-group col-md-4">
-                                                                    <label for="inputZip" class="col-form-label">Egreso Promedio Mensual</label>
-                                                                    <input type="number" class="form-control" name="egreso" id="egreso" placeholder="0.00">
-                                                                </div>
-                                                            </div> 
-
-                                                            <div class="form-row">                                        
-                                                                <div class="form-group col-md-4">
-                                                                    <label for="inputState" class="col-form-label">Agregar a la cartera</label>
-                                                                    <select class="form-control" name="cartera" id="cartera" required >                                                                        
-                                                                        <?php
-                                                                        include 'config/conexion.php';
-                                                                        $result = $conexion->query("select id_categoria as id,nombre FROM tcartera");
-                                                                        if ($result) {
-                                                                            while ($fila = $result->fetch_object()) {                                                                                
-                                                                                echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
-                                                                            }
-                                                                        }
-                                                                        ?> 
-                                                                    </select>
-                                                                </div>
-                                                            </div>    
-
-                                                            <div class="form-row">
-                                                                <label for="inputEmail4" class="col-form-label">Descripcion</label>
-                                                                <textarea class="form-control" id="observ" name="observ" rows="5"></textarea>
-                                                            </div>
-
-                                                            </form>
-                                                        </div>
-                                                    </div>
+                                            
+                                            <div class="card-box">
+                                                <p class="header-title" id="id_depreciacion">depreciacion</p>
+                                                <div class="mt-4">
+                                                    <div id="distributed-series" class="ct-chart ct-golden-section"></div>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn  btn-primary waves-effect" id ="cambios" name = "cambios"  onclick="go();" >Guardar Cambios</button>
-                                                <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
-                                            </div>
+                                            </div> <!-- end card-box-->                                   
+                                                                                     
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->                              
-                            
+                                </div><!-- /.modal -->       
                         </div>
                     </div>      
                 </div> <!-- container -->
@@ -450,7 +397,25 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
     <div class="rightbar-overlay"></div>
 
     <?php include_once 'Pie.php';?>
-
+    <script type="text/javascript">
+        	var depre = new Chartist.Bar('#distributed-series', {
+                labels: ['D', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+                series: [20, 60, 120, 200, 180, 20, 10]
+                }, {
+                    distributeSeries: true, 
+                    fullWidth: true,
+                    chartPadding: {
+                        right: 40
+                    }                
+            });                     
+             
+            
+            $('#depreciacion').on('shown.bs.modal', function (e) {
+                depre.update();
+            });
+                
+    </script>
+    
 </body>
 
 </html>
