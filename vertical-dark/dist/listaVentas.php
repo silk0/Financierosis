@@ -14,10 +14,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-    function go(){
-    //validacion respectiva me da hueva
-    $("#editarForm").submit();;         
-    } 
+    function go() {
+        //validacion respectiva me da hueva
+        $("#editarForm").submit();;
+    }
+
     function edit(id, nom, ape, dui, rol, usu, contra, dir) {
         // document.getElementById("baccion2").value=id;
         document.getElementById("nombrev").value = nom;
@@ -88,6 +89,26 @@
                         </div>
                     </div>
                     <!-- end page title -->
+
+                    <!-- //////////////////////////////////// -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card-box">
+                                <h5 class="page-title">INFORMACION</h5>
+                                <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4" class="col-form-label">Nombre1: </label><br>
+                                    <label for="inputEmail4" class="col-form-label">Nombre2: </label><br>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4" class="col-form-label">Nombre3: </label><br>
+                                    <label for="inputEmail4" class="col-form-label">Nombre4: </label><br>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end /////////////////// -->
 
                     <div class="row">
                         <div class="col-12">
@@ -242,11 +263,14 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="card-box">
-                                                            <form name="editarForm" id="editarForm" method="post" action="scriptsphp/modificarEmpleado.php?bandera=1" required class="parsley-examples">
-                                                            <div class="form-row">
-                                                                <input type="hidden" id="idfiador" name="idfiador">
-                                                                <input type="hidden" id="id_empleado" name="id_empleado">
-                                                            </div>
+                                                            <form name="editarForm" id="editarForm" method="post"
+                                                                action="scriptsphp/modificarEmpleado.php?bandera=1"
+                                                                required class="parsley-examples">
+                                                                <div class="form-row">
+                                                                    <input type="hidden" id="idfiador" name="idfiador">
+                                                                    <input type="hidden" id="id_empleado"
+                                                                        name="id_empleado">
+                                                                </div>
                                                                 <div class="form-row">
                                                                     <div class="form-group col-md-6">
                                                                         <label for="inputEmail4"
@@ -306,8 +330,7 @@
                                                                             class="col-form-label">Direccion</label>
                                                                         <input type="text" class="form-control"
                                                                             name="direcm" id="direcm" required
-                                                                            placeholder="Calle Juan Ulloa Canas y Avenida Crescencio Miranda Casa #23"
-                                                                            >
+                                                                            placeholder="Calle Juan Ulloa Canas y Avenida Crescencio Miranda Casa #23">
                                                                     </div>
                                                                 </div>
                                                             </form>
