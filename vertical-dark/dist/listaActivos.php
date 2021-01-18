@@ -139,12 +139,12 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                         <?php
                                         
                                         include "config/conexion.php";
-                                            $result = $conexion->query("SELECT tactivo.correlativo,tactivo.descripcion,tactivo.tipo_adquicicion,tactivo.fecha_adquisicion, tclasificacion.nombre as nombreC FROM tclasificacion INNER JOIN tactivo ON tactivo.id_activo = tclasificacion.id_clasificaion ORDER BY id_activo");
+                                            $result = $conexion->query("SELECT tactivo.correlativo, ttipo_activo.nombre as tipoa, tactivo.descripcion, tactivo.tipo_adquicicion, tactivo.fecha_adquisicion FROM tactivo INNER JOIN tdepartamento ON tactivo.id_departamento = tdepartamento.id_departamento INNER JOIN ttipo_activo ON tactivo.id_tipo = ttipo_activo.id_tipo INNER JOIN tclasificacion ON ttipo_activo.id_clasificacion = tclasificacion.id_clasificaion");
                                         if ($result) {
                                             while ($fila = $result->fetch_object()) {
                                                 echo "<tr>";
                                                 echo "<td>" . $fila->correlativo . "</td>";
-                                                echo "<td>" . $fila->nombreC . "</td>";
+                                                echo "<td>" . $fila->tipoa . "</td>";
                                                 echo "<td>" . $fila->descripcion . "</td>"; 
                                                 echo "<td>" . $fila->tipo_adquicicion . "</td>";
                                                 echo "<td>" . $fila->fecha_adquisicion . "</td>";
