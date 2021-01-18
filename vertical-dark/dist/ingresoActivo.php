@@ -135,6 +135,11 @@
                                                 }
                                             } 
                                         ?>
+                                        <div class="form-group col-md-4">
+                                            <label for="inputEmail4" class="col-form-label">Vida Util</label>
+                                            <input type="number" class="form-control" name="vida" id="vida" required
+                                                placeholder="Vida Util en Años">
+                                        </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
