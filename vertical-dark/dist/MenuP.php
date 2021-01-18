@@ -98,7 +98,7 @@
                     <a href="venderCredito.php">Ventas al credito</a>
                 </li>  
                 <li>
-                    <a href="listaVentas.php">Lista de ventas</a>
+                    <a href="listaVentas.php">Ventas y pagos</a>
                 </li> 
                 <li>
                     <a href="cuentasCobrar.php">Cuentas por cobrar</a>

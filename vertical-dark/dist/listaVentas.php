@@ -83,7 +83,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box">
-                                <h4 class="page-title">Listado de Empleado</h4>
+                                <h4 class="page-title">Registro ventas y pago de cuotas</h4>
                             </div>
                         </div>
                     </div>

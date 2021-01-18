@@ -21,12 +21,12 @@
        
         $result = $conexion->query("insert into
             tventas(id_cliente,codigo,id_plan,id_empleado,prestamo_original,saldo_actual,
-            mora_acumulada,intereses_acumulados,estado,proximo_pago,fecha,interes,prima)
+            mora_acumulada,intereses_acumulados,estado,proximo_pago,fecha,interes,prima,meses)
             values ('".$id_cl."', 
             '".$codC."', 
             null,
             '".$emp."',
-            '".$total."','".$total."',0,0,'Pendiente','".$cuotaF."',now(),'".$inter."',0);");
+            '".$total."','".$total."',0,0,'Pendiente','".$cuotaF."',now(),'".$inter."',0,'".$meses."');");
         if ($result) {            
             $result = $conexion->query("insert into tdetalle_venta(
                 id_venta,
@@ -36,7 +36,7 @@
                 tipo)
             select '".$codI."',t.id_producto,
             t.cantidad,
-            (select p.precio_venta from tproducto p where t.id_producto = p.id_producto),0
+            (select p.precio_venta from tproducto p where t.id_producto = p.id_producto),1
             from tcarrito t;
                ");
             if ($result) {
@@ -66,7 +66,7 @@
                                 );
                                 if(!$result)
                                     echo "Error en crear pagos";
-                                $fecha = date("Y-m-d",strtotime($cuotaF."+ 1 month"));
+                                $fecha = date("Y-m-d",strtotime($fecha."+ 1 month"));
                                 
                             }
                             
