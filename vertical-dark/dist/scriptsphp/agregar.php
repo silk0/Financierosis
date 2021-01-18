@@ -7,7 +7,7 @@
             $depa   = $_POST["depa"];
             $emple   = $_POST["emple"];
             $prove   = $_POST["prove"];
-            $corre   = $_POST["corre"];
+            $corre   = $_POST["correlativo"];
             $f  = $_POST["fecha"];
             $fechaBD = date("Y-m-d", strtotime($f));
             $observ   = $_POST["observ"];
