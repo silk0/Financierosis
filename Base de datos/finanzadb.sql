@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-01-2021 a las 02:22:27
+-- Tiempo de generación: 18-01-2021 a las 07:26:46
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -75,21 +75,22 @@ CREATE TABLE `tactivo` (
   `precio` double NOT NULL,
   `marca` varchar(50) NOT NULL,
   `depreciacionacum` double NOT NULL,
-  `tipo_adquicicion` varchar(50) NOT NULL
+  `tipo_adquicicion` varchar(50) NOT NULL,
+  `vidaUtil` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tactivo`
 --
 
-INSERT INTO `tactivo` (`id_activo`, `id_tipo`, `id_departamento`, `id_encargado`, `id_proveedor`, `correlativo`, `fecha_adquisicion`, `descripcion`, `estado`, `precio`, `marca`, `depreciacionacum`, `tipo_adquicicion`) VALUES
-(1, 1, 1, 1, 1, '101-201 - 301-401 - 0001', '2019-08-01', 'computadora HD', '1', 1600, 'Samnsung', 0, 'Nuevo'),
-(2, 2, 2, 2, 2, '101-202 - 301-402 - 0002', '2018-12-06', 'silla nuevas', '1', 500, 'Hander', 100, 'Nuevo'),
-(3, 1, 4, 2, 2, '0003', '2021-01-28', 'Servira?', '1', 3, 'cetron', 0, 'Nuevo'),
-(4, 2, 4, 2, 1, '0004', '2020-12-29', '345345345345345345', '1', 555, 'cetron', 0, 'Usado'),
-(5, 2, 2, 3, 1, '0005', '2021-01-14', 'hh', '1', 555, 'cetron', 0, 'Nuevo'),
-(6, 1, 4, 2, 1, '0006', '2021-01-13', 'Nuevo con correccion', '1', 555, 'cetron', 0, 'Nuevo'),
-(7, 2, 2, 2, 1, '0001-0002-0002-0007', '2021-01-12', '55555hhh', '1', 55, 'cetron', 0, 'Nuevo');
+INSERT INTO `tactivo` (`id_activo`, `id_tipo`, `id_departamento`, `id_encargado`, `id_proveedor`, `correlativo`, `fecha_adquisicion`, `descripcion`, `estado`, `precio`, `marca`, `depreciacionacum`, `tipo_adquicicion`, `vidaUtil`) VALUES
+(1, 1, 1, 1, 1, '101-201 - 301-401 - 0001', '2019-08-01', 'computadora HD', '1', 1600, 'Samnsung', 0, 'Nuevo', 6),
+(2, 2, 2, 2, 2, '101-202 - 301-402 - 0002', '2018-12-06', 'silla nuevas', '1', 500, 'Hander', 100, 'Nuevo', 6),
+(3, 1, 4, 2, 2, '0003', '2021-01-28', 'Servira?', '1', 3, 'cetron', 0, 'Nuevo', 6),
+(4, 2, 4, 2, 1, '0004', '2018-07-04', '345345345345345345', '1', 5000, 'cetron', 0, 'Usado', 3),
+(5, 2, 2, 3, 1, '0005', '2021-01-14', 'hh', '1', 555, 'cetron', 0, 'Nuevo', 6),
+(6, 1, 4, 2, 1, '0006', '2021-01-13', 'Nuevo con correccion', '1', 555, 'cetron', 0, 'Nuevo', 6),
+(7, 2, 2, 2, 1, '0001-0002-0002-0007', '2021-01-12', '55555hhh', '1', 55, 'cetron', 0, 'Nuevo', 6);
 
 -- --------------------------------------------------------
 
@@ -155,7 +156,10 @@ INSERT INTO `tbanco` (`id_banco`, `descripcion`, `cantidad`, `id_venta`) VALUES
 (23, 'Pago de cuota No.00014 de la venta No.000028 al credito.', 35.46, 28),
 (24, 'Pago de cuota No.00015 de la venta No.000028 al credito.', 35.46, 28),
 (25, 'Pago de cuota No.00016 de la venta No.000028 al credito.', 35.46, 28),
-(26, 'Pago de cuota No.00017 de la venta No.000028 al credito.', 35.46, 28);
+(26, 'Pago de cuota No.00017 de la venta No.000028 al credito.', 35.46, 28),
+(27, 'Pago de cuota No.00021 de la venta No.000029 al credito.', 35.4571, 29),
+(28, 'Pago de cuota No.00022 de la venta No.000029 al credito.', 35.4571, 29),
+(29, 'Pago de cuota No.00023 de la venta No.000029 al credito.', 35.4571, 29);
 
 -- --------------------------------------------------------
 
@@ -230,11 +234,11 @@ CREATE TABLE `tclasificacion` (
 --
 
 INSERT INTO `tclasificacion` (`id_clasificaion`, `nombre`, `correlativo`, `tiempo_depreciacion`) VALUES
-(1, 'Mobiliario y Equipo', '301', 2),
-(2, 'Terrenos', '302', 0),
-(3, 'Edificios', '303', 20),
-(4, 'Equipo de Computo', '304', 4),
-(5, 'Equipo de Reparto', '305', 2);
+(1, 'Edificios', '301', 5),
+(2, 'Maquinaria', '302', 20),
+(3, 'Vehiculos', '303', 25),
+(4, 'Otros bienes muebles', '304', 50),
+(5, 'No', '305', 2);
 
 -- --------------------------------------------------------
 
@@ -508,9 +512,9 @@ INSERT INTO `tpago` (`id_pago`, `id_venta`, `monto`, `fecha`, `mora`, `estado`) 
 (18, 28, 35.46, '2021-05-17', 0, 0),
 (19, 28, 35.46, '2021-06-17', 0, 0),
 (20, 28, 35.46, '2021-07-17', 0, 1),
-(21, 29, 35.4571, '2021-01-18', 0, 0),
-(22, 29, 35.4571, '2021-02-18', 0, 0),
-(23, 29, 35.4571, '2021-02-18', 0, 0),
+(21, 29, 35.4571, '2021-01-18', 0, 1),
+(22, 29, 35.4571, '2021-02-18', 0, 1),
+(23, 29, 35.4571, '2021-02-18', 0, 1),
 (24, 29, 35.4571, '2021-02-18', 0, 0),
 (25, 29, 35.4571, '2021-02-18', 0, 0),
 (26, 29, 35.4571, '2021-02-18', 0, 0),
@@ -592,7 +596,7 @@ CREATE TABLE `ttipo_activo` (
 
 INSERT INTO `ttipo_activo` (`id_tipo`, `id_clasificacion`, `nombre`, `correlativo`) VALUES
 (1, 1, 'Computadora', '0001'),
-(2, 1, 'Sillas', '0002'),
+(2, 2, 'Sillas', '0002'),
 (3, 5, 'Camion', '0003'),
 (4, 1, 'Mesa', '0004');
 
@@ -634,7 +638,7 @@ INSERT INTO `tventas` (`id_venta`, `id_cliente`, `codigo`, `id_plan`, `id_emplea
 (26, 21, '000026', NULL, 4, 649.75, 649.75, 0, NULL, 'Cancelado', '2021-01-16', '2021-01-16', 0, NULL, NULL),
 (27, 5, '000027', NULL, 4, 129.95, 129.95, 0, NULL, 'Cancelado', '2021-01-16', '2021-01-16', 0, NULL, NULL),
 (28, 4, '000028', NULL, 4, 248.2, 70.9, 0, NULL, 'Pendiente', '2021-01-17', '2021-01-16', 13, NULL, 7),
-(29, 4, '000029', NULL, 4, 248.2, 248.2, 0, 0, 'Pendiente', '2021-01-18', '2021-01-17', 13, 0, NULL);
+(29, 4, '000029', NULL, 4, 248.2, 141.829, 0, 0, 'Pendiente', '2021-01-18', '2021-01-17', 13, 0, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -830,7 +834,7 @@ ALTER TABLE `tarticulos_vendidos`
 -- AUTO_INCREMENT de la tabla `tbanco`
 --
 ALTER TABLE `tbanco`
-  MODIFY `id_banco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_banco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `tcarrito`

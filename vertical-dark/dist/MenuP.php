@@ -120,10 +120,7 @@
                 </li>
                 <li>
                     <a href="listaActivos.php">Listado de Activo</a>
-                </li>
-                <li>
-                    <a href="Contenido.php">Depreciacion</a>
-                </li>  
+                </li> 
                 <li>
                     <a href="ingresoInstituciones.php">Instituciones</a>
                 </li>
