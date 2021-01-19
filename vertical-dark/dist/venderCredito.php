@@ -368,7 +368,7 @@
     
     <script type="text/javascript">
        
-        $('#interesN').on('change', function () {
+        $('#interesN').on('keyup', function () {
             $int = $(this).val();
             $m = $('#meses').val();            
             $toV = $('#totalV').val();
@@ -382,7 +382,7 @@
                 $('#total').val("$0.00");
             }
         });
-        $('#meses').on('change', function () {
+        $('#meses').on('keyup', function () {
             $int = $('#interesN').val();
             $m = $(this).val();            
             $toV = $('#totalV').val();

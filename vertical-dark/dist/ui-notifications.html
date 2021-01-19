@@ -19,6 +19,14 @@
         <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
 
     </head>
+    <script type="text/javascript">
+        	function noti()
+        	{
+        		$.toast({heading: "Heads up!", text: "This alert needs your attention, but it is not super important.", position: "top-right", loaderBg: "#3b98b5", icon: "info"});
+        		$.toast({heading: "Oh snap!", text: "Change a few things up and try submitting again.", position: "top-right", loaderBg: "#bf441d", icon: "error"});
+        		$.toast({heading: "Well Done!", text: "You successfully read this important alert message", position: "top-right", loaderBg: "#5ba035", icon: "success"});
+        	}
+        </script>
 
     <body>
 
@@ -821,6 +829,9 @@
                                                 <td>
                                                     <button type="button" class="btn btn-light waves-effect btn-sm" id="toastr-ten">Click me</button>
                                                 </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-light waves-effect btn-sm" id="boton" onclick="noti();">cliqueame</button>
+                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -964,6 +975,19 @@
         <!-- Right bar overlay-->
         <div class="rightbar-overlay"></div>
 
+        <script type="text/javascript">
+
+        	/*$("#boton").on("click",
+        		function()
+        		{alert("entra");//NotificationApp.toastr.success("Heads up!","rrrrrrrrrrr","top-right","#3b98b5","info")
+        	});*/
+        	/*$('#boton').on('click', function () {
+            	
+	        });*/
+        	/*$('#toastr-one').toast({text :"Nuevo toast prueba"});
+        	toastr.success('Click Button');*/
+        </script>
+        
         <!-- Vendor js -->
         <script src="assets/js/vendor.min.js"></script>
 
