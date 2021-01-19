@@ -234,26 +234,26 @@
                                                 )\";>
                                                     <i class='dripicons-enter'></i> 
                                                 </button>
-                                                </span>
+                                                </span>";
 
-
-                                                <span  data-toggle='modal' data-target='#devolucion' >  
-                                                <button 
-                                                button type='button'
-                                                title='Devolucion'
-                                                data-toggle='tooltip' 
-                                                data-placement='bottom'                                                              
-                                                class='btn btn-info waves-effect waves-light' onclick=\"
-                                                devolucion(
-                                                    '$fila->id_producto',                                                    
-                                                    '$fila->codigo',
-                                                    '$fila->id_proveedor',
-                                                    '$fila->nombre'
-                                                )\";>
-                                                    <i class='dripicons-exit'></i> 
-                                                </button> 
-                                                </span> 
-                                                </td>";
+                                                if(($fila->stock)>0)
+                                                    $a .="<span  data-toggle='modal' data-target='#devolucion' >  
+                                                    <button 
+                                                    button type='button'
+                                                    title='Devolucion'
+                                                    data-toggle='tooltip' 
+                                                    data-placement='bottom'                                                              
+                                                    class='btn btn-info waves-effect waves-light' onclick=\"
+                                                    devolucion(
+                                                        '$fila->id_producto',                                                    
+                                                        '$fila->codigo',
+                                                        '$fila->id_proveedor',
+                                                        '$fila->nombre'
+                                                    )\";>
+                                                        <i class='dripicons-exit'></i> 
+                                                    </button> 
+                                                    </span> 
+                                                    </td>";
                                             echo $a;
                                             echo "</tr>";
                                         }
@@ -370,7 +370,7 @@
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
                             </div><!-- /.modal --> 
-                            <!--  Modal vender ComprarProductos-->
+                            <!--  Modal -->
                             <div id="devolucion" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -426,7 +426,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal-footer form-group">    
+                                        <div class="modal-footer form-group"> 
+                                            <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal" onclick="kardex();"><span>Kardex</span><i class="icon-doc ml-1"></i></button>    
                                             <button type="button" onclick="añadirDevolucion();" class="btn  btn-primary waves-effect" data-dismiss="modal">Registrar</button>
                                             <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Cerrar</button>
                                         </div>
@@ -478,15 +479,17 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-
+                                                           
                                                             <div class="form-row">
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-md-12">
-                                                                        <label for="stock" class="col-form-label">Factura No.</label>
-                                                                        <input type="text" class="form-control" name="facturaC" id="facturaD" 
-                                                                            placeholder="No.3456789">
-                                                                    </div>                                                                
-                                                                </div> 
+                                                                <div class="form-group col-md-12">
+                                                                    <label for="stock" class="col-form-label">Factura No.</label>
+                                                                    <input type="text" class="form-control" name="facturaC" id="facturaD" 
+                                                                        placeholder="No.3456789">
+                                                                </div>                                                                
+                                                            </div> 
+                                                            
+
+                                                            <div class="form-row">                                                                
                                                                 <div class="form-group col-md-4">
                                                                     <label for="stock" class="col-form-label">Precio</label>
                                                                     <input type="number" class="form-control" name="precioC" id="precioC" 
@@ -510,6 +513,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer form-group">    
+                                        <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal" onclick="kardex();"><span>Kardex</span><i class="icon-doc ml-1"></i></button> 
                                             <button type="button" onclick="añadirCompra();" class="btn  btn-primary waves-effect" data-dismiss="modal">Registrar</button>
                                             <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Cerrar</button>
                                         </div>
@@ -572,6 +576,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">    
+                                        <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal" onclick="kardex();"><span>Kardex</span><i class="icon-doc ml-1"></i></button> 
                                             <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal" onclick="añadircarrito();">Añadir al carrito</button>
                                             <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Cerrar</button>
                                         </div>
