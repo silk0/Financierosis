@@ -16,6 +16,7 @@ if($accion==1){
   $salario = $_POST['salario'];
   $observ  = $_POST['observ'];
   $egres  = $_POST['egreso'];
+  $fiador  = $_POST['fiadorm'];
   
   $consulta  = "UPDATE tclientes set nombre='" . $nombre . "',
       apellido='" . $apellido . "',
@@ -28,7 +29,8 @@ if($accion==1){
       celular='" . $cel . "',
       correo='" . $email . "',
       observaciones='" . $observ . "',
-      egreso='" . $egres . "' 
+      egreso='" . $egres . "',
+      id_fiador='".$fiador."'
       where id_cliente='". $id ."'";
   $resultado = $conexion->query($consulta);
   if ($resultado) {   
