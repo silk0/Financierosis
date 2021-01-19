@@ -93,7 +93,7 @@
                                         
                                         include "config/conexion.php";
                                             $result = $conexion->query("select d.id_detalleventa as id,t.fecha as fecha, concat(t2.nombre,' ',t2.apellido) as cliente, concat('Venta NO.',t.codigo) as venta,
-                                                                concat('$ ',t.saldo_actual) as saldo, t.estado as estado
+                                                                concat('$ ',truncate(t.saldo_actual,2)) as saldo, t.estado as estado
                                                         from tdetalle_venta  as d
                                                         inner join tventas t on d.id_venta = t.id_venta
                                                         inner join tclientes t2 on t.id_cliente = t2.id_cliente

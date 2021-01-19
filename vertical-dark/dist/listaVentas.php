@@ -144,7 +144,7 @@
                                             <?php
                                         
                                         include "config/conexion.php";
-                                            $result = $conexion->query("select  v.fecha, b.descripcion, concat('$ ',b.cantidad) as precio,dv.tipo
+                                            $result = $conexion->query("select  v.fecha, b.descripcion, concat('$ ',truncate(b.cantidad,2)) as precio,dv.tipo
                                                     from tdetalle_venta as dv inner join tventas v on dv.id_venta = v.id_venta
                                                     inner join tbanco b on v.id_venta = b.id_venta order by v.codigo desc ;
                                             ");
