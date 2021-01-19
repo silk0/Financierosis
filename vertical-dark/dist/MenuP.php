@@ -6,7 +6,7 @@
 
         <li>
             <a href="javascript: void(0);">
-                <i class="mdi mdi-account-multiple"></i>
+                <i class="mdi mdi-24px  mdi-account-multiple"></i>
                 <span>Clientes </span>
                 <span class="menu-arrow"></span>
             </a>
@@ -21,7 +21,7 @@
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="mdi mdi-shield-account"></i>
+                <i class="mdi mdi-24px mdi-shield-account"></i>
                 <span> Fiadores </span>
                 <span class="menu-arrow"></span>
             </a>
@@ -36,7 +36,7 @@
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="mdi mdi-truck-check"></i>
+                <i class="mdi mdi-24px mdi-truck-check"></i>
                 <span> Proveedores </span>
                 <span class="menu-arrow"></span>
             </a>
@@ -51,7 +51,7 @@
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="mdi mdi-account-card-details"></i>
+                <i class="mdi mdi-24px mdi-account-card-details"></i>
                 <span> Empleados </span>
                 <span class="menu-arrow"></span>
             </a>
@@ -67,7 +67,7 @@
 
         <li>
             <a href="javascript: void(0);">
-                <i class=" mdi mdi-dropbox"></i>
+                <i class=" mdi mdi-24px mdi-dropbox"></i>
                 <span>Inventario</span>
                 <span class="menu-arrow"></span>
             </a>
@@ -86,7 +86,7 @@
 
         <li>
         <a href="javascript: void(0);">
-                <i class="mdi mdi-cart"></i>
+                <i class="mdi mdi-24px mdi-cart"></i>
                 <span>ventas</span>
                 <span class="menu-arrow"></span>
             </a>
@@ -100,17 +100,19 @@
                 <li>
                     <a href="listaVentas.php">Ventas y pagos</a>
                 </li> 
-                <li>
-                    <a href="cuentasCobrar.php">Cuentas por cobrar</a>
-                </li>               
+                              
             </ul>
         </li>
-        
-
+        <li>
+        <a href="cuentasCobrar.php">
+                <i class="mdi mdi-24px mdi-book-open-page-variant"></i>
+                <span>Cuentas por cobrar</span>                
+            </a>
+        </li>
         <li class="menu-title">Activo</li>
         <li>
             <a href="javascript: void(0);">
-                <i class="mdi mdi-notebook"></i>
+                <i class="mdi mdi-24px mdi-notebook"></i>
                 <span>Activo Fijo</span>
                 <span class="menu-arrow"></span>
             </a>

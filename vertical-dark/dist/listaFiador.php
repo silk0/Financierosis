@@ -119,7 +119,7 @@ function modify(id,nom,ape,dui,nit,tel,cel,direc,email,prof,sal){
                                                 echo "<td>" . $fila->apellido . "</td>";
                                                 echo "<td>" . $fila->direccion . "</td>"; 
                                                 echo "<td>" . $fila->telefono . "</td>";
-                                                echo "<td> 
+                                                echo "<td style='width: 10%;' align='center'> 
                                                 <span data-toggle='modal'                                                    
                                                 data-target='#mostrarFiador'>                                                
                                                     <button 

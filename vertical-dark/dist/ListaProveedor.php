@@ -144,7 +144,7 @@
                                                 echo "<td>" . $fila->representante . "</td>"; 
                                                 echo "<td>" . $fila->celular . "</td>";
                                                 echo "<td>" . $fila->email . "</td>";
-                                                echo "<td>    
+                                                echo "<td style='width: 10%;' align='center'>    
                                                 <span data-toggle='modal'                                                    
                                                 data-target='#mostrarProveedor'>                                             
                                                     <button 

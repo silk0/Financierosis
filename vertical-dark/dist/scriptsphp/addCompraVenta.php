@@ -39,12 +39,12 @@ if ($bandera==1) {
           $consulta="insert into kardex(id_producto, fecha, descripcion, movimiento, 
           cantidad, vunitario, cantidads, vunitarios, 
           vtotals)
-          select id_producto, now(), concat('Compra Factura No.', '".$id_producto."'), 1, '".$cantidad."',
+          select id_producto, now(), concat('Compra Factura No.', '".$facturaC."'), 1, '".$cantidad."',
           precio_compra, stock, precio_compra,round(precio_compra*tproducto.stock,2)
           from tproducto where id_producto='".$id_producto."';";
           $resultado=$conexion->query($consulta);
           if($resultado){
-            echo "Se ingreso en el kardex";
+            header('Location:../listadoProducto.php');
           }else{
             echo "No se ingreso en el kardex";
           }
@@ -82,7 +82,7 @@ if ($bandera==1) {
             from tproducto where id_producto='".$id_producto."';";
             $resultado=$conexion->query($consulta);
             if($resultado){
-              echo "Se ingreso en el kardex";
+              header('Location:../listadoProducto.php');
             }else{
               echo "No se ingreso en el kardex";
             }

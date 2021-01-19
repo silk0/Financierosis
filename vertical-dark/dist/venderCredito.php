@@ -194,7 +194,7 @@
                                         <div class="col-md-2">
                                              <div class="mt-3">
                                                 
-                                                <label for="inputState" class="col-form-label">Total+interes</label>
+                                                <label for="inputState" class="col-form-label">Total + interes</label>
                                                 <div>
                                                     <div class="input-group">
                                                         <input type="text" class="form-control" id="total" name="total"
@@ -264,7 +264,7 @@
 
                                                 <small class="text-muted">
                                                         El boton de realizar venta al credito se desbloqueara
-                                                        si los productos en el carrito no superen un producto. Solo se registra
+                                                        si los productos en el carrito superen un producto. Solo se registra
                                                         las ventas al credito de un producto a la vez.
                                                 </small>
                                             </div>

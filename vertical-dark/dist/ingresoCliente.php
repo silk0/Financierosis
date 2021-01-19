@@ -56,8 +56,11 @@
                 '</div>'
         });
     }
+    function mensaje(){
+        
+    }
 
-    function alert(str, icono) {
+    function m(str, icono) {
         var Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -114,8 +117,8 @@
         } else if (document.getElementById('observ').value == "") {
             notify(' Advertencia:', 'El campo Observaciones es obligatorio', 'top', 'right', 'any', 'warning');
             document.getElementById("observ").focus();
-        } else {
-            document.form.submit();
+        } else {            
+            document.form.submit();            
         }
     }
 
@@ -299,6 +302,7 @@
                                                 <?php
                                                    include 'config/conexion.php';
                                                     $result = $conexion->query("select id_fiador as id,nombre FROM tfiador");
+                                                   
                                                      if ($result) {
                                                        while ($fila = $result->fetch_object()) {                                                                                
                                                      echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
@@ -387,6 +391,7 @@
 
         $resultado = $conexion->query($consulta);
         if ($resultado) {
+             
             msgI("Los datos fueron almacenados con exito");
         } else {
             msgE("Los datos no pudieron almacenarce");
@@ -396,7 +401,7 @@
 function msgI($texto)
 {
     echo "<script type='text/javascript'>";
-    echo "notify('Exito','$texto','top', 'right', 'any', 'success');";
+    
     echo "</script>";
 }
 function msgA($texto)

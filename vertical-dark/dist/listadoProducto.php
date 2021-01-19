@@ -174,7 +174,7 @@
                                                 echo "<td> Activo </td>";
                                             else{ echo "<td> Inactivo </td>";}
                                             
-                                                $a = "<td align='center'> 
+                                                $a = "<td style='width: 15%;' align='center'> 
                                                 <span  data-toggle='modal' data-target='#verProducto' >                                                                                                                          
                                                     <button
                                                         button type='button'
@@ -418,7 +418,7 @@
                                                                 <div class="form-group col-md-4">
                                                                     <label for="stock" class="col-form-label">Cantidad</label>
                                                                     <input type="number" class="form-control" name="cantidadD" id="cantidadD"
-                                                                        placeholder="$0.00">
+                                                                        placeholder="0">
                                                                 </div>                                                                
                                                             </div>              
                                                         </form>
