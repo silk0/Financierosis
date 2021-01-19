@@ -79,6 +79,10 @@
 <!-- Init js -->
 <script src="assets/js/pages/chartist.init.js"></script>
 
+<!-- toastr init js-->
+<script src="assets/js/pages/toastr.init.js"></script>
+<script src="assets/libs/jquery-toast/jquery.toast.min.js"></script>
+
 
 <script type="text/javascript">
     Parsley.addMessages('es', {
