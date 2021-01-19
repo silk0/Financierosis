@@ -441,7 +441,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">    
-                                            <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Registrar compra</button>
+                                            <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Registrar</button>
                                             <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Cerrar</button>
                                         </div>
                                     </div><!-- /.modal-content -->

@@ -15,15 +15,8 @@ $id  = $_REQUEST["id"];
 <?php
 include "../config/conexion.php";
 
-/*"bandera":$bandera,
-"producto" :$id_produc,
-"proveedor" :$id_proveed,
-"factura" :$factura,
-"cantidad" :$cantidad,
-"precio" :$precio,
-"total" :$total*/
-$bandera = $_POST["bandera"];
-$idproducto = $_POSTREQUEST["producto"];
+$bandera = $_REQUEST["bandera"];
+$idproducto = $_POST["producto"];
 $cantidad = $_POST["cantidad"];
 $vunitario = $_POST["precio"];
 $subtotalK = $_POST["total"];

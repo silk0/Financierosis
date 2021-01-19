@@ -48,12 +48,7 @@
         <link href="assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
         <link href="assets/libs/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" /> 
         
-        <!-- Vendor js -->
-        <script src="assets/js/vendor.min.js"></script>
-        <script src="assets/libs/jquery-toast/jquery.toast.min.js"></script>
-
-        <!-- toastr init js-->
-        <script src="assets/js/pages/toastr.init.js"></script>
+        
 
         <link rel="shortcut icon" href="assets/images/favicon.ico">      
         <!-- Chartist Chart CSS -->
