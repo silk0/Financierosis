@@ -47,8 +47,6 @@
         <link href="assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet" />
         <link href="assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
         <link href="assets/libs/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" /> 
-        
-        
 
         <link rel="shortcut icon" href="assets/images/favicon.ico">      
         <!-- Chartist Chart CSS -->
