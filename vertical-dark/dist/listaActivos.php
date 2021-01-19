@@ -23,35 +23,50 @@
 ?>
 <?php include_once 'Cabecera.php';?>
 
-<SCRIPT  language=JavaScript> 
-    function go(){
+<SCRIPT language=JavaScript>
+    function go() {
         //validacion respectiva me da hueva
         $("#editarForm").submit();
-            
-    } 
 
-    function grafica(dDia,dMes,dAno)
-    {
-        $dia=Number(dDia);
-        $mes=Number(dMes);
-        $ano=Number(dAno);
-        document.getElementById("id_depreciacion").innerHTML="Dia: $"+$dia+"    Mes: $"+$mes+"    Año: $"+$ano;
+    }
+
+    function grafica(dDia, dMes, dAno) {
+        $dia = Number(dDia);
+        $mes = Number(dMes);
+        $ano = Number(dAno);
+        document.getElementById("id_depreciacion").innerHTML = "Dia: $" + $dia + "    Mes: $" + $mes + "    Año: $" +
+            $ano;
         depre = new Chartist.Bar('#distributed-series', {
-        labels: ['Dias', 'Meses', 'Años'],
-        series: [dDia,dMes,dAno]
+            labels: ['Dias', 'Meses', 'Años'],
+            series: [dDia, dMes, dAno]
         }, {
-            distributeSeries: true, 
+            distributeSeries: true,
             ticks: ['One', 'Two', 'Three'],
             fullWidth: true,
             width: '300px',
             chartPadding: {
                 right: 40
-            }                
+            }
         });
-                        
-    }  
 
+    }
 
+    function edit(id, cor, vid, inst, uni, tip, aad, fec, enca, mar, pre, va, des) {
+        // document.getElementById("baccion2").value=id;
+        //document.getElementById("id_activo").value = id;
+        document.getElementById("correv").value = cor;
+        document.getElementById("vidav").value = vid;
+         document.getElementById("instiv").value = inst;
+         document.getElementById("unidav").value = uni;
+         document.getElementById("tipov").value = tip;
+         document.getElementById("adquiv").value = aad;
+         document.getElementById("fechav").value = fec;
+         document.getElementById("encarv").value = enca;
+         document.getElementById("marcav").value = mar;
+         document.getElementById("provev").value = pre;
+         document.getElementById("valor").value = va;
+         document.getElementById("desv").value = des;
+    }
 </script>
 
 <body>
@@ -107,31 +122,26 @@
                                 <p class="sub-header">
 
                                 </p>
-                                <form id="fCartera" name= "fCartera" action="" method="GET"  class="parsley-examples">
-                                
-                                <table id="datatable-buttons"
-                                    class="table table-striped table-bordered dt-responsive nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th>Correlativo</th>
-                                            <th>Clasificacion</th>
-                                            <th>Descripcion</th>
-                                            <th>Tipo Adquisicion</th>
-                                            <th>Fecha de Adquisicion</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
+                                <form id="fCartera" name="fCartera" action="" method="GET" class="parsley-examples">
 
-                                    <tbody> 
-                                        <?php
+                                    <table id="datatable-buttons"
+                                        class="table table-striped table-bordered dt-responsive nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Correlativo</th>
+                                                <th>Clasificacion</th>
+                                                <th>Descripcion</th>
+                                                <th>Tipo Adquisicion</th>
+                                                <th>Fecha de Adquisicion</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <?php
                                         
                                         include "config/conexion.php";
-                                            $result = $conexion->query("SELECT tactivo.id_activo,tactivo.correlativo, 
-                                            ttipo_activo.nombre as tipoa, tactivo.descripcion, 
-                                            tactivo.tipo_adquicicion, tactivo.fecha_adquisicion FROM tactivo
-                                             INNER JOIN tdepartamento ON tactivo.id_departamento = tdepartamento.id_departamento 
-                                             INNER JOIN ttipo_activo ON tactivo.id_tipo = ttipo_activo.id_tipo 
-                                             INNER JOIN tclasificacion ON ttipo_activo.id_clasificacion = tclasificacion.id_clasificaion");
+                                            $result = $conexion->query("SELECT tactivo.descripcion, tactivo.correlativo, tactivo.fecha_adquisicion, tactivo.id_activo, tactivo.marca, tactivo.precio, tactivo.tipo_adquicicion, tproveedor.nombre as pro, templeados.nombre as emp, ttipo_activo.nombre as tipoa, tinstitucion.nombre as insti, tdepartamento.nombre as dpto, tclasificacion.nombre as clasificacion FROM tactivo INNER JOIN tdepartamento ON tactivo.id_departamento = tdepartamento.id_departamento INNER JOIN ttipo_activo ON tactivo.id_tipo = ttipo_activo.id_tipo INNER JOIN tclasificacion ON ttipo_activo.id_clasificacion = tclasificacion.id_clasificaion INNER JOIN tinstitucion ON tdepartamento.id_institucion = tinstitucion.id_institucion INNER JOIN templeados ON tactivo.id_encargado = templeados.id_empleado INNER JOIN tproveedor ON tactivo.id_proveedor = tproveedor.id_proveedor");
                                         if ($result) {
                                             while ($fila = $result->fetch_object()) {
                                                 echo "<tr>";
@@ -148,6 +158,19 @@
                                                     data-placement='bottom'                            
                                                     class='btn btn-primary waves-effect waves-light' onclick=\"
                                                     edit(
+                                                        '$fila->id_activo',
+                                                        '$fila->correlativo',
+                                                        '$fila->vidaUtil',
+                                                        '$fila->insti',
+                                                        '$fila->dpto',
+                                                        '$fila->tipoa',
+                                                        '$fila->tipo_adquicicion',
+                                                        '$fila->fecha_adquisicion',
+                                                        '$fila->emp',
+                                                        '$fila->marca',
+                                                        '$fila->pro',
+                                                        '$fila->precio',
+                                                        '$fila->descripcion'
                                                     )\";>
                                                         <i class='mdi mdi-18px mdi-eye'></i> 
                                                     </button></span>";
@@ -225,149 +248,159 @@
                                             }
                                         }
                                         ?>
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <!-- end row -->                     
-                    
+                    <!-- end row -->
+
                     <!-- Bootstrap Modals -->
                     <div class="row">
-                        <div class="col-12">                               
+                        <div class="col-12">
+                            <div class="">
                                 <!--  Modal mostrar cliente-->
-                                <div id="mostrarCliente" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                                <div id="mostrar" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                                    aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h4 class="modal-title" id="myLargeModalLabel">Datos del cliente</h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">×</button>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="card-box">
-                                                            <form name="form" required class="parsley-examples">
-                                                            
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputEmail4" class="col-form-label">Nombre</label>
-                                                                    <input type="text"  class="form-control" name="nombrem" id="nombrem" required  placeholder="Jose Alfredo" readonly>
+                                                            <form name="form" id="form" method="post" action=""
+                                                                class="parsley-examples">
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputEmail4"
+                                                                            class="col-form-label">Correlativo</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="correv" id="correv" readonly>
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputPassword4"
+                                                                            class="col-form-label">Vida Util</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="vidav" id="vidav" readonly>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputPassword4" class="col-form-label">Apellido</label>
-                                                                    <input type="text" class="form-control" name="apellidom" id="apellidom" required  placeholder="Rodriguez Perez" readonly>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-4">
+                                                                        <label for="inputEmail4"
+                                                                            class="col-form-label">Institucion</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="instiv" id="instiv" required readonly>
+                                                                    </div>
+                                                                    <div class="form-group col-md-4">
+                                                                        <label for="inputPassword4"
+                                                                            class="col-form-label">Unidad</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="unidav" id="unidav" required readonly>
+                                                                    </div>
+                                                                    <div class="form-group col-md-4">
+                                                                        <label for="inputEmail4"
+                                                                            class="col-form-label">Tipo
+                                                                            de Activo</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="tipov" id="tipov" required readonly>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputEmail4" class="col-form-label">Dui</label>
-                                                                    <input type="text"  class="form-control" name="duim" id="duim" required  data-mask="99999999-9" placeholder="99999999-9" readonly>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-4">
+                                                                        <label for="inputEmail4"
+                                                                            class="col-form-label">Tipo
+                                                                            de Adquisicion</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="adquiv" id="adquiv" required readonly>
+                                                                    </div>
+                                                                    <div class="form-group col-md-4">
+                                                                        <label for="inputPassword4"
+                                                                            class="col-form-label">Fecha de
+                                                                            Adquisicion</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="fechav" id="fechav" required
+                                                                            placeholder="" readonly>
+                                                                    </div>
+                                                                    <div class="form-group col-md-4">
+                                                                        <label for="inputEmail4"
+                                                                            class="col-form-label">Encargado</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="encarv" id="encarv" required readonly>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputPassword4" class="col-form-label">Nit</label>
-                                                                    <input type="text" class="form-control" name="nitm" id="nitm" required  data-mask="9999-999999-999-9" placeholder="9999-999999-999-9" readonly>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-4">
+                                                                        <label for="inputEmail4"
+                                                                            class="col-form-label">Marca</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="marcav" id="marcav" required
+                                                                            placeholder="" readonly>
+                                                                    </div>
+                                                                    <div class="form-group col-md-4">
+                                                                        <label for="inputPassword4"
+                                                                            class="col-form-label">Proveedor</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="provev" id="provev" required
+                                                                            placeholder="" readonly>
+                                                                    </div>
+                                                                    <div class="form-group col-md-4">
+                                                                        <label for="inputEmail4"
+                                                                            class="col-form-label">Valor del Activo
+                                                                            $</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="valor" id="valor" required readonly>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputEmail4" class="col-form-label">Telefono fijo</label>
-                                                                    <input type="text"  class="form-control" name="telm" id="telm" required  data-mask="9999-9999" placeholder="9999-9999" readonly>
+                                                                <div class="form-row">
+                                                                    <label for="inputEmail4"
+                                                                        class="col-form-label">Descripcion</label>
+                                                                    <textarea class="form-control" id="desv" name="desv"
+                                                                        rows="5" readonly></textarea>
                                                                 </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputPassword4" class="col-form-label">Telefono Movil</label>
-                                                                    <input type="text" class="form-control" name="celm" id="celm" required data-mask="9999-9999" placeholder="9999-9999" readonly>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-row">
-                                                                <label for="inputAddress" class="col-form-label">Direccion</label>
-                                                                <input type="text" class="form-control"  name="direcm" id="direcm" required placeholder="Calle Juan Ulloa Canas y Avenida Crescencio Miranda Casa #23" readonly>
-                                                            </div>
-
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputEmail4" class="col-form-label">Email</label>
-                                                                    <input type="email"  class="form-control" name="emailm" id="emailm"  required  placeholder="Correo@correo.com" readonly>
-                                                                </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="inputPassword4" class="col-form-label">Profesion u oficio</label>
-                                                                    <input type="text"  class="form-control" name="profeciom" id="profeciom" required  placeholder="Ing. Civil" readonly>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-4">
-                                                                    <label for="inputCity" class="col-form-label">Ingresos Mensuales</label>
-                                                                    <input type="text" class="form-control" name="salm" id="salm" required  placeholder="0.00" readonly>
-                                                                </div>
-                                                                <div class="form-group col-md-4">
-                                                                    <label for="inputState" class="col-form-label">Tipo de ingreso</label>
-                                                                    <input type="text" class="form-control" name="tipom" id="tipom" placeholder="0.00" readonly>
-                                                                </div>
-                                                                <div class="form-group col-md-4">
-                                                                    <label for="inputZip" class="col-form-label">Egreso Promedio Mensual</label>
-                                                                    <input type="text" class="form-control" name="egres" id="egres" placeholder="0.00" readonly>
-                                                                </div>
-                                                            </div> 
-
-                                                            <div class="form-row">                                        
-                                                                <div class="form-group col-md-4">
-                                                                    <label for="inputState" class="col-form-label">Agregar a la cartera</label>
-                                                                    <select class="form-control" name="carteram" id="carteram" disabled>                                                                        
-                                                                        <?php
-                                                                        include 'config/conexion.php';
-                                                                        $result = $conexion->query("select id_categoria as id,nombre FROM tcartera");
-                                                                        if ($result) {
-                                                                            while ($fila = $result->fetch_object()) {                                                                                
-                                                                                echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
-                                                                            }
-                                                                        }
-                                                                        ?> 
-                                                                    </select>
-                                                                </div>
-                                                            </div>    
-
-                                                            <div class="form-row">
-                                                                <label for="inputEmail4" class="col-form-label">Descripcion</label>
-                                                                <textarea class="form-control" id="observm" name="observm" rows="5" readonly></textarea>
-                                                            </div>
-
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
+                                                <button type="button" class="btn  btn-primary waves-effect"
+                                                    data-dismiss="modal">Cerrar</button>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->   
+                                </div><!-- /.modal -->
                                 <!--  Modal editar cliente-->
-                                <div id="depreciacion" class="modal fade bs-example-modal-lg" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div id="depreciacion" class="modal fade bs-example-modal-lg" role="dialog"
+                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title" id="myLargeModalLabel">Depreciacion Acumulada</h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h4 class="modal-title" id="myLargeModalLabel">Depreciacion Acumulada
+                                                </h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">×</button>
                                             </div>
-                                            
+
                                             <div class="card-box">
                                                 <p class="header-title" id="id_depreciacion">depreciacion</p>
                                                 <div class="mt-4">
-                                                    <div id="distributed-series" class="ct-chart ct-golden-section"></div>
+                                                    <div id="distributed-series" class="ct-chart ct-golden-section">
+                                                    </div>
                                                 </div>
-                                            </div> <!-- end card-box-->                                   
-                                                                                     
+                                            </div> <!-- end card-box-->
+
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->       
+                                </div><!-- /.modal -->
+                            </div>
                         </div>
-                    </div>      
+                    </div><!-- FIN Bootstrap Modals -->
                 </div> <!-- container -->
             </div> <!-- content -->
 
@@ -398,24 +431,23 @@
 
     <?php include_once 'Pie.php';?>
     <script type="text/javascript">
-        	var depre = new Chartist.Bar('#distributed-series', {
-                labels: ['D', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
-                series: [20, 60, 120, 200, 180, 20, 10]
-                }, {
-                    distributeSeries: true, 
-                    fullWidth: true,
-                    chartPadding: {
-                        right: 40
-                    }                
-            });                     
-             
-            
-            $('#depreciacion').on('shown.bs.modal', function (e) {
-                depre.update();
-            });
-                
+        var depre = new Chartist.Bar('#distributed-series', {
+            labels: ['D', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+            series: [20, 60, 120, 200, 180, 20, 10]
+        }, {
+            distributeSeries: true,
+            fullWidth: true,
+            chartPadding: {
+                right: 40
+            }
+        });
+
+
+        $('#depreciacion').on('shown.bs.modal', function (e) {
+            depre.update();
+        });
     </script>
-    
+
 </body>
 
 </html>
