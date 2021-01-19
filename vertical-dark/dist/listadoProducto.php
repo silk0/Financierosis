@@ -413,30 +413,13 @@
                                                                         ?> 
                                                                     </select>
                                                                 </div>
-                                                            </div>
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-12">
-                                                                    <label for="stock" class="col-form-label">Factura No.</label>
-                                                                    <input type="number" class="form-control" name="facturaD" id="facturaD" 
-                                                                        placeholder="No.3456789">
-                                                                </div>                                                                
-                                                            </div> 
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-4">
-                                                                    <label for="stock" class="col-form-label">Precio</label>
-                                                                    <input type="number" class="form-control" name="precioD" id="precioD" 
-                                                                        placeholder="$0.00">
-                                                                </div>
+                                                            </div>                                                            
+                                                            <div class="form-row">                                                                
                                                                 <div class="form-group col-md-4">
                                                                     <label for="stock" class="col-form-label">Cantidad</label>
                                                                     <input type="number" class="form-control" name="cantidadD" id="cantidadD"
                                                                         placeholder="$0.00">
-                                                                </div>
-                                                                <div class="form-group col-md-4">
-                                                                    <label for="stock" class="col-form-label">Precio Total</label>
-                                                                    <input type="text" class="form-control" name="precioTD" id="precioTD" 
-                                                                        placeholder="$0.00" readonly>
-                                                                </div>  
+                                                                </div>                                                                
                                                             </div>              
                                                         </form>
                                                     </div>
@@ -497,6 +480,13 @@
                                                             </div>
 
                                                             <div class="form-row">
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-12">
+                                                                        <label for="stock" class="col-form-label">Factura No.</label>
+                                                                        <input type="text" class="form-control" name="facturaC" id="facturaD" 
+                                                                            placeholder="No.3456789">
+                                                                    </div>                                                                
+                                                                </div> 
                                                                 <div class="form-group col-md-4">
                                                                     <label for="stock" class="col-form-label">Precio</label>
                                                                     <input type="number" class="form-control" name="precioC" id="precioC" 
