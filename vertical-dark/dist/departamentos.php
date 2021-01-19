@@ -129,7 +129,6 @@
                                                 echo "<td>" . $fila->correlativo . "</td>";
                                                 echo "<td>" . $fila->nombre . "</td>";
                                                 echo "<td>" . $fila->nombrei . "</td>";
-                                                
                                                 echo "<td> 
                                                 <span data-toggle='modal'                                                    
                                                 data-target='#ver'>                                                

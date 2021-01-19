@@ -56,17 +56,29 @@
         //document.getElementById("id_activo").value = id;
         document.getElementById("correv").value = cor;
         document.getElementById("vidav").value = vid;
-         document.getElementById("instiv").value = inst;
-         document.getElementById("unidav").value = uni;
-         document.getElementById("tipov").value = tip;
-         document.getElementById("adquiv").value = aad;
-         document.getElementById("fechav").value = fec;
-         document.getElementById("encarv").value = enca;
-         document.getElementById("marcav").value = mar;
-         document.getElementById("provev").value = pre;
-         document.getElementById("valor").value = va;
-         document.getElementById("desv").value = des;
+        document.getElementById("instiv").value = inst;
+        document.getElementById("unidav").value = uni;
+        document.getElementById("tipov").value = tip;
+        document.getElementById("adquiv").value = aad;
+        document.getElementById("fechav").value = fec;
+        document.getElementById("encarv").value = enca;
+        document.getElementById("marcav").value = mar;
+        document.getElementById("provev").value = pre;
+        document.getElementById("valor").value = va;
+        document.getElementById("desv").value = des;
     }
+
+    function darba(id, corred, est) {
+        document.getElementById("id_activo").value = id;
+        document.getElementById("corred").value = corred;
+        document.getElementById("estado").value = est;
+    }
+
+    function edi(){
+    //validacion respectiva me da hueva
+    //enviarDatos(2);
+    $("#editarForm").submit();;      
+} 
 </script>
 
 <body>
@@ -150,9 +162,8 @@
                                                 echo "<td>" . $fila->descripcion . "</td>"; 
                                                 echo "<td>" . $fila->tipo_adquicicion . "</td>";
                                                 echo "<td>" . $fila->fecha_adquisicion . "</td>";
-                                                echo "<td>    
-                                                <span data-toggle='modal'                                                    
-                                                data-target='#mostrar'>                                             
+                                                echo "<td>
+                                                <span data-toggle='modal'data-target='#mostrar'> 
                                                     <button 
                                                     button type='button' title='Informacion' data-toggle='tooltip' 
                                                     data-placement='bottom'                            
@@ -171,8 +182,18 @@
                                                         '$fila->pro',
                                                         '$fila->precio',
                                                         '$fila->descripcion'
-                                                    )\";>
-                                                        <i class='mdi mdi-18px mdi-eye'></i> 
+                                                    )\";><i class='mdi mdi-18px mdi-eye'></i> 
+                                                    </button></span>
+                                                    <span data-toggle='modal'data-target='#dar'> 
+                                                    <button 
+                                                    button type='button' title='Estado' data-toggle='tooltip' 
+                                                    data-placement='bottom'                            
+                                                    class='btn btn-primary waves-effect waves-light' onclick=\"
+                                                    darba(
+                                                        '$fila->id_activo',
+                                                        '$fila->correlativo',
+                                                        '$fila->estado'
+                                                    )\";><i class=' mdi mdi-18px mdi-arrow-collapse-vertical'></i> 
                                                     </button></span>";
                                                 $nuevo = $conexion->query("select round(if((dias/365)<=vida,d.depreA*ano,d.depreA*vida),2) depreA,
                                                             round(if((dias/365)<=vida,(d.depreA/12)*meses,d.depreA*vida),2) depreM,
@@ -260,7 +281,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="">
-                                <!--  Modal mostrar cliente-->
+                                <!--  Modal mostrar -->
                                 <div id="mostrar" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
                                     aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog modal-lg">
@@ -375,6 +396,59 @@
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
+
+                                <!--  Modal baja alta-->
+                                <div id="dar" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                                    aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myLargeModalLabel">Estado del Activo</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="card-box">
+                                                            <form name="editarForm" id="editarForm" method="post" action="scriptsphp/modificarAF.php?bandera=1"
+                                                                class="parsley-examples">
+                                                                <input type="hidden" id="id_activo" name="id_activo">
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="inputEmail4"
+                                                                            class="col-form-label">Correlativo</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="corred" id="corred" required readonly>
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                            <label for="inputState"
+                                                                                class="col-form-label">Estado</label>
+                                                                            <select class="form-control" name="estado"
+                                                                                id="estado" required>
+                                                                                <option selected>Seleccione</option>
+                                                                                <?php
+                                                                                    echo "<option value='1'>Activo</option>";
+                                                                                    echo "<option value='0'>Inactivo</option>";
+                                                                                ?>
+                                                                            </select>
+                                                                        </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn  btn-primary waves-effect" id="cambios"
+                                                    name="cambios" onclick="edi();">Guardar Cambios</button>
+                                                <button type="button" class="btn  btn-primary waves-effect"
+                                                    data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+
                                 <!--  Modal editar cliente-->
                                 <div id="depreciacion" class="modal fade bs-example-modal-lg" role="dialog"
                                     aria-labelledby="myLargeModalLabel" aria-hidden="true">
