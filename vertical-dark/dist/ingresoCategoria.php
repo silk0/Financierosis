@@ -220,12 +220,12 @@ function modify(id,cate,estad){
                                                 echo "<tr>";
                                                 echo "<td>" . $fila->categoria . "</td>";
                                                 if($fila->estado==1){
-                                                    echo "<td>Activo</td>";
+                                                    echo "<td style='width: 20%;' align='center'>Activo</td>";
                                                 }else{
-                                                    echo "<td>Inactivo</td>";
+                                                    echo "<td style='width: 20%;' align='center'>Inactivo</td>";
                                                 }
 
-                                                echo "<td> 
+                                                echo "<td  style='width: 10%;' align='center'> 
                                                 <span data-toggle='modal'                                                    
                                                     data-target='#editar'>
                                                     <button 

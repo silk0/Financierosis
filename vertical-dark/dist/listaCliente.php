@@ -188,7 +188,7 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                                 echo "<td>" . $fila->nombre . "</td>";
                                                 echo "<td>" . $fila->apellido . "</td>"; 
                                                 echo "<td>" . $fila->telefono . "</td>";
-                                                echo "<td>    
+                                                echo "<td style='width: 10%;' align='center'>    
                                                 <span data-toggle='modal'                                                    
                                                 data-target='#mostrarCliente'>                                             
                                                     <button 

@@ -117,7 +117,7 @@
                                                 echo "<td>" . $fila->nombre . "</td>";
                                                 echo "<td>" . $fila->apellido . "</td>";
                                                 echo "<td>" . $fila->zona . "</td>";
-                                                echo "<td>    
+                                                echo "<td style='width: 10%;' align='center'>    
                                                 <span data-toggle='modal'                                                    
                                                 data-target='#ver'>                                             
                                                     <button 
