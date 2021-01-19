@@ -254,7 +254,7 @@ function modify(id,nom,ape,dui,nit,tel,cel,direc,email,prof,sal){
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
+                                                <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Cerrar</button>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
@@ -339,7 +339,7 @@ function modify(id,nom,ape,dui,nit,tel,cel,direc,email,prof,sal){
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn  btn-primary waves-effect" id ="cambios" name = "cambios"  onclick="go();" >Guardar Cambios</button>
-                                                <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
+                                                <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Cerrar</button>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->

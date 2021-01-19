@@ -260,10 +260,10 @@
                                         </br>
                                         <div class="form-row">
                                             <div class="form-group text-right mb-0">
-                                                <button class="btn btn-success btn-rounded waves-light width-md" onclick="go();" type="button">
+                                                <button class="btn  btn-primary waves-effect" onclick="go();" type="button">
                                                     Registrar
                                                 </button>
-                                                <button type="reset" class="btn btn-danger btn-rounded waves-light width-md">
+                                                <button type="reset" class="btn btn-light waves-effect">
                                                     Cancelar
                                                 </button>
                                             </div>

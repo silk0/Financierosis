@@ -159,8 +159,8 @@
                                     </br>
                                     <div class="form-row"> 
                                     <div class="form-group">
-                                        <button type="buttom" onclick="go();" class="btn btn-success btn-rounded waves-light width-md">Registrar</button>                                        
-                                        <button type="reset"  class="btn btn-danger btn-rounded waves-light width-md">Cancelar</button>  
+                                        <button type="buttom" onclick="go();" class="btn  btn-primary waves-effect">Registrar</button>                                        
+                                        <button type="reset"  class="btn btn-light waves-effect">Cancelar</button>  
                                     </div>                                      
                                     </div>
                                 </form>

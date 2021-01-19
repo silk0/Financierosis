@@ -390,7 +390,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn  btn-primary waves-effect"
+                                                <button type="button" class="btn btn-light waves-effect"
                                                     data-dismiss="modal">Cerrar</button>
                                             </div>
                                         </div><!-- /.modal-content -->
@@ -442,7 +442,7 @@
                                             <div class="modal-footer">
                                             <button type="button" class="btn  btn-primary waves-effect" id="cambios"
                                                     name="cambios" onclick="edi();">Guardar Cambios</button>
-                                                <button type="button" class="btn  btn-primary waves-effect"
+                                                <button type="button" class="btn btn-light waves-effect"
                                                     data-dismiss="modal">Cerrar</button>
                                             </div>
                                         </div><!-- /.modal-content -->

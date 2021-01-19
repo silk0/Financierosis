@@ -182,9 +182,9 @@ function modify(id,cate,estad){
                                     <div class="form-row">
                                         <div class="form-group">
                                             <button type="buttom" onclick="go();"
-                                                class="btn btn-success btn-rounded waves-light width-md">Registrar</button>
+                                            class="btn  btn-primary waves-effect">Registrar</button>
                                             <button type="reset"
-                                                class="btn btn-danger btn-rounded waves-light width-md">Cancelar</button>
+                                            class="btn btn-light waves-effect">Cancelar</button>
                                         </div>
                                     </div>
                                 </form>
@@ -307,7 +307,7 @@ function modify(id,cate,estad){
                                                     <button type="button" class="btn  btn-primary waves-effect"
                                                         id="cambios" name="cambios" onclick="goCate();">Guardar
                                                         Cambios</button>
-                                                    <button type="button" class="btn  btn-primary waves-effect"
+                                                    <button type="button" class="btn btn-light waves-effect"
                                                         data-dismiss="modal">Cerrar</button>
                                                 </div>
                                             </div><!-- /.modal-content -->

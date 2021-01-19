@@ -86,7 +86,7 @@
                         <div class="col-12">
                             <div class="card-box">
                                 <div align="right"><button type="button"
-                                        class="btn btn-outline-success btn-rounded waves-effect waves-light width-md"
+                                class="btn  btn-primary waves-effect"
                                         data-toggle='modal' data-target='#nuevo'>Nuevo</button>
                                 </div>
                                 <br>
@@ -230,7 +230,7 @@
                                                 <div class="modal-footer">
                                                     <button type="submit" class="btn  btn-primary waves-effect"
                                                         id="cambios" name="agg">Registrar</button>
-                                                    <button type="button" class="btn  btn-primary waves-effect"
+                                                    <button type="button" class="btn btn-light waves-effect"
                                                         data-dismiss="modal">Cerrar</button>
                                                 </div>
                                             </div><!-- /.modal-content -->
@@ -295,7 +295,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn  btn-primary waves-effect"
+                                                <button type="button" class="btn btn-light waves-effect"
                                                     data-dismiss="modal">Cerrar</button>
                                             </div>
                                         </div><!-- /.modal-content -->
@@ -374,7 +374,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn  btn-primary waves-effect" id="cambios"
                                                     name="cambios" onclick="go();">Guardar Cambios</button>
-                                                <button type="button" class="btn  btn-primary waves-effect"
+                                                <button type="button" class="btn btn-light waves-effect"
                                                     data-dismiss="modal">Cerrar</button>
                                             </div>
                                         </div><!-- /.modal-content -->
