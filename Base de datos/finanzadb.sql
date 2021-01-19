@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-01-2021 a las 07:26:46
+-- Tiempo de generación: 19-01-2021 a las 05:02:10
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -54,7 +54,8 @@ INSERT INTO `kardex` (`id_kardex`, `id_producto`, `fecha`, `descripcion`, `movim
 (9, 3, '2021-01-16', 'Venta  No.000025 al contado.', 2, 5, 100, 140, 100, 14000),
 (10, 3, '2021-01-16', 'Venta  No.000026 al contado.', 2, 5, 100, 135, 100, 13500),
 (11, 3, '2021-01-16', 'Venta  No.000027 al contado.', 2, 1, 100, 134, 100, 13400),
-(12, 3, '2021-01-17', 'Venta  No.000029 al credito.', 2, 1, 100, 133, 100, 13300);
+(12, 3, '2021-01-17', 'Venta  No.000029 al credito.', 2, 1, 100, 133, 100, 13300),
+(13, 5, '2021-01-18', 'Compra de productos factura No.', 1, 10, 5, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -86,10 +87,10 @@ CREATE TABLE `tactivo` (
 INSERT INTO `tactivo` (`id_activo`, `id_tipo`, `id_departamento`, `id_encargado`, `id_proveedor`, `correlativo`, `fecha_adquisicion`, `descripcion`, `estado`, `precio`, `marca`, `depreciacionacum`, `tipo_adquicicion`, `vidaUtil`) VALUES
 (1, 1, 1, 1, 1, '101-201 - 301-401 - 0001', '2019-08-01', 'computadora HD', '1', 1600, 'Samnsung', 0, 'Nuevo', 6),
 (2, 2, 2, 2, 2, '101-202 - 301-402 - 0002', '2018-12-06', 'silla nuevas', '1', 500, 'Hander', 100, 'Nuevo', 6),
-(3, 1, 4, 2, 2, '0003', '2021-01-28', 'Servira?', '1', 3, 'cetron', 0, 'Nuevo', 6),
-(4, 2, 4, 2, 1, '0004', '2018-07-04', '345345345345345345', '1', 5000, 'cetron', 0, 'Usado', 3),
+(3, 1, 4, 2, 2, '0003', '2021-01-28', 'Servira?', '1', 3, 'cetron', 0, 'Donado', 6),
+(4, 2, 4, 2, 1, '0004', '2018-07-04', '345345345345345345', '1', 5000, 'cetron', 0, 'Usado', 2),
 (5, 2, 2, 3, 1, '0005', '2021-01-14', 'hh', '1', 555, 'cetron', 0, 'Nuevo', 6),
-(6, 1, 4, 2, 1, '0006', '2021-01-13', 'Nuevo con correccion', '1', 555, 'cetron', 0, 'Nuevo', 6),
+(6, 1, 4, 2, 1, '0006', '2021-01-13', 'Nuevo con correccion', '1', 555, 'cetron', 0, 'Donado', 6),
 (7, 2, 2, 2, 1, '0001-0002-0002-0007', '2021-01-12', '55555hhh', '1', 55, 'cetron', 0, 'Nuevo', 6);
 
 -- --------------------------------------------------------
@@ -172,6 +173,13 @@ CREATE TABLE `tcarrito` (
   `id_producto` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tcarrito`
+--
+
+INSERT INTO `tcarrito` (`id_carrito`, `id_producto`, `cantidad`) VALUES
+(1, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -261,38 +269,29 @@ CREATE TABLE `tclientes` (
   `celular` varchar(20) NOT NULL,
   `correo` varchar(40) NOT NULL,
   `observaciones` varchar(200) NOT NULL,
-  `egreso` float DEFAULT NULL
+  `egreso` float DEFAULT NULL,
+  `id_fiador` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tclientes`
 --
 
-INSERT INTO `tclientes` (`id_cliente`, `id_cartera`, `nombre`, `apellido`, `direccion`, `dui`, `nit`, `profecion`, `tipo_ingreso`, `salario`, `telefono`, `celular`, `correo`, `observaciones`, `egreso`) VALUES
-(3, 2, 'Nose que nombre', 'Ramirez Lopez', 'Santo tomas abajo cantos los hernandez, apastepeque San vicente', '12832738-7', '1278-372883-827-8', 'Contador', 'Remesa', 525, '2389-2898', '7787-8788', 'jessica@gmail.com', 'Esta es una nueva Descripcion', 100),
-(4, 2, 'Fernando Josue', 'Hernandez Arevalo', 'COl san benito #45 san Isisdro San salavador', '29389829-8', '7281-728738-273-4', 'Lic. Contadora', 'Salario', 1500, '2239-8928', '7887-8788', 'fernando97@gmai.com', 'una persona con posibilidad de pagar el credito', 200),
-(5, 4, 'Maria Azucena', 'Garcia Mata', 'Colonia el manantial #45 SUchitoto', '28298398-9', '7876-767565-777-7', 'Contador', 'Salario', 600, '2342-2222', '7837-8738', 'MariaAzu@hotmail.com', 'buena condicion de pago', 0),
-(10, 1, 'Sandra Liseth', 'Arevalo Carranza', 'Colonia la monserrath, san esteban obrajuelo San Otrillo', '12321112-2', '2342-342342-221-1', 'Lic. Contadora', 'Salario', 800, '2332-3232', '7899-8989', 'Sandra@gmail.com', 'el cliente cumple con los requisitos', 0),
-(11, 2, 'Ileana Liseth ', 'Oliva', 'apastepeque', '05294607-4', '6534-345566-778-8', 'Contador', 'Salario', 100, '2345-6778', '7342-3124', 'eticas@gmail.com', 'kljh;ljycdykxsdtyikljjhgff', 0),
-(12, 4, 'Kike jesus', 'Jovel', 'Bxndjd', '62737737-7', '6262-3627-277-23', 'Contador', 'Remesa', 800, '989-8686', '686867', 'Kgjjkll', 'Jfhdbfnkuec', 0),
-(14, 4, 'Jose Manuel', 'Rivera Perez', 'Calle Oriente Medio casa #45', '65619873-1', '1958-479033-641-9', 'Lic. Contadora', 'Salario', 400, '2323-5684', '7896-6583', 'silkfirmyn@gmail.com', 'Esta es una prueba ojala salga de puta madre', 200),
-(15, 2, 'Erick2', 'Rivera Perez', 'Calle Oriente Medio casa #45', '22222222-2', '2222-222222-222-2', 'Lic. Contadora', 'Salario', 1111, '2323-5684', '2222-2222', 'silkfirmyn@gmail.com', 'wqeeeeeeeeeeeeeee', 222),
-(16, 1, 'Erick3', 'Rivera Perez', 'Calle Oriente Medio casa #45', '22222222-2', '2222-222222-222-2', 'Contador1', 'Salario', 1111, '1111-1111', '2222-2222', 'silkfirmyn@gmail.com', 'wqeeeeeeeeeeeeeee', 222),
-(20, 1, 'articulo', 'Rivera Perez', 'Calle Oriente Medio casa #45', '99999999-9', '9999-999999-999-9', 'Contador', 'Salario', 500, '9999-9999', '9999-9999', 'silkfirmyn@gmail.com', 'Esta es una prueba ojala salga de puta madre', 200),
-(21, 1, 'articulo', 'Rivera Perez', 'Calle Oriente Medio casa #45', '99999999-9', '9999-999999-999-9', 'Lic. Contadora', 'Salario', 500, '9999-9999', '9999-9999', 'silkfirmyn@gmail.com', 'Esta es una prueba ojala salga de puta madre', 200),
-(22, 2, 'Jessica Abigail', 'Rosales Martinez', 'Santo tomas abajo cantos los hernandez, apastepeque San vicente', '22222222-2', '2222-222222-222-2', 'Lic. Contadora', 'Salario', 222, '2222-2222', '2222-2222', 'jessica@gmail.com', 'Nueva descripcion', 222);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tclientes_fiador`
---
-
-CREATE TABLE `tclientes_fiador` (
-  `id_clientes_fiador` int(10) NOT NULL,
-  `id_cliente` int(10) NOT NULL,
-  `id_fiador` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `tclientes` (`id_cliente`, `id_cartera`, `nombre`, `apellido`, `direccion`, `dui`, `nit`, `profecion`, `tipo_ingreso`, `salario`, `telefono`, `celular`, `correo`, `observaciones`, `egreso`, `id_fiador`) VALUES
+(3, 2, 'Nose que nombre', 'Ramirez Lopez', 'Santo tomas abajo cantos los hernandez, apastepeque San vicente', '12832738-7', '1278-372883-827-8', 'Contador', 'Remesa', 525, '2389-2898', '7787-8788', 'jessica@gmail.com', 'Esta es una nueva Descripcion', 100, NULL),
+(4, 2, 'Fernando Josue', 'Hernandez Arevalo', 'COl san benito #45 san Isisdro San salavador', '29389829-8', '7281-728738-273-4', 'Lic. Contadora', 'Salario', 1500, '2239-8928', '7887-8788', 'fernando97@gmai.com', 'una persona con posibilidad de pagar el credito', 200, NULL),
+(5, 4, 'Maria Azucena', 'Garcia Mata', 'Colonia el manantial #45 SUchitoto', '28298398-9', '7876-767565-777-7', 'Contador', 'Salario', 600, '2342-2222', '7837-8738', 'MariaAzu@hotmail.com', 'buena condicion de pago', 0, NULL),
+(10, 1, 'Sandra Liseth', 'Arevalo Carranza', 'Colonia la monserrath, san esteban obrajuelo San Otrillo', '12321112-2', '2342-342342-221-1', 'Lic. Contadora', 'Salario', 800, '2332-3232', '7899-8989', 'Sandra@gmail.com', 'el cliente cumple con los requisitos', 0, NULL),
+(11, 2, 'Ileana Liseth ', 'Oliva', 'apastepeque', '05294607-4', '6534-345566-778-8', 'Contador', 'Salario', 100, '2345-6778', '7342-3124', 'eticas@gmail.com', 'kljh;ljycdykxsdtyikljjhgff', 0, NULL),
+(12, 4, 'Kike jesus', 'Jovel', 'Bxndjd', '62737737-7', '6262-3627-277-23', 'Contador', 'Remesa', 800, '989-8686', '686867', 'Kgjjkll', 'Jfhdbfnkuec', 0, NULL),
+(14, 4, 'Jose Manuel', 'Rivera Perez', 'Calle Oriente Medio casa #45', '65619873-1', '1958-479033-641-9', 'Lic. Contadora', 'Salario', 400, '2323-5684', '7896-6583', 'silkfirmyn@gmail.com', 'Esta es una prueba ojala salga de puta madre', 200, NULL),
+(15, 2, 'Erick2', 'Rivera Perez', 'Calle Oriente Medio casa #45', '22222222-2', '2222-222222-222-2', 'Lic. Contadora', 'Salario', 1111, '2323-5684', '2222-2222', 'silkfirmyn@gmail.com', 'wqeeeeeeeeeeeeeee', 222, NULL),
+(16, 1, 'Erick3', 'Rivera Perez', 'Calle Oriente Medio casa #45', '22222222-2', '2222-222222-222-2', 'Contador1', 'Salario', 1111, '1111-1111', '2222-2222', 'silkfirmyn@gmail.com', 'wqeeeeeeeeeeeeeee', 222, NULL),
+(20, 1, 'articulo', 'Rivera Perez', 'Calle Oriente Medio casa #45', '99999999-9', '9999-999999-999-9', 'Contador', 'Salario', 500, '9999-9999', '9999-9999', 'silkfirmyn@gmail.com', 'Esta es una prueba ojala salga de puta madre', 200, NULL),
+(21, 1, 'articulo', 'Rivera Perez', 'Calle Oriente Medio casa #45', '99999999-9', '9999-999999-999-9', 'Lic. Contadora', 'Salario', 500, '9999-9999', '9999-9999', 'silkfirmyn@gmail.com', 'Esta es una prueba ojala salga de puta madre', 200, NULL),
+(22, 2, 'Jessica Abigail', 'Rosales Martinez', 'Santo tomas abajo cantos los hernandez, apastepeque San vicente', '22222222-2', '2222-222222-222-2', 'Lic. Contadora', 'Salario', 222, '2222-2222', '2222-2222', 'jessica@gmail.com', 'Nueva descripcion', 222, NULL),
+(23, 4, 'articulo', 'Rosales', 'Santo tomas abajo can2tos los hernandez, apastepeque San vicente', '22222222-2', '2222-222222-222-2', 'Lic. Contadora', 'Remesa', -1, '2222-2222', '2222-2222', 'jessica@gmail.com', '22', -1, NULL),
+(24, 4, 'articulo', 'Rosales', 'Santo tomas abajo can2tos los hernandez, apastepeque San vicente', '22222222-2', '2222-222222-222-2', 'Lic. Contadora', 'Remesa', -1, '2222-2222', '2222-2222', 'jessica@gmail.com', '22', -1, NULL);
 
 -- --------------------------------------------------------
 
@@ -316,7 +315,8 @@ CREATE TABLE `tcompras` (
 INSERT INTO `tcompras` (`id_compras`, `id_producto`, `id_proveedor`, `fecha`, `precio`, `cantidad`) VALUES
 (1, 2, 1, '2021-01-06', 15, 7),
 (2, 2, 1, '2021-01-06', 5, 5),
-(3, 5, 1, '2021-01-06', 100, 10);
+(3, 5, 1, '2021-01-06', 100, 10),
+(4, 5, 1, '2021-01-18', 0, 10);
 
 -- --------------------------------------------------------
 
@@ -505,7 +505,7 @@ CREATE TABLE `tpago` (
 
 INSERT INTO `tpago` (`id_pago`, `id_venta`, `monto`, `fecha`, `mora`, `estado`) VALUES
 (13, 26, 35.46, '2019-01-21', 0, 2),
-(14, 28, 35.46, '2021-01-17', 0, 1),
+(14, 28, 35.46, '2021-01-17', 4.6098, 2),
 (15, 28, 35.46, '2021-02-17', 0, 1),
 (16, 28, 35.46, '2021-03-17', 0, 1),
 (17, 28, 35.46, '2021-04-17', 0, 1),
@@ -549,7 +549,7 @@ INSERT INTO `tproducto` (`id_producto`, `id_proveedor`, `id_categoria`, `nombre`
 (2, 1, 1, 'Lavadora LG', 'Lavadora con capacidad de 20 libras, extra clean.', 5, 5.25, 5, 20, 0, 'HKJH9000', 1),
 (3, 2, 1, 'Refrigeradora', 'sjdfkshd', 100, 115, 15, 20, 133, 'HKJH6937', 1),
 (4, 2, 1, 'Cocina', 'sjdkshfes', 400, 480, 20, 15, 100, 'HKJH9695', 1),
-(5, 1, 1, 'articulo', '233333 descrip', 100, 122, 22, 222, 0, 'ARTI3558', 0);
+(5, 1, 1, 'articulo', '233333 descrip', 0, 0, 22, 222, 10, 'ARTI3558', 0);
 
 -- --------------------------------------------------------
 
@@ -637,7 +637,7 @@ INSERT INTO `tventas` (`id_venta`, `id_cliente`, `codigo`, `id_plan`, `id_emplea
 (25, 11, '000025', NULL, 4, 0, 0, 0, NULL, 'Cancelado', '2021-01-16', '2021-01-16', 0, NULL, NULL),
 (26, 21, '000026', NULL, 4, 649.75, 649.75, 0, NULL, 'Cancelado', '2021-01-16', '2021-01-16', 0, NULL, NULL),
 (27, 5, '000027', NULL, 4, 129.95, 129.95, 0, NULL, 'Cancelado', '2021-01-16', '2021-01-16', 0, NULL, NULL),
-(28, 4, '000028', NULL, 4, 248.2, 70.9, 0, NULL, 'Pendiente', '2021-01-17', '2021-01-16', 13, NULL, 7),
+(28, 4, '000028', NULL, 4, 248.2, 106.36, 4.6098, NULL, 'Pendiente', '2021-01-17', '2021-01-16', 13, NULL, 7),
 (29, 4, '000029', NULL, 4, 248.2, 141.829, 0, 0, 'Pendiente', '2021-01-18', '2021-01-17', 13, 0, NULL);
 
 --
@@ -705,15 +705,8 @@ ALTER TABLE `tclasificacion`
 --
 ALTER TABLE `tclientes`
   ADD PRIMARY KEY (`id_cliente`),
-  ADD KEY `fk_cartera` (`id_cartera`);
-
---
--- Indices de la tabla `tclientes_fiador`
---
-ALTER TABLE `tclientes_fiador`
-  ADD PRIMARY KEY (`id_clientes_fiador`),
-  ADD KEY `fk_clientefiador` (`id_cliente`),
-  ADD KEY `fk_fiadorcliente` (`id_fiador`);
+  ADD KEY `fk_cartera` (`id_cartera`),
+  ADD KEY `tclientes_tfiador_id_fiador_fk` (`id_fiador`);
 
 --
 -- Indices de la tabla `tcompras`
@@ -816,7 +809,7 @@ ALTER TABLE `tventas`
 -- AUTO_INCREMENT de la tabla `kardex`
 --
 ALTER TABLE `kardex`
-  MODIFY `id_kardex` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_kardex` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `tactivo`
@@ -840,7 +833,7 @@ ALTER TABLE `tbanco`
 -- AUTO_INCREMENT de la tabla `tcarrito`
 --
 ALTER TABLE `tcarrito`
-  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tcartera`
@@ -864,19 +857,13 @@ ALTER TABLE `tclasificacion`
 -- AUTO_INCREMENT de la tabla `tclientes`
 --
 ALTER TABLE `tclientes`
-  MODIFY `id_cliente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
---
--- AUTO_INCREMENT de la tabla `tclientes_fiador`
---
-ALTER TABLE `tclientes_fiador`
-  MODIFY `id_clientes_fiador` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cliente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `tcompras`
 --
 ALTER TABLE `tcompras`
-  MODIFY `id_compras` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_compras` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tdepartamento`
@@ -985,14 +972,8 @@ ALTER TABLE `tcarrito`
 -- Filtros para la tabla `tclientes`
 --
 ALTER TABLE `tclientes`
-  ADD CONSTRAINT `fk_cartera` FOREIGN KEY (`id_cartera`) REFERENCES `tcartera` (`id_categoria`);
-
---
--- Filtros para la tabla `tclientes_fiador`
---
-ALTER TABLE `tclientes_fiador`
-  ADD CONSTRAINT `fk_clientefiador` FOREIGN KEY (`id_cliente`) REFERENCES `tclientes` (`id_cliente`),
-  ADD CONSTRAINT `fk_fiadorcliente` FOREIGN KEY (`id_fiador`) REFERENCES `tfiador` (`id_fiador`);
+  ADD CONSTRAINT `fk_cartera` FOREIGN KEY (`id_cartera`) REFERENCES `tcartera` (`id_categoria`),
+  ADD CONSTRAINT `tclientes_tfiador_id_fiador_fk` FOREIGN KEY (`id_fiador`) REFERENCES `tfiador` (`id_fiador`);
 
 --
 -- Filtros para la tabla `tcompras`

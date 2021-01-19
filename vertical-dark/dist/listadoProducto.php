@@ -4,7 +4,7 @@
 <SCRIPT  language=JavaScript> 
     function go(){
         //validacion respectiva me da hueva
-        $("#editarForm").submit();;         
+        $("#editarForm").submit();     
     }
 
     function kardex(){   
@@ -35,7 +35,17 @@
             $("#carritoForm").submit(); 
             
          }
-    }     
+    }  
+    
+    function añadirCompra(){
+       alert(document.getElementById("idproveedorC").value);
+        $("#comprarProduct").submit(); 
+    } 
+    
+    function añadirDevolucion(){
+        
+        $("#devolverProducto").submit(); 
+    } 
 
     function ver(id_prod,id_prov,id_cat,nomb,desc,pc,mg,pv,st,cod,esta)
     {
@@ -53,8 +63,7 @@
 
     function compra(id_prod,cod,id_prov,nomb)
     {
-        document.getElementById("id_producto").value=id_prod;
-        document.getElementById("tituloC").innerHTML="Compra de articulos";
+        document.getElementById("idC").value=Number(id_prod);
         document.getElementById("codigoC").value=cod;
         document.getElementById("nombreC").value=nomb;
         document.getElementById("idproveedorC").value=Number(id_prov);
@@ -75,12 +84,10 @@
 
     function devolucion(id_prod,cod,id_prov,nomb)
     {   
-        document.getElementById("id_producto").value=id_prod;
-        document.getElementById("tituloC").innerHTML="Devolucion de articulos";
-        document.getElementById("id").value=id_prod;
-        document.getElementById("codigoC").value=cod;
-        document.getElementById("nombreC").value=nomb;
-        document.getElementById("idproveedorC").value=Number(id_prov);
+        document.getElementById("idD").value=id_prod;
+        document.getElementById("codigoD").value=cod;
+        document.getElementById("nombreD").value=nomb;
+        document.getElementById("idproveedorD").value=Number(id_prov);
     }
 </script>
 
@@ -212,7 +219,7 @@
                                                     </span>";
 
 
-                                                $a .="<span  data-toggle='modal' data-target='#comprarProducto' >
+                                                $a .="<span  data-toggle='modal' data-target='#comprar' >
                                                 <button 
                                                 button type='button'
                                                 title='Compra'
@@ -220,7 +227,7 @@
                                                 data-placement='bottom'                                                    
                                                 class='btn btn-success waves-effect waves-light' onclick=\"
                                                 compra(                                                
-                                                    '$fila->p.id',
+                                                    '$fila->id_producto',                                                    
                                                     '$fila->codigo',
                                                     '$fila->id_proveedor',
                                                     '$fila->nombre'
@@ -230,7 +237,7 @@
                                                 </span>
 
 
-                                                <span  data-toggle='modal' data-target='#comprarProducto' >  
+                                                <span  data-toggle='modal' data-target='#devolucion' >  
                                                 <button 
                                                 button type='button'
                                                 title='Devolucion'
@@ -238,7 +245,7 @@
                                                 data-placement='bottom'                                                              
                                                 class='btn btn-info waves-effect waves-light' onclick=\"
                                                 devolucion(
-                                                    '$fila->p.id',
+                                                    '$fila->id_producto',                                                    
                                                     '$fila->codigo',
                                                     '$fila->id_proveedor',
                                                     '$fila->nombre'
@@ -274,8 +281,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="card-box">
-                                                        <form  method="post"  class="parsley-examples" readonly>
-                                                            <input type="hidden" id="bandera" name="bandera" value="1">
+                                                        <form  method="post"  class="parsley-examples" readonly>                                                            
                                                             
                                                             <div class="form-row">
                                                                 <div class="form-group col-md-4">
@@ -364,8 +370,88 @@
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
                             </div><!-- /.modal --> 
-                            <!--  Modal mostrar ComprarProductos-->
-                            <div id="comprarProducto" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+                            <!--  Modal vender ComprarProductos-->
+                            <div id="devolucion" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="tituloC" name="tituloC">Devolver producto</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card-box">
+                                                        <form id="devolverProducto" name="devolverProducto" action="scriptsphp/addCompraVenta.php?bandera=2" method="post"  class="parsley-examples" readonly>                                                            
+                                                        <input type="hidden" id="idD" name="idD">                                                      
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="codigoC" class="col-form-label">Codigo</label>
+                                                                    <input type="text" class="form-control" name="codigoD" id="codigoD" readonly
+                                                                        placeholder="0000000">
+                                                                </div> 
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="nombreC" class="col-form-label">Nombre</label>
+                                                                    <input type="text" class="form-control" name="nombreD" id="nombreD" readonly
+                                                                        placeholder="Nombre">
+                                                                </div>                                                                   
+                                                            </div>
+
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-12">
+                                                                    <label for="idproveedorD" class="col-form-label">Proveedor</label>
+                                                                    <select  class="form-control" name="idproveedorD" id="idproveedorD" disabled >
+                                                                    <option value='0' selected>Seleccione</option>
+                                                                    <?php
+                                                                        include 'config/conexion.php';
+                                                                        $result = $conexion->query("select id_proveedor, nombre, representante,email FROM tproveedor");
+                                                                        if ($result) {
+                                                                            while ($fila = $result->fetch_object()) {                                                                                
+                                                                                echo '<option value="' . $fila->id_proveedor . '">' . $fila->nombre . ' - ' . $fila->representante . ' ('. $fila->email .')</opcion>';                                                                                
+                                                                            }
+                                                                        }
+                                                                        ?> 
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-12">
+                                                                    <label for="stock" class="col-form-label">Factura No.</label>
+                                                                    <input type="number" class="form-control" name="facturaD" id="facturaD" 
+                                                                        placeholder="No.3456789">
+                                                                </div>                                                                
+                                                            </div> 
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="stock" class="col-form-label">Precio</label>
+                                                                    <input type="number" class="form-control" name="precioD" id="precioD" 
+                                                                        placeholder="$0.00">
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="stock" class="col-form-label">Cantidad</label>
+                                                                    <input type="number" class="form-control" name="cantidadD" id="cantidadD"
+                                                                        placeholder="$0.00">
+                                                                </div>
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="stock" class="col-form-label">Precio Total</label>
+                                                                    <input type="text" class="form-control" name="precioTD" id="precioTD" 
+                                                                        placeholder="$0.00" readonly>
+                                                                </div>  
+                                                            </div>              
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer form-group">    
+                                            <button type="button" onclick="añadirDevolucion();" class="btn  btn-primary waves-effect" data-dismiss="modal">Registrar</button>
+                                            <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal --> 
+                            <!--  Modal comprar ComprarProductos-->
+                            <div id="comprar" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -376,13 +462,9 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="card-box">
-                                                        <form id="comprarProducto" name="comprarProducto" method="post"  class="parsley-examples" readonly>                                                            
-                                                        
-                                                            <div class="form-row">                                                               
-                                                                <div class="form-group col-md-6">
-                                                                    <input type="hidden" class="form-control" name="id" id="id">
-                                                                </div>                                                                   
-                                                            </div>
+                                                        <form id="comprarProduct" name="comprarProduct" method="post"  action="scriptsphp/addCompraVenta.php?bandera=1" class="parsley-examples">                                                            
+                                                            <input type="hidden" id="idC" name="idC"> 
+                                                            
                                                             <div class="form-row">
                                                                 <div class="form-group col-md-6">
                                                                     <label for="codigoC" class="col-form-label">Codigo</label>
@@ -415,24 +497,21 @@
                                                             </div>
 
                                                             <div class="form-row">
-                                                                <div class="form-group col-md-6">
+                                                                <div class="form-group col-md-4">
                                                                     <label for="stock" class="col-form-label">Precio</label>
                                                                     <input type="number" class="form-control" name="precioC" id="precioC" 
                                                                         placeholder="$0.00">
                                                                 </div>
-                                                                <div class="form-group col-md-6">
+                                                                <div class="form-group col-md-4">
                                                                     <label for="stock" class="col-form-label">Cantidad</label>
                                                                     <input type="number" class="form-control" name="cantidadC" id="cantidadC"
                                                                         placeholder="$0.00">
                                                                 </div>
-                                                            </div> 
-
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
+                                                                <div class="form-group col-md-4">
                                                                     <label for="stock" class="col-form-label">Precio Total</label>
                                                                     <input type="text" class="form-control" name="precioTC" id="precioTC" 
                                                                         placeholder="$0.00" readonly>
-                                                                </div>                                                                
+                                                                </div> 
                                                             </div>   
                                                                                         
                                                         </form>
@@ -440,8 +519,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">    
-                                            <button type="button" class="btn  btn-primary waves-effect" data-dismiss="modal">Registrar</button>
+                                        <div class="modal-footer form-group">    
+                                            <button type="button" onclick="añadirCompra();" class="btn  btn-primary waves-effect" data-dismiss="modal">Registrar</button>
                                             <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Cerrar</button>
                                         </div>
                                     </div><!-- /.modal-content -->
