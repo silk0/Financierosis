@@ -78,11 +78,11 @@
 
 <!-- Init js -->
 <script src="assets/js/pages/chartist.init.js"></script>
+<!-- Sparkline charts -->
+<script src="assets/libs/jquery-sparkline/jquery.sparkline.min.js"></script>
 
-<!-- toastr init js-->
-<script src="assets/js/pages/toastr.init.js"></script>
-<script src="assets/libs/jquery-toast/jquery.toast.min.js"></script>
-
+<!-- init js -->
+<script src="assets/js/pages/sparkline.init.js"></script>
 
 <script type="text/javascript">
     Parsley.addMessages('es', {

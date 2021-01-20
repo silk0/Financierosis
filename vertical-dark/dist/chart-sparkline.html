@@ -571,7 +571,7 @@
                                     <h4 class="header-title">Pie Chart</h4>
         
                                     <div class="mt-4">
-                                        <div id="sparkline3" class="text-center"></div>
+                                        <div id="sparkline3" class="text-right"></div>
                                     </div>
                                 </div> <!-- end card-box -->
                             </div> <!-- end col -->
@@ -790,7 +790,9 @@
 
         <!-- init js -->
         <script src="assets/js/pages/sparkline.init.js"></script>
-
+        <script type="text/javascript">
+        	 $('#sparkline3').sparkline(myvalues, {type: 'pie', barColor: 'green'} );
+        </script>
         <!-- App js -->
         <script src="assets/js/app.min.js"></script>
         
