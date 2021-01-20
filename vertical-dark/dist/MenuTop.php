@@ -75,7 +75,7 @@
                 <!-- item-->
                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                     <i class="dripicons-user"></i>
-                    <span>My Account</span>
+                    <span><?php echo $_SESSION["tipo"];?></span>
                 </a>                
 
                 <div class="dropdown-divider"></div>

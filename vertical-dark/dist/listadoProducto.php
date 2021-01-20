@@ -37,7 +37,7 @@
     }
 
     function añadirCompra() {
-        alert(document.getElementById("idproveedorC").value);
+        
         $("#comprarProduct").submit();
     }
 
@@ -47,17 +47,17 @@
     }
 
     function ver(id_prod, id_prov, id_cat, nomb, desc, pc, mg, pv, st, cod, esta) {
+       
         document.getElementById("id_produc").value = id_prod;
         document.getElementById("codigo").value = cod;
         document.getElementById("nombre").value = nomb;
         document.getElementById("stock").value = Number(st);
         document.getElementById("mganancia").value = Number(mg);
-        document.getElementById("pcompra").value = Number(pc);
-        document.getElementById("pventa").value = Number(pv);
+        document.getElementById("pcompra").value = Number(pc);        
         document.getElementById("idproveedor").value = id_prov;
         document.getElementById("descri").value = desc;
-        document.getElementById("categoria").value = id_cat;
-        document.getElementById("estado").value = esta;
+        document.getElementById("categoria").value = Number(id_cat);
+        document.getElementById("estado").value = Number(esta);
     }
 
     function compra(id_prod, cod, id_prov, nomb) {

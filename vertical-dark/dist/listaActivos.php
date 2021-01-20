@@ -34,8 +34,8 @@
         $dia = Number(dDia);
         $mes = Number(dMes);
         $ano = Number(dAno);
-        document.getElementById("id_depreciacion").innerHTML = "Dia: $" + $dia + "    Mes: $" + $mes + "    Año: $" +
-            $ano;
+        document.getElementById("id_depreciacion").innerHTML = 
+        "Depreciacion Actual</br>Dia: &nbsp;&nbsp;$" + $dia + "&nbsp;&nbsp;Mes: &nbsp;&nbsp;$" + $mes + "&nbsp;&nbsp;Año: $" +$ano;
         depre = new Chartist.Bar('#distributed-series', {
             labels: ['Dias', 'Meses', 'Años'],
             series: [dDia, dMes, dAno]
@@ -196,7 +196,7 @@
                                                         '$fila->id_activo',
                                                         '$fila->correlativo',
                                                         '$fila->estado'
-                                                    )\";><i class=' mdi mdi-18px mdi-arrow-collapse-vertical'></i> 
+                                                    )\";><i class=' mdi mdi-18px mdi-pencil-off-outline'></i> 
                                                     </button></span>";
                                                 $nuevo = $conexion->query("select round(if((dias/365)<=vida,d.depreA*ano,d.depreA*vida),2) depreA,
                                                             round(if((dias/365)<=vida,(d.depreA/12)*meses,d.depreA*vida),2) depreM,
