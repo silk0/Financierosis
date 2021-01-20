@@ -15,6 +15,9 @@
 <html lang="en">
 <?php include_once 'Cabecera.php';?>
 
+<script>
+</script>
+
 <body>
 
     <!-- Begin page -->
@@ -66,6 +69,9 @@
                                         
                                     </div> <!-- end col -->
                                     <div class="col-md-3" >
+                                    <?php
+                                    
+                                     ?>
                                         <div class="text-md-right">
                                             <div class="line-h-24 " align="left" style=" padding: 5px 5px 5px 5px;
                                                                                             border: solid;">

@@ -55,8 +55,8 @@
         document.getElementById("pcompra").value = Number(pc);
         document.getElementById("pventa").value = Number(pv);
         document.getElementById("idproveedor").value = id_prov;
+        document.getElementById("descri").value = desc;
         document.getElementById("categoria").value = id_cat;
-        document.getElementById("descrip").value = desc;
         document.getElementById("estado").value = esta;
     }
 
@@ -168,8 +168,8 @@
                                             echo "<td>$ " . $fila->precio_compra. "</td>"; 
                                             echo "<td>$ " . $fila->precio_venta . "</td>";
                                             echo "<td>" . $fila->stock . "</td>"; 
-                                            if(($fila->estado)>0)                                               
-                                                echo "<td> Activo </td>";
+                                            if(($fila->estado)>0)                                         
+                                             echo "<td> Activo </td>";
                                             else{ echo "<td> Inactivo </td>";}
                                             
                                                 $a = "<td style='width: 15%;' align='center'> 
@@ -191,7 +191,7 @@
                                                             '$fila->precio_venta',
                                                             '$fila->stock_minimo',
                                                             '$fila->codigo',
-                                                            '$fila->estado'
+                                                            '$fila->estado',
                                                         )\";>
                                                             <i class='mdi mdi-eye'></i> 
                                                     </button>  
@@ -330,8 +330,7 @@
                                                                     <label for="idproveedor"
                                                                         class="col-form-label">Proveedor</label>
                                                                     <select class="form-control" name="idproveedor"
-                                                                        id="idproveedor" disabled>
-                                                                        <option value='0' selected>Seleccione
+                                                                        id="idproveedor" >
                                                                         </option>
                                                                         <?php
                                                                         include 'config/conexion.php';
@@ -368,16 +367,15 @@
                                                             <div class="form-row">
                                                                 <label for="descrip"
                                                                     class="col-form-label">Descripcion</label>
-                                                                <textarea class="form-control" id="descrip"
-                                                                    name="descrip" rows="5"></textarea>
+                                                                <textarea class="form-control" id="descri"
+                                                                    name="descri" rows="5"></textarea>
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="form-group col-md-6">
                                                                     <label for="inputState"
                                                                         class="col-form-label">Estado</label>
                                                                     <select class="form-control" name="estado"
-                                                                        id="estado" required>
-                                                                        <option selected>Seleccione</option>
+                                                                        id="estado" >
                                                                         <?php
                                                                                     echo "<option value='1'>Activo</option>";
                                                                                     echo "<option value='0'>Inactivo</option>";

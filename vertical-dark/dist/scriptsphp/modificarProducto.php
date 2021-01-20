@@ -6,7 +6,7 @@ if($accion==1){
     $id_prod  = $_POST['id_produc'];
     $nombre   = $_POST['nombre'];
     $prov   = $_POST['idproveedor'];
-    $desc   = $_POST['descrip'];
+    $des   = $_POST['descri'];
     $pcompra  = $_POST['pcompra'];
     $mganancia  = $_POST['mganancia'];
     $stock   = $_POST['stock'];
@@ -14,7 +14,7 @@ if($accion==1){
     $precioV = ((floatval($mganancia)/100)*floatval($pcompra))+floatval($pcompra);
 
     $consulta  = "UPDATE tproducto set id_proveedor='" . $prov . "',id_categoria='" . $catego . "',nombre='" . $nombre . "',
-    descripcion='" . $desc . "', precio_compra='" . $pcompra . "',margen='" . $mganancia . "',
+    descripcion='" . $des . "', precio_compra='" . $pcompra . "',margen='" . $mganancia . "',
     stock_minimo='" . $stock . "',estado='" . $estad . "',precio_venta=truncate('" .$precioV  . "',2)
     where id_producto='".$id_prod."'";
     $resultado = $conexion->query($consulta);
