@@ -17,8 +17,7 @@
     function go(idventa){
     //validacion respectiva me da hueva
         if(idventa>0){
-            $url = "coutasCredito.php?id="+idventa;
-            window.open($url,"_blank"); 
+            location.href= "coutasCredito.php?id="+idventa;
         }                 
     } 
 

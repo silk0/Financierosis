@@ -96,7 +96,7 @@
                         <?php
                         include "config/conexion.php";
                         $result = $conexion->query("
-                        select contado,credito,contado+credito as suma from(select (select  round(sum(b.cantidad),2) as contadoAcum
+                        select contado,credito,if(contado is null, credito, if(credito is null, contado, contado+credito)) as suma from(select (select  round(sum(b.cantidad),2) as contadoAcum
                         from tdetalle_venta as dv inner join tventas v on dv.id_venta = v.id_venta and dv.tipo = 0
                         inner join tbanco b on v.id_venta = b.id_venta order by v.codigo desc) as contado,
                         (select  round(sum(b.cantidad),2) as creditoAcum

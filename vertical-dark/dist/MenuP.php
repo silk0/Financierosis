@@ -1,6 +1,6 @@
 <div id="sidebar-menu">
     <ul class="metismenu" id="side-menu">
-        <?php if($_SESSION["tipo"]=="Administrador" or $_SESSION["tipo"]=="Vendedor" or $_SESSION["tipo"]=="Inventario" ){ 
+        <?php if($_SESSION["tipo"]=="Administrador" or $_SESSION["tipo"]=="Vendedor" ){ 
             echo '<li class="menu-title">Ventas e inventario</li>';}?>
         <?php if($_SESSION["tipo"]=="Administrador" or $_SESSION["tipo"]=="Vendedor"){
         echo '
@@ -72,7 +72,7 @@
             </ul>
         </li>'
         ;}?>
-        <?php if($_SESSION["tipo"]=="Administrador" or $_SESSION["tipo"]=="Inventario"){
+        <?php if($_SESSION["tipo"]=="Administrador" or $_SESSION["tipo"]=="Vendedor"){
         echo '
             <li>
                 <a href="javascript: void(0);">
@@ -152,13 +152,13 @@
                 </ul>
             </li>'
         ;}?>
-        <li class="menu-title">Otros</li>
-        <li>
-            <a href="Contenido.php">
-                <i class=" mdi mdi-24px mdi-chart-areaspline"></i>
-                <span>Estadisticas</span>                
-            </a>
-        </li>
+       <li class="menu-title">Otros</li>
+            <li>
+                <a href="Contenido.php">
+                    <i class=" mdi mdi-24px mdi-chart-areaspline"></i>
+                    <span>Estadisticas</span>                
+                </a>
+            </li>
 
     </ul>
 

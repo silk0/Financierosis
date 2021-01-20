@@ -63,9 +63,37 @@
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
-                            <div class="page-title-box">                                
-                                <h4 class="page-title">Contenido</h4>
-                            </div>
+                        <?php
+                        include "config/conexion.php";
+                        $result = $conexion->query("
+                        select d.id_detalleventa as id,t.fecha as fecha, concat(t2.nombre,' ',t2.apellido) as cliente, concat('Venta NO.',t.codigo) as venta,
+                        concat('$ ',truncate(t.saldo_actual,2)) as saldo, t.estado as estado
+                        from tdetalle_venta  as d
+                        inner join tventas t on d.id_venta = t.id_venta
+                        inner join tclientes t2 on t.id_cliente = t2.id_cliente
+                        where d.tipo=1 and d.id_detalleventa='".$_REQUEST["id"]."';");
+                        
+                        if ($result) {
+                            while ($fila = $result->fetch_object()) {
+                                echo "<div class='card-box'>
+                                    <div class='form-row' align='center'>
+                                    <div class='form-group col-md-3'>                                
+                                        <label for='inputEmail4' class='col-form-label'>Cliente: <span >".$fila->cliente."</span></label><br>                                        
+                                    </div>
+                                    <div class='form-group col-md-3'>
+                                        <label for='inputEmail4' class='col-form-label'><span >". $fila->venta."</span></label><br>
+                                    </div>
+                                    <div class='form-group col-md-3'>
+                                        <label for='inputEmail4' class='col-form-label'>Saldo: <span >".$fila->saldo."</span></label><br>
+                                    </div>
+                                    <div class='form-group col-md-3'>
+                                        <label for='inputEmail4' class='col-form-label'>Estado: <span >".$fila->estado."</span></label><br>
+                                    </div>
+                                </div>
+                                </div>";
+                                }
+                            }
+                        ?>
                         </div>
                     </div>
                     <?php

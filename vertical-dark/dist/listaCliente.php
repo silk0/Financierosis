@@ -337,9 +337,9 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                                             </div> 
 
                                                             <div class="form-row">                                        
-                                                                <div class="form-group col-md-4">
+                                                                <div class="form-group col-md-6">
                                                                     <label for="inputState" class="col-form-label">Agregar a la cartera</label>
-                                                                    <select class="form-control" name="carteram" id="carteram" disabled>                                                                        
+                                                                    <select class="form-control" name="carteram" id="carteram" >                                                                        
                                                                         <?php
                                                                         include 'config/conexion.php';
                                                                         $result = $conexion->query("select id_categoria as id,nombre FROM tcartera");
@@ -351,9 +351,20 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                                                         ?> 
                                                                     </select>
                                                                 </div>
-                                                                <div class="form-group col-md-4">
+                                                                <div class="form-group col-md-6">
                                                                     <label for="inputZip" class="col-form-label">Fiador</label>
-                                                                    <input type="text" class="form-control" name="fiadorv" id="fiadorv" readonly>
+                                                                    <select class="form-control" name="fiadorv" id="fiadorv" disabled>
+                                                                    <option value='0' selected>Seleccione</option>
+                                                                        <?php
+                                                                        include 'config/conexion.php';
+                                                                            $result = $conexion->query("select id_fiador as id,nombre FROM tfiador;");
+                                                                            if ($result) {
+                                                                            while ($fila = $result->fetch_object()) {                                                                                
+                                                                              echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
+                                                                                }
+                                                                            }
+                                                                        ?>
+                                                                    </select>
                                                                 </div>
                                                             </div>    
 
@@ -476,20 +487,20 @@ function modify(id,nom,ape,dui,nit,prof,direc,tel,cel,email,tipo,sal,ob,egres,ca
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group col-md-6">
-                                            <label for="inputState" class="col-form-label">Agregar Fiador</label>
-                                            <select class="form-control" name="fiadorm" id="fiadorm">
-                                            <option value='0' selected>Seleccione</option>
-                                                <?php
-                                                   include 'config/conexion.php';
-                                                    $result = $conexion->query("select id_fiador as id,nombre FROM tfiador");
-                                                     if ($result) {
-                                                       while ($fila = $result->fetch_object()) {                                                                                
-                                                     echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
-                                                         }
-                                                      }
-                                                ?>
-                                            </select>
-                                        </div>
+                                                                    <label for="inputState" class="col-form-label">Agregar Fiador</label>
+                                                                    <select class="form-control" >
+                                                                    <option value='0' selected>Seleccione</option>
+                                                                        <?php
+                                                                        include 'config/conexion.php';
+                                                                            $result = $conexion->query("select id_fiador as id,nombre FROM tfiador;");
+                                                                            if ($result) {
+                                                                            while ($fila = $result->fetch_object()) {                                                                                
+                                                                              echo '<option value="' . $fila->id . '">' . $fila->nombre . '</opcion>';                                                                                
+                                                                                }
+                                                                            }
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
                                                             </div>    
 
                                                             <div class="form-row">

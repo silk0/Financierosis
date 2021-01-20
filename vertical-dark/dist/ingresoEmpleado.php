@@ -198,7 +198,6 @@
                                                 <option>Administrador</option>
                                                 <option>Vendedor</option>
                                                 <option>Activo Fijo</option>
-                                                <option>Inventario</option>
                                             </select>
                                         </div>
                                     </div>

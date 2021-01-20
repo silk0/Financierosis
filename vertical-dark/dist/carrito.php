@@ -156,15 +156,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="clearfix pt-5">
-                                            <h6>Notes:</h6>
-    
-                                            <small class="text-muted">
-                                                All accounts are to be paid within 7 days from receipt of
-                                                invoice. To be paid by cheque or credit card or direct payment
-                                                online. If account is not paid within 7 days the credits details
-                                                supplied as confirmation of work undertaken will be charged the
-                                                agreed quoted fee noted above.
-                                            </small>
+                                            
                                         </div>
                                     </div> <!-- end col -->
                                     <div class="col-md-6">

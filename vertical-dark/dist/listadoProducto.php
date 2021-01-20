@@ -14,7 +14,6 @@
     function añadircarrito() {
         var cantidadDeseada = document.getElementById("carritoA").value;
         var id = document.getElementById("id_producto").value;
-        alert(id);
         var stock = document.getElementById("cantidadI").value;
         if (cantidadDeseada == "") {
             Swal.fire(
