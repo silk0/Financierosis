@@ -140,11 +140,12 @@
                                         class="table table-striped table-bordered dt-responsive nowrap">
                                         <thead>
                                             <tr>
-                                                <th>Correlativo</th>
-                                                <th>Clasificacion</th>
-                                                <th>Descripcion</th>
-                                                <th>Tipo Adquisicion</th>
                                                 <th>Fecha de Adquisicion</th>
+                                                <th>Correlativo</th>
+                                                <th>Tipo de Activo</th>
+                                                <th>Descripcion</th>
+                                                <th>Tipo</th>
+                                                <th>Estado</th>
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>
@@ -157,11 +158,16 @@
                                         if ($result) {
                                             while ($fila = $result->fetch_object()) {
                                                 echo "<tr>";
+                                                echo "<td>" . $fila->fecha_adquisicion . "</td>";
                                                 echo "<td>" . $fila->correlativo . "</td>";
                                                 echo "<td>" . $fila->tipoa . "</td>";
                                                 echo "<td>" . $fila->descripcion . "</td>"; 
                                                 echo "<td>" . $fila->tipo_adquicicion . "</td>";
-                                                echo "<td>" . $fila->fecha_adquisicion . "</td>";
+                                                if($fila->estado==1){
+                                                    echo "<td style='width: 20%;' align='center'>Activo</td>";
+                                                }else{
+                                                    echo "<td style='width: 20%;' align='center'>Inactivo</td>";
+                                                }
                                                 echo "<td>
                                                 <span data-toggle='modal'data-target='#mostrar'> 
                                                     <button 
@@ -426,13 +432,12 @@
                                                                                 class="col-form-label">Estado</label>
                                                                             <select class="form-control" name="estado"
                                                                                 id="estado" required>
-                                                                                <option selected>Seleccione</option>
                                                                                 <?php
                                                                                     echo "<option value='1'>Activo</option>";
                                                                                     echo "<option value='0'>Inactivo</option>";
                                                                                 ?>
                                                                             </select>
-                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </form>
                                                         </div>
