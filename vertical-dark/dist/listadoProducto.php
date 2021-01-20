@@ -297,7 +297,7 @@
                                                                     <label for="nombre"
                                                                         class="col-form-label">Nombre</label>
                                                                     <input type="text" class="form-control"
-                                                                        name="nombre" id="nombre" readonly
+                                                                        name="nombre" id="nombre" 
                                                                         placeholder="Refrigeradora">
                                                                 </div>
                                                             </div>
@@ -306,14 +306,14 @@
                                                                     <label for="stock" class="col-form-label">Stock
                                                                         minimo</label>
                                                                     <input type="number" class="form-control"
-                                                                        name="stock" id="stock" readonly
+                                                                        name="stock" id="stock" 
                                                                         placeholder="0">
                                                                 </div>
                                                                 <div class="form-group col-md-3">
                                                                     <label for="pcompra" class="col-form-label">Precio
                                                                         de compra</label>
                                                                     <input type="number" class="form-control"
-                                                                        name="pcompra" id="pcompra" readonly
+                                                                        name="pcompra" id="pcompra" 
                                                                         placeholder="$0.00">
                                                                 </div>
                                                                 <div class="form-group col-md-3">
@@ -322,15 +322,8 @@
                                                                         ganancia</label>
                                                                     <input type="number" class="form-control"
                                                                         name="mganancia" id="mganancia" required
-                                                                        placeholder="0%" readonly>
-                                                                </div>
-                                                                <div class="form-group col-md-3">
-                                                                    <label for="pventa" class="col-form-label">Precio de
-                                                                        venta</label>
-                                                                    <input type="number" class="form-control"
-                                                                        name="pventa" id="pventa" required
-                                                                        placeholder="$0.00" readonly>
-                                                                </div>
+                                                                        placeholder="0%" >
+                                                                </div>                                                                
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="form-group col-md-6">
@@ -356,7 +349,7 @@
                                                                     <label for="categoria"
                                                                         class="col-form-label">Categoria</label>
                                                                     <select class="form-control" name="categoria"
-                                                                        id="categoria" disabled>
+                                                                        id="categoria">
                                                                         <?php
                                                                         include 'config/conexion.php';
                                                                         $result = $conexion->query("select id_categoria, categoria, estado FROM tcategoria");
@@ -375,7 +368,7 @@
                                                                 <label for="descrip"
                                                                     class="col-form-label">Descripcion</label>
                                                                 <textarea class="form-control" id="descrip"
-                                                                    name="descrip" rows="5" readonly></textarea>
+                                                                    name="descrip" rows="5" ></textarea>
 
                                                                 <div class="form-group col-md-6">
                                                                     <label for="inputState"
