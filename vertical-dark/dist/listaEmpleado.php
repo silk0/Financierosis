@@ -113,9 +113,9 @@
                                         if ($result) {
                                             while ($fila = $result->fetch_object()) {
                                                 echo "<tr>";
-                                                echo "<td>" . $fila->dui . "</td>";
-                                                echo "<td>" . $fila->nombre . "</td>";
-                                                echo "<td>" . $fila->apellido . "</td>";
+                                                echo "<td style='width: 12%;' align='center'>" . $fila->dui . "</td>";
+                                                echo "<td style='width: 12%;' align='center'>" . $fila->nombre . "</td>";
+                                                echo "<td style='width: 12%;' align='center'>" . $fila->apellido . "</td>";
                                                 echo "<td>" . $fila->zona . "</td>";
                                                 echo "<td style='width: 10%;' align='center'>    
                                                 <span data-toggle='modal'                                                    

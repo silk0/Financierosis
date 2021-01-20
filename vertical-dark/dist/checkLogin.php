@@ -33,13 +33,10 @@
                 $_SESSION["nombre"] = $Nombre;
                 $_SESSION["usuario"] = $usuario;
                 $_SESSION["id"] = $id;
-                $_SESSION["tipo"] = $tipo;
+                $_SESSION["tipo"] = $tipo;                
                 
-                if($tipo=="Administrador"){
-                    header("Location:main.php?tipo=1");
-                }else if($tipo=="Vendedor"){
-                            header("Location:Contenido.php?tipo=0");
-                        }
+                header("Location:Contenido.php");
+                
                     
                 }
         }else{
