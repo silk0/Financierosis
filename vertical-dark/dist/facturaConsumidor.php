@@ -15,8 +15,7 @@
 <html lang="en">
 <?php include_once 'Cabecera.php';?>
 
-<script>
-</script>
+
 
 <body>
 
@@ -70,7 +69,7 @@
                                     </div> <!-- end col -->
                                     <div class="col-md-3" >
                                     <?php
-                                    
+                                   
                                      ?>
                                         <div class="text-md-right">
                                             <div class="line-h-24 " align="left" style=" padding: 5px 5px 5px 5px;
@@ -84,10 +83,14 @@
                                     </div> <!-- end col -->
                                 </div> 
                                 <div class="row mt-3">
-                                    <div class="col-md-6">    
-                                        <h6>Cliente: </h6>                                   
-                                        <h6>Direccion: </h6>
-                                        <h6>Dui:      Nit:</h6>
+                                    <div class="col-md-6">   
+                                    <?php  $id  = $_REQUEST["id_client"];
+                                    $result = $conexion->query("SELECT*FROM tclientes WHERE id_cliente='$id'");
+                                    if ($result) {
+                                        while ($fila = $result->fetch_object()) { 
+                                        echo "<h6>Cliente:  $fila->nombre $fila->apellido </h6>";                                  
+                                       echo " <h6>Direccion:  $fila->direccion</h6>";
+                                       echo " <h6>Dui:  $fila->dui    Nit:   $fila->nit</h6>"; }} ?>
                                     </div> <!-- end col -->
     
                                     <div class="col-md-6">
