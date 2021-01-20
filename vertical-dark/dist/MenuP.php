@@ -137,6 +137,13 @@
                 </li>              
             </ul>
         </li>
+        <li class="menu-title">Otros</li>
+        <li>
+            <a href="Contenido.php">
+            <i class=" mdi mdi-24px mdi-chart-areaspline"></i>
+                <span>Estadisticas</span>                
+            </a>
+        </li>
 
     </ul>
 
