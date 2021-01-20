@@ -50,7 +50,6 @@
         });
 
     }
-
     function edit(id, cor, vid, inst, uni, tip, aad, fec, enca, mar, pre, va, des) {
         // document.getElementById("baccion2").value=id;
         //document.getElementById("id_activo").value = id;
