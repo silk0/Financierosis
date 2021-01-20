@@ -1,22 +1,25 @@
 <?php
 include "../config/conexion.php";
 $accion = $_REQUEST['bandera'];
-
 if($accion==1){
-  $baccion  = $_POST['idproducto'];
-$nombre   = $_POST['nombre'];
-$proveedor   = $_POST['idproveedor'];
-$categoria   = $_POST['idcat'];
-$margen  = $_POST['margen'];
-$stock   = $_POST['stock'];
-$descripcion   = $_POST['descrip'];
+              $catego   = $_POST['categoria'];
+              $id_prod  = $_POST['id_produc'];
+              $nombre   = $_POST['nombre'];
+              $desc   = $_POST['descrip'];
+              $pcompra  = $_POST['pcompra'];
+              $mganancia  = $_POST['mganancia'];
+              $stock   = $_POST['stock'];
+              $estado   = $_POST['estado'];
 
-$consulta  = "UPDATE tproducto set nombre='" . $nombre . "',id_proveedor='" . $proveedor . "',id_categoria='" . $categoria . "',descripcion='" . $descripcion . "',margen='" . $margen . "',stock_minimo='". $stock ."' where id_producto='" . $baccion . "'";
-$resultado = $conexion->query($consulta);
-  if ($resultado) {   
-    header('Location:../inventario.php?bandera=1');
-  } else {
-    header('Location:../inventario.php?bandera=2');
-  }   
+              $consulta  = "UPDATE tproducto set id_categoria='" . $catego . "',nombre='" . $nombre . "',
+              descripcion='" . $desc . "', precio_compra='" . $pcompra . "',margen='" . $mganancia . "',
+              stock_minimo='" . $stock . "',estado='" . $estado . "' 
+              where id_produc='".$id_prod."'";
+              $resultado = $conexion->query($consulta);
+                if ($resultado) {   
+                  header('Location:../listadoProducto.php'); 
+                } else {
+                  echo 'No funciona';  
+                }   
 }
 ?>
