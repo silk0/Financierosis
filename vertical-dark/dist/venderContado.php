@@ -15,6 +15,8 @@
 <html lang="en">
 <?php include_once 'Cabecera.php';?>
 <SCRIPT  language=JavaScript> 
+
+
     function go(){
         $("#venderContado").submit();;         
     }  
@@ -249,11 +251,11 @@
                                         <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light">
                                             <i class="mdi mdi-printer mr-1"></i> Factura credito fiscal
                                         </a>
-                                        <button  onclick="goFactura();"
+                                        <button type="button"  onclick="goFactura();"
                                             class="btn btn-primary waves-effect waves-light">
                                             <i class="mdi mdi-printer mr-1"></i> Factura consumidor final
                                         </button>
-                                        <button type=button onclick="go();" class="btn btn-info waves-effect waves-light">Realizar venta</button>                                        
+                                        <button type="button" onclick="go();" class="btn btn-info waves-effect waves-light">Realizar venta</button>                                        
                                     </div>
                                 </div>
                             </div>
