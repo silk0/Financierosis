@@ -142,7 +142,6 @@
                                             <tr>
                                                 <th>Fecha de Adquisicion</th>
                                                 <th>Correlativo</th>
-                                                <th>Tipo de Activo</th>
                                                 <th>Descripcion</th>
                                                 <th>Tipo</th>
                                                 <th>Estado</th>
@@ -154,13 +153,12 @@
                                             <?php
                                         
                                         include "config/conexion.php";
-                                            $result = $conexion->query("SELECT tactivo.estado,tactivo.descripcion, tactivo.correlativo, tactivo.fecha_adquisicion, tactivo.id_activo, tactivo.marca, tactivo.precio, tactivo.tipo_adquicicion, tproveedor.nombre as pro, templeados.nombre as emp, ttipo_activo.nombre as tipoa, tinstitucion.nombre as insti, tdepartamento.nombre as dpto, tclasificacion.nombre as clasificacion FROM tactivo INNER JOIN tdepartamento ON tactivo.id_departamento = tdepartamento.id_departamento INNER JOIN ttipo_activo ON tactivo.id_tipo = ttipo_activo.id_tipo INNER JOIN tclasificacion ON ttipo_activo.id_clasificacion = tclasificacion.id_clasificaion INNER JOIN tinstitucion ON tdepartamento.id_institucion = tinstitucion.id_institucion INNER JOIN templeados ON tactivo.id_encargado = templeados.id_empleado INNER JOIN tproveedor ON tactivo.id_proveedor = tproveedor.id_proveedor");
+                                            $result = $conexion->query("SELECT tactivo.descripcion, tactivo.correlativo, tactivo.fecha_adquisicion, tactivo.id_activo, tactivo.marca, tactivo.precio, tactivo.tipo_adquicicion, tproveedor.nombre as pro, templeados.nombre as emp, ttipo_activo.nombre as tipoa, tinstitucion.nombre as insti, tdepartamento.nombre as dpto, tclasificacion.nombre as clasificacion FROM tactivo INNER JOIN tdepartamento ON tactivo.id_departamento = tdepartamento.id_departamento INNER JOIN ttipo_activo ON tactivo.id_tipo = ttipo_activo.id_tipo INNER JOIN tclasificacion ON ttipo_activo.id_clasificacion = tclasificacion.id_clasificaion INNER JOIN tinstitucion ON tdepartamento.id_institucion = tinstitucion.id_institucion INNER JOIN templeados ON tactivo.id_encargado = templeados.id_empleado INNER JOIN tproveedor ON tactivo.id_proveedor = tproveedor.id_proveedor");
                                         if ($result) {
                                             while ($fila = $result->fetch_object()) {
                                                 echo "<tr>";
                                                 echo "<td>" . $fila->fecha_adquisicion . "</td>";
                                                 echo "<td>" . $fila->correlativo . "</td>";
-                                                echo "<td>" . $fila->tipoa . "</td>";
                                                 echo "<td>" . $fila->descripcion . "</td>"; 
                                                 echo "<td>" . $fila->tipo_adquicicion . "</td>";
                                                 if($fila->estado==1){
