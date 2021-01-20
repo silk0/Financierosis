@@ -50,147 +50,172 @@
 
                 <!-- Start Content-->
                 <div class="container-fluid">
-                <div class="row">
-                        <div class="col-xl-4 col-lg-6">
-                            <div class="card-box">
-                                <h4 class="header-title mb-3">Line Chart</h4>
-                                <div class="row text-center">
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">4,335</h3>
-                                        <p class="text-muted text-overflow">Total Sales</p>
-                                    </div>
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">874</h3>
-                                        <p class="text-muted text-overflow">Open Compaign</p>
-                                    </div>
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">2,548</h3>
-                                        <p class="text-muted text-overflow">Total Sales</p>
-                                    </div>
-                                </div>
-                                <div class="chartjs-chart-example chartjs-chart">
-                                    <canvas id="line-chart-example"></canvas>    
-                                </div>            
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-    
-                        <div class="col-xl-4 col-lg-6">
-                            <div class="card-box">
-                                <h4 class="header-title mb-3">Bar Chart</h4>
-                                <div class="row text-center">
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">2,548</h3>
-                                        <p class="text-muted text-overflow">Total Sales</p>
-                                    </div>
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">1,254</h3>
-                                        <p class="text-muted text-overflow">Open Compaign</p>
-                                    </div>
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">8,954</h3>
-                                        <p class="text-muted text-overflow">Total Sales</p>
-                                    </div>
-                                </div>
-                                <div class="chartjs-chart-example chartjs-chart">
-                                    <canvas id="bar-chart-example"></canvas>    
-                                </div>            
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-    
-                        <div class="col-xl-4 col-lg-6">
-                            <div class="card-box">
-                                <h4 class="header-title mb-3">Area Chart</h4>
-                                <div class="row text-center">
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">3,365</h3>
-                                        <p class="text-muted text-overflow">Total Sales</p>
-                                    </div>
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">952</h3>
-                                        <p class="text-muted text-overflow">Open Compaign</p>
-                                    </div>
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">1,880</h3>
-                                        <p class="text-muted text-overflow">Total Sales</p>
-                                    </div>
-                                </div>
-                                <div class="chartjs-chart-example chartjs-chart">
-                                    <canvas id="area-chart-example"></canvas>    
-                                </div>            
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
+                <div class="row">  
+                    <div class="col-lg-6">
+                        <div class="card-box">
+                            <h4 class="header-title mb-3">Articulos en inventario</h4>                                
+                            
+                            <div class="chartjs-chart-example chartjs-chart">
+                                <canvas id="doughnut1" width="100" height="100"></canvas>    
+                            </div>
+                            </br></br></br></br></br></br>
+                        </div> <!-- end card-box -->
+                    </div> <!-- end col -->
 
-                        <div class="col-xl-4 col-lg-6">
-                            <div class="card-box">
-                                <h4 class="header-title mb-3">Doughnut Chart</h4>
-                                <div class="chartjs-chart-example chartjs-chart">
-                                    <canvas id="doughnut1" width="400" height="400"></canvas>    
-                                </div>
-                                <div class="row text-center">
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">5,548</h3>
-                                        <p class="text-muted text-overflow">Total Sales</p>
-                                    </div>
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">2,289</h3>
-                                        <p class="text-muted text-overflow">Open Compaign</p>
-                                    </div>
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">9,847</h3>
-                                        <p class="text-muted text-overflow">Total Sales</p>
-                                    </div>
-                                </div>
-                                            
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-    
-                        <div class="col-xl-4 col-lg-6">
-                            <div class="card-box">
-                                <h4 class="header-title mb-3">Polar Area Chart</h4>
-                                <div class="row text-center">
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">8,941</h3>
-                                        <p class="text-muted text-overflow">Total Sales</p>
-                                    </div>
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">4,251</h3>
-                                        <p class="text-muted text-overflow">Open Compaign</p>
-                                    </div>
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">1,008</h3>
-                                        <p class="text-muted text-overflow">Total Sales</p>
-                                    </div>
-                                </div>
-                                <div class="chartjs-chart-example chartjs-chart">
-                                    <canvas id="barra"></canvas>    
-                                </div>            
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-    
-                        <div class="col-xl-4 col-lg-6">
-                            <div class="card-box">
-                                <h4 class="header-title mb-3">Filled Line Chart</h4>
-                                <div class="row text-center">
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">2,840</h3>
-                                        <p class="text-muted text-overflow">Total Sales</p>
-                                    </div>
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">10,584</h3>
-                                        <p class="text-muted text-overflow">Open Compaign</p>
-                                    </div>
-                                    <div class="col-sm-4 mb-3">
-                                        <h3 class="font-weight-light">821</h3>
-                                        <p class="text-muted text-overflow">Total Sales</p>
-                                    </div>
-                                </div>
-                                <div class="chartjs-chart-example chartjs-chart">
-                                    <canvas id="filled-line-chart"></canvas>    
-                                </div>            
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
+                    <div class="col-lg-6">
+                        <div class="card-box">
+                        
+                            <h4 class="header-title mb-3">Registros en el sistema financiero</h4>
+                            <?php include "config/conexion.php";
+                                $usado = $conexion->query("select
+                                    (select count(*) from tclientes) as c,
+                                    (select count(*) from tproveedor) as p,
+                                    (select count(*) from tfiador) as f,
+                                    (select count(*) from templeados) as e;");
+                                if($usado){
+                                    while($filo = $usado->fetch_object()){       
+                                    
+                                        echo    "<div class='row text-center'>
+                                                    <div class='col-sm-3 mb-3'>
+                                                        <h3 class='font-weight-light'>".$filo->c."</h3>
+                                                        <p class='text-muted text-overflow'>Clientes</p>
+                                                    </div>
+                                                    <div class='col-sm-3 mb-3'>
+                                                        <h3 class='font-weight-light'>".$filo->p."</h3>
+                                                        <p class='text-muted text-overflow'>Proveedores</p>
+                                                    </div>
+                                                    <div class='col-sm-3 mb-3'>
+                                                        <h3 class='font-weight-light'>".$filo->f."</h3>
+                                                        <p class='text-muted text-overflow'>Fiadores</p>
+                                                    </div>
+                                                    <div class='col-sm-3 mb-3'>
+                                                        <h3 class='font-weight-light'>".$filo->e."</h3>
+                                                        <p class='text-muted text-overflow'>Empleados</p>
+                                                    </div>                                   
+                                                </div>";
+                                    }
+                                }
+                            ?>
+                            
+                            <div class="chartjs-chart-example chartjs-chart">
+                            
+                                <div id="barra" style="width=800px; height=600px" class="ct-chart ct-golden-section"></div>    
+                            </div>            
+                        </div> <!-- end card-box -->
+                    </div> <!-- end col -->                  
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card-box">
+                            <h4 class="header-title">Articulos Bajos el minimos</h4>
+
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo</th> 
+                                            <th>Articulo</th> 
+                                            <th>Stock</th> 
+                                            <th>Stock minimo</th>                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                        $usado = $conexion->query("select codigo,nombre,stock,stock_minimo from 
+                                        tproducto p where p.stock_minimo>=p.stock");
+                                        if($usado){
+                                            while($filo = $usado->fetch_object()){
+                                        echo "
+                                        <tr>
+                                            <th scope='row'>".$filo->codigo."</th>
+                                            <td>".$filo->nombre."</td>
+                                            <td>".$filo->stock."</td>
+                                            <td>".$filo->stock_minimo."</td>                                            
+                                        </tr>
+                                        ";
+                                        }}
+                                    ?>                                        
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div> <!-- end card-box -->
                     </div>
-                    <!-- end row -->      
+                </div>
+                <div class="row">  
+                    <div class="col-lg-6">
+                        <div class="card-box">                        
+                            <h4 class="header-title mb-3">Ventas al credito</h4>
+                            <?php include "config/conexion.php";
+                                $usado = $conexion->query("select
+                                (select count(*) from tventas where estado='Incobrable') i,
+                                (select count(*) from tventas where estado='Cancelado') c,
+                                (select count(*) from tventas where estado='Moroso') m,
+                                (select count(*) from tventas where estado='Pendiente') p;");
+                                if($usado){
+                                    while($filo = $usado->fetch_object()){       
+                                    
+                                        echo    "<div class='row text-center'>
+                                                    <div class='col-sm-3 mb-3'>
+                                                        <h3 class='font-weight-light'>".$filo->p."</h3>
+                                                        <p class='text-muted text-overflow'>Pendiente</p>
+                                                    </div>
+                                                    <div class='col-sm-3 mb-3'>
+                                                        <h3 class='font-weight-light'>".$filo->c."</h3>
+                                                        <p class='text-muted text-overflow'>Canceladas</p>
+                                                    </div>
+                                                    <div class='col-sm-3 mb-3'>
+                                                        <h3 class='font-weight-light'>".$filo->i."</h3>
+                                                        <p class='text-muted text-overflow'>Incobrable</p>
+                                                    </div>
+                                                    <div class='col-sm-3 mb-3'>
+                                                        <h3 class='font-weight-light'>".$filo->m."</h3>
+                                                        <p class='text-muted text-overflow'>Morosa</p>
+                                                    </div>                                   
+                                                </div>";
+                                    }
+                                }
+                            ?>
+                            
+                            <div class="chartjs-chart-example chartjs-chart">
+                            
+                                <div id="barra2" style="width=800px; height=600px" class="ct-chart ct-golden-section"></div>    
+                            </div>            
+                        </div> <!-- end card-box -->
+                    </div> <!-- end col -->  
+                    <div class="col-lg-6">
+                        <div class="card-box">                        
+                            <h4 class="header-title mb-3">Registro de Ventas Realizadas</h4>
+                            <?php include "config/conexion.php";
+                                $usado = $conexion->query("select
+                                (select count(*) from tdetalle_venta where tipo=1) cre,
+                                (select count(*) from tdetalle_venta where tipo=0) con;");
+                                if($usado){
+                                    while($filo = $usado->fetch_object()){       
+                                    
+                                        echo    "<div class='row text-center'>
+                                                    <div class='col-sm-3 mb-3'>
+                                                        <h3 class='font-weight-light'>".$filo->cre."</h3>
+                                                        <p class='text-muted text-overflow'>Ventas al credito</p>
+                                                    </div>
+                                                    <div class='col-sm-3 mb-3'>
+                                                        <h3 class='font-weight-light'>".$filo->con."</h3>
+                                                        <p class='text-muted text-overflow'>Ventas al contado</p>
+                                                    </div>
+                                                                                  
+                                                </div>";
+                                    }
+                                }
+                            ?>
+                            
+                            <div class="chartjs-chart-example chartjs-chart">
+                            
+                                <div id="barra1" style="width=800px; height=600px" class="ct-chart ct-golden-section"></div>    
+                            </div>            
+                        </div> <!-- end card-box -->
+                    </div> <!-- end col -->                  
+                </div>
+                <!-- end row -->      
 
                 </div> <!-- container -->
 
@@ -226,36 +251,101 @@
     <?php include_once 'Pie.php';?>    
     <script type="text/javascript">  
        
-        new Chart($("#doughnut1"), {
-            type: 'doughnut',
-            data: {
-                labels: ["Wallet Balance","Travels","Food & Drinks","Nuevo"],
-                datasets:[{
-                        data:[300,50,100,333],
-                            backgroundColor:["#02a8b5","#fa5c7c","#ebeff2","#ef84f6"],
-                            borderColor:"transparent",
-                            borderWidth:"1"}
-                        ]         
-            }
-                        
-        });      
+             
 
     </script>
-    <script type="text/javascript">
-        new Chart($("#barra"), {
-            type: 'bar',
-            data: {
-                labels: ["Wallet Balance","Travels","Food & Drinks","Nuevo"],
-                datasets:[{
-                        data:[300,50,100,333],
-                            backgroundColor:["#02a8b5","#fa5c7c","#ebeff2","#ef84f6"],
-                            borderColor:"transparent",
-                            borderWidth:"1"}
-                        ]         
+    <?php include "config/conexion.php";
+        $usado = $conexion->query("select
+            (select count(*) from tclientes) as c,
+            (select count(*) from tproveedor) as p,
+            (select count(*) from tfiador) as f,
+            (select count(*) from templeados) as e;");
+        if($usado){
+            while($filo = $usado->fetch_object()){        
+            echo "<script type='text/javascript'>
+                    var depre = new Chartist.Bar('#barra', {
+                        labels: ['Clientes', 'Proveedores', 'Fiadiores','Empleados'],
+                        series: [".$filo->c.", ".$filo->p.", ".$filo->f.",".$filo->e."]
+                    }, {
+                        distributeSeries: true,
+                        fullWidth: true,
+                        chartPadding: {
+                            right: 40
+                        }
+                    });
+                </script>";
             }
-                        
-        });    
-    </script>
+        }
+    ?>
+    <?php include "config/conexion.php";
+        $usado = $conexion->query("select
+        (select count(*) from tdetalle_venta where tipo=1) cre,
+        (select count(*) from tdetalle_venta where tipo=0) con;");
+        if($usado){
+            while($filo = $usado->fetch_object()){        
+            echo "<script type='text/javascript'>
+                    var depre = new Chartist.Bar('#barra1', {
+                        labels: ['Ventas al credito', 'Ventas al contado'],
+                        series: [".$filo->cre.", ".$filo->con."]
+                    }, {
+                        distributeSeries: true,
+                        fullWidth: true,
+                        chartPadding: {
+                            right: 40
+                        }
+                    });
+                </script>";
+            }
+        }
+    ?>
+    <?php include "config/conexion.php";
+        $usado = $conexion->query("select
+        (select count(*) from tventas where estado='Incobrable') i,
+        (select count(*) from tventas where estado='Cancelado') c,
+        (select count(*) from tventas where estado='Moroso') m,
+        (select count(*) from tventas where estado='Pendiente') p;");
+        if($usado){
+            while($filo = $usado->fetch_object()){        
+            echo "<script type='text/javascript'>
+                    var depre = new Chartist.Bar('#barra2', {
+                        labels: ['Pendiente', 'Cancelado','Moroso','Incobrable'],
+                        series: [".$filo->p.", ".$filo->c.",".$filo->m.",".$filo->i."]
+                    }, {
+                        distributeSeries: true,
+                        fullWidth: true,
+                        chartPadding: {
+                            right: 40
+                        }
+                    });
+                </script>";
+            }
+        }
+    ?>    
+    <?php include "config/conexion.php";
+        $usado = $conexion->query("select 
+        (select count(*) from tproducto p where p.stock_minimo<p.stock) n,
+        (select count(*) from tproducto p where p.stock_minimo>=p.stock) m;");
+
+        if($usado){
+            while($filo = $usado->fetch_object()){        
+            echo "<script type='text/javascript'>
+                new Chart($('#doughnut1'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Articulos sobre el minimo','Articulos bajo el minimo'],
+                        datasets:[{
+                                data:[".$filo->n.",".$filo->m."],
+                                    backgroundColor:['#02a8b5','#fa5c7c'],
+                                    borderColor:'transparent',
+                                    borderWidth:'200'}
+                                ]         
+                    }
+                            
+                 }); 
+                </script>";
+            }
+        }
+    ?>
 </body>
 
 </html>

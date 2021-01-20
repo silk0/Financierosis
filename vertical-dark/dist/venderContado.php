@@ -202,14 +202,11 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="clearfix pt-5">
-                                                <h6>Notes:</h6>
+                                                <h6>Nota:</h6>
 
                                                 <small class="text-muted">
-                                                    All accounts are to be paid within 7 days from receipt of
-                                                    invoice. To be paid by cheque or credit card or direct payment
-                                                    online. If account is not paid within 7 days the credits details
-                                                    supplied as confirmation of work undertaken will be charged the
-                                                    agreed quoted fee noted above.
+                                                    Al realizar una venta al contado se modifica 
+                                                    la cantidad de articulos en el inventario.
                                                 </small>
                                             </div>
                                         </div> <!-- end col -->
@@ -249,7 +246,7 @@
                                         <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light">
                                             <i class="mdi mdi-printer mr-1"></i> Factura credito fiscal
                                         </a>
-                                        <button  onclick="goFactura();"
+                                        <button type=button onclick="goFactura();"
                                             class="btn btn-primary waves-effect waves-light">
                                             <i class="mdi mdi-printer mr-1"></i> Factura consumidor final
                                         </button>
