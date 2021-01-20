@@ -330,7 +330,7 @@
                                                         <div class="card-box">
                                                             <form name="editarForm" id="editarForm" method="post" action="scriptsphp/modificarDpto.php?bandera=1" required
                                                                 class="parsley-examples">
-                                                                <div class="form-row">
+                                                            <div class="form-row">
                                                                 <input type="hidden" id="id_departamento" name="id_departamento">
                                                             </div>
                                                                 <div class="form-row">
