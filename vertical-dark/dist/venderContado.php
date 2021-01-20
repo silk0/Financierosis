@@ -247,12 +247,8 @@
                                     <div class="text-right d-print-none">
                                         <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light">
                                             <i class="mdi mdi-printer mr-1"></i> Factura credito fiscal
-                                        </a>
-<<<<<<< HEAD
-                                        <button type=button onclick="goFactura();"
-=======
+                                        </a>                                        
                                         <button type="button"  onclick="goFactura();"
->>>>>>> 1462f3812f27520bcf41ca25b907ba0b821349db
                                             class="btn btn-primary waves-effect waves-light">
                                             <i class="mdi mdi-printer mr-1"></i> Factura consumidor final
                                         </button>
