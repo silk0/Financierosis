@@ -4,7 +4,7 @@
     $loginPassword =$_GET["pass"];
     $result = $conexion->query("SELECT
     templeados.rol,
-    templeados.nombre,
+    templeados.nombre,concat(templeados.nombre,' ',templeados.apellido) as nomC,
     templeados.apellido,
     templeados.id_empleado,
     templeados.usuario,
@@ -16,7 +16,8 @@
         while ($fila = $result->fetch_object()) {
             $passR = $fila->pass;
             $Nombre=$fila->nombre;
-            $tipo=$fila->rol;	
+            $tipo=$fila->rol;
+            $nomC=	$fila->nomC;
             $usuario=$fila->usuario;
             $id=$fila->id_empleado;
             $apellido=$fila->apellido;
@@ -34,7 +35,7 @@
                 $_SESSION["usuario"] = $usuario;
                 $_SESSION["id"] = $id;
                 $_SESSION["tipo"] = $tipo;                
-                
+                $_SESSION["ncompleto"]=$nomC;
                 header("Location:Contenido.php");
                 
                     

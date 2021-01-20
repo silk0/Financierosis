@@ -74,10 +74,23 @@
                                         <div class="text-md-right">
                                             <div class="line-h-24 " align="left" style=" padding: 5px 5px 5px 5px;
                                                                                             border: solid;">
-                                            	<label>Factura No.</label>
+                                                                                            <?php 
+                                                    include 'config/conexion.php';
+                                                    $result = $conexion->query("SHOW TABLE STATUS LIKE 'tventas'");
+                                                    $codigoR = null;
+                                                    if ($result) {
+                                                        while ($fila = $result->fetch_object()) {                                               
+                                                            $codigoR=str_pad($fila->Auto_increment, 6, "0", STR_PAD_LEFT);
+                                                            echo'<label>Factura No.'.$codigoR .'</label>';
+                                                        }
+                                                    }
+
+
+                                                ?>
+                                            
                                                 <br>
-                                                <label>NRC:</label><br>
-                                                <LABEL>NIT:</LABEL><br>
+                                                <label>NRC:1559-33</label><br>
+                                                <LABEL>NIT:1010-269638-102-9</LABEL><br>
                                             </div>
                                         </div>
                                     </div> <!-- end col -->
@@ -95,9 +108,15 @@
     
                                     <div class="col-md-6">
                                         <div class="text-md-right" >
-                                            <h6>Fecha: </h6>
-                                            <h6>Condicion venta: </h6>
-                                            <h6>vendedor: </h6>                                            
+                                        <?php 
+                                                    include 'config/conexion.php';
+                                                    $fecha_actual = date("d-m-Y");
+                                                    $hoy = date("d-m-Y",strtotime($fecha_actual."- 1 days"));
+                                                    echo'
+                                            <h6>Fecha: '. $hoy .'</h6>';
+                                            ?>
+                                            <h6>Condicion venta: Contado</h6>
+                                            <h6>vendedor: <?php echo $_SESSION["ncompleto"];?> </h6>                                            
                                         </div>
                                     </div> <!-- end col -->
                                 </div>    
@@ -116,14 +135,52 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td><small>540px</small></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td><small>540px</small></td>                      
-                                                    <td><small>540px</small></td>
-                                                </tr>          
+                                            <?php
+                                                        include 'config/conexion.php';
+                                                        $result = $conexion->query("
+                                                            select p.codigo,p.nombre, p.descripcion, p.precio_venta,
+                                                            t.cantidad, p.precio_venta*t.cantidad,p.precio_venta*t.cantidad as total
+                                                            FROM tcarrito t
+                                                            inner join tproducto as p on p.id_producto=t.id_producto
+                                                            order by p.codigo asc;
+                                                        ");
+                                                        if ($result) {
+                                                            $j=17;
+                                                            while ($fila = $result->fetch_object()) {                                                                               
+                                                                $j--;
+                                                                echo '
+                                                                <tr>
+                                                                    <td class="text-center" style="padding: 4px 4px 4px 4px; height: 10px;"><small>' . $fila->cantidad . '</small></td>
+                                                                    <td style="padding: 0px 0px 0px 0px; height: 10px;">
+                                                                        <small>' . $fila->nombre . '</small>
+                                                                    </td>
+                                                                    
+                                                                    <td style="padding: 0px 0px 0px 0px; height: 10px;" class="text-center"><small>$' . $fila->precio_venta . '</small></td>
+                                                                    <td style="padding: 0px 0px 0px 0px; height: 10px;"></td>
+                                                                    <td style="padding: 0px 0px 0px 0px; height: 10px;"><small></small></td>
+                                                                    <td style="padding: 0px 0px 0px 0px; height: 10px;" class="text-center"><small>$' . $fila->total . '</small></td>
+                                                                    
+                                                                </tr>
+                                                                ';                                                                                
+                                                            }
+                                                            for ($i=$j; $i >0 ; $i--) { 
+                                                                echo '
+                                                                <tr>
+                                                                    <td class="text-center"><small></small></td>
+                                                                    <td>
+                                                                        <small></small>
+                                                                    </td>
+                                                                    
+                                                                    <td class="text-center"><small></small></td>
+                                                                    <td></td>
+                                                                    <td><small></small></td>
+                                                                    <td class="text-center"><small></small></td>
+                                                                    
+                                                                </tr>
+                                                                ';
+                                                            }
+                                                        }
+                                                    ?>
                                             </tbody>                                            
                                         </table>
                                         <table class="table table-bordered table-striped mb-0">
@@ -170,6 +227,7 @@
                                                         </table>
                                                     </th>
                                                     <th style="width: 19%; padding: 0px 0px 5px 10px;">
+                                                   
                                                         <small>SUMAS</small>
                                                         </br>
                                                         <small>13% IVA</small>
@@ -184,10 +242,10 @@
                                                          </br>
                                                         <small>VENTA TOTAL</small>
                                                     </th>  
-                                                    <th style="width: 19.5%; padding: 0px 0px 5px 10px;" class="text-md-right">
+                                                    <th style="width: 19.5%; padding: 0px 0px 5px 10px;" class="text-md-right">                                                      
                                                         <small>$</small>
                                                          </br>
-                                                       <small>$</small>
+                                                        <small>$</small>
                                                          </br>
                                                          <small>$</small>
                                                          </br>
@@ -200,7 +258,39 @@
                                                          <small>$</small>
                                                          </br>
                                                     </th>
-                                                    <th style="width: 10.4%;"></th>   
+                                                    <th style="width: 10.4%; padding: 0px 0px 5px 10px;" class="text-md-letf">
+                                                    <?php
+                                                            include 'config/conexion.php';
+                                                            $result = $conexion->query("select sum(p.precio_venta*t.cantidad) as subtotal,
+                                                                ROUND(sum(p.precio_venta*t.cantidad)*0.13,1) as iva,
+                                                                 (sum(p.precio_venta*t.cantidad)*0.13)+sum(p.precio_venta*t.cantidad) as total,
+                                                                (sum(p.precio_venta*t.cantidad)*0.13)+sum(p.precio_venta*t.cantidad) as tota
+                                                                FROM tcarrito t
+                                                                inner join tproducto as p on p.id_producto=t.id_producto;
+                                                            ");
+                                                            
+                                                            if ($result) {
+                                                                while ($fila = $result->fetch_object()) {                                                                               
+                                                                    
+                                                                    echo '
+                                                                        <small>' . $fila->subtotal . '</small>
+                                                                        </br>
+                                                                        <small>' . $fila->iva . '</small></p>
+                                                                        
+                                                                        </br>
+                                                                        <small></small>
+                                                                        </br>
+                                                                        <small></small>
+                                                                        </br>
+                                                                        <small>' . $fila->total . '</small>
+                                                                        </br>
+                                                                        
+                                                                    ';                                                                                
+                                                                }
+                                                            }
+                                                        ?> 
+                                                </th>   
+                                                
                                                 </tr>
                                             </thead>                                                                                                                           
                                         </table>
@@ -209,8 +299,8 @@
 	                            </div> <!-- end col -->
 	                            <div class="mt-4 mb-1">
 	                                <div class="text-right d-print-none">
-	                                    <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-printer mr-1"></i> Print</a>
-	                                    <button href="#" class="btn btn-info waves-effect waves-light" id="otro">Realizar venta</button>                                        
+	                                    <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-printer mr-1"></i> Imprimir</a>
+	                                    
 	                                </div>
 	                            </div>
                             </div> <!-- end card-box -->
