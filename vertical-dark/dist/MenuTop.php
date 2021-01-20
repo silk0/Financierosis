@@ -59,7 +59,7 @@
         <li class="dropdown notification-list">
         
             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                <img src="assets/images/users/avatar-4.jpg" alt="user-image" class="rounded-circle">
+                <img src="assets/images/users/user.png" alt="user-image" class="rounded-circle">
                 <span class="pro-user-name ml-1">
                    <?php echo $nombre;?> <i class="mdi mdi-chevron-down"></i> 
                 </span>
@@ -68,7 +68,7 @@
                 <!-- item-->
                 <div class="dropdown-item noti-title">
                     <h6 class="m-0">
-                        Bienvenido!
+                        Bienvenido a Greeva!
                     </h6>
                 </div>
 
@@ -76,25 +76,7 @@
                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                     <i class="dripicons-user"></i>
                     <span>My Account</span>
-                </a>
-
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i class="dripicons-gear"></i>
-                    <span>Settings</span>
-                </a>
-
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i class="dripicons-help"></i>
-                    <span>Support</span>
-                </a>
-
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i class="dripicons-lock"></i>
-                    <span>Lock Screen</span>
-                </a>
+                </a>                
 
                 <div class="dropdown-divider"></div>
 
